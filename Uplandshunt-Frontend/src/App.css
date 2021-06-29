@@ -24,14 +24,21 @@ body {
 }
 
 .hero {
-  background: url("./assets/bgImg.svg") no-repeat center center fixed;
+  background-image: url("./assets/bgImg.png");
   background-size: cover;
-  min-height: 65vh;
+  background-position: center;
+  background-attachment: local;
+  background-repeat: no-repeat;
+  image-rendering: -webkit-optimize-contrast;
+  width: 100%;
+  height: 100%;
   background-color: #1f1f1f;
+  object-fit: cover;
 }
 
 .hero-support {
-  margin-left: 35rem;
+  margin-left: 33rem;
+  margin-top: 15rem;
 }
 
 .slider-arrow {
