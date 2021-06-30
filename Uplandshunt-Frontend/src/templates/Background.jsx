@@ -1,4 +1,4 @@
-import bgImage from "../assets/bgImg.svg";
+import bgImage from "../assets/bgImg.png";
 
 const Background = () => {
   return (
@@ -7,7 +7,7 @@ const Background = () => {
         <img
           src={bgImage}
           alt="bgImage"
-          className="bg-lightBlack h-full w-full object-cover"
+          className="bg-lightBlack h-screen w-full object-cover"
         />
       </div>
       <p className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full text-white text-5xl leading-14 font-bold capitalize">

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import { SectionWrapper } from "../Layout/SectionWrapper";
 import {
   Hero,
@@ -24,9 +26,11 @@ const Landing = () => {
               <button className="border border-primary rounded-md py-2 px-4 mr-6">
                 Register
               </button>
-              <button className="text-white bg-primary rounded-md py-2 px-4 mr-6">
-                Login
-              </button>
+              <Link to="/login">
+                <button className="text-white bg-primary rounded-md py-2 px-4 mr-6">
+                  Login
+                </button>
+              </Link>
             </ul>
           </nav>
         </header>

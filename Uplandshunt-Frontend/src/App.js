@@ -7,6 +7,7 @@ import {
   Login,
   PasswordRecovery,
   Landing,
+  DashboardLogin,
 } from "./pages";
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
             <Route path="/resetpassword" exact component={ResetPassword} />
             <Route path="/login" exact component={Login} />
             <Route path="/forgotpassword" exact component={PasswordRecovery} />
+            <Route path="/dashboardlogin" exact component={DashboardLogin} />
           </div>
         </Switch>
       </Router>

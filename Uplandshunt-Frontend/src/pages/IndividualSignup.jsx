@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 import { Select, Input } from "../atoms";
 import Intro from "../templates/Intro";
@@ -91,10 +92,12 @@ const IndividualSignup = () => {
         </div>
       </form>
 
-      <p className="text-center font-normal text-sm mb-20">
-        Already have an account?{" "}
-        <span className="text-primary font-bold">Sign In</span>
-      </p>
+      <Link to="/login">
+        <p className="text-center font-normal text-sm mb-20">
+          Already have an account?{" "}
+          <span className="text-primary font-bold">Sign In</span>
+        </p>
+      </Link>
     </AuthLayout>
   );
 };

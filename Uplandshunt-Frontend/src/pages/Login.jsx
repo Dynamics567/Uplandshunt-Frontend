@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 import { Input } from "../atoms";
 import Intro from "../templates/Intro";
@@ -39,9 +40,11 @@ const Login = () => {
             type={passwordShown ? "text" : "password"}
           />
         </div>
-        <p className="underline text-right text-xs font-normal">
-          Forgot password ? Click here to reset the password
-        </p>
+        <Link to="/forgotpassword">
+          <p className="underline text-right text-xs font-normal">
+            Forgot password ? Click here to reset the password
+          </p>
+        </Link>
 
         <div className="my-8 flex w-full justify-between items-center text-center">
           <button className="rounded-md p-4 text-white bg-primary font-semibold w-full">
@@ -50,10 +53,12 @@ const Login = () => {
         </div>
       </form>
 
-      <p className="text-center font-normal text-sm">
-        Don't have an account?
-        <span className="text-primary font-bold"> Sign In</span>
-      </p>
+      <Link to="/register">
+        <p className="text-center font-normal text-sm">
+          Don't have an account?
+          <span className="text-primary font-bold"> Sign Up</span>
+        </p>
+      </Link>
 
       <div className="m-auto w-8/12">
         <p className="text-lightgreen in-between font-bold font-sm my-12">or</p>
