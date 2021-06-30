@@ -11,8 +11,8 @@ const WhyUpland = () => {
   return (
     <div>
       <SubTitle text="Why UplandShunt" className="text-center" />
-      <img src={ellipseRight} alt="ellipseRight" className="w-36" />
-      <section className="w-full flex justify-between -mt-36 mb-2 ml-12">
+      <img src={ellipseRight} alt="ellipseRight" className="w-48 -mt-36" />
+      <section className="w-11/12 flex justify-between -mt-44 mb-2 ml-12">
         <ReasonCard
           title="Top class builders with huge projects"
           subtitle="Experienced and qualified builders working on all kinds of property projects."
@@ -24,24 +24,40 @@ const WhyUpland = () => {
           photo={buy}
         />
       </section>
-      <section className="mt-12 mb-2 ml-12 relative">
-        <div className="w-full flex justify-between absolute z-20 overflow-hidden">
+      <section className="absolute z-20 mt-12 w-11/12 flex justify-between mb-2 ml-12">
+        <ReasonCard
+          title="All kinds of properties available"
+          subtitle="Buying a property in nigeria gives access to the property’s title documents and transfer documents in his/her name."
+          photo={property}
+        />
+        <ReasonCard
+          title="Low charges compared to market"
+          subtitle="Buying and selling properties at a cheaper and affordable rate without loss of income."
+          photo={money}
+        />
+      </section>
+      <div className="relative mt-20">
+        <img src={ellipseLeft} alt="ellipseLeft" className="ellipse-img w-48" />
+      </div>
+      {/* <section className="mt-12 mb-2 ml-12 relative">
+        <div className="w-11/12 flex justify-between absolute z-20 overflow-hidden">
           <ReasonCard
             title="All kinds of properties available"
             subtitle="Buying a property in nigeria gives access to the property’s title documents and transfer documents in his/her name."
             photo={property}
+            className=""
           />
           <ReasonCard
             title="Low charges compared to market"
             subtitle="Buying and selling properties at a cheaper and affordable rate without loss of income."
             photo={money}
-            className=""
+            // className="ml-24"
           />
         </div>
         <div className="relative">
           <img src={ellipseLeft} alt="ellipseLeft" className="ellipse-img" />
         </div>
-      </section>
+      </section> */}
     </div>
   );
 };

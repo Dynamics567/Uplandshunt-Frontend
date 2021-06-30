@@ -20,6 +20,15 @@ const Explore = ({ title }) => {
     ref.current.slickNext();
   };
   const settings = {
+    // customPaging: function (i) {
+    //   return (
+    //     <a>
+    //       {/* <img src={`${baseUrl}/abstract0${i + 1}.jpg`} /> */}
+    //       <p>{i + 1}</p>
+    //     </a>
+    //   );
+    // },
+    dotsClass: "slick-dots slick-thumb",
     dots: true,
     infinite: true,
     slidesToShow: 4,
@@ -84,10 +93,12 @@ const Explore = ({ title }) => {
             src={leftArrow}
             alt="left-arrow"
             onClick={() => handlePrev(sliderRef)}
-            className="cursor-pointer w-4 slider-arrow mr-28"
+            className="cursor-pointer w-4 slider-arrow mr-2"
           />
         </section>
-
+        <p>
+          Previous 1 2 3 <span className="text-primary">Next</span>
+        </p>
         <section>
           <img
             src={rightArrow}

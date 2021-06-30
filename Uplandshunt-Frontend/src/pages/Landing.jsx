@@ -45,7 +45,7 @@ const Landing = () => {
         <section className="mt-20">
           <WhyUpland />
           <HowToSell />
-          {/* <Subscription /> */}
+          <Subscription />
           <DownloadApp />
         </section>
         <Footer />

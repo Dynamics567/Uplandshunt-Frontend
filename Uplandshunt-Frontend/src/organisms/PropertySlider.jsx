@@ -90,10 +90,12 @@ const PropertySlider = ({ title }) => {
             src={leftArrow}
             alt="left-arrow"
             onClick={() => handlePrev(sliderRef)}
-            className="cursor-pointer w-4 slider-arrow mr-28"
+            className="cursor-pointer w-4 slider-arrow mr-2"
           />
         </section>
-
+        <p>
+          Previous 1 2 3 <span className="text-primary">Next</span>
+        </p>
         <section>
           <img
             src={rightArrow}

@@ -19,6 +19,7 @@ module.exports = {
         ashTwo: "#b5b5b5",
         maroon: "#701f2e",
         purple: "#213037",
+        whiteAsh: "rgba(237,242,247,0.2)",
       },
       fontFamily: {
         roboto: ["Roboto", "sans-serif"],

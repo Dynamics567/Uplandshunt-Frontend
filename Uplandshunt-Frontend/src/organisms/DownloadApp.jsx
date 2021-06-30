@@ -8,7 +8,7 @@ import { SectionWrapper } from "../Layout";
 const DownloadApp = () => {
   return (
     <>
-      <div className="my-36 bg-maroon w-full" style={{ height: "417px" }}>
+      <div className="mt-56 mb-36 bg-maroon w-full" style={{ height: "417px" }}>
         <SectionWrapper>
           <div className="py-14 flex flex-col items-end pt-20">
             <p className="font-bold text-2xl my-4 text-white">
