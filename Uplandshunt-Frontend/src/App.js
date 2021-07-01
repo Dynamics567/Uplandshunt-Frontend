@@ -8,6 +8,9 @@ import {
   PasswordRecovery,
   Landing,
   DashboardLogin,
+  Blog,
+  Regulations,
+  News,
 } from "./pages";
 
 function App() {
@@ -22,6 +25,9 @@ function App() {
             <Route path="/login" exact component={Login} />
             <Route path="/forgotpassword" exact component={PasswordRecovery} />
             <Route path="/dashboardlogin" exact component={DashboardLogin} />
+            <Route path="/legal/news" exact component={News} />
+            <Route path="/legal/regulations" exact component={Regulations} />
+            <Route path="/legal/blog" exact component={Blog} />
           </div>
         </Switch>
       </Router>

@@ -38,3 +38,21 @@ export const company = [
     item: "Terms and condition",
   },
 ];
+
+export const blogNavItems = [
+  {
+    id: "1",
+    item: "News",
+    url: "/legal/news",
+  },
+  {
+    id: "2",
+    item: "Regulations",
+    url: "/legal/regulations",
+  },
+  {
+    id: "3",
+    item: "Blog",
+    url: "/legal/blog",
+  },
+];

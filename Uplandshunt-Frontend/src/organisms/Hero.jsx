@@ -1,5 +1,5 @@
 import support from "../assets/support.svg";
-import search from "../assets/search.svg";
+import { Search } from "../atoms";
 
 const Hero = () => {
   return (
@@ -11,14 +11,10 @@ const Hero = () => {
             population
           </p>
           <div className="inline-flex w-full">
-            <div className="flex w-full justify-center mt-16">
-              <input
-                type="text"
-                placeholder="Search property by City Name or Pin Code"
-                className="rounded-3xl rounded-r-none w-2/6 p-4 text-sm font-normal"
-              />
-              <img src={search} alt="search" />
-            </div>
+            <Search
+              placeholder="Search property by City Name or Pin Code"
+              className="w-2/6"
+            />
           </div>
           <div className="hero-support fixed top-0 inset-x-0 z-50 h-16">
             <img src={support} alt="support" className="w-36 hero-support" />

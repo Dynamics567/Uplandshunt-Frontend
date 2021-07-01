@@ -4,3 +4,7 @@ export * from "./ResetPassword";
 export * from "./PasswordRecovery";
 export * from "./Landing";
 export * from "./DashboardLogin";
+export * from "./News";
+export * from "./Regulations";
+export * from "./News";
+export * from "./Blog";
