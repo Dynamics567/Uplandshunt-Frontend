@@ -8,3 +8,6 @@ export * from "./News";
 export * from "./Regulations";
 export * from "./News";
 export * from "./Blog";
+export * from "./SingleNews";
+export * from "./SingleBlog";
+export * from "./SingleRegulation";

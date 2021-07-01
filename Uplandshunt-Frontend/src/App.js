@@ -11,6 +11,9 @@ import {
   Blog,
   Regulations,
   News,
+  SingleNews,
+  SingleBlog,
+  SingleRegulation,
 } from "./pages";
 
 function App() {
@@ -28,6 +31,13 @@ function App() {
             <Route path="/legal/news" exact component={News} />
             <Route path="/legal/regulations" exact component={Regulations} />
             <Route path="/legal/blog" exact component={Blog} />
+            <Route path="/legal/newsview" exact component={SingleNews} />
+            <Route path="/legal/blogview" exact component={SingleBlog} />
+            <Route
+              path="/legal/regulationview"
+              exact
+              component={SingleRegulation}
+            />
           </div>
         </Switch>
       </Router>

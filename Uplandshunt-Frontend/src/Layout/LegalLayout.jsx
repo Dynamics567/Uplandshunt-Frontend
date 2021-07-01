@@ -1,11 +1,11 @@
 import { SectionWrapper } from ".";
-import { BlogHeader, Footer } from "../organisms";
+import { LegalHeader, Footer } from "../organisms";
 
 const LegalLayout = ({ children, text }) => {
   return (
     <>
       <div className="m-auto">
-        <BlogHeader />
+        <LegalHeader />
       </div>
       <SectionWrapper>
         <div className="text-center mt-16 mb-6">

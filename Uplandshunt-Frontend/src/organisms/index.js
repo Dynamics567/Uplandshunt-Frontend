@@ -5,4 +5,4 @@ export * from "./HowToSell";
 export * from "./Subscription";
 export * from "./DownloadApp";
 export * from "./Footer";
-export * from "./BlogHeader";
+export * from "./LegalHeader";

@@ -6,9 +6,9 @@ const Blog = () => {
   return (
     <div>
       <LegalLayout text="Blogs on building a house">
-        <BlogCard photo={prop2} />
-        <BlogCard photo={prop2} />
-        <BlogCard photo={prop2} />
+        <BlogCard photo={prop2} url="/legal/blogview" />
+        <BlogCard photo={prop2} url="/legal/blogview" />
+        <BlogCard photo={prop2} url="/legal/blogview" />
       </LegalLayout>
     </div>
   );

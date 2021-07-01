@@ -1,11 +1,11 @@
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import { NavItem } from "../atoms";
-import search from "../assets/search.svg";
 import { blogNavItems } from "../data/FooterItems";
 import { SectionWrapper } from "../Layout";
+import { HeaderTwo } from "../molecules";
 
-const BlogHeader = () => {
+const LegalHeader = () => {
   let isActive;
   const location = useLocation();
   const path = location.pathname.slice(1);
@@ -20,29 +20,7 @@ const BlogHeader = () => {
   return (
     <div className="bg-white">
       <>
-        <div
-          className="flex p-4 justify-between items-center"
-          style={{ boxShadow: "0px 0px 4px 0px #eea7a740" }}
-        >
-          <p className="" style={{ width: "40%" }}>
-            Sample Logo
-          </p>
-
-          <div className="flex w-full">
-            <input
-              type="text"
-              placeholder="Lagos"
-              className="rounded-3xl rounded-r-none p-4 text-sm font-normal border"
-              style={{ boxShadow: "0px 0px 4px 0px #eea7a740", width: "70%" }}
-            />
-            <img src={search} alt="search" />
-          </div>
-          <Link to="/login">
-            <button className="text-white bg-primary rounded-md py-2 px-4 mr-6">
-              Login
-            </button>
-          </Link>
-        </div>
+        <HeaderTwo />
         <SectionWrapper>
           <ul className="flex ml-10">
             {blogNavItems.map(({ id, item, url }) => {
@@ -60,14 +38,9 @@ const BlogHeader = () => {
             })}
           </ul>
         </SectionWrapper>
-        {/* <div className="mt-10">
-          <BlogCard />
-          <BlogCard />
-          <BlogCard />
-        </div> */}
       </>
     </div>
   );
 };
 
-export { BlogHeader };
+export { LegalHeader };

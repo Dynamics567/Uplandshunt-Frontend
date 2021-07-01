@@ -5,9 +5,9 @@ const Regulations = () => {
   return (
     <div>
       <LegalLayout text="New regulations on building a flat">
-        <BlogCard photo={prop2} />
-        <BlogCard photo={prop2} />
-        <BlogCard photo={prop2} />
+        <BlogCard photo={prop2} url="/legal/regulationview" />
+        <BlogCard photo={prop2} url="/legal/regulationview" />
+        <BlogCard photo={prop2} url="/legal/regulationview" />
       </LegalLayout>
     </div>
   );

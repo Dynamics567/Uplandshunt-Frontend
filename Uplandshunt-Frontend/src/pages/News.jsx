@@ -6,9 +6,9 @@ const News = () => {
   return (
     <div>
       <LegalLayout text="News about the buildings">
-        <BlogCard photo={prop2} />
-        <BlogCard photo={prop2} />
-        <BlogCard photo={prop2} />
+        <BlogCard photo={prop2} url="/legal/newsview" />
+        <BlogCard photo={prop2} url="/legal/newsview" />
+        <BlogCard photo={prop2} url="/legal/newsview" />
       </LegalLayout>
     </div>
   );
