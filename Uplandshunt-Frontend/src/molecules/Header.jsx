@@ -12,8 +12,12 @@ const Header = () => {
             <Link to="/legal/news">
               <li className="mr-6">Legal</li>
             </Link>
-            <li className="mr-6">About Us</li>
-            <li className="mr-6">Contact Us</li>
+            <Link to="/about">
+              <li className="mr-6">About Us</li>
+            </Link>
+            <Link to="/contactus">
+              <li className="mr-6">Contact Us</li>
+            </Link>
             <button className="border border-primary rounded-md py-2 px-4 mr-6">
               Register
             </button>

@@ -20,6 +20,7 @@ module.exports = {
         maroon: "#701f2e",
         purple: "#213037",
         whiteAsh: "rgba(237,242,247,0.2)",
+        gray: "#effof6",
       },
       fontFamily: {
         roboto: ["Roboto", "sans-serif"],

@@ -11,3 +11,7 @@ export * from "./Blog";
 export * from "./SingleNews";
 export * from "./SingleBlog";
 export * from "./SingleRegulation";
+export * from "./ContactUs";
+export * from "./About";
+export * from "./PrivacyPolicy";
+export * from "./TermsAndConditions";
