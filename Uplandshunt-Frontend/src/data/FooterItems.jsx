@@ -1,6 +1,13 @@
 import cell from "../assets/cell.svg";
 import addy from "../assets/addy.svg";
 import email from "../assets/email.svg";
+import dashboard from "../assets/userDashboard/dashboard.svg";
+import listing from "../assets/userDashboard/listings.svg";
+import subscription from "../assets/userDashboard/subscription.svg";
+import profile from "../assets/userDashboard/profile.svg";
+import savedProperty from "../assets/userDashboard/savedProperty.svg";
+import purchase from "../assets/userDashboard/purchase.svg";
+import request from "../assets/userDashboard/request.svg";
 
 export const getInTouch = [
   {
@@ -54,5 +61,50 @@ export const blogNavItems = [
     id: "3",
     item: "Blog",
     url: "/legal/blog",
+  },
+];
+
+export const userDashboard = [
+  {
+    id: "1",
+    navItem: "Dashboard",
+    image: dashboard,
+    link: "/dashboard",
+  },
+  {
+    id: "2",
+    navItem: "My Listing",
+    image: listing,
+    link: "/dashboard/listings",
+  },
+  {
+    id: "3",
+    navItem: "My Subscription",
+    image: subscription,
+    link: "/dashboard/subscription",
+  },
+  {
+    id: "4",
+    navItem: "My Profile",
+    image: profile,
+    link: "/dashboard/profile",
+  },
+  {
+    id: "5",
+    navItem: "Saved Property",
+    image: savedProperty,
+    link: "/dashboard/savedProperty",
+  },
+  {
+    id: "6",
+    navItem: "Property Request",
+    image: request,
+    link: "/dashboard/request",
+  },
+  {
+    id: "7",
+    navItem: "My Purchase",
+    image: purchase,
+    link: "/dashboard/purchase",
   },
 ];
