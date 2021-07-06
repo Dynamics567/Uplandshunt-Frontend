@@ -34,7 +34,7 @@ function App() {
             <Route path="/contactus" exact component={ContactUs} />
             <Route path="/forgotpassword" exact component={PasswordRecovery} />
             <Route path="/dashboardlogin" exact component={DashboardLogin} />
-            <Route path="/legal/news" exact component={News} />
+            <Route path="/legal/news" component={News} />
             <Route path="/about" exact component={About} />
             <Route path="/privacypolicy" exact component={PrivacyPolicy} />
             <Route path="/terms" exact component={TermsAndConditions} />
@@ -42,7 +42,7 @@ function App() {
             <Route path="/legal/regulations" exact component={Regulations} />
             <Route path="/legal/blog" exact component={Blog} />
             <Route path="/legal/newsview" exact component={SingleNews} />
-            <Route path="/legal/blogview" exact component={SingleBlog} />
+            <Route path="/legal/blogview" component={SingleBlog} />
             <Route
               path="/legal/regulationview"
               exact

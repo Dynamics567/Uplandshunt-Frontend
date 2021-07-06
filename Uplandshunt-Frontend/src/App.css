@@ -90,3 +90,8 @@ h2:after {
   filter: invert(33%) sepia(50%) saturate(1288%) hue-rotate(315deg)
     brightness(85%) contrast(80%);
 }
+
+.legal-active p {
+  padding-bottom: 0.4rem;
+  border-bottom: 7px solid #b3404a;
+}

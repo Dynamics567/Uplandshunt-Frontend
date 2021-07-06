@@ -23,3 +23,4 @@ export * from "./Profile";
 export * from "./SavedProperty";
 export * from "./PropertyRequest";
 export * from "./MyPurchase";
+export * from "./Extra";

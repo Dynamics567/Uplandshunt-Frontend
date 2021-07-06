@@ -9,6 +9,7 @@ import {
   PropertyRequest,
   SavedProperty,
   MyPurchase,
+  Extra,
 } from "../pages";
 
 const Dashboard = () => {
@@ -26,6 +27,7 @@ const Dashboard = () => {
             <Route path="/dashboard/listings" exact component={Listings} />
             <Route path="/dashboard/profile" exact component={Profile} />
             <Route path="/dashboard/purchase" exact component={MyPurchase} />
+            <Route path="/dashboard/extra" exact component={Extra} />
             <Route
               path="/dashboard/listings"
               exact

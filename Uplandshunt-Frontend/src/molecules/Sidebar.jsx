@@ -11,7 +11,7 @@ const Sidebar = () => {
           <NavLink
             activeClassName="active"
             to={link}
-            className="flex items-center cursor-pointer mb-12"
+            className="flex items-center cursor-pointer mb-20"
             key={id}
           >
             <img src={image} alt={navItem} className="mr-4" />

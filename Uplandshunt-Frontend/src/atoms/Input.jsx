@@ -1,8 +1,11 @@
 import React from "react";
 
-const Input = ({ placeholder, className, type, name, id, error }) => {
+const Input = ({ placeholder, className, type, name, id, error, label }) => {
   return (
     <div>
+      <label htmlFor={name} className="font-bold text-sm pb-4">
+        {label}
+      </label>
       <div className={`mb-6 border border-lightAsh ${className}`}>
         <input
           type={type}

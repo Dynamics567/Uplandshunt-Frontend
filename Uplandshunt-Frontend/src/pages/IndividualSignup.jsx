@@ -24,23 +24,23 @@ const IndividualSignup = () => {
         subtitle="Provide your details in order to register your account"
       />
       <form className="mt-12 m-auto w-8/12">
-        <label htmlFor="Account Type" className="font-bold text-sm pb-4">
-          Account Type
-        </label>
         <Select
           label="Category"
           values={accountType}
           selectedValue="Individual Account"
+          labelName="Account Type"
           // onValueChange={(val) => filterCategory(val)}
         />
-        <label htmlFor="Account Name" className="font-bold text-sm pb-4">
-          Account Name
-        </label>
-        <Input type="text" placeholder="example@example.com" />
-        <label htmlFor="Email Address" className="font-bold text-sm pb-4">
-          Email Address
-        </label>
-        <Input type="email" placeholder="example@example.com" />
+        <Input
+          type="text"
+          placeholder="example@example.com"
+          label="Account Name"
+        />
+        <Input
+          type="email"
+          placeholder="example@example.com"
+          label="Email Address"
+        />
         <div className="w-full relative">
           <i onClick={togglePasswordVisibility}>
             <img
@@ -49,12 +49,10 @@ const IndividualSignup = () => {
               className="w-6 absolute visibility mt-8 ml-96"
             />
           </i>
-          <label htmlFor="Password" className="font-bold text-sm pb-4">
-            Password
-          </label>
           <Input
             placeholder="xxxxxxx"
             type={passwordShown ? "text" : "password"}
+            label="Password"
           />
         </div>
         <div className="w-full relative">
@@ -65,18 +63,13 @@ const IndividualSignup = () => {
               className="w-6 absolute visibility mt-8 ml-96"
             />
           </i>
-          <label htmlFor="Password" className="font-bold text-sm pb-4">
-            Confirm Password
-          </label>
           <Input
             placeholder="xxxxxxx"
             type={passwordShown ? "text" : "password"}
+            label="Confirm Password"
           />
         </div>
-        <label htmlFor="Contact number" className="font-bold text-sm pb-4">
-          Contact number
-        </label>
-        <Input type="email" placeholder="00000000000" />
+        <Input type="email" placeholder="00000000000" label="Contact number" />
         <input type="radio" value="" className="mr-2" />
         <label htmlFor="Terms" className="text-sm font-normal">
           I agree to the Terms of Service and Privacy Policy

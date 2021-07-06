@@ -22,16 +22,18 @@ const ContactUs = () => {
           <section className="mt-14">
             <div className="flex w-full">
               <div className="w-1/2 mr-8">
-                <label htmlFor="Password" className="font-bold text-sm pb-4">
-                  Email Address
-                </label>
-                <Input placeholder="example@example.com" type="email" />
+                <Input
+                  placeholder="example@example.com"
+                  type="email"
+                  label="Email Address"
+                />
               </div>
               <div className="w-1/2">
-                <label htmlFor="Password" className="font-bold text-sm pb-4">
-                  Contact Number
-                </label>
-                <Input placeholder="00000000" type="text" />
+                <Input
+                  placeholder="00000000"
+                  type="text"
+                  label="Contact Number"
+                />
               </div>
             </div>
             <TextArea placeholder="Message" />

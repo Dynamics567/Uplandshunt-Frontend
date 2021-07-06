@@ -20,10 +20,7 @@ const Login = () => {
         subtitle="Provide your username and password to login to the system"
       />
       <form className="mt-12 m-auto w-8/12">
-        <label htmlFor="Username" className="font-bold text-sm pb-4">
-          Username
-        </label>
-        <Input type="text" placeholder="example@example.com" />
+        <Input type="text" placeholder="example@example.com" label="Username" />
         <div className="w-full relative">
           <i onClick={togglePasswordVisibility}>
             <img
@@ -32,12 +29,10 @@ const Login = () => {
               className="w-6 absolute visibility mt-8 ml-96"
             />
           </i>
-          <label htmlFor="Password" className="font-bold text-sm pb-4">
-            Password
-          </label>
           <Input
             placeholder="xxxxxxx"
             type={passwordShown ? "text" : "password"}
+            label="Password"
           />
         </div>
         <Link to="/forgotpassword">

@@ -107,4 +107,10 @@ export const userDashboard = [
     image: purchase,
     link: "/dashboard/purchase",
   },
+  {
+    id: "8",
+    navItem: "Extra",
+    image: purchase,
+    link: "/dashboard/extra",
+  },
 ];
