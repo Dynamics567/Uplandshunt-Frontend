@@ -7,7 +7,7 @@ import silver from "../assets/silver.svg";
 import plan from "../assets/plan.svg";
 // import gold from "../assets/silver.svg";
 import bronzeBg from "../assets/bronzeBg.svg";
-import card10 from "../assets/card10.png";
+// import card10 from "../assets/card10.png";
 // import silverBg from "../assets/silverBg.svg";
 import goldBg from "../assets/goldBg.svg";
 

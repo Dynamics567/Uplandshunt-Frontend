@@ -38,7 +38,7 @@ function App() {
             <Route path="/about" exact component={About} />
             <Route path="/privacypolicy" exact component={PrivacyPolicy} />
             <Route path="/terms" exact component={TermsAndConditions} />
-            <Route path="/dashboard" exact component={Dashboard} />
+            <Route path="/dashboard" component={Dashboard} />
             <Route path="/legal/regulations" exact component={Regulations} />
             <Route path="/legal/blog" exact component={Blog} />
             <Route path="/legal/newsview" exact component={SingleNews} />

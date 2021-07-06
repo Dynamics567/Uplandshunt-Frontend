@@ -6,3 +6,4 @@ export * from "./Subscription";
 export * from "./DownloadApp";
 export * from "./Footer";
 export * from "./LegalHeader";
+export * from "./EditNewListing";

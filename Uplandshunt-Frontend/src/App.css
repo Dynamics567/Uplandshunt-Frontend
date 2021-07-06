@@ -78,3 +78,15 @@ h2:after {
 /* h2:last-of-type {
   top: 100px;
 } */
+
+.active {
+  color: black;
+  background-color: white;
+  padding: 2rem -1.2rem;
+  border-radius: 2rem;
+}
+
+.active img {
+  filter: invert(33%) sepia(50%) saturate(1288%) hue-rotate(315deg)
+    brightness(85%) contrast(80%);
+}
