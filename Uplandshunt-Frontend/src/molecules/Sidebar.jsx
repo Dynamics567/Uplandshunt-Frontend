@@ -23,7 +23,7 @@ const Sidebar = () => {
           </NavLink>
         );
       })}
-      <p className="font-bold text-white text-base text-center">Logout</p>
+      <p className="font-bold text-white text-base">Logout</p>
     </div>
   );
 };

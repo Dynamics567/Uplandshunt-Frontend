@@ -9,7 +9,10 @@ import {
   PropertyRequest,
   SavedProperty,
   MyPurchase,
-  Extra,
+  Documents,
+  UserView,
+  ManageDetails,
+  InterestRecieved,
 } from "../pages";
 
 const Dashboard = () => {
@@ -27,7 +30,26 @@ const Dashboard = () => {
             <Route path="/dashboard/listings" exact component={Listings} />
             <Route path="/dashboard/profile" exact component={Profile} />
             <Route path="/dashboard/purchase" exact component={MyPurchase} />
-            <Route path="/dashboard/extra" exact component={Extra} />
+            <Route
+              path="/dashboard/listings/manageDetails"
+              exact
+              component={ManageDetails}
+            />
+            <Route
+              path="/dashboard/listings/userview"
+              exact
+              component={UserView}
+            />
+            <Route
+              path="/dashboard/listings/documents"
+              exact
+              component={Documents}
+            />
+            <Route
+              path="/dashboard/listings/interest"
+              exact
+              component={InterestRecieved}
+            />
             <Route
               path="/dashboard/listings"
               exact

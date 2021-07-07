@@ -1,12 +1,12 @@
 import { SectionWrapper } from ".";
 import { ListingsHeader } from "../molecules";
 
-const ListingsLayout = ({ children, getCurrentPage }) => {
+const ListingsLayout = ({ children }) => {
   return (
     <>
       <SectionWrapper>
         <div className="m-auto">
-          <ListingsHeader onClick={getCurrentPage} />
+          <ListingsHeader />
         </div>
         <section>{children}</section>
       </SectionWrapper>

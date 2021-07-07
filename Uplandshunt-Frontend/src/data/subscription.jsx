@@ -68,21 +68,21 @@ export const listingHeader = [
   {
     id: "1",
     item: "Manage Details",
-    url: "/dashboard/extra",
+    url: "/dashboard/listings/manageDetails",
   },
   {
     id: "2",
     item: "User View",
-    url: "/dashboard/extra",
+    url: "/dashboard/listings/userview",
   },
   {
     id: "3",
     item: "Documents",
-    url: "/dashboard/extra",
+    url: "/dashboard/listings/documents",
   },
   {
     id: "4",
     item: "Interest Recieved",
-    url: "/dashboard/extra",
+    url: "/dashboard/listings/interest",
   },
 ];

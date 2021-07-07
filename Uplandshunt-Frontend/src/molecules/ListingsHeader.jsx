@@ -1,25 +1,24 @@
 import { NavLink } from "react-router-dom";
 import { listingHeader } from "../data/subscription";
 
-const ListingsHeader = ({ getCurrentPage }) => {
-  // const getCurrentPage = (id) => {
-  //   return id;
-  // };
+const ListingsHeader = () => {
   return (
-    <div className="flex">
+    <div className="flex items-center justify-between">
       {listingHeader.map(({ id, item, url }) => {
         return (
           <NavLink
             className="cursor-pointer"
-            activeClassName="legal active"
+            activeClassName="legal-active"
             to={url}
             key={id}
-            onClick={() => getCurrentPage(id)}
           >
-            <p className="font-bold text-lg text-ash mr-10">{item}</p>
+            <p className="font-bold text-lg text-ash mr-2">{item}</p>
           </NavLink>
         );
       })}
+      <button className="bg-metal p-4 font-semibold text-sm rounded-sm text-white">
+        Boost Property
+      </button>
     </div>
   );
 };
