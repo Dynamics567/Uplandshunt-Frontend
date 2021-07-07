@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
+import { ListingsLayout } from "../Layout";
 
 const Extra = () => {
+  const getCurrentPage = (id) => {
+    return id;
+  };
   return (
     <div>
-      <p>extra</p>
+      <ListingsLayout onClick={getCurrentPage}>
+        <p>edit</p>
+      </ListingsLayout>
     </div>
   );
 };

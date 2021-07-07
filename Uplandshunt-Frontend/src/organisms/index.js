@@ -8,3 +8,4 @@ export * from "./Footer";
 export * from "./LegalHeader";
 export * from "./EditNewListing";
 export * from "./EditProfile";
+export * from "./AllSavedProperties";
