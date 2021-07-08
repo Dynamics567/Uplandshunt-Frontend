@@ -8,6 +8,7 @@ const PropertyRequest = () => {
       image={propertyQuestion}
       text="You have not requested any properties yet!"
       buttonText="Request New Properties"
+      buttonUrl="/dashboard/request/bidsPlaced"
     />
   );
 };

@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { DashboardHeader, Sidebar } from "../molecules";
-import { EditNewListing } from "../organisms";
 import {
   Listings,
   Notification,
@@ -13,6 +12,14 @@ import {
   UserView,
   ManageDetails,
   InterestRecieved,
+  BidsPlaced,
+  InterestSent,
+  EditNewListing,
+  PropertyRequestDocument,
+  PaymentHistory,
+  PropertyPurchased,
+  PropertyRented,
+  AllSavedProperties,
 } from "../pages";
 
 const Dashboard = () => {
@@ -27,9 +34,13 @@ const Dashboard = () => {
           <DashboardHeader />
           <Switch>
             <Route path="/dashboard" exact component={Notification} />
-            <Route path="/dashboard/listings" exact component={Listings} />
             <Route path="/dashboard/profile" exact component={Profile} />
-            <Route path="/dashboard/purchase" exact component={MyPurchase} />
+            <Route path="/dashboard/listings" exact component={Listings} />
+            <Route
+              path="/dashboard/listings/edit"
+              exact
+              component={EditNewListing}
+            />
             <Route
               path="/dashboard/listings/manageDetails"
               exact
@@ -61,9 +72,45 @@ const Dashboard = () => {
               component={SavedProperty}
             />
             <Route
+              path="/dashboard/savedProperty/allSavedProperties"
+              exact
+              component={AllSavedProperties}
+            />
+            <Route
               path="/dashboard/request"
               exact
               component={PropertyRequest}
+            />
+            <Route
+              path="/dashboard/request/bidsPlaced"
+              exact
+              component={BidsPlaced}
+            />
+            <Route
+              path="/dashboard/request/interestSent"
+              exact
+              component={InterestSent}
+            />
+            <Route
+              path="/dashboard/request/documents"
+              exact
+              component={PropertyRequestDocument}
+            />
+            <Route path="/dashboard/purchase" exact component={MyPurchase} />
+            <Route
+              path="/dashboard/purchase/propertyPurchased"
+              exact
+              component={PropertyPurchased}
+            />
+            <Route
+              path="/dashboard/purchase/propertyRented"
+              exact
+              component={PropertyRented}
+            />
+            <Route
+              path="/dashboard/purchase/paymentHistory"
+              exact
+              component={PaymentHistory}
             />
             <Route
               path="/dashboard/subscription"

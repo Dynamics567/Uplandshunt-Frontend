@@ -8,7 +8,7 @@ const ListingsHeader = () => {
         return (
           <NavLink
             className="cursor-pointer"
-            activeClassName="legal-active"
+            activeClassName="dashboard-active"
             to={url}
             key={id}
           >

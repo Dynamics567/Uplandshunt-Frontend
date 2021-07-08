@@ -82,8 +82,9 @@ h2:after {
 .active {
   color: black;
   background-color: white;
-  padding: 2rem -1.2rem;
-  border-radius: 2rem;
+  padding: 0.7rem;
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
 }
 
 .active img {
@@ -92,5 +93,10 @@ h2:after {
 }
 
 .legal-active p {
+  border-bottom: 7px solid #b3404a;
+}
+
+.dashboard-active p {
+  color: #1f1f1f;
   border-bottom: 7px solid #b3404a;
 }

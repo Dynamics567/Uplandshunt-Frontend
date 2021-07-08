@@ -8,6 +8,7 @@ const MyPurchase = () => {
       image={houseSearch}
       text="You have not purchased any properties yet!"
       buttonText="Purchase New Properties"
+      buttonUrl="/dashboard/purchase/propertyPurchased"
     />
   );
 };

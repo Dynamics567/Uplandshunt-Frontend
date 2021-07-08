@@ -86,3 +86,39 @@ export const listingHeader = [
     url: "/dashboard/listings/interest",
   },
 ];
+
+export const propertyRequest = [
+  {
+    id: "1",
+    item: "Bids Placed",
+    url: "/dashboard/request/bidsPlaced",
+  },
+  {
+    id: "2",
+    item: "Interest Sent",
+    url: "/dashboard/request/interestSent",
+  },
+  {
+    id: "3",
+    item: "Documents",
+    url: "/dashboard/request/documents",
+  },
+];
+
+export const purchase = [
+  {
+    id: "1",
+    item: "Property Purchased",
+    url: "/dashboard/purchase/propertyPurchased",
+  },
+  {
+    id: "2",
+    item: "Property Rented",
+    url: "/dashboard/purchase/propertyRented",
+  },
+  {
+    id: "3",
+    item: "Payment History",
+    url: "/dashboard/purchase/paymentHistory",
+  },
+];

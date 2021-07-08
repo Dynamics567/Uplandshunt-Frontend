@@ -1,10 +1,9 @@
 import { Link } from "react-router-dom";
 
-const EmptyState = ({ image, text, buttonText, buttonUrl, setEditForm }) => {
-  const getForm = () => {
-    setEditForm(true);
+const EmptyState = ({ image, text, buttonText, buttonUrl }) => {
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
   };
-
   return (
     <div className="flex flex-col justify-center items-center">
       <img src={image} alt={text} />
@@ -12,7 +11,7 @@ const EmptyState = ({ image, text, buttonText, buttonUrl, setEditForm }) => {
       <Link to={buttonUrl} className="w-full flex items-center justify-center">
         <button
           className="rounded-md p-4 text-white bg-primary font-semibold w-2/6"
-          onClick={getForm}
+          onClick={scrollToTop}
         >
           {buttonText}
         </button>
