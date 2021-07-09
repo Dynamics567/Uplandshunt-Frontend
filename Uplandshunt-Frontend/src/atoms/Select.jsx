@@ -5,12 +5,13 @@ const Select = ({
   selectedValue,
   className,
   labelName,
+  error,
   ...rest
 }) => {
   return (
-    <div className="">
+    <div className="mb-6">
       <label className="font-bold text-sm pb-4">{labelName}</label>
-      <div className={`mb-6 border border-lightAsh ${className}`}>
+      <div className={`border border-lightAsh ${className}`}>
         <select
           className="p-2 w-full bg-white"
           defaultValue={selectedValue}
@@ -24,6 +25,9 @@ const Select = ({
           ))}
         </select>
       </div>
+      <span>
+        <p className="text-red-500 text-sm">{error}</p>
+      </span>
     </div>
   );
 };
