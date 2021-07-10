@@ -21,7 +21,18 @@ import {
   Dashboard,
 } from "./pages";
 
+const setToken = (userToken) => {
+  sessionStorage.setItem("token", JSON.stringify(userToken));
+};
+
+const getToken = () => {
+  const tokenString = sessionStorage.getItem("token");
+  const userToken = JSON.parse(tokenString);
+  return userToken?.token;
+};
+
 function App() {
+  const token = getToken();
   return (
     <div className="overflow-hidden">
       <Router>
@@ -30,6 +41,7 @@ function App() {
             <Route path="/" exact component={Landing} />
             <Route path="/register" exact component={IndividualSignup} />
             <Route path="/resetpassword" exact component={ResetPassword} />
+            {/* if(!token) {<Route path="/login" exact component={Login} />} */}
             <Route path="/login" exact component={Login} />
             <Route path="/contactus" exact component={ContactUs} />
             <Route path="/forgotpassword" exact component={PasswordRecovery} />
