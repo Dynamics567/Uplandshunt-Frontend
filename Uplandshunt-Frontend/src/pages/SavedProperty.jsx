@@ -1,7 +1,7 @@
 // import { DashboardSectionTitle } from "../atoms";
 
 import smallTown from "../assets/userDashboard/smallTown.svg";
-import { AllSavedProperties } from "../pages";
+// import { AllSavedProperties } from "../pages";
 import EmptyState from "../templates/EmptyState";
 
 const SavedProperty = () => {

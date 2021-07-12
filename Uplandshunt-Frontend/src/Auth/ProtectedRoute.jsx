@@ -1,16 +1,20 @@
 import { Route, Redirect } from "react-router-dom";
 
-const ProtectedRoute = ({ Component, isAuthenticated, logout, ...rest }) => {
+import { useAuthState } from "../Context";
+
+const ProtectedRoute = ({ component: Component, path, ...rest }) => {
+  const userDetails = useAuthState();
   return (
     <Route
-      {...rest}
-      render={(props) => {
-        isAuthenticated ? (
-          <Component logout={logout} />
+      path={path}
+      render={(props) =>
+        !Boolean(userDetails.token) ? (
+          <Redirect to={{ pathname: "/login" }} />
         ) : (
-          <Redirect to={{ pathname: "/", state: { from: props.location } }} />
-        );
-      }}
+          <Component {...props} />
+        )
+      }
+      {...rest}
     />
   );
 };
