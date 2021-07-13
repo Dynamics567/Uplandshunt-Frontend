@@ -31,14 +31,17 @@ export const company = [
   {
     id: "1",
     item: "About Us",
+    path: "/about",
   },
   {
     id: "2",
     item: "Legal",
+    path: "/legal/news",
   },
   {
     id: "1",
     item: "Privacy policy",
+    path: "/privacypolicy",
   },
   {
     id: "1",

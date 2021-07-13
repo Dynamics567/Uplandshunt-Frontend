@@ -4,6 +4,7 @@ import { SectionWrapper } from "../Layout";
 import whatsappFooter from "../assets/whatsappFooter.svg";
 import linkedin from "../assets/linkedin.svg";
 import facebook from "../assets/facebook.svg";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -27,11 +28,11 @@ const Footer = () => {
           </section>
           <div className="">
             <p className="font-bold text-lg pb-6 uppercase">Company</p>
-            {company.map(({ item, id }) => {
+            {company.map(({ item, id, path }) => {
               return (
-                <div className="mb-3" key={id}>
+                <Link to={path} className="mb-3" key={id}>
                   <p className="font-normal text-lg">{item}</p>
-                </div>
+                </Link>
               );
             })}
           </div>
