@@ -116,7 +116,7 @@ const IndividualSignup = () => {
           </i>
           <Input
             placeholder="xxxxxxx"
-            type={passwordShown ? "text" : "password"}
+            type={confirmPasswordShown ? "text" : "password"}
             label="Confirm Password"
             name="password_confirmation"
             {...register("password_confirmation")}
