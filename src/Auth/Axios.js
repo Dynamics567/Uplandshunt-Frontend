@@ -1,5 +1,6 @@
 import axios from "axios";
 
-const instance = axios.create({
-  baseURL: "",
+export const axiosInstance = axios.create({
+  baseURL: "https://uplandshut.herokuapp.com/v1/",
+  // timeout: 1000,
 });

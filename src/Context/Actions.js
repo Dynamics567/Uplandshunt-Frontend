@@ -1,4 +1,5 @@
-const ROOT_URL = "https://secret-hamlet-03431.herokuapp.com";
+// const ROOT_URL = "https://secret-hamlet-03431.herokuapp.com";
+const ROOT_URL = "https://uplandshut.herokuapp.com/v1/";
 
 export async function loginUser(dispatch, loginPayload) {
   const requestOptions = {

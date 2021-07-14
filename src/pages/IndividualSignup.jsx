@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 
+import { axiosInstance } from "../Auth/Axios";
 import { Select, Input } from "../atoms";
 import Intro from "../templates/Intro";
 import eyeClosed from "../assets/eyeClosed.svg";
@@ -17,7 +18,8 @@ const accountType = [
 
 const IndividualSignup = () => {
   const [passwordShown, setPasswordShown] = useState(false);
-  const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
+  const [confirmPasswordShown, setConfirmPasswordShown] = useState(true);
+  const [isBusiness, setIsBusiness] = useState(false);
 
   const togglePasswordVisibility = () => {
     setPasswordShown(passwordShown ? false : true);
@@ -27,13 +29,19 @@ const IndividualSignup = () => {
     setConfirmPasswordShown(confirmPasswordShown ? false : true);
   };
 
-  const getCategory = (val) => {
-    console.log(val);
+  let accountSelected;
+  const getAccountType = (val) => {
+    accountSelected = val.target.value;
+    if (accountSelected === "Business") {
+      setIsBusiness(!isBusiness);
+    }
   };
 
   const validationSchema = Yup.object().shape({
     account_type: Yup.string().required("Account Type is required"),
     name: Yup.string().required("Account Name is required"),
+    business_name: Yup.string().required("Business Name is required"),
+    business_phone: Yup.string().required("Business Number is required"),
     email: Yup.string().required("Email is required").email("Email is invalid"),
     phone: Yup.string().required("Phone number is required"),
     password: Yup.string()
@@ -42,7 +50,10 @@ const IndividualSignup = () => {
     password_confirmation: Yup.string()
       .oneOf([Yup.ref("password"), null], "Passwords must match")
       .required("Confirm Password is required"),
-    acceptTerms: Yup.bool().oneOf([true], "Accept Ts & Cs is required"),
+    acceptTerms: Yup.bool().oneOf(
+      [true],
+      "Terms and Conditions must be accepted"
+    ),
   });
   const formOptions = { resolver: yupResolver(validationSchema) };
 
@@ -51,10 +62,10 @@ const IndividualSignup = () => {
   const { errors } = formState;
 
   function onSubmit(data) {
-    // display form data on success
-    // alert("SUCCESS!! :-)\n\n" + JSON.stringify(data, null, 4));
-    // return false;
-    console.log(data);
+    // console.log(data);
+    axiosInstance.post("auth/register", data).then((response) => {
+      console.log(response);
+    });
   }
   return (
     <AuthLayout>
@@ -63,14 +74,15 @@ const IndividualSignup = () => {
         subtitle="Provide your details in order to register your account"
       />
       <form className="mt-12 m-auto w-8/12" onSubmit={handleSubmit(onSubmit)}>
+        {formState.isSubmitted && (
+          <div className="success">Form submitted successfully</div>
+        )}
         <Select
-          label="Category"
           values={accountType}
-          selectedValue="Individual Account"
-          labelName="Account Type"
-          onValueChange={(val) => getCategory(val)}
+          selectedValue="Individual"
           name="account_type"
           {...register("account_type")}
+          onChange={(val) => getAccountType(val)}
           error={errors.account_type?.message}
         />
         <Input
@@ -131,7 +143,30 @@ const IndividualSignup = () => {
           {...register("phone")}
           error={errors.phone?.message}
         />
-        {/* <div className="flex w-full"> */}
+        {isBusiness ? (
+          <div className="">
+            <Input
+              placeholder="xxxxxxx"
+              type="text"
+              label="Business Name"
+              name="business_name"
+              {...register("business_name")}
+              error={errors.business_name?.message}
+            />
+            <Input
+              placeholder="xxxxxxx"
+              type="text"
+              placeholder="00000000"
+              label="Business Number"
+              name="business_number"
+              {...register("business_phone")}
+              error={errors.business_phone?.message}
+            />
+          </div>
+        ) : (
+          ""
+        )}
+
         <input
           type="checkbox"
           value=""
@@ -145,10 +180,9 @@ const IndividualSignup = () => {
         <span>
           <p className="text-red-500 text-sm">{errors.acceptTerms?.message}</p>
         </span>
-        {/* </div> */}
         <div className="my-8 flex w-full justify-between items-center">
           <button className="rounded-lg p-4 text-white bg-primary font-semibold mr-10">
-            Register as an individual
+            Register as an {"Individual" || accountSelected}
           </button>
           <button className="rounded-lg px-10 py-4 text-primary bg-white border border-primary font-semibold">
             Submit
@@ -158,7 +192,7 @@ const IndividualSignup = () => {
 
       <Link to="/login">
         <p className="text-center font-normal text-sm mb-20">
-          Already have an account?{" "}
+          Already have an account?
           <span className="text-primary font-bold">Sign In</span>
         </p>
       </Link>

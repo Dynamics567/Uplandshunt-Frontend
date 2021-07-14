@@ -1,5 +1,4 @@
 const Select = ({
-  label,
   values,
   onValueChange,
   selectedValue,
