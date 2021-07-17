@@ -3,14 +3,13 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 
-import { registerUser, useAuthState, useAuthDispatch } from "../Context";
-// import { axiosInstance } from "../Auth/Axios";
+import { axiosInstance } from "../Auth/Axios";
 import { Input } from "../atoms";
 import eyeClosed from "../assets/eyeClosed.svg";
 import eyeOpened from "../assets/eyeOpen.svg";
 import { RegisterLayout } from "../Layout";
 
-const IndividualSignup = (props) => {
+const BusinessSignup = () => {
   const [passwordShown, setPasswordShown] = useState(false);
   const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
 
@@ -24,6 +23,8 @@ const IndividualSignup = (props) => {
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Account Name is required"),
+    business_name: Yup.string().required("Business Name is required"),
+    business_phone: Yup.string().required("Business Phone is required"),
     email: Yup.string().required("Email is required").email("Email is invalid"),
     phone: Yup.string().required("Phone number is required"),
     password: Yup.string()
@@ -43,20 +44,14 @@ const IndividualSignup = (props) => {
   const { register, handleSubmit, formState } = useForm(formOptions);
   const { errors } = formState;
 
-  const dispatch = useAuthDispatch();
-
-  const onSubmit = async (data) => {
-    let accountType = { account_type: "Individual" };
+  function onSubmit(data) {
+    let accountType = { account_type: "Business" };
     const userData = { ...accountType, ...data };
-    try {
-      let response = await registerUser(dispatch, userData);
+    console.log(userData);
+    axiosInstance.post("auth/register", userData).then((response) => {
       console.log(response);
-      if (!response.status === 201) return;
-      props.history.push("/dashboard");
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    });
+  }
   return (
     <RegisterLayout>
       <form className="mt-12 m-auto w-8/12" onSubmit={handleSubmit(onSubmit)}>
@@ -121,6 +116,24 @@ const IndividualSignup = (props) => {
           {...register("phone")}
           error={errors.phone?.message}
         />
+        <Input
+          placeholder="xxxxxxx"
+          type="text"
+          label="Business Name"
+          name="business_name"
+          {...register("business_name")}
+          error={errors.business_name?.message}
+        />
+        <Input
+          placeholder="xxxxxxx"
+          type="text"
+          placeholder="00000000"
+          label="Business Number"
+          name="business_phone"
+          {...register("business_phone")}
+          error={errors.business_phone?.message}
+        />
+
         <input
           type="checkbox"
           value=""
@@ -136,7 +149,7 @@ const IndividualSignup = (props) => {
         </span>
         <div className="my-8 flex w-full justify-between items-center">
           <button className="rounded-lg p-4 w-full text-white bg-primary font-semibold">
-            Register as an Individual
+            Register as a Business
           </button>
         </div>
       </form>
@@ -144,4 +157,4 @@ const IndividualSignup = (props) => {
   );
 };
 
-export { IndividualSignup };
+export { BusinessSignup };

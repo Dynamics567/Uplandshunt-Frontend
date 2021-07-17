@@ -13,6 +13,8 @@ export const initialState = {
   token: "" || token,
   loading: false,
   errorMessage: null,
+  registerSuccess: "",
+  registerError: null,
 };
 
 export const AuthReducer = (initialState, action) => {
@@ -41,7 +43,23 @@ export const AuthReducer = (initialState, action) => {
         loading: false,
         errorMessage: action.error,
       };
-
+    case "REQUEST_REGISTER":
+      return {
+        ...initialState,
+        loading: true,
+      };
+    case "REGISTER_SUCCESS":
+      return {
+        ...initialState,
+        loading: false,
+        registerSuccess: action.payload.data,
+      };
+    case "REGISTER_ERROR":
+      return {
+        ...initialState,
+        loading: false,
+        errorMessage: action.error,
+      };
     default:
       throw new Error(`Unhandled action type:${action.type}`);
   }

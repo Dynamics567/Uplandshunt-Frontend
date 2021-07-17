@@ -122,3 +122,16 @@ export const purchase = [
     url: "/dashboard/purchase/paymentHistory",
   },
 ];
+
+export const register = [
+  {
+    id: "1",
+    item: "Individual Signup",
+    url: "/register",
+  },
+  {
+    id: "2",
+    item: "Business Signup",
+    url: "/businessRegister",
+  },
+];

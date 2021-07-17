@@ -36,7 +36,7 @@ const Login = (props) => {
     let password = data.password;
     try {
       let response = await loginUser(dispatch, { email, password });
-      console.log(email, password, response);
+      console.log(response);
       if (!response.user) return;
       props.history.push("/dashboard");
     } catch (error) {

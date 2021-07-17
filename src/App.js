@@ -23,6 +23,7 @@ import {
   PrivacyPolicy,
   TermsAndConditions,
   Dashboard,
+  BusinessSignup,
 } from "./pages";
 
 function App() {
@@ -34,6 +35,11 @@ function App() {
             <div className="">
               <Route path="/" exact component={Landing} />
               <Route path="/register" exact component={IndividualSignup} />
+              <Route
+                path="/businessRegister"
+                exact
+                component={BusinessSignup}
+              />
               <Route path="/resetpassword" exact component={ResetPassword} />
               <Route path="/login" exact component={Login} />
               <Route path="/contactus" exact component={ContactUs} />
