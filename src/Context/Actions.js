@@ -12,9 +12,8 @@ export async function loginUser(dispatch, loginPayload) {
     dispatch({ type: "REQUEST_LOGIN" });
     let response = await fetch(`${ROOT_URL}/auth/login`, requestOptions);
     let data = await response.json();
-    console.log(data);
 
-    if (data.user) {
+    if (data.data.user) {
       dispatch({
         type: "LOGIN_SUCCESS",
         payload: data,
@@ -23,10 +22,10 @@ export async function loginUser(dispatch, loginPayload) {
       return data;
     }
 
-    // dispatch({ type: "LOGIN_ERROR", error: data.errors });
+    dispatch({ type: "LOGIN_ERROR", error: data.data.errors.error[0] });
     return;
   } catch (error) {
-    dispatch({ type: "LOGIN_ERROR", error: error });
+    dispatch({ type: "LOGIN_ERROR", error: null });
   }
 }
 
@@ -47,13 +46,15 @@ export async function registerUser(dispatch, registerPayload) {
     dispatch({ type: "REQUEST_REGISTER" });
     let response = await fetch(`${ROOT_URL}/auth/register`, registerOptions);
     let data = await response.json();
-    console.log(data);
+    // console.log(data);
 
-    if (data.status === true) {
+    if (data.status) {
+      console.log(data);
       dispatch({
         type: "REGISTER_SUCCESS",
         payload: data,
       });
+      return data;
     }
 
     dispatch({ type: "REGISTER_ERROR", error: data.data });

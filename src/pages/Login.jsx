@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
@@ -12,7 +12,8 @@ import eyeOpened from "../assets/eyeOpen.svg";
 import gmail from "../assets/gmail.svg";
 import { AuthLayout } from "../Layout";
 
-const Login = (props) => {
+const Login = () => {
+  const location = useHistory();
   const [passwordShown, setPasswordShown] = useState(false);
   const togglePasswordVisibility = () => {
     setPasswordShown(passwordShown ? false : true);
@@ -37,8 +38,8 @@ const Login = (props) => {
     try {
       let response = await loginUser(dispatch, { email, password });
       console.log(response);
-      if (!response.user) return;
-      props.history.push("/dashboard");
+      if (!response.data.user) return;
+      location.push("/dashboard");
     } catch (error) {
       console.log(error);
     }

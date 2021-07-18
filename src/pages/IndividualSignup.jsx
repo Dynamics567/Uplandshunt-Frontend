@@ -10,7 +10,7 @@ import eyeClosed from "../assets/eyeClosed.svg";
 import eyeOpened from "../assets/eyeOpen.svg";
 import { RegisterLayout } from "../Layout";
 
-const IndividualSignup = (props) => {
+const IndividualSignup = () => {
   const [passwordShown, setPasswordShown] = useState(false);
   const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
 
@@ -44,15 +44,17 @@ const IndividualSignup = (props) => {
   const { errors } = formState;
 
   const dispatch = useAuthDispatch();
+  const { loading, errorMessage, registerSuccess } = useAuthState();
 
   const onSubmit = async (data) => {
     let accountType = { account_type: "Individual" };
     const userData = { ...accountType, ...data };
     try {
       let response = await registerUser(dispatch, userData);
-      console.log(response);
+      console.log(response.data);
       if (!response.status === 201) return;
-      props.history.push("/dashboard");
+      // props.history.push("/dashboard");
+      console.log("register");
     } catch (error) {
       console.log(error);
     }
@@ -63,6 +65,12 @@ const IndividualSignup = (props) => {
         {/* {formState.isSubmitted && (
           <div className="success">Form submitted successfully</div>
         )} */}
+        {errorMessage ? (
+          <p className="text-sm text-red-400">{errorMessage}</p>
+        ) : null}
+        {registerSuccess ? (
+          <p className="text-sm text-green-400">{errorMessage}</p>
+        ) : null}
         <Input
           type="text"
           placeholder="example@example.com"

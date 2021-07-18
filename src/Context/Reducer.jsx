@@ -28,7 +28,7 @@ export const AuthReducer = (initialState, action) => {
       return {
         ...initialState,
         user: action.payload.user,
-        token: action.payload.auth_token,
+        token: action.payload.data.token,
         loading: false,
       };
     case "LOGOUT":
@@ -52,6 +52,7 @@ export const AuthReducer = (initialState, action) => {
       return {
         ...initialState,
         loading: false,
+        // user: action.payload.data,
         registerSuccess: action.payload.data,
       };
     case "REGISTER_ERROR":
