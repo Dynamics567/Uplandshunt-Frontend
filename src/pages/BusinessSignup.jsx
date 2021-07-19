@@ -10,6 +10,7 @@ import eyeClosed from "../assets/eyeClosed.svg";
 import eyeOpened from "../assets/eyeOpen.svg";
 import { RegisterLayout } from "../Layout";
 import LoadSpinner from "../templates/LoadSpinner";
+import { userDashboard } from "../data/FooterItems";
 
 const BusinessSignup = () => {
   const location = useHistory();
@@ -54,7 +55,7 @@ const BusinessSignup = () => {
   const onSubmit = async (data) => {
     let accountType = { account_type: "Business" };
     const userData = { ...accountType, ...data };
-
+    console.log(userData);
     try {
       let response = await registerUser(dispatch, userData);
       console.log(response);

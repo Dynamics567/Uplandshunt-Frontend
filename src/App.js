@@ -40,7 +40,11 @@ function App() {
                 exact
                 component={BusinessSignup}
               />
-              <Route path="/resetpassword" exact component={ResetPassword} />
+              <Route
+                path="/resetpassword/:token"
+                exact
+                component={ResetPassword}
+              />
               <Route path="/login" exact component={Login} />
               <Route path="/contactus" exact component={ContactUs} />
               <Route

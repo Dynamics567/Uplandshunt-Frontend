@@ -1,15 +1,26 @@
 import { useState } from "react";
+import { useParams } from "react-router";
+import { useForm } from "react-hook-form";
+import { useHistory } from "react-router-dom";
 
+import { axiosInstance } from "../Auth/Axios";
 import { Input } from "../atoms";
 import Intro from "../templates/Intro";
 import eyeClosed from "../assets/eyeClosed.svg";
 import eyeOpened from "../assets/eyeOpen.svg";
 import { AuthLayout } from "../Layout";
-import { useForm } from "react-hook-form";
+import LoadSpinner from "../templates/LoadSpinner";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 
 const ResetPassword = () => {
+  let { token } = useParams();
+  const location = useHistory();
+
+  const [loading, setLoading] = useState(false);
+  const [response, setResponse] = useState("");
+  const [error, setError] = useState("");
+
   const [passwordShown, setPasswordShown] = useState(false);
   const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
 
@@ -37,7 +48,26 @@ const ResetPassword = () => {
   const { errors } = formState;
 
   function handleResetPassword(data) {
-    console.log(data);
+    let userToken = { token: token };
+    const userData = { ...userToken, ...data };
+
+    setLoading(true);
+    axiosInstance
+      .post("auth/reset-password", userData)
+      .then(function (response) {
+        console.log(response);
+        setResponse(response.data.data);
+        setLoading(false);
+        location.push("/login");
+      })
+      .catch(function (error) {
+        if (error.response) {
+          setError(error.response.data.data);
+          setLoading(false);
+        }
+        // handle error
+        // setError(error.status);
+      });
   }
   return (
     <AuthLayout>
@@ -49,6 +79,9 @@ const ResetPassword = () => {
         className="mt-12 m-auto w-8/12"
         onSubmit={handleSubmit(handleResetPassword)}
       >
+        {error && <p className="text-sm text-red-400">{error}</p>}
+        {response && <p className="text-sm text-green-400">{response}</p>}
+
         <div className="w-full relative">
           <i onClick={togglePasswordVisibility}>
             <img
@@ -86,8 +119,9 @@ const ResetPassword = () => {
           />
         </div>
 
-        <div className="my-8 flex w-full justify-between items-center text-center">
-          <button className="rounded-md p-4 text-white bg-primary font-semibold w-full">
+        <div className="bg-primary rounded-md p-4 my-8 flex w-full justify-between items-center text-center">
+          <div className="">{loading && <LoadSpinner />}</div>
+          <button className="text-white bg-primary font-semibold w-full focus:outline-none">
             Reset Password
           </button>
         </div>

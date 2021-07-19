@@ -12,7 +12,11 @@ const Toast = (props) => {
     <>
       <div className={`notification-container ${position}`}>
         {list.map((toast, i) => (
-          <div key={i} className={`notification toast ${position}`}>
+          <div
+            key={i}
+            className={`notification toast ${position}`}
+            style={{ backgroundColor: toast.backgroundColor }}
+          >
             <button>X</button>
             <div className="notification-image">
               <img src={toast.icon} alt="" />

@@ -2,14 +2,33 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
-// import { useToasts } from "react-toast-notifications";
 import { useHistory } from "react-router-dom";
 
 import { AuthLayout } from "../Layout";
+import check from "../assets/check.svg";
+import warning from "../assets/warning.svg";
 import Intro from "../templates/Intro";
 import { Input } from "../atoms";
 import LoadSpinner from "../templates/LoadSpinner";
 import { axiosInstance } from "../Auth/Axios";
+import { Toast } from "../organisms";
+
+const testList = [
+  {
+    id: 1,
+    title: "Success",
+    description: "This is a success toast component",
+    backgroundColor: "#5cb85c",
+    icon: check,
+  },
+  {
+    id: 2,
+    title: "Danger",
+    description: "This is an error toast component",
+    backgroundColor: "#d9534f",
+    icon: warning,
+  },
+];
 
 const PasswordRecovery = () => {
   const location = useHistory();
@@ -36,7 +55,7 @@ const PasswordRecovery = () => {
         console.log(response);
         setResponse(response.data.data);
         setLoading(false);
-        location.push("/resetpassword");
+        // location.push("/resetpassword");
       })
       .catch(function (error) {
         if (error.response) {
@@ -49,6 +68,7 @@ const PasswordRecovery = () => {
   };
   return (
     <div className="h-full">
+      {/* <Toast toastList={testList} position="top-left" /> */}
       <AuthLayout>
         <Intro
           title="Password Recovery"
