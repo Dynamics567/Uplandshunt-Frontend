@@ -7,3 +7,4 @@ export * from "./DownloadApp";
 export * from "./Footer";
 export * from "./LegalHeader";
 export * from "./EditProfile";
+export * from "./Toast";

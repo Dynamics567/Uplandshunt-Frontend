@@ -49,7 +49,6 @@ export async function registerUser(dispatch, registerPayload) {
     // console.log(data);
 
     if (data.status) {
-      console.log(data);
       dispatch({
         type: "REGISTER_SUCCESS",
         payload: data,
@@ -60,6 +59,7 @@ export async function registerUser(dispatch, registerPayload) {
     dispatch({ type: "REGISTER_ERROR", error: data.data });
     return;
   } catch (error) {
-    dispatch({ type: "REGISTER_ERROR", error: error });
+    // dispatch({ type: "REGISTER_ERROR", error: error });
+    console.log(error);
   }
 }

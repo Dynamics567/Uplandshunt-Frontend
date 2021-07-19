@@ -1,15 +1,19 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 
-import { axiosInstance } from "../Auth/Axios";
+import { registerUser, useAuthState, useAuthDispatch } from "../Context";
 import { Input } from "../atoms";
 import eyeClosed from "../assets/eyeClosed.svg";
 import eyeOpened from "../assets/eyeOpen.svg";
 import { RegisterLayout } from "../Layout";
+import LoadSpinner from "../templates/LoadSpinner";
 
 const BusinessSignup = () => {
+  const location = useHistory();
+
   const [passwordShown, setPasswordShown] = useState(false);
   const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
 
@@ -20,6 +24,9 @@ const BusinessSignup = () => {
   const toggleConfirmPasswordVisibility = () => {
     setConfirmPasswordShown(confirmPasswordShown ? false : true);
   };
+
+  const dispatch = useAuthDispatch();
+  const { loading, errorMessage, registerSuccess } = useAuthState();
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Account Name is required"),
@@ -41,23 +48,35 @@ const BusinessSignup = () => {
   const formOptions = { resolver: yupResolver(validationSchema) };
 
   // get functions to build form with useForm() hook
-  const { register, handleSubmit, formState } = useForm(formOptions);
+  const { reset, register, handleSubmit, formState } = useForm(formOptions);
   const { errors } = formState;
 
-  function onSubmit(data) {
+  const onSubmit = async (data) => {
     let accountType = { account_type: "Business" };
     const userData = { ...accountType, ...data };
-    console.log(userData);
-    axiosInstance.post("auth/register", userData).then((response) => {
+
+    try {
+      let response = await registerUser(dispatch, userData);
       console.log(response);
-    });
-  }
+      if (!response.status === 201) return;
+      location.push("/login");
+    } catch (error) {
+      console.log(error);
+    }
+    reset({});
+  };
   return (
     <RegisterLayout>
       <form className="mt-12 m-auto w-8/12" onSubmit={handleSubmit(onSubmit)}>
         {/* {formState.isSubmitted && (
           <div className="success">Form submitted successfully</div>
         )} */}
+        {errorMessage ? (
+          <p className="text-sm text-red-400">{errorMessage}</p>
+        ) : null}
+        {registerSuccess ? (
+          <p className="text-sm text-green-400">{registerSuccess}</p>
+        ) : null}
         <Input
           type="text"
           placeholder="example@example.com"
@@ -87,6 +106,7 @@ const BusinessSignup = () => {
             type={passwordShown ? "text" : "password"}
             label="Password"
             name="password"
+            autocomplete="on"
             {...register("password")}
             error={errors.password?.message}
           />
@@ -103,6 +123,7 @@ const BusinessSignup = () => {
             placeholder="xxxxxxx"
             type={confirmPasswordShown ? "text" : "password"}
             label="Confirm Password"
+            autocomplete="on"
             name="password_confirmation"
             {...register("password_confirmation")}
             error={errors.password_confirmation?.message}
@@ -127,7 +148,6 @@ const BusinessSignup = () => {
         <Input
           placeholder="xxxxxxx"
           type="text"
-          placeholder="00000000"
           label="Business Number"
           name="business_phone"
           {...register("business_phone")}
@@ -147,8 +167,9 @@ const BusinessSignup = () => {
         <span>
           <p className="text-red-500 text-sm">{errors.acceptTerms?.message}</p>
         </span>
-        <div className="my-8 flex w-full justify-between items-center">
-          <button className="rounded-lg p-4 w-full text-white bg-primary font-semibold">
+        <div className="bg-primary rounded-md p-4 my-8 flex w-full justify-between items-center">
+          <div className="">{loading && <LoadSpinner />}</div>
+          <button className="w-full text-white font-semibold focus:outline-none">
             Register as a Business
           </button>
         </div>

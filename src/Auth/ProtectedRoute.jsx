@@ -18,8 +18,4 @@ const ProtectedRoute = ({ component: Component, path, ...rest }) => {
     />
   );
 };
-
-{
-  /* <Redirect to={{pathname:"/",state:{from:props.location}}/> */
-}
 export { ProtectedRoute };

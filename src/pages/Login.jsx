@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
@@ -11,9 +13,11 @@ import eyeClosed from "../assets/eyeClosed.svg";
 import eyeOpened from "../assets/eyeOpen.svg";
 import gmail from "../assets/gmail.svg";
 import { AuthLayout } from "../Layout";
+import LoadSpinner from "../templates/LoadSpinner";
 
 const Login = () => {
   const location = useHistory();
+  const success = () => toast("");
   const [passwordShown, setPasswordShown] = useState(false);
   const togglePasswordVisibility = () => {
     setPasswordShown(passwordShown ? false : true);
@@ -54,9 +58,10 @@ const Login = () => {
         className="mt-12 m-auto w-8/12"
         onSubmit={handleSubmit(handleLogin)}
       >
-        {errorMessage ? (
+        {/* {errorMessage ? (
           <p className="text-sm text-red-400">{errorMessage}</p>
-        ) : null}
+        ) : null} */}
+        {errorMessage && <p className="text-sm text-red-400">{errorMessage}</p>}
         <Input
           type="email"
           placeholder="example@example.com"
@@ -88,8 +93,9 @@ const Login = () => {
           </p>
         </Link>
 
-        <div className="my-8 flex w-full justify-between items-center text-center">
-          <button className="rounded-md p-4 text-white bg-primary font-semibold w-full">
+        <div className="bg-primary rounded-md p-4 my-8 flex w-full justify-between items-center text-center">
+          <div className="">{loading && <LoadSpinner />}</div>
+          <button className="text-white bg-primary font-semibold w-full focus:outline-none">
             Log In
           </button>
         </div>

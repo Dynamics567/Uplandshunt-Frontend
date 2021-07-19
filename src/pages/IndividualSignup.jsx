@@ -2,15 +2,17 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
+import { useHistory } from "react-router";
 
 import { registerUser, useAuthState, useAuthDispatch } from "../Context";
-// import { axiosInstance } from "../Auth/Axios";
 import { Input } from "../atoms";
 import eyeClosed from "../assets/eyeClosed.svg";
 import eyeOpened from "../assets/eyeOpen.svg";
 import { RegisterLayout } from "../Layout";
+import LoadSpinner from "../templates/LoadSpinner";
 
 const IndividualSignup = () => {
+  const location = useHistory();
   const [passwordShown, setPasswordShown] = useState(false);
   const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
 
@@ -40,7 +42,7 @@ const IndividualSignup = () => {
   const formOptions = { resolver: yupResolver(validationSchema) };
 
   // get functions to build form with useForm() hook
-  const { register, handleSubmit, formState } = useForm(formOptions);
+  const { register, handleSubmit, formState, reset } = useForm(formOptions);
   const { errors } = formState;
 
   const dispatch = useAuthDispatch();
@@ -51,13 +53,12 @@ const IndividualSignup = () => {
     const userData = { ...accountType, ...data };
     try {
       let response = await registerUser(dispatch, userData);
-      console.log(response.data);
       if (!response.status === 201) return;
-      // props.history.push("/dashboard");
-      console.log("register");
+      location.push("/login");
     } catch (error) {
       console.log(error);
     }
+    reset();
   };
   return (
     <RegisterLayout>
@@ -69,7 +70,7 @@ const IndividualSignup = () => {
           <p className="text-sm text-red-400">{errorMessage}</p>
         ) : null}
         {registerSuccess ? (
-          <p className="text-sm text-green-400">{errorMessage}</p>
+          <p className="text-sm text-green-400">{registerSuccess}</p>
         ) : null}
         <Input
           type="text"
@@ -100,6 +101,7 @@ const IndividualSignup = () => {
             type={passwordShown ? "text" : "password"}
             label="Password"
             name="password"
+            autocomplete="on"
             {...register("password")}
             error={errors.password?.message}
           />
@@ -117,6 +119,7 @@ const IndividualSignup = () => {
             type={confirmPasswordShown ? "text" : "password"}
             label="Confirm Password"
             name="password_confirmation"
+            autocomplete="on"
             {...register("password_confirmation")}
             error={errors.password_confirmation?.message}
           />
@@ -142,8 +145,9 @@ const IndividualSignup = () => {
         <span>
           <p className="text-red-500 text-sm">{errors.acceptTerms?.message}</p>
         </span>
-        <div className="my-8 flex w-full justify-between items-center">
-          <button className="rounded-lg p-4 w-full text-white bg-primary font-semibold">
+        <div className="bg-primary rounded-md p-4 my-8 flex w-full justify-between items-center">
+          <div className="">{loading && <LoadSpinner />}</div>
+          <button className="w-full text-white bg-primary font-semibold focus:outline-none">
             Register as an Individual
           </button>
         </div>
