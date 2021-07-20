@@ -13,7 +13,7 @@ const Input = ({
 }) => {
   return (
     <div className="mb-6">
-      <label htmlFor={name} className="font-bold text-sm pb-4">
+      <label htmlFor={name} className="font-bold text-sm mb-8">
         {label}
       </label>
       <div

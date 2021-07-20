@@ -57,8 +57,7 @@ function App() {
               <Route path="/legal/news" component={News} />
               <Route path="/about" exact component={About} />
               <Route
-                path="/activateaccount"
-                exact
+                path="/activateaccount/:token"
                 component={ActivateAccount}
               />
               <Route path="/privacypolicy" exact component={PrivacyPolicy} />
