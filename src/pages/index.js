@@ -36,3 +36,4 @@ export * from "./PropertyPurchased";
 export * from "./PropertyRented";
 export * from "./PaymentHistory";
 export * from "./AllSavedProperties";
+export * from "./ActivateAccount";

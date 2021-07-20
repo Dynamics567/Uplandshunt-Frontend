@@ -24,6 +24,7 @@ import {
   TermsAndConditions,
   Dashboard,
   BusinessSignup,
+  ActivateAccount,
 } from "./pages";
 
 function App() {
@@ -55,6 +56,11 @@ function App() {
               <Route path="/dashboardlogin" exact component={DashboardLogin} />
               <Route path="/legal/news" component={News} />
               <Route path="/about" exact component={About} />
+              <Route
+                path="/activateaccount"
+                exact
+                component={ActivateAccount}
+              />
               <Route path="/privacypolicy" exact component={PrivacyPolicy} />
               <Route path="/terms" exact component={TermsAndConditions} />
               <ProtectedRoute path="/dashboard" component={Dashboard} />

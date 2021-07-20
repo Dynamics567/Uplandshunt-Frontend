@@ -60,7 +60,7 @@ const BusinessSignup = () => {
       let response = await registerUser(dispatch, userData);
       console.log(response);
       if (!response.status === 201) return;
-      location.push("/login");
+      // location.push("/login");
     } catch (error) {
       console.log(error);
     }
