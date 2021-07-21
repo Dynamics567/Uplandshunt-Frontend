@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import "react-toastify/dist/ReactToastify.css";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";

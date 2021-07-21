@@ -6,7 +6,7 @@ const Search = ({ placeholder, className }) => {
       <input
         type="text"
         placeholder={placeholder}
-        className={`rounded-3xl rounded-r-none p-4 text-sm font-normal ${className}`}
+        className={`rounded-3xl rounded-r-none p-4 text-sm font-normal focus:outline-none text-black ${className}`}
       />
       <img src={search} alt="search" />
     </div>
