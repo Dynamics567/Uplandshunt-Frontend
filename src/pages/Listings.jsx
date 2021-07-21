@@ -7,6 +7,7 @@ import EmptyState from "../templates/EmptyState";
 import { axiosInstance } from "../Auth/Axios";
 import LoadSpinner from "../templates/LoadSpinner";
 import { DashboardSectionTitle } from "../atoms";
+import PropertyCard from "../templates/PropertyCard";
 
 const Listings = () => {
   const [userListings, setUserListings] = useState("");
@@ -53,7 +54,7 @@ const Listings = () => {
     (property) => property.list_type === "sell"
   );
 
-  console.log(propertiesToRent, propertiesToSell);
+  console.log(propertiesToRent);
 
   return (
     <>
@@ -62,24 +63,46 @@ const Listings = () => {
         buttonText="Add New Listings"
         buttonUrl="/dashboard/listings/edit"
       />
-      {loading ? ( //response
-        <LoadSpinner /> //loader
+      {loading ? (
+        <LoadSpinner />
       ) : response.length === 0 ? (
-        <EmptyState //if there are no properties
+        <EmptyState
           image={building}
           text="You have not added any listings yet!"
           buttonText="Add New Listings"
         />
       ) : (
-        <div>
+        <div className="ml-4">
           <p className="text-xl font-bold">Properties To Sell</p>
-          {propertiesToSell.map((property) => {
-            return <p>{property.name}</p>;
-          })}
+          <div className="grid grid-cols-4 gap-2 mt-6">
+            {propertiesToSell.map((property) => {
+              // return property.images.map((image) => {
+              return (
+                <PropertyCard
+                  location={property.city}
+                  price={property.price}
+                  place={property.name}
+                  // photo={image[0]}
+                />
+              );
+              // });
+            })}
+          </div>
           <p className="text-xl font-bold">Properties To Sell</p>
-          {propertiesToRent.map((property) => {
-            return <p>{property.name}</p>;
-          })}
+          <div className="grid grid-cols-4 gap-2 mt-6">
+            {propertiesToRent.map((property) => {
+              // return property.images.map((image) => {
+              return (
+                <PropertyCard
+                  location={property.city}
+                  price={property.price}
+                  place={property.name}
+                  // photo={image[0]}
+                />
+              );
+              // });
+            })}
+          </div>
         </div>
       )}
     </>
@@ -87,16 +110,3 @@ const Listings = () => {
 };
 
 export { Listings };
-
-// {loading ? ( //response
-//   <EmptyState
-//     image={building}
-//     text="You have not added any listings yet!"
-//     buttonText="Add New Listings"
-//     buttonUrl="/dashboard/listings/edit"
-//   />
-// ) : response ? (
-//   <div></div>
-// ) : (
-// <LoadSpinner />
-// )}

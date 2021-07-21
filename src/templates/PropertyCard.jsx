@@ -2,7 +2,7 @@ import locationIcon from "../assets/location.svg";
 
 const PropertyCard = ({ photo, location, price, place }) => {
   return (
-    <div className="mr-8 mb-8 border border-white shadow-xl rounded-md">
+    <div className="mr-8 mb-8 border border-white shadow-md rounded-md">
       <section className="w-full h-auto object-cover">
         <img
           src={photo}
