@@ -2,8 +2,8 @@ import bgImage from "../assets/bgImg.png";
 
 const Background = () => {
   return (
-    <div className="w-full h-screen relative text-center overflow-auto">
-      <div className="h-screen object-cover">
+    <div className="w-full h-screen object-cover relative text-center overflow-auto">
+      <div className="h-screen">
         <img
           src={bgImage}
           alt="bgImage"

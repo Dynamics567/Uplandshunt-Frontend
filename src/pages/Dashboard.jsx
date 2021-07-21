@@ -25,13 +25,13 @@ import {
 
 const Dashboard = () => {
   return (
-    <div className="flex">
+    <div className="flex min-w-full">
       <Router>
         <div className="flex-none">
           <Sidebar />
         </div>
 
-        <div className="flex-grow w-full">
+        <div className="min-h-screen inner-layout ml-64 relative">
           <DashboardHeader />
           <Switch>
             <Route path="/dashboard" exact component={Notification} />

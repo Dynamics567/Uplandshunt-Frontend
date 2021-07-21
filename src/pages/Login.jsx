@@ -85,7 +85,7 @@ const Login = () => {
           />
         </div>
         <Link to="/forgotpassword">
-          <p className="underline text-right text-xs font-normal">
+          <p className="underline text-gray-400 text-sm text-right mt-2">
             Forgot password ? Click here to reset the password
           </p>
         </Link>

@@ -13,14 +13,10 @@ const Input = ({
 }) => {
   return (
     <div className="mb-6">
-      <label htmlFor={name} className="font-bold text-sm mb-8">
+      <label htmlFor={name} className="text-lg font-semibold text-left">
         {label}
       </label>
-      <div
-        className={classNames(`border border-lightAsh ${className}`, {
-          "border border-red-500": error,
-        })}
-      >
+      <div className="">
         <input
           type={type}
           name={name}
@@ -28,7 +24,7 @@ const Input = ({
           ref={register}
           placeholder={placeholder}
           {...inputProps}
-          className={`p-2 outline-none w-full text-sm text-greyTwo`}
+          className="w-full border border-gray-400 focus:outline-none px-2 rounded-md py-1 mt-1"
         />
       </div>
       <span>

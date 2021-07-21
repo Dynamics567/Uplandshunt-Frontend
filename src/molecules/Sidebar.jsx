@@ -7,16 +7,16 @@ const Sidebar = () => {
     window.scrollTo(0, 0);
   };
   return (
-    <div className="bg-primary h-full w-64 text-white">
-      <p className="font-normal py-6 text-base text-center">Sample Logo</p>
-      <div className="flex flex-col mt-8 h-full">
+    <div className="w-64 bg-primary fixed top-0 left-0 right-0 bottom-0 pt-5 text-white z-10 pl-10">
+      <p className="font-normal text-base text-center">Sample Logo</p>
+      <div className="mt-6 space-y-10 h-4/5 ">
         {userDashboard.map(({ id, image, navItem, link }) => {
           return (
             <NavLink
               exact
               activeClassName="active"
               to={link}
-              className="flex items-center cursor-pointer ml-4 mb-20"
+              className="flex items-center cursor-pointer ml-4"
               key={id}
               onClick={scrollToTop}
             >

@@ -134,6 +134,10 @@ h2:after {
   }
 }
 
+.inner-layout {
+  min-width: 1000px;
+  width: calc(100% - 256px);
+}
 /* Toast Styles */
 .notification-container {
   font-size: 14px;
