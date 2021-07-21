@@ -10,7 +10,6 @@ import eyeClosed from "../assets/eyeClosed.svg";
 import eyeOpened from "../assets/eyeOpen.svg";
 import { RegisterLayout } from "../Layout";
 import LoadSpinner from "../templates/LoadSpinner";
-import { userDashboard } from "../data/FooterItems";
 
 const BusinessSignup = () => {
   const location = useHistory();

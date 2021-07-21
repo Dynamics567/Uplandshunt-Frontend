@@ -9,7 +9,7 @@ let token = localStorage.getItem("currentUser")
   : "";
 
 export const initialState = {
-  userDetails: "" || user,
+  user: "" || user,
   token: "" || token,
   loading: false,
   errorMessage: null,
@@ -25,10 +25,11 @@ export const AuthReducer = (initialState, action) => {
         loading: true,
       };
     case "LOGIN_SUCCESS":
+      console.log(action.payload);
       return {
         ...initialState,
         user: action.payload.user,
-        token: action.payload.data.token,
+        token: action.payload.token,
         loading: false,
       };
     case "LOGOUT":
@@ -52,7 +53,7 @@ export const AuthReducer = (initialState, action) => {
       return {
         ...initialState,
         loading: false,
-        // user: action.payload.data,
+        user: action.payload,
         registerSuccess: action.payload.data,
       };
     case "REGISTER_ERROR":

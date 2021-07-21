@@ -5,11 +5,15 @@ import * as Yup from "yup";
 
 import { Input } from "../atoms";
 import { axiosInstance } from "../Auth/Axios";
+import { useAuthState } from "../Context";
 
 const EditProfile = () => {
   const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState("");
   const [error, setError] = useState("");
+
+  const userDetails = useAuthState();
+  const userToken = userDetails.token;
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Property Name is required"),
@@ -31,15 +35,14 @@ const EditProfile = () => {
   const { register, handleSubmit, formState, reset } = useForm(formOptions);
   const { errors } = formState;
 
-  let token = localStorage.getItem("currentUser")
-    ? JSON.parse(localStorage.getItem("currentUser")).token
-    : "";
-  console.log(token);
   const editProfile = (data) => {
-    console.log(data, token);
+    const config = {
+      headers: { Authorization: `Bearer ${userToken}` },
+    };
+
     setLoading(true);
     axiosInstance
-      .post("account/update-profile", data)
+      .post("account/update-profile", data, config)
       .then(function (response) {
         console.log(response);
         // setResponse(response.data.data);

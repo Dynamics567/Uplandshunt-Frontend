@@ -20,6 +20,7 @@ import {
   PropertyPurchased,
   PropertyRented,
   AllSavedProperties,
+  EditProfile,
 } from "../pages";
 
 const Dashboard = () => {
@@ -34,7 +35,6 @@ const Dashboard = () => {
           <DashboardHeader />
           <Switch>
             <Route path="/dashboard" exact component={Notification} />
-            <Route path="/dashboard/profile" exact component={Profile} />
             <Route path="/dashboard/listings" exact component={Listings} />
             <Route
               path="/dashboard/listings/edit"
@@ -111,6 +111,12 @@ const Dashboard = () => {
               path="/dashboard/purchase/paymentHistory"
               exact
               component={PaymentHistory}
+            />
+            <Route path="/dashboard/profile" exact component={Profile} />
+            <Route
+              path="/dashboard/editprofile"
+              exact
+              component={EditProfile}
             />
             <Route
               path="/dashboard/subscription"

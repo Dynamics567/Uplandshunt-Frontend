@@ -16,51 +16,57 @@ export const plans = [
   },
 ];
 
+let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+currentUser = currentUser?.data?.user;
+console.log(currentUser);
+const { email, first_name, phone, avatar, role } = currentUser;
+
+export const userObject = { avatar, first_name };
 export const profile = [
   {
     id: "1",
     question: "Name:",
-    answer: "Chide Anene",
+    answer: first_name,
   },
   {
     id: "2",
     question: "Company Name:",
-    answer: "Chidi Properties Plc",
+    answer: "",
   },
   {
     id: "3",
     question: "Address:",
-    answer: "3, Baale street, Makogi, Lekki",
+    answer: "",
   },
   {
     id: "4",
     question: "Country:",
-    answer: "Nigeria",
+    answer: "",
   },
   {
     id: "5",
     question: "State",
-    answer: "Lagos State",
+    answer: "",
   },
   {
     id: "6",
     question: "City:",
-    answer: "Lekki, Lagos",
+    answer: "",
   },
   {
     id: "7",
     question: "Contact Number:",
-    answer: "Lekki, Lagos",
+    answer: phone,
   },
   {
     id: "8",
     question: "Email Address:",
-    answer: "chidianene@gmail.com",
+    answer: email,
   },
   {
     id: "9",
     question: "Website:",
-    answer: "www.chidiproperties.com",
+    answer: "",
   },
 ];
 

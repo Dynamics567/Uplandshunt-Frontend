@@ -54,7 +54,7 @@ const IndividualSignup = () => {
     try {
       let response = await registerUser(dispatch, userData);
       if (!response.status === 201) return;
-      location.push("/login");
+      // location.push("/login");
     } catch (error) {
       console.log(error);
     }
