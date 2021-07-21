@@ -14,8 +14,6 @@ const Profile = () => {
     ["Address", address],
   ];
 
-  console.log(currentUser);
-
   return (
     <div className="">
       <div className="flex mb-20">

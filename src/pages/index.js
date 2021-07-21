@@ -24,7 +24,7 @@ export * from "./Profile";
 export * from "./SavedProperty";
 export * from "./PropertyRequest";
 export * from "./MyPurchase";
-export * from "./EditNewListing";
+export * from "./AddNewListing";
 export * from "./UserView";
 export * from "./Documents";
 export * from "./ManageDetails";

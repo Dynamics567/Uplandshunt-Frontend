@@ -138,6 +138,15 @@ h2:after {
   min-width: 1000px;
   width: calc(100% - 256px);
 }
+
+.addListing {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.addListing input {
+  flex: 0 0 33.333333%;
+}
 /* Toast Styles */
 .notification-container {
   font-size: 14px;
