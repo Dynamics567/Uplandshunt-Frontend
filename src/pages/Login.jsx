@@ -16,7 +16,6 @@ import LoadSpinner from "../templates/LoadSpinner";
 
 const Login = () => {
   const location = useHistory();
-  const success = () => toast("");
   const [passwordShown, setPasswordShown] = useState(false);
   const togglePasswordVisibility = () => {
     setPasswordShown(passwordShown ? false : true);
