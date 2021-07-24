@@ -2,17 +2,15 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
-import { useHistory } from "react-router";
+import { toast } from "react-toastify";
 
 import { registerUser, useAuthState, useAuthDispatch } from "../Context";
-import { Input } from "../atoms";
+import { Input, Button } from "../atoms";
 import eyeClosed from "../assets/eyeClosed.svg";
 import eyeOpened from "../assets/eyeOpen.svg";
 import { RegisterLayout } from "../Layout";
-import LoadSpinner from "../templates/LoadSpinner";
 
 const IndividualSignup = () => {
-  const location = useHistory();
   const [passwordShown, setPasswordShown] = useState(false);
   const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
 
@@ -54,24 +52,16 @@ const IndividualSignup = () => {
     try {
       let response = await registerUser(dispatch, userData);
       if (!response.status === 201) return;
-      // location.push("/login");
+      toast.success(registerSuccess && registerSuccess);
     } catch (error) {
+      toast.error(errorMessage && errorMessage);
       console.log(error);
     }
-    reset();
+    // reset();
   };
   return (
     <RegisterLayout>
       <form className="mt-12 m-auto w-8/12" onSubmit={handleSubmit(onSubmit)}>
-        {/* {formState.isSubmitted && (
-          <div className="success">Form submitted successfully</div>
-        )} */}
-        {errorMessage ? (
-          <p className="text-sm text-red-400">{errorMessage}</p>
-        ) : null}
-        {registerSuccess ? (
-          <p className="text-sm text-green-400">{registerSuccess}</p>
-        ) : null}
         <Input
           type="text"
           placeholder="example@example.com"
@@ -145,12 +135,7 @@ const IndividualSignup = () => {
         <span>
           <p className="text-red-500 text-sm">{errors.acceptTerms?.message}</p>
         </span>
-        <div className="bg-primary rounded-md p-4 my-8 flex w-full justify-between items-center">
-          <div className="">{loading && <LoadSpinner />}</div>
-          <button className="w-full text-white bg-primary font-semibold focus:outline-none">
-            Register as an Individual
-          </button>
-        </div>
+        <Button loading={loading} buttonText="Register as an Individual" />
       </form>
     </RegisterLayout>
   );

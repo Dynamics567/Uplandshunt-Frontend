@@ -1,6 +1,4 @@
-import { Link } from "react-router-dom";
-
-const EmptyState = ({ image, text, buttonText, buttonUrl }) => {
+const EmptyState = ({ image, text }) => {
   return (
     <div className="flex flex-col justify-center items-center">
       <img src={image} alt={text} />

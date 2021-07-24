@@ -5,11 +5,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 
 import { registerUser, useAuthState, useAuthDispatch } from "../Context";
-import { Input } from "../atoms";
+import { Input, Button } from "../atoms";
 import eyeClosed from "../assets/eyeClosed.svg";
 import eyeOpened from "../assets/eyeOpen.svg";
 import { RegisterLayout } from "../Layout";
-import LoadSpinner from "../templates/LoadSpinner";
 
 const BusinessSignup = () => {
   const location = useHistory();
@@ -167,12 +166,13 @@ const BusinessSignup = () => {
         <span>
           <p className="text-red-500 text-sm">{errors.acceptTerms?.message}</p>
         </span>
-        <div className="bg-primary rounded-md p-4 my-8 flex w-full justify-between items-center">
+        {/* <div className="bg-primary rounded-md p-4 my-8 flex w-full justify-between items-center">
           <div className="">{loading && <LoadSpinner />}</div>
           <button className="w-full text-white font-semibold focus:outline-none">
             Register as a Business
           </button>
-        </div>
+        </div> */}
+        <Button loading={loading} buttonText="Register as an Business" />
       </form>
     </RegisterLayout>
   );

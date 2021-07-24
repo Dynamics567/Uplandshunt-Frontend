@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 
-import { Input } from "../atoms";
+import { Input, Button } from "../atoms";
 import { axiosInstance } from "../Auth/Axios";
 import { useAuthState } from "../Context";
 
@@ -167,11 +167,8 @@ const EditProfile = () => {
             error={errors.logo?.message}
           />
         </div>
-
-        <div className="my-8 flex w-full justify-between items-center text-center">
-          <button className="rounded-md text-center p-4 text-white bg-primary font-semibold w-1/4">
-            Save
-          </button>
+        <div className="w-1/4">
+          <Button loading={loading} buttonText="Save" />
         </div>
       </form>
     </div>

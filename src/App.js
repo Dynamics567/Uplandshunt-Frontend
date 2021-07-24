@@ -1,6 +1,8 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import "./App.css";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { ProtectedRoute } from "./Auth/ProtectedRoute";
 // import routes from "./Config/routes";
 import { AuthProvider } from "./Context";
@@ -63,7 +65,7 @@ function App() {
               <Route path="/privacypolicy" exact component={PrivacyPolicy} />
               <Route path="/terms" exact component={TermsAndConditions} />
               <ProtectedRoute path="/dashboard" component={Dashboard} />
-              <Route path="/legal/regulations" exact component={Regulations} />
+              <Route path="/legal/regulations" component={Regulations} />
               <Route path="/legal/blog" exact component={Blog} />
               <Route path="/legal/newsview" exact component={SingleNews} />
               <Route path="/legal/blogview" component={SingleBlog} />
@@ -74,6 +76,7 @@ function App() {
               />
             </div>
           </Switch>
+          <ToastContainer autoClose={5000} />
         </Router>
       </AuthProvider>
     </div>

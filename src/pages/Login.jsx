@@ -5,16 +5,14 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 
 import { loginUser, useAuthState, useAuthDispatch } from "../Context";
-import { Input } from "../atoms";
+import { Button, Input } from "../atoms";
 import Intro from "../templates/Intro";
 import eyeClosed from "../assets/eyeClosed.svg";
 import eyeOpened from "../assets/eyeOpen.svg";
 import gmail from "../assets/gmail.svg";
 import { AuthLayout } from "../Layout";
-import LoadSpinner from "../templates/LoadSpinner";
 
 const Login = () => {
-  const location = useHistory();
   const [passwordShown, setPasswordShown] = useState(false);
   const togglePasswordVisibility = () => {
     setPasswordShown(passwordShown ? false : true);
@@ -40,7 +38,7 @@ const Login = () => {
       let response = await loginUser(dispatch, { email, password });
       console.log(response);
       if (!response.data.user) return;
-      location.push("/dashboard");
+      window.location.replace("/dashboard");
     } catch (error) {
       console.log(error);
     }
@@ -89,13 +87,7 @@ const Login = () => {
             Forgot password ? Click here to reset the password
           </p>
         </Link>
-
-        <div className="bg-primary rounded-md p-4 my-8 flex w-full justify-between items-center text-center">
-          <div className="">{loading && <LoadSpinner />}</div>
-          <button className="text-white bg-primary font-semibold w-full focus:outline-none">
-            Log In
-          </button>
-        </div>
+        <Button loading={loading} buttonText="Log in" />
       </form>
 
       <Link to="/register">

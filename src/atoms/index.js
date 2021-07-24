@@ -6,3 +6,4 @@ export * from "./Search";
 export * from "./NavItem";
 export * from "./TextArea";
 export * from "./DashboardSectionTitle";
+export * from "./Button";

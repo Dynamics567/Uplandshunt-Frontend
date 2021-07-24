@@ -12,6 +12,7 @@ export const initialState = {
   user: "" || user,
   token: "" || token,
   loading: false,
+  isAuthenticated: localStorage.getItem("currentUser") ? true : false,
   errorMessage: null,
   registerSuccess: "",
   registerError: null,
@@ -25,10 +26,10 @@ export const AuthReducer = (initialState, action) => {
         loading: true,
       };
     case "LOGIN_SUCCESS":
-      console.log(action.payload);
       return {
         ...initialState,
         user: action.payload.user,
+        isAuthenticated: true,
         token: action.payload.token,
         loading: false,
       };
@@ -37,6 +38,7 @@ export const AuthReducer = (initialState, action) => {
         ...initialState,
         user: "",
         token: "",
+        isAuthenticated: false,
       };
     case "LOGIN_ERROR":
       return {

@@ -1,4 +1,5 @@
 import { useAuthDispatch, useAuthState, logout } from "../Context";
+import { useHistory } from "react-router-dom";
 
 import listingDetails from "../assets/userDashboard/listingDetails.svg";
 import transactionHistory from "../assets/userDashboard/transactionHistory.svg";
@@ -6,12 +7,13 @@ import priceHistory from "../assets/userDashboard/priceHistory.svg";
 import savedProperties from "../assets/userDashboard/savedProperties.svg";
 
 const Notification = (props) => {
+  const location = useHistory();
   const dispatch = useAuthDispatch();
   const userDetails = useAuthState;
 
   const handleLogout = () => {
     logout(dispatch);
-    props.history.push("/login");
+    window.location.replace("/login");
   };
 
   return (

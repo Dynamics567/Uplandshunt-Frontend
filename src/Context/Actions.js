@@ -19,7 +19,7 @@ export async function loginUser(dispatch, loginPayload) {
         payload: data.data,
       });
       console.log(data);
-      localStorage.setItem("currentUser", JSON.stringify(data.data));
+      localStorage.setItem("currentUser", JSON.stringify(data.data.token));
       return data;
     }
 

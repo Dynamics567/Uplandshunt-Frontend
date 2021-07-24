@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
@@ -8,6 +7,7 @@ import axios from "axios";
 import prop1 from "../assets/prop1.svg";
 import { Input, Select } from "../atoms";
 import { useAuthState } from "../Context";
+import { axiosInstance } from "../Auth/Axios";
 
 const propertyType = [
   ["Residence", "Residence"],
@@ -66,13 +66,12 @@ const EditNewListing = () => {
   const { errors } = formState;
 
   const addNewListing = (data) => {
-    console.log("works");
     const config = {
       headers: { Authorization: `Bearer ${userToken}` },
     };
 
     // setLoading(true);
-    axios
+    axiosInstance
       .post("http://localhost:9090/v1/user/property/", data, config)
       .then(function (response) {
         console.log(response.data);

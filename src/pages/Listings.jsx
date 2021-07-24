@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 
-import { useAuthState } from "../Context";
 import building from "../assets/userDashboard/building.svg";
 import EmptyState from "../templates/EmptyState";
-import { axiosInstance } from "../Auth/Axios";
+import { axiosWithAuth } from "../Auth/Axios";
 import LoadSpinner from "../templates/LoadSpinner";
 import { DashboardSectionTitle } from "../atoms";
 import PropertyCard from "../templates/PropertyCard";
@@ -15,46 +13,40 @@ const Listings = () => {
   const [response, setResponse] = useState([]);
   const [error, setError] = useState("");
 
-  const userDetails = useAuthState();
-  const userToken = userDetails.token;
-
   const getUserListings = () => {
-    const config = {
-      headers: { Authorization: `Bearer ${userToken}` },
-    };
-
     setLoading(true);
-    axiosInstance
-      .get("/user/property", config)
+    axiosWithAuth()
+      .get("/user/property")
       .then(function (response) {
         console.log(response);
-        const properties = response.data.data;
-        setResponse(properties);
-        setLoading(false);
-      })
-      .catch(function (error) {
-        if (error.response) {
-          setError(error.response.data.data);
-          setLoading(false);
-        }
-        // handle error
-        setError(error.status);
+        // const properties = response.data.data;
+        // setResponse(properties);
+        // console.log(properties);
+        // setLoading(false);
       });
+    // .catch(function (error) {
+    //   if (error.response) {
+    //     setError(error.response.data.data);
+    //     setLoading(false);
+    //   }
+    //   // handle error
+    //   setError(error.status);
+    // });
   };
 
   useEffect(() => {
     getUserListings();
   }, []);
 
-  const propertiesToSell = response.filter(
-    (property) => property.list_type === "sell"
-  );
+  // const propertiesToSell = response.filter(
+  //   (property) => property.list_type === "sell"
+  // );
 
-  const propertiesToRent = response.filter(
-    (property) => property.list_type === "sell"
-  );
+  // const propertiesToRent = response.filter(
+  //   (property) => property.list_type === "sell"
+  // );
 
-  console.log(propertiesToRent);
+  // console.log(propertiesToRent);
 
   return (
     <>
@@ -75,7 +67,7 @@ const Listings = () => {
         <div className="ml-4">
           <p className="text-xl font-bold">Properties To Sell</p>
           <div className="grid grid-cols-4 gap-2 mt-6">
-            {propertiesToSell.map((property) => {
+            {/* {propertiesToSell.map((property) => {
               // return property.images.map((image) => {
               return (
                 <PropertyCard
@@ -86,11 +78,11 @@ const Listings = () => {
                 />
               );
               // });
-            })}
+            })} */}
           </div>
           <p className="text-xl font-bold">Properties To Sell</p>
           <div className="grid grid-cols-4 gap-2 mt-6">
-            {propertiesToRent.map((property) => {
+            {/* {propertiesToRent.map((property) => {
               // return property.images.map((image) => {
               return (
                 <PropertyCard
@@ -101,7 +93,7 @@ const Listings = () => {
                 />
               );
               // });
-            })}
+            })} */}
           </div>
         </div>
       )}
