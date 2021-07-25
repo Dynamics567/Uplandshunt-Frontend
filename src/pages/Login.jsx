@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
+import { toast } from "react-toastify";
 
 import { loginUser, useAuthState, useAuthDispatch } from "../Context";
 import { Button, Input } from "../atoms";
@@ -36,10 +37,11 @@ const Login = () => {
     let password = data.password;
     try {
       let response = await loginUser(dispatch, { email, password });
-      console.log(response);
       if (!response.data.user) return;
+      toast.success(response.message);
       window.location.replace("/dashboard");
     } catch (error) {
+      toast.error(errorMessage && errorMessage);
       console.log(error);
     }
   };

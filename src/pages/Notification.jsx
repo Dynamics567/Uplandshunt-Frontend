@@ -17,21 +17,18 @@ const Notification = (props) => {
   };
 
   return (
-    <div className="pl-6 mr-20">
+    <div className="m-auto w-11/12">
       <p className="font-bold text-base my-4 ">Welcome Chidi</p>
-      <section className="flex justify-between">
-        <img src={listingDetails} alt="listingDetails" className="mr-10" />
+      <div className="grid grid-cols-2 gap-2">
+        <img src={listingDetails} alt="listingDetails" />
         <img
           src={transactionHistory}
           alt="transactionHistory"
           className="mr-10"
         />
-      </section>
-
-      <section className="flex justify-between my-14">
-        <img src={priceHistory} alt="priceHistory" className="mr-10" />
+        <img src={priceHistory} alt="priceHistory" />
         <img src={savedProperties} alt="savedProperties" />
-      </section>
+      </div>
       <p>Welcome {userDetails.user?.email}</p>
       <button onClick={handleLogout} className="bg-red-500 p-4 rounded-md">
         logout
