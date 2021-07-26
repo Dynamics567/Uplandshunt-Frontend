@@ -1,4 +1,3 @@
-// const ROOT_URL = "https://secret-hamlet-03431.herokuapp.com";
 const ROOT_URL = "https://uplandshut.herokuapp.com/v1/";
 
 export async function loginUser(dispatch, loginPayload) {
@@ -17,6 +16,7 @@ export async function loginUser(dispatch, loginPayload) {
       dispatch({
         type: "LOGIN_SUCCESS",
         payload: data.data,
+        user: data.data.user,
       });
       console.log(data);
       localStorage.setItem("currentUser", JSON.stringify(data.data.token));

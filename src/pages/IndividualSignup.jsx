@@ -40,7 +40,7 @@ const IndividualSignup = () => {
   const formOptions = { resolver: yupResolver(validationSchema) };
 
   // get functions to build form with useForm() hook
-  const { register, handleSubmit, formState, reset } = useForm(formOptions);
+  const { register, handleSubmit, formState } = useForm(formOptions);
   const { errors } = formState;
 
   const dispatch = useAuthDispatch();

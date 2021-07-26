@@ -9,7 +9,7 @@ const Select = ({
 }) => {
   return (
     <div className="mb-6">
-      <label className="font-bold text-sm pb-4">{labelName}</label>
+      <label className="text-lg font-semibold text-left">{labelName}</label>
 
       <select
         className="w-full border border-gray-400 focus:outline-none px-2 rounded-md py-1 mt-1"

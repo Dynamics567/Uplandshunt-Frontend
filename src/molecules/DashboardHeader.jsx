@@ -1,8 +1,10 @@
+import { useAuthState } from "../Context";
 import search from "../assets/search.svg";
 import active from "../assets/userDashboard/active.svg";
 import avatar from "../assets/userDashboard/avatar.svg";
 
 const DashboardHeader = () => {
+  const userDetails = useAuthState();
   return (
     <div
       className="flex justify-between p-4"
@@ -19,7 +21,9 @@ const DashboardHeader = () => {
       </div>
       <div className="flex items-center">
         <img src={active} alt="active" className="mr-4" />
-        <p className="font-bold text-base mr-4">Chidi</p>
+        <p className="font-bold text-base mr-4">
+          {userDetails.user?.first_name}
+        </p>
         <img src={avatar} alt="avatar" className="mr-10" />
       </div>
     </div>

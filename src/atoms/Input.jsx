@@ -1,5 +1,3 @@
-import classNames from "classnames";
-
 const Input = ({
   placeholder,
   className,

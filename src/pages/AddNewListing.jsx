@@ -8,30 +8,7 @@ import prop1 from "../assets/prop1.svg";
 import { Input, Select } from "../atoms";
 import { useAuthState } from "../Context";
 import { axiosInstance } from "../Auth/Axios";
-
-const propertyType = [
-  ["Residence", "Residence"],
-  ["Flat", "Flat"],
-];
-const availability = [
-  ["Available", "Available"],
-  ["Unavailable", "Unavailable"],
-];
-
-const listType = [
-  ["Sell", "Sell"],
-  ["Rent", "Rent"],
-];
-
-const Status = [
-  ["active", "active"],
-  ["inactive", "inactive"],
-];
-
-const tradeStatus = [
-  ["active", "active"],
-  ["inactive", "inactive"],
-];
+import { propertyType, availability, listType } from "../data/SelectOptions";
 
 const EditNewListing = () => {
   // const getManageDetailsPage = () => {
@@ -52,12 +29,10 @@ const EditNewListing = () => {
     availability: Yup.string().required("Availability is required"),
     area: Yup.string().required("Area of the Property is required"),
     list_type: Yup.string().required("List type is required"),
-    status: Yup.string().required("Status is required"),
     bedroom: Yup.number().required("Number of Bedrooms is required"),
     kitchen: Yup.number().required("Number of Kitchen is required"),
     parking: Yup.number().required("Number of Parking lot is required"),
     bathroom: Yup.number().required("Number of Bathroom is required"),
-    trade_status: Yup.number().required("Trade Status is required"),
   });
   const formOptions = { resolver: yupResolver(validationSchema) };
 
@@ -102,14 +77,14 @@ const EditNewListing = () => {
           error={errors.name?.message}
         />
 
-        {/* <Select
+        <Select
           values={propertyType}
           selectedValue="Residence"
           labelName="Property Type"
           name="name"
           {...register("name")}
           error={errors.name?.message}
-        /> */}
+        />
 
         <Input
           type="text"
@@ -179,15 +154,6 @@ const EditNewListing = () => {
           {...register("list_type")}
           error={errors.list_type?.message}
         />
-
-        <Select
-          values={Status}
-          selectedValue="active"
-          labelName="Status"
-          name="status"
-          {...register("status")}
-          error={errors.status?.message}
-        />
         <Input
           type="number"
           label="Bedroom"
@@ -216,14 +182,6 @@ const EditNewListing = () => {
           name="bathroom"
           {...register("bathroom")}
           error={errors.bathroom?.message}
-        />
-        <Select
-          values={tradeStatus}
-          selectedValue="active"
-          labelName="Status"
-          name="trade_status"
-          {...register("trade_status")}
-          error={errors.trade_status?.message}
         />
       </section>
 
