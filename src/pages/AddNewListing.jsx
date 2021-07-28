@@ -1,14 +1,21 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
-import axios from "axios";
+// import axios from "axios";
 
 // import leftArrow from "../assets/leftArrow.svg";
-import prop1 from "../assets/prop1.svg";
+// import prop1 from "../assets/prop1.svg";
 import { Input, Select } from "../atoms";
 import { useAuthState } from "../Context";
 import { axiosInstance } from "../Auth/Axios";
-import { propertyType, availability, listType } from "../data/SelectOptions";
+import {
+  propertyType,
+  availability,
+  listType,
+  amenities,
+  furnishingType,
+  depositStructure,
+} from "../data/SelectOptions";
 
 const EditNewListing = () => {
   // const getManageDetailsPage = () => {
@@ -20,19 +27,24 @@ const EditNewListing = () => {
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Property Name is required"),
-    price: Yup.string().required("Property price is required"),
+    property_type: Yup.string().required("Property type is required"),
     city: Yup.string().required("City is required"),
-    country: Yup.string().required("Country is required"),
+    price: Yup.string().required("Price is required"),
+    area: Yup.string().required("Area of the Property is required"),
     postal_code: Yup.number().required("Postal code is required"),
     address_line_one: Yup.string().required("Address Lane 1 is required"),
     address_line_two: Yup.string().required("Address Lane 2 is required"),
-    availability: Yup.string().required("Availability is required"),
-    area: Yup.string().required("Area of the Property is required"),
+    amenities: Yup.string().required("Amenities is required"),
+    country: Yup.string().required("Country is required"),
     list_type: Yup.string().required("List type is required"),
-    bedroom: Yup.number().required("Number of Bedrooms is required"),
+    availability: Yup.string().required("Availability is required"),
     kitchen: Yup.number().required("Number of Kitchen is required"),
-    parking: Yup.number().required("Number of Parking lot is required"),
     bathroom: Yup.number().required("Number of Bathroom is required"),
+    bedroom: Yup.number().required("Number of Bedrooms is required"),
+    date: Yup.string().required("Date is required"),
+    status: Yup.string().required("Selling status is required"),
+    furnishing: Yup.string().required("Furnishing Type is required"),
+    deposit: Yup.string().required("Deposit Structure is required"),
   });
   const formOptions = { resolver: yupResolver(validationSchema) };
 
@@ -81,7 +93,7 @@ const EditNewListing = () => {
           values={propertyType}
           selectedValue="Residence"
           labelName="Property Type"
-          name="name"
+          name="property_type"
           {...register("name")}
           error={errors.name?.message}
         />
@@ -109,13 +121,12 @@ const EditNewListing = () => {
           {...register("area")}
           error={errors.area?.message}
         />
-        <Select
-          values={availability}
-          selectedValue="Residence"
-          labelName="Availability"
-          name="availability"
-          {...register("availability")}
-          error={errors.availability?.message}
+        <Input
+          type="text"
+          label="Postal Code"
+          name="postal_code"
+          {...register("postal_code")}
+          error={errors.postal_code?.message}
         />
         <Input
           type="text"
@@ -131,13 +142,13 @@ const EditNewListing = () => {
           {...register("address_line_two")}
           error={errors.address_line_two?.message}
         />
-
-        <Input
-          type="text"
-          label="Postal Code"
-          name="postal_code"
-          {...register("postal_code")}
-          error={errors.postal_code?.message}
+        <Select
+          values={amenities}
+          selectedValue="Gym"
+          labelName="Amenities"
+          name="amenities"
+          {...register("amenities")}
+          error={errors.amenities?.message}
         />
         <Input
           type="text"
@@ -149,10 +160,32 @@ const EditNewListing = () => {
         <Select
           values={listType}
           selectedValue="Sell"
-          labelName="List Type"
+          labelName="Listing Type"
           name="list_type"
           {...register("list_type")}
           error={errors.list_type?.message}
+        />
+        <Select
+          values={availability}
+          selectedValue="Residence"
+          labelName="Availability"
+          name="availability"
+          {...register("availability")}
+          error={errors.availability?.message}
+        />
+        <Input
+          type="number"
+          label="Kitchen"
+          name="kitchen"
+          {...register("kitchen")}
+          error={errors.kitchen?.message}
+        />
+        <Input
+          type="number"
+          label="Bathroom"
+          name="bathroom"
+          {...register("bathroom")}
+          error={errors.bathroom?.message}
         />
         <Input
           type="number"
@@ -162,37 +195,52 @@ const EditNewListing = () => {
           error={errors.bedroom?.message}
         />
         <Input
-          type="number"
-          label="Kitchen"
-          name="kitchen"
-          {...register("kitchen")}
-          error={errors.kitchen?.message}
+          type="text"
+          label="Date"
+          name="date"
+          {...register("date")}
+          error={errors.date?.message}
         />
-
         <Input
+          type="text"
+          label="Selling Status"
+          name="status"
+          {...register("status")}
+          error={errors.status?.message}
+        />
+        <Select
+          values={furnishingType}
+          selectedValue="Not furnished"
+          labelName="Furnishing Type"
+          name="furnishing"
+          {...register("furnishing")}
+          error={errors.furnishing?.message}
+        />
+        <Select
+          values={depositStructure}
+          selectedValue="10%"
+          labelName="Deposit Structure"
+          name="deposit"
+          {...register("deposit")}
+          error={errors.deposit?.message}
+        />
+        {/* <Input
           type="number"
           label="Parking"
           name="parking"
           {...register("parking")}
           error={errors.parking?.message}
-        />
-        <Input
-          type="number"
-          label="Bathroom"
-          name="bathroom"
-          {...register("bathroom")}
-          error={errors.bathroom?.message}
-        />
+        /> */}
       </section>
 
-      <div className="mb-12 mt-10">
+      {/* <div className="mb-12 mt-10">
         <p className="font-bold text-base mb-4">Images Of Properties</p>
         <div className="flex">
           <img src={prop1} alt="prop1" className="mr-4 w-1/2" />
           <img src={prop1} alt="prop1" className="mr-4 w-1/2" />
           <img src={prop1} alt="prop1" className=" w-1/2" />
         </div>
-      </div>
+      </div> */}
 
       <div
         className="flex w-full justify-center items-center text-center mb-10"

@@ -18,7 +18,7 @@ export const availability = [
 ];
 
 export const listType = [
-  ["", "Category"],
+  // ["", "Category"],
   ["New Development", "New Development"],
   ["Buy property", "Buy property"],
   ["For Rent", "Rent"],
@@ -122,4 +122,29 @@ export const maximumPrice = [
   ["₦200 million", "₦200 million"],
   ["₦500 million", "₦500 million"],
   ["₦1 billion", "₦₦1 billion"],
+];
+
+export const amenities = [
+  ["Gym", "Gym"],
+  ["Swimming pool", "Swimming pool"],
+  ["Rooftop decker", "Rooftop decker"],
+  ["Concierge", "Concierge"],
+  ["Barbeque", "Barbeque"],
+  ["Party room", "Party room"],
+  ["Balcony", "Balcony"],
+  ["Fibre stream internet", "Fibre stream internet"],
+  ["Air conditioner", "Air conditioner"],
+  ["Guest suites", "Guest suites"],
+  ["Pets allowed", "Pets allowed"],
+  ["Washing machine", "Washing machine"],
+  ["Geysers", "Geysers"],
+  ["Lifts", "Lifts"],
+  ["Parking", "Parking"],
+];
+
+export const depositStructure = [
+  ["10%", "10%"],
+  ["15%", "15%"],
+  ["20%", "20%"],
+  ["25%", "25%"],
 ];
