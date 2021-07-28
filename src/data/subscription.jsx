@@ -16,60 +16,6 @@ export const plans = [
   },
 ];
 
-// let currentUser = JSON.parse(localStorage.getItem("currentUser"));
-// currentUser = currentUser?.data?.user;
-// console.log(currentUser);
-// const { email, first_name, phone, avatar, role } = currentUser;
-
-// export const userObject = { avatar, first_name };
-// export const profile = [
-//   {
-//     id: "1",
-//     question: "Name:",
-//     answer: first_name,
-//   },
-//   {
-//     id: "2",
-//     question: "Company Name:",
-//     answer: "",
-//   },
-//   {
-//     id: "3",
-//     question: "Address:",
-//     answer: "",
-//   },
-//   {
-//     id: "4",
-//     question: "Country:",
-//     answer: "",
-//   },
-//   {
-//     id: "5",
-//     question: "State",
-//     answer: "",
-//   },
-//   {
-//     id: "6",
-//     question: "City:",
-//     answer: "",
-//   },
-//   {
-//     id: "7",
-//     question: "Contact Number:",
-//     answer: phone,
-//   },
-//   {
-//     id: "8",
-//     question: "Email Address:",
-//     answer: email,
-//   },
-//   {
-//     id: "9",
-//     question: "Website:",
-//     answer: "",
-//   },
-// ];
-
 export const listingHeader = [
   {
     id: "1",
@@ -139,5 +85,18 @@ export const register = [
     id: "2",
     item: "Business Signup",
     url: "/businessRegister",
+  },
+];
+
+export const filter = [
+  {
+    id: "1",
+    item: "Top Properties",
+    url: "/searchresults/topproperties",
+  },
+  {
+    id: "2",
+    item: "Boosted Properties",
+    url: "/searchresults/boostedproperties",
   },
 ];

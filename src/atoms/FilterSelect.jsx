@@ -1,24 +1,27 @@
-const Select = ({
+const FilterSelect = ({
   values,
   onValueChange,
   selectedValue,
   className,
-  labelName,
   error,
   ...rest
 }) => {
   return (
-    <div className="mb-6 otherSelect">
-      <label className="text-lg font-semibold text-left">{labelName}</label>
-
+    <div className="mb-2">
       <select
-        className={`w-full border border-gray-400 focus:outline-none px-2 rounded-md py-1 mt-1 ${className}`}
+        className={`font-semibold text-base w-full focus:outline-none px-2 py-1 mt-1 cursor-pointer${className}`}
         defaultValue={selectedValue}
+        disabled={selectedValue}
         onChange={({ target: { value } }) => onValueChange(value)}
         {...rest}
       >
         {values.map(([value, text]) => (
-          <option key={value} value={value}>
+          <option
+            key={value}
+            value={value}
+            className="font-normal filter-option"
+            style={{ display: value ? "block" : "none" }}
+          >
             {text}
           </option>
         ))}
@@ -31,4 +34,4 @@ const Select = ({
   );
 };
 
-export { Select };
+export { FilterSelect };

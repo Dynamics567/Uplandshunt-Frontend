@@ -17,6 +17,7 @@ module.exports = {
         lightgreen: "#14A198",
         ash: "#6C6C6C",
         ashTwo: "#b5b5b5",
+        ashThree: "#c4c4c4",
         maroon: "#701f2e",
         purple: "#213037",
         whiteAsh: "rgba(237,242,247,0.2)",

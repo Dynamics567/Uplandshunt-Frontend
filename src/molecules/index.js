@@ -6,3 +6,4 @@ export * from "./ListingsHeader";
 export * from "./PropertyRequestHeader";
 export * from "./PurchaseHeader";
 export * from "./RegisterHeader";
+export * from "./FilterHeader";

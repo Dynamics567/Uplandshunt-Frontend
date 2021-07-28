@@ -18,6 +18,8 @@ export const availability = [
 ];
 
 export const listType = [
+  ["", "Category"],
+  ["New Development", "New Development"],
   ["Buy property", "Buy property"],
   ["For Rent", "Rent"],
 ];
@@ -35,11 +37,13 @@ export const filterBy = [
   ["Furnishing Type", "Furnishing Type"],
 ];
 
-export const category = [
+export const filterCategory = [
   ["New Development", "New Development"],
   ["Buy Property", "Buy Property"],
   ["For Rent", "For Rent"],
 ];
+
+export const category = [["Category", "Category"]];
 
 export const deposit = [
   ["10%", "10%"],

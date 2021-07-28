@@ -7,3 +7,5 @@ export * from "./NavItem";
 export * from "./TextArea";
 export * from "./DashboardSectionTitle";
 export * from "./Button";
+export * from "./HeroSelect";
+export * from "./FilterSelect";

@@ -304,3 +304,28 @@ h2:after {
 .overlay {
   background-color: rgba(0, 0, 0, 0.5);
 }
+
+/* select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: none;
+  background-color: white;
+  background-image: url("../src/assets/dropdown.svg");
+  background-repeat: no-repeat;
+  background-position-x: 100%;
+  margin-right: 2rem;
+  padding: 1rem;
+  padding-right: 2rem;
+  background-position-y: 15px;
+}
+
+.otherSelect select {
+  background-position-y: 8px;
+  background-attachment: green;
+} */
+.filter-option select option {
+  background-color: red;
+  position: absolute;
+  left: 2rem;
+  padding-left: 10rem;
+}
