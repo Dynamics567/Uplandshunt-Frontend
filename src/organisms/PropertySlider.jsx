@@ -1,18 +1,17 @@
-import { useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Slider from "react-slick";
-import { Link } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import { property } from "../data/Properties";
+import prop2 from "../assets/prop2.svg";
 import rightArrow from "../assets/right.svg";
 import leftArrow from "../assets/left.svg";
 import locationIcon from "../assets/location.svg";
 import { SectionTitle } from "../atoms";
+import { axiosInstance } from "../Auth/Axios";
 
-const PropertySlider = ({ title }) => {
+const PropertySlider = ({ title, category }) => {
   const sliderRef = useRef();
-
   const handlePrev = (ref) => {
     ref.current.slickPrev();
   };
@@ -54,33 +53,69 @@ const PropertySlider = ({ title }) => {
     //       },
     //   ]
   };
+
+  const [topProperties, setTopProperties] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const getTopProperties = () => {
+    setLoading(true);
+    axiosInstance
+      .get(`property/${category}/all`)
+      .then(function (response) {
+        // handle success
+        const topProperties = response.data.data;
+        setTopProperties(topProperties);
+        // setLoading(false);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+      .then(function () {
+        // always executed
+      });
+  };
+
+  useEffect(() => {
+    getTopProperties();
+  }, []);
+
+  const getPropertyDetails = (id) => {
+    console.log(id);
+  };
+
   return (
     <>
       <SectionTitle title={title} />
       <Slider ref={sliderRef} {...settings}>
-        {property.map(({ name, photo, location, id, price }) => {
+        {topProperties.map((property) => {
           return (
-            <Link key={id}>
+            <div
+              key={property.id}
+              onClick={() => {
+                getPropertyDetails(property.id);
+              }}
+            >
               <div className="mr-8 mb-8 border border-white shadow-xl rounded-md">
                 <section className="w-full h-auto object-cover">
                   <img
-                    src={photo}
+                    src={prop2}
                     alt="location"
                     className="object-cover w-full h-full"
                   />
                 </section>
                 <section className="mt-4 p-2">
-                  <p className="font-bold text-sm">{name}</p>
+                  <p className="font-bold text-sm">{property.name}</p>
                   <div className="flex">
                     <img src={locationIcon} alt="location" className="mr-2" />
                     <p className="font-bold text-sm text-ash my-1">
-                      {location}
+                      {property.address_line_one}
                     </p>
                   </div>
-                  <p className="font-bold text-base">{price}</p>
+                  {/* <p className="font-bold text-base">{price}</p> */}
                 </section>
               </div>
-            </Link>
+            </div>
           );
         })}
       </Slider>
@@ -94,7 +129,7 @@ const PropertySlider = ({ title }) => {
           />
         </section>
         <p>
-          Previous 1 2 3 <span className="text-primary">Next</span>
+          Previous <span className="text-primary">Next</span>
         </p>
         <section>
           <img

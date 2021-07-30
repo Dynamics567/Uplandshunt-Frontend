@@ -21,7 +21,6 @@ const Hero = () => {
       .then(function (response) {
         // handle success
         const category = response.data.data.category;
-        console.log(category);
         setFilterBy(category);
         setLoading(false);
       })
@@ -37,6 +36,7 @@ const Hero = () => {
   useEffect(() => {
     getFilters();
   }, []);
+
   return (
     <>
       {loading ? (
