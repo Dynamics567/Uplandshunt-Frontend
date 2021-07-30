@@ -28,7 +28,9 @@ import {
   BusinessSignup,
   ActivateAccount,
   SearchResult,
+  ImageUpload,
 } from "./pages";
+import DragAndDrop from "./templates/DragAndDrop";
 
 function App() {
   return (
@@ -71,6 +73,7 @@ function App() {
               <Route path="/legal/newsview" exact component={SingleNews} />
               <Route path="/legal/blogview" component={SingleBlog} />
               <Route path="/searchresults" component={SearchResult} />
+              <Route path="/imageUpload" component={ImageUpload} />
               <Route
                 path="/legal/regulationview"
                 exact
