@@ -9,6 +9,7 @@ import leftArrow from "../assets/left.svg";
 import locationIcon from "../assets/location.svg";
 import { SectionTitle } from "../atoms";
 import { axiosInstance } from "../Auth/Axios";
+import { Link } from "react-router-dom";
 
 const PropertySlider = ({ title, category }) => {
   const sliderRef = useRef();
@@ -80,21 +81,16 @@ const PropertySlider = ({ title, category }) => {
     getTopProperties();
   }, []);
 
-  const getPropertyDetails = (id) => {
-    console.log(id);
-  };
-
   return (
     <>
       <SectionTitle title={title} />
       <Slider ref={sliderRef} {...settings}>
         {topProperties.map((property) => {
           return (
-            <div
+            <Link
+              to={`/propertydetails/${property.id}`}
               key={property.id}
-              onClick={() => {
-                getPropertyDetails(property.id);
-              }}
+              onClick={() => {}}
             >
               <div className="mr-8 mb-8 border border-white shadow-xl rounded-md">
                 <section className="w-full h-auto object-cover">
@@ -115,7 +111,7 @@ const PropertySlider = ({ title, category }) => {
                   {/* <p className="font-bold text-base">{price}</p> */}
                 </section>
               </div>
-            </div>
+            </Link>
           );
         })}
       </Slider>

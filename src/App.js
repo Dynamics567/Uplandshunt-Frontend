@@ -29,6 +29,7 @@ import {
   ActivateAccount,
   SearchResult,
   ImageUpload,
+  PropertyDetails,
 } from "./pages";
 import DragAndDrop from "./templates/DragAndDrop";
 
@@ -50,6 +51,11 @@ function App() {
                 path="/resetpassword/:token"
                 exact
                 component={ResetPassword}
+              />
+              <Route
+                path="/propertydetails/:id"
+                exact
+                component={PropertyDetails}
               />
               <Route path="/login" exact component={Login} />
               <Route path="/contactus" exact component={ContactUs} />

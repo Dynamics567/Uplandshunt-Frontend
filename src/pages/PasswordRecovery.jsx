@@ -5,30 +5,11 @@ import * as Yup from "yup";
 // import { useHistory } from "react-router-dom";
 
 import { AuthLayout } from "../Layout";
-// import check from "../assets/check.svg";
-// import warning from "../assets/warning.svg";
 import Intro from "../templates/Intro";
 import { Input } from "../atoms";
 import LoadSpinner from "../templates/LoadSpinner";
 import { axiosInstance } from "../Auth/Axios";
 // import { Toast } from "../organisms";
-
-// const testList = [
-//   {
-//     id: 1,
-//     title: "Success",
-//     description: "This is a success toast component",
-//     backgroundColor: "#5cb85c",
-//     icon: check,
-//   },
-//   {
-//     id: 2,
-//     title: "Danger",
-//     description: "This is an error toast component",
-//     backgroundColor: "#d9534f",
-//     icon: warning,
-//   },
-// ];
 
 const PasswordRecovery = () => {
   // const location = useHistory();

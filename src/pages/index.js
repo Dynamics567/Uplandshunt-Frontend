@@ -42,3 +42,4 @@ export * from "./SearchResult";
 export * from "./TopProperties";
 export * from "./BoostedProperties";
 export * from "./ImageUpload";
+export * from "./PropertyDetails";
