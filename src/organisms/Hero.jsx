@@ -57,32 +57,30 @@ const Hero = () => {
                 Real estate re-imagined for fast growing <br /> and dynamic
                 population
               </p>
-              <section className="flex">
-                <div className="flex w-full cursor-pointer">
-                  <div className="w-full flex justify-center items-center">
-                    <input
-                      type="text"
-                      placeholder="Search property or Filter"
-                      className={`rounded-3xl w-6/12 rounded-r-none p-4 text-sm font-normal focus:outline-none text-black`}
-                      onChange={(event) => setSearchValue(event.target.value)}
-                    />
-                    <div
-                      className="flex justify-start -ml-8 cursor-pointer"
-                      onClick={toggleDropDown}
-                    >
-                      <img src={dropdown} alt="dropdown" className="w-4" />
-                    </div>
+              <section className="flex w-full mt-14">
+                <div className="flex justify-center items-center w-full">
+                  <input
+                    type="text"
+                    placeholder="Search property or Filter"
+                    className={`rounded-3xl w-6/12 rounded-r-none p-4 text-sm font-normal focus:outline-none text-black`}
+                    onChange={(event) => setSearchValue(event.target.value)}
+                  />
+                  <div
+                    className="flex justify-start -ml-8 cursor-pointer"
+                    onClick={toggleDropDown}
+                  >
+                    <img src={dropdown} alt="dropdown" className="w-4" />
                   </div>
                 </div>
                 <Link
                   to={`/searchresults/${searchValue}/${getCategoryName}`}
-                  className=""
+                  className="w-1/4"
                 >
                   <img
                     src={search}
                     alt="search"
                     className=""
-                    // style={{ marginRight: "13.76rem" }}
+                    style={{ marginLeft: "-11.9rem" }}
                   />
                 </Link>
               </section>
