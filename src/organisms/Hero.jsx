@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
+import search from "../assets/search.svg";
 import support from "../assets/support.svg";
-import { Search } from "../atoms";
+import dropdown from "../assets/dropdown.svg";
 import { axiosInstance } from "../Auth/Axios";
 import DashboardLoader from "../templates/DashboardLoader";
 
@@ -9,6 +11,8 @@ const Hero = () => {
   const [showDropDown, setShowDropDown] = useState(false);
   const [filterBy, setFilterBy] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
+  const [getCategoryName, setGetCategoryName] = useState("");
 
   const toggleDropDown = () => {
     setShowDropDown(!showDropDown);
@@ -33,6 +37,10 @@ const Hero = () => {
       });
   };
 
+  // const getCategory = (name) => {
+  //   return setGetCategoryName;
+  // };
+
   useEffect(() => {
     getFilters();
   }, []);
@@ -49,15 +57,35 @@ const Hero = () => {
                 Real estate re-imagined for fast growing <br /> and dynamic
                 population
               </p>
-              <div
-                className="inline-flex w-full cursor-pointer"
-                onClick={toggleDropDown}
-              >
-                <Search
-                  placeholder="Search property or Filter"
-                  className="w-2/6"
-                />
-              </div>
+              <section className="flex">
+                <div className="flex w-full cursor-pointer">
+                  <div className="w-full flex justify-center items-center">
+                    <input
+                      type="text"
+                      placeholder="Search property or Filter"
+                      className={`rounded-3xl w-6/12 rounded-r-none p-4 text-sm font-normal focus:outline-none text-black`}
+                      onChange={(event) => setSearchValue(event.target.value)}
+                    />
+                    <div
+                      className="flex justify-start -ml-8 cursor-pointer"
+                      onClick={toggleDropDown}
+                    >
+                      <img src={dropdown} alt="dropdown" className="w-4" />
+                    </div>
+                  </div>
+                </div>
+                <Link
+                  to={`/searchresults/${searchValue}/${getCategoryName}`}
+                  className=""
+                >
+                  <img
+                    src={search}
+                    alt="search"
+                    className=""
+                    // style={{ marginRight: "13.76rem" }}
+                  />
+                </Link>
+              </section>
               <div className="hero-support fixed top-0 inset-x-0 z-50 h-16">
                 <img
                   src={support}
@@ -74,17 +102,23 @@ const Hero = () => {
             >
               <div className="">
                 <div
-                  className="align-end items-center bg-white py-3 px-6 cursor-pointer -ml-16"
+                  className="align-end items-center bg-white cursor-pointer -ml-16"
                   style={{ marginTop: "-11.4rem" }}
                 >
-                  {filterBy.map((filterOption) => {
+                  {filterBy.map(({ id, name }) => {
                     return (
-                      <div className="flex" key={filterOption.id}>
+                      <div
+                        className="flex hover:bg-ashThree py-3 px-6"
+                        key={id}
+                        onClick={() => {
+                          setGetCategoryName(() => name);
+                        }}
+                      >
                         <p
                           className="pr-4 pb-2 text-lg font-normal"
                           style={{ flex: "1" }}
                         >
-                          {filterOption.name}
+                          {name}
                         </p>
                       </div>
                     );
@@ -93,24 +127,6 @@ const Hero = () => {
               </div>
             </div>
           )}
-          {/* {secondDropDown && (
-          <div className="flex justify-center cursor-pointer">
-            <div
-              className="my-4 absolute top-96 right-44"
-              style={{ marginTop: "5.4rem", marginRight: ".2rem" }}
-            >
-              {heroFilter.map(({ id, item }) => {
-                return (
-                  <div key={id} className="bg-white p-3 hover:bg-ashThree">
-                    <Link to="/searchresults" className="font-normal text-base">
-                      {item}
-                    </Link>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        )} */}
         </div>
       )}
     </>

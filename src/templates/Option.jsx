@@ -1,11 +1,27 @@
 import React from "react";
 
 const Option = ({ options }) => {
+  const optionEntries = Object.values(options);
+
+  const getName = (id) => {
+    console.log(id);
+  };
   return (
     <div className="">
-      <p className="font-normal text-base bg-white shadow-md pb-4 pl-4 pt-4">
-        {options.option}
-      </p>
+      {optionEntries.map(({ name, id }) => {
+        return (
+          <div
+            key={id}
+            onClick={() => {
+              getName(id);
+            }}
+          >
+            <p className="font-normal text-base bg-white shadow-md pl-4">
+              {name}
+            </p>
+          </div>
+        );
+      })}
     </div>
   );
 };

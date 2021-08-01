@@ -53,7 +53,7 @@ function App() {
                 component={ResetPassword}
               />
               <Route
-                path="/propertydetails/:id"
+                path="/propertydetails/:id/:category"
                 exact
                 component={PropertyDetails}
               />
@@ -78,7 +78,10 @@ function App() {
               <Route path="/legal/blog" exact component={Blog} />
               <Route path="/legal/newsview" exact component={SingleNews} />
               <Route path="/legal/blogview" component={SingleBlog} />
-              <Route path="/searchresults" component={SearchResult} />
+              <Route
+                path="/searchresults/:value?/:category?"
+                component={SearchResult}
+              />
               <Route path="/imageUpload" component={ImageUpload} />
               <Route
                 path="/legal/regulationview"

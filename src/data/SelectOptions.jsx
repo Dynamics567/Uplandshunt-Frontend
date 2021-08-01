@@ -1,27 +1,26 @@
 export const propertyType = [
-  ["Under construction", "Under construction"],
-  ["Occupancy stage", "Occupancy stage"],
-  ["Flat", "Flat"],
-  ["Detached", "Detached"],
-  ["Semi Detached", "Semi Detached"],
-  ["Town house", "Town house"],
-  ["Bungalow", "Bungalow"],
-  ["Student accomodation", "Student accomodation"],
-  ["Residential", "Residential"],
-  ["Office space", "Office space"],
-  ["Condo Apartment", "Condo Apartment"],
+  ["1", "Under construction"],
+  ["2", "Occupancy stage"],
+  ["3", "Flat"],
+  ["4", "Detached"],
+  ["5", "Semi Detached"],
+  ["6", "Town house"],
+  ["7", "Bungalow"],
+  ["8", "Residential"],
+  ["9", "Student accomodation"],
+  ["10", "Office space"],
+  ["11", "Condo Apartment"],
 ];
 
 export const availability = [
-  ["Available", "Available"],
-  ["Unavailable", "Unavailable"],
+  ["1", "Available"],
+  ["2", "Unavailable"],
 ];
 
 export const listType = [
-  // ["", "Category"],
-  ["New Development", "New Development"],
-  ["Buy property", "Buy property"],
-  ["For Rent", "Rent"],
+  ["1", "Rent"],
+  ["2", "Buy property"],
+  ["3", "New Development"],
 ];
 
 export const filterBy = [
@@ -46,10 +45,10 @@ export const filterCategory = [
 export const category = [["Category", "Category"]];
 
 export const deposit = [
-  ["10%", "10%"],
-  ["15%", "15%"],
-  ["20%", "20%"],
-  ["25%", "25%"],
+  ["1", "10%"],
+  ["2", "15%"],
+  ["3", "20%"],
+  ["4", "25%"],
 ];
 
 export const date = [
@@ -59,9 +58,9 @@ export const date = [
 ];
 
 export const furnishingType = [
-  ["Not Furnished", "Not Furnished"],
-  ["Semi-Furnished", "Semi-Furnished"],
-  ["Fully Furnished", "Fully Furnished"],
+  ["1", "Not Furnished"],
+  ["2", "Semi-Furnished"],
+  ["3", "Fully Furnished"],
 ];
 
 export const sellingStatus = [
@@ -143,8 +142,26 @@ export const amenities = [
 ];
 
 export const depositStructure = [
-  ["10%", "10%"],
-  ["15%", "15%"],
-  ["20%", "20%"],
-  ["25%", "25%"],
+  ["1", "10%"],
+  ["2", "15%"],
+  ["3", "20%"],
+  ["4", "25%"],
+];
+
+export const multiSelectOptions = [
+  { label: "Gym", value: "1" },
+  { label: "Swimming pool", value: "2" },
+  { label: "Rooftop decker", value: "3" },
+  { label: "Concierge", value: "4" },
+  { label: "Barbeque", value: "5" },
+  { label: "Party room", value: "6" },
+  { label: "Balcony", value: "7" },
+  { label: "Fibre stream internet", value: "8" },
+  { label: "Air conditioner", value: "9" },
+  { label: "Guest suites", value: "10" },
+  { label: "Pets allowed", value: "11" },
+  { label: "Washing machine", value: "12" },
+  { label: "Geysers", value: "13" },
+  { label: "Lifts", value: "14" },
+  { label: "Parking", value: "15" },
 ];

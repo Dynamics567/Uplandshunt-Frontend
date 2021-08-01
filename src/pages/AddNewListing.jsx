@@ -1,20 +1,21 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import MultiSelect from "react-multi-select-component";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
-// import axios from "axios";
 
 // import leftArrow from "../assets/leftArrow.svg";
 // import prop1 from "../assets/prop1.svg";
 import { Input, Select } from "../atoms";
-import { useAuthState } from "../Context";
-import { axiosInstance } from "../Auth/Axios";
+import { axiosWithAuth } from "../Auth/Axios";
 import {
-  propertyType,
   availability,
   listType,
   amenities,
   furnishingType,
   depositStructure,
+  multiSelectOptions,
+  propertyType,
 } from "../data/SelectOptions";
 
 const EditNewListing = () => {
@@ -22,29 +23,26 @@ const EditNewListing = () => {
   //   window.scrollTo(0, 0);
   // };
 
-  const userDetails = useAuthState();
-  const userToken = userDetails.token;
+  const [selected, setSelected] = useState([]);
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Property Name is required"),
-    property_type: Yup.string().required("Property type is required"),
+    type: Yup.number().required("Property Type is required"),
+    category: Yup.number().required("Category is required"),
     city: Yup.string().required("City is required"),
     price: Yup.string().required("Price is required"),
-    area: Yup.string().required("Area of the Property is required"),
-    postal_code: Yup.number().required("Postal code is required"),
+    area: Yup.number().required("Area of the Property is required"),
+    postal_code: Yup.string().required("Postal code is required"),
     address_line_one: Yup.string().required("Address Lane 1 is required"),
     address_line_two: Yup.string().required("Address Lane 2 is required"),
-    amenities: Yup.string().required("Amenities is required"),
+    // amenity: Yup.string().required("Amenities is required"),
     country: Yup.string().required("Country is required"),
-    list_type: Yup.string().required("List type is required"),
-    availability: Yup.string().required("Availability is required"),
-    kitchen: Yup.number().required("Number of Kitchen is required"),
-    bathroom: Yup.number().required("Number of Bathroom is required"),
-    bedroom: Yup.number().required("Number of Bedrooms is required"),
-    date: Yup.string().required("Date is required"),
-    status: Yup.string().required("Selling status is required"),
-    furnishing: Yup.string().required("Furnishing Type is required"),
-    deposit: Yup.string().required("Deposit Structure is required"),
+    availability: Yup.number().required("Availability is required"),
+    kitchen: Yup.string().required("Number of Kitchen is required"),
+    bathroom: Yup.string().required("Number of Bathroom is required"),
+    bedroom: Yup.string().required("Number of Bedrooms is required"),
+    furnish_type: Yup.number().required("Furnishing Type is required"),
+    deposit_structure: Yup.number().required("Deposit Structure is required"),
   });
   const formOptions = { resolver: yupResolver(validationSchema) };
 
@@ -53,15 +51,14 @@ const EditNewListing = () => {
   const { errors } = formState;
 
   const addNewListing = (data) => {
-    const config = {
-      headers: { Authorization: `Bearer ${userToken}` },
-    };
-
+    let amenities = { amenity: selected };
+    const propertyData = { ...amenities, ...data };
+    console.log(propertyData);
     // setLoading(true);
-    axiosInstance
-      .post("http://localhost:9090/v1/user/property/", data, config)
+    axiosWithAuth()
+      .post("property", data)
       .then(function (response) {
-        console.log(response.data);
+        console.log(response);
         // setResponse(response.data.data);
         // setLoading(false);
         // location.push("/resetpassword");
@@ -88,14 +85,13 @@ const EditNewListing = () => {
           {...register("name")}
           error={errors.name?.message}
         />
-
         <Select
           values={propertyType}
-          selectedValue="Residence"
+          selectedValue="Sell"
           labelName="Property Type"
-          name="property_type"
-          {...register("name")}
-          error={errors.name?.message}
+          name="type"
+          {...register("type")}
+          error={errors.type?.message}
         />
 
         <Input
@@ -115,7 +111,7 @@ const EditNewListing = () => {
         />
 
         <Input
-          type="text"
+          type="number"
           label="Area of the Property"
           name="area"
           {...register("area")}
@@ -142,14 +138,15 @@ const EditNewListing = () => {
           {...register("address_line_two")}
           error={errors.address_line_two?.message}
         />
-        <Select
-          values={amenities}
-          selectedValue="Gym"
-          labelName="Amenities"
-          name="amenities"
-          {...register("amenities")}
-          error={errors.amenities?.message}
+
+        <MultiSelect
+          options={multiSelectOptions}
+          value={selected}
+          onChange={setSelected}
+          labelledBy="Amenities"
+          className="mt-7"
         />
+
         <Input
           type="text"
           label="Country"
@@ -161,9 +158,9 @@ const EditNewListing = () => {
           values={listType}
           selectedValue="Sell"
           labelName="Listing Type"
-          name="list_type"
-          {...register("list_type")}
-          error={errors.list_type?.message}
+          name="category"
+          {...register("category")}
+          error={errors.category?.message}
         />
         <Select
           values={availability}
@@ -174,63 +171,42 @@ const EditNewListing = () => {
           error={errors.availability?.message}
         />
         <Input
-          type="number"
+          type="text"
           label="Kitchen"
           name="kitchen"
           {...register("kitchen")}
           error={errors.kitchen?.message}
         />
         <Input
-          type="number"
+          type="text"
           label="Bathroom"
           name="bathroom"
           {...register("bathroom")}
           error={errors.bathroom?.message}
         />
         <Input
-          type="number"
+          type="text"
           label="Bedroom"
           name="bedroom"
           {...register("bedroom")}
           error={errors.bedroom?.message}
         />
-        <Input
-          type="text"
-          label="Date"
-          name="date"
-          {...register("date")}
-          error={errors.date?.message}
-        />
-        <Input
-          type="text"
-          label="Selling Status"
-          name="status"
-          {...register("status")}
-          error={errors.status?.message}
-        />
         <Select
           values={furnishingType}
           selectedValue="Not furnished"
           labelName="Furnishing Type"
-          name="furnishing"
-          {...register("furnishing")}
-          error={errors.furnishing?.message}
+          name="furnish_type"
+          {...register("furnish_type")}
+          error={errors.furnish_type?.message}
         />
         <Select
           values={depositStructure}
           selectedValue="10%"
           labelName="Deposit Structure"
-          name="deposit"
-          {...register("deposit")}
-          error={errors.deposit?.message}
+          name="deposit_structure"
+          {...register("deposit_structure")}
+          error={errors.deposit_structure?.message}
         />
-        {/* <Input
-          type="number"
-          label="Parking"
-          name="parking"
-          {...register("parking")}
-          error={errors.parking?.message}
-        /> */}
       </section>
 
       {/* <div className="mb-12 mt-10">
