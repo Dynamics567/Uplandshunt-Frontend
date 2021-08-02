@@ -53,7 +53,7 @@ function App() {
                 component={ResetPassword}
               />
               <Route
-                path="/propertydetails/:id/:category"
+                path="/propertydetails/:id/"
                 exact
                 component={PropertyDetails}
               />

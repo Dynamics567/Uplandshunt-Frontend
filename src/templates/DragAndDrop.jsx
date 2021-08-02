@@ -53,7 +53,7 @@
 // };
 // export default DragAndDrop;
 
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useEffect, useState, useMemo } from "react";
 import { useDropzone } from "react-dropzone";
 
 const baseStyle = {
@@ -83,9 +83,19 @@ const rejectStyle = {
 };
 
 const DragAndDrop = (props) => {
+  const [files, setFiles] = useState([]);
+
   const onDrop = useCallback((acceptedFiles) => {
-    console.log(acceptedFiles);
+    setFiles(
+      acceptedFiles.map((file) =>
+        Object.assign(file, {
+          preview: URL.createObjectURL(file),
+        })
+      )
+    );
   }, []);
+
+  const maxSize = 2097152;
 
   const {
     getRootProps,
@@ -93,19 +103,48 @@ const DragAndDrop = (props) => {
     isDragActive,
     isDragAccept,
     isDragReject,
+    rejectedFiles,
   } = useDropzone({
     onDrop,
     accept: "image/jpeg, image/png",
+    minSize: "0",
+    maxSize: { maxSize },
   });
 
-  return (
-    <div
-      {...getRootProps()}
-      className="mt-10 flex flex-col items-center p-6 bg-primary rounded-sm border-dashed"
-    >
-      <input {...getInputProps()} />
-      <div>Drag and drop your images here.</div>
+  const isFileTooLarge =
+    rejectedFiles.length > 0 && rejectedFiles[0].size > maxSize;
+
+  const style = useMemo(
+    () => ({
+      ...baseStyle,
+      ...(isDragActive ? activeStyle : {}),
+      ...(isDragAccept ? acceptStyle : {}),
+      ...(isDragReject ? rejectStyle : {}),
+    }),
+    [isDragActive, isDragReject, isDragAccept, rejectedFiles]
+  );
+
+  const thumbs = files.map((file) => (
+    <div key={file.name}>
+      <img src={file.preview} alt={file.name} />
     </div>
+  ));
+
+  useEffect(
+    () => () => {
+      files.forEach((file) => URL.revokeObjectURL(file.preview));
+    },
+    [files]
+  );
+
+  return (
+    <section>
+      <div {...getRootProps({ style })}>
+        <input {...getInputProps()} />
+        <div>Drag and drop your images here.</div>
+      </div>
+      <aside>{thumbs}</aside>
+    </section>
   );
 };
 
