@@ -111,8 +111,8 @@ const DragAndDrop = (props) => {
     maxSize: { maxSize },
   });
 
-  const isFileTooLarge =
-    rejectedFiles.length > 0 && rejectedFiles[0].size > maxSize;
+  // const isFileTooLarge =
+  //   rejectedFiles.length > 0 && rejectedFiles[0].size > maxSize;
 
   const style = useMemo(
     () => ({

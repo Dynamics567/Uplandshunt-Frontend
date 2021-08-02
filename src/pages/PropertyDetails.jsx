@@ -31,8 +31,6 @@ const PropertyDetails = () => {
         // handle success
         const details = response.data.data;
         setPropertyDetails(details);
-        console.log(details);
-        console.log();
         setLoading(false);
       })
       .catch(function (error) {

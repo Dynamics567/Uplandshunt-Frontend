@@ -9,44 +9,41 @@ import PropertyCard from "../templates/PropertyCard";
 
 const Listings = () => {
   const [userListings, setUserListings] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [response, setResponse] = useState([]);
   const [error, setError] = useState("");
 
   const getUserListings = () => {
-    setLoading(true);
+    setLoading(false);
     axiosWithAuth()
-      .get("/user/property")
+      .get("property/user/listing")
       .then(function (response) {
-        console.log(response);
-        // const properties = response.data.data;
-        // setResponse(properties);
+        const properties = response.data.data;
         // console.log(properties);
-        // setLoading(false);
+        setResponse(properties);
+        setLoading(false);
+      })
+      .catch(function (error) {
+        if (error.response) {
+          setError(error.response.data.data);
+          setLoading(false);
+        }
+        // handle error
+        setError(error.status);
       });
-    // .catch(function (error) {
-    //   if (error.response) {
-    //     setError(error.response.data.data);
-    //     setLoading(false);
-    //   }
-    //   // handle error
-    //   setError(error.status);
-    // });
   };
 
   useEffect(() => {
     getUserListings();
   }, []);
 
-  // const propertiesToSell = response.filter(
-  //   (property) => property.list_type === "sell"
-  // );
+  const propertiesToSell = response.filter(
+    (property) => property.property_category.name === "Buy Property"
+  );
 
-  // const propertiesToRent = response.filter(
-  //   (property) => property.list_type === "sell"
-  // );
-
-  // console.log(propertiesToRent);
+  const propertiesToRent = response.filter(
+    (property) => property.property_category.name === "Rent Property"
+  );
 
   return (
     <>
@@ -67,33 +64,33 @@ const Listings = () => {
         <div className="ml-4">
           <p className="text-xl font-bold">Properties To Sell</p>
           <div className="grid grid-cols-4 gap-2 mt-6">
-            {/* {propertiesToSell.map((property) => {
-              // return property.images.map((image) => {
-              return (
-                <PropertyCard
-                  location={property.city}
-                  price={property.price}
-                  place={property.name}
-                  // photo={image[0]}
-                />
-              );
-              // });
-            })} */}
+            {propertiesToSell.map((property) => {
+              return property.images.map((image) => {
+                return (
+                  <PropertyCard
+                    location={property.city}
+                    price={property.price}
+                    place={property.name}
+                    photo={image.image_url}
+                  />
+                );
+              });
+            })}
           </div>
           <p className="text-xl font-bold">Properties To Sell</p>
           <div className="grid grid-cols-4 gap-2 mt-6">
-            {/* {propertiesToRent.map((property) => {
-              // return property.images.map((image) => {
-              return (
-                <PropertyCard
-                  location={property.city}
-                  price={property.price}
-                  place={property.name}
-                  // photo={image[0]}
-                />
-              );
-              // });
-            })} */}
+            {propertiesToRent.map((property) => {
+              return property.images.map((image) => {
+                return (
+                  <PropertyCard
+                    location={property.city}
+                    price={property.price}
+                    place={property.name}
+                    photo={image.image_url}
+                  />
+                );
+              });
+            })}
           </div>
         </div>
       )}

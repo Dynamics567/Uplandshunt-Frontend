@@ -50,13 +50,14 @@ const EditNewListing = () => {
   const { register, handleSubmit, formState, reset } = useForm(formOptions);
   const { errors } = formState;
 
+  console.log();
   const addNewListing = (data) => {
-    let amenities = { amenity: selected };
+    let amenities = { amenity: selected[1].value };
     const propertyData = { ...amenities, ...data };
-    console.log(propertyData);
+    // console.log(propertyData);
     // setLoading(true);
     axiosWithAuth()
-      .post("property", data)
+      .post("property", propertyData)
       .then(function (response) {
         console.log(response);
         // setResponse(response.data.data);
