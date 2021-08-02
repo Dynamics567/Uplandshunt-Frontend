@@ -82,7 +82,6 @@ function App() {
                 path="/searchresults/:value?/:category?"
                 component={SearchResult}
               />
-              <Route path="/imageUpload" component={ImageUpload} />
               <Route
                 path="/legal/regulationview"
                 exact

@@ -1,17 +1,18 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useHistory } from "react-router-dom";
 import MultiSelect from "react-multi-select-component";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
+import { toast } from "react-toastify";
 
 // import leftArrow from "../assets/leftArrow.svg";
 // import prop1 from "../assets/prop1.svg";
-import { Input, Select } from "../atoms";
+import { Button, Input, Select } from "../atoms";
 import { axiosWithAuth } from "../Auth/Axios";
 import {
   availability,
   listType,
-  amenities,
   furnishingType,
   depositStructure,
   multiSelectOptions,
@@ -22,8 +23,10 @@ const EditNewListing = () => {
   // const getManageDetailsPage = () => {
   //   window.scrollTo(0, 0);
   // };
-
+  const location = useHistory();
   const [selected, setSelected] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setErrors] = useState("");
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Property Name is required"),
@@ -35,7 +38,6 @@ const EditNewListing = () => {
     postal_code: Yup.string().required("Postal code is required"),
     address_line_one: Yup.string().required("Address Lane 1 is required"),
     address_line_two: Yup.string().required("Address Lane 2 is required"),
-    // amenity: Yup.string().required("Amenities is required"),
     country: Yup.string().required("Country is required"),
     availability: Yup.number().required("Availability is required"),
     kitchen: Yup.string().required("Number of Kitchen is required"),
@@ -52,22 +54,23 @@ const EditNewListing = () => {
 
   console.log();
   const addNewListing = (data) => {
-    let amenities = { amenity: selected[1].value };
+    let amenities = { amenity: [selected[1].value] || [] };
     const propertyData = { ...amenities, ...data };
     // console.log(propertyData);
-    // setLoading(true);
+    setLoading(true);
     axiosWithAuth()
       .post("property", propertyData)
       .then(function (response) {
-        console.log(response);
-        // setResponse(response.data.data);
-        // setLoading(false);
-        // location.push("/resetpassword");
+        if (response) {
+          setLoading(false);
+        }
+        toast.success(response.data.message);
+        location.push("/dashboard/listings/imageUpload");
       })
       .catch(function (error) {
         if (error.response) {
-          // setError(error.response.data.data);
-          // setLoading(false);
+          setErrors(errors);
+          toast.error(errors);
         }
         // handle error
         // setError(error.status);
@@ -112,7 +115,7 @@ const EditNewListing = () => {
         />
 
         <Input
-          type="number"
+          type="text"
           label="Area of the Property"
           name="area"
           {...register("area")}
@@ -223,10 +226,8 @@ const EditNewListing = () => {
         className="flex w-full justify-center items-center text-center mb-10"
         // onClick={getManageDetailsPage}
       >
-        <div className="w-full">
-          <button className="rounded-md p-4 text-white bg-primary font-semibold w-1/2">
-            Continue
-          </button>
+        <div className="w-1/2">
+          <Button loading={loading} buttonText="Continue" />
         </div>
       </div>
     </form>

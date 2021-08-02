@@ -21,6 +21,7 @@ import {
   PropertyRented,
   AllSavedProperties,
   EditProfile,
+  ImageUpload,
 } from "../pages";
 
 const Dashboard = () => {
@@ -41,6 +42,11 @@ const Dashboard = () => {
               exact
               component={EditNewListing}
             />
+            <Route
+              path="/dashboard/listings/imageUpload"
+              component={ImageUpload}
+            />
+
             <Route
               path="/dashboard/listings/manageDetails"
               exact
