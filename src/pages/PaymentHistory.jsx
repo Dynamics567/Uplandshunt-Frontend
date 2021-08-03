@@ -1,4 +1,4 @@
-import bids from "../assets/userDashboard/bids.svg";
+import bids from "../assets/userDashboard/bids.png";
 import { PurchaseLayout } from "../Layout";
 
 const PaymentHistory = () => {

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import prop2 from "../assets/prop2.svg";
+import prop2 from "../assets/prop2.png";
 import locationIcon from "../assets/location.svg";
 import call from "../assets/call.png";
 

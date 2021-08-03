@@ -1,7 +1,7 @@
 import { ListingsLayout } from "../Layout";
 import { Link } from "react-router-dom";
 // import leftArrow from "../assets/leftArrow.svg";
-import prop1 from "../assets/prop1.svg";
+import prop1 from "../assets/prop1.png";
 import { Input } from "../atoms";
 
 const ManageDetails = () => {

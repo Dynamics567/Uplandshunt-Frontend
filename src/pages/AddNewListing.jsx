@@ -7,7 +7,6 @@ import * as Yup from "yup";
 import { toast } from "react-toastify";
 
 // import leftArrow from "../assets/leftArrow.svg";
-// import prop1 from "../assets/prop1.svg";
 import { Button, Input, Select } from "../atoms";
 import { axiosWithAuth } from "../Auth/Axios";
 import {

@@ -1,5 +1,5 @@
 import { LegalLayout } from "../Layout/LegalLayout";
-import prop2 from "../assets/prop3.svg";
+import prop2 from "../assets/prop3.png";
 import BlogCard from "../templates/BlogCard";
 
 const Blog = () => {

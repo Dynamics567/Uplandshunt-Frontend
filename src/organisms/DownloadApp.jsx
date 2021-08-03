@@ -1,6 +1,6 @@
 import React from "react";
 
-import mockup from "../assets/mockup.svg";
+import mockup from "../assets/mockup.png";
 import appStore from "../assets/appStore.svg";
 import googlePlay from "../assets/googlePlay.svg";
 import { SectionWrapper } from "../Layout";

@@ -1,6 +1,6 @@
 import { SectionWrapper } from "../Layout";
 import { Header } from "../molecules";
-import aboutGroup from "../assets/aboutGroup.svg";
+import aboutGroup from "../assets/aboutGroup.png";
 import focus from "../assets/focus.svg";
 import target from "../assets/target.svg";
 import { services, values } from "../data/values";

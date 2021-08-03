@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 
 import { HeaderTwo } from "../molecules";
-import prop3 from "../assets/prop3.svg";
+import prop3 from "../assets/prop3.png";
 import smallProp from "../assets/smallProp.png";
 import interest from "../assets/interest.png";
 import bid from "../assets/bid.png";

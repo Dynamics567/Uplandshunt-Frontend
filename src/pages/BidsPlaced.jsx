@@ -1,5 +1,5 @@
 import { PropertyRequestLayout } from "../Layout";
-import bids from "../assets/userDashboard/bids.svg";
+import bids from "../assets/userDashboard/bids.png";
 
 const BidsPlaced = () => {
   return (

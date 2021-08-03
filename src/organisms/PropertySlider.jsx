@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import prop2 from "../assets/prop2.svg";
+import prop2 from "../assets/prop2.png";
 import rightArrow from "../assets/right.svg";
 import leftArrow from "../assets/left.svg";
 import locationIcon from "../assets/location.svg";

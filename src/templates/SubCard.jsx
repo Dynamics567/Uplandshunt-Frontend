@@ -2,17 +2,7 @@ import { useState, useEffect } from "react";
 import dot from "../assets/dot.svg";
 import { axiosInstance } from "../Auth/Axios";
 
-const SubCard = ({
-  category,
-  icon,
-  amount,
-  note,
-  note1,
-  note2,
-  note3,
-  bgImage,
-  className,
-}) => {
+const SubCard = ({ icon, bgImage, className }) => {
   const [loading, setLoading] = useState(false);
   const [subscription, setSubscription] = useState([]);
 
