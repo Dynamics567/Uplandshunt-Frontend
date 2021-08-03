@@ -1,72 +1,17 @@
-// import React from "react";
-
-// const DragAndDrop = (props) => {
-//   const { data, dispatch } = props;
-
-//   const handleDragEnter = (e) => {
-//     e.preventDefault();
-//     e.stopPropagation();
-//     dispatch({ type: "SET_DROP_DEPTH", dropDepth: data.dropDepth + 1 });
-//   };
-//   const handleDragLeave = (e) => {
-//     e.preventDefault();
-//     e.stopPropagation();
-//     dispatch({ type: "SET_DROP_DEPTH", dropDepth: data.dropDepth - 1 });
-//     if (data.dropDepth > 0) return;
-//     dispatch({ type: "SET_IN_DROP_ZONE", inDropZone: false });
-//   };
-//   const handleDragOver = (e) => {
-//     e.preventDefault();
-//     e.stopPropagation();
-//     e.dataTransfer.dropEffect = "copy";
-//     dispatch({ type: "SET_IN_DROP_ZONE", inDropZone: true });
-//   };
-//   const handleDrop = (e) => {
-//     e.preventDefault();
-//     e.stopPropagation();
-//     let files = [...e.dataTransfer.files];
-
-//     if (files && files.length > 0) {
-//       const existingFiles = data.fileList.map((f) => f.name);
-//       files = files.filter((f) => !existingFiles.includes(f.name));
-
-//       dispatch({ type: "ADD_FILE_TO_LIST", files });
-//       e.dataTransfer.clearData();
-//       dispatch({ type: "SET_DROP_DEPTH", dropDepth: 0 });
-//       dispatch({ type: "SET_IN_DROP_ZONE", inDropZone: false });
-//     }
-//   };
-//   return (
-//     <div
-//       className={
-//         data.inDropZone ? "drag-drop-zone inside-drag-area" : "drag-drop-zone"
-//       }
-//       onDrop={(e) => handleDrop(e)}
-//       onDragOver={(e) => handleDragOver(e)}
-//       onDragEnter={(e) => handleDragEnter(e)}
-//       onDragLeave={(e) => handleDragLeave(e)}
-//     >
-//       <input type="file" accept="image/png, image/gif, image/jpeg" />
-//       <p>Drag and drop here or</p>
-//     </div>
-//   );
-// };
-// export default DragAndDrop;
-
 import React, { useCallback, useEffect, useState, useMemo } from "react";
 import { useDropzone } from "react-dropzone";
+
+import cloud from "../assets/cloud.png";
+import bin from "../assets/bin.png";
 
 const baseStyle = {
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  padding: "20px",
   borderWidth: 2,
   borderRadius: 2,
   borderColor: "#eeeeee",
-  borderStyle: "dashed",
-  backgroundColor: "#fafafa",
-  color: "#bdbdbd",
+  backgroundColor: "#ffffff",
   transition: "border .3s ease-in-out",
 };
 
@@ -96,6 +41,7 @@ const DragAndDrop = (props) => {
   }, []);
 
   const maxSize = 2097152;
+  console.log(files);
 
   const {
     getRootProps,
@@ -137,14 +83,41 @@ const DragAndDrop = (props) => {
     [files]
   );
 
+  const removeImage = (file) => {
+    const newFiles = [...files]; // make a var for the new array
+    newFiles.splice(file, 1); // remove the file from the array
+    setFiles(newFiles); // update the state
+  };
+
   return (
-    <section>
-      <div {...getRootProps({ style })}>
-        <input {...getInputProps()} />
-        <div>Drag and drop your images here.</div>
-      </div>
-      <aside>{thumbs}</aside>
-    </section>
+    <>
+      <section className="mr-4 rounded-sm bg-white">
+        <div className="flex" style={{ justifyContent: "flex-end" }}>
+          <img
+            src={bin}
+            alt="bin"
+            className="self-end w-4 cursor-pointer"
+            onClick={removeImage}
+          />
+        </div>
+        <div {...getRootProps({ style })}>
+          <input {...getInputProps()} />
+          <div className="flex flex-col justify-center p-10">
+            <div className="flex justify-center">
+              <img src={cloud} alt="cloud" className="w-8" />
+            </div>
+            <p className="font-semibold text-base cursor-pointer">
+              Drag and drop here or {""}
+              <span className="text-primary">browse images </span>
+            </p>
+          </div>
+        </div>
+        <p className="text-ashfont-semibold text-xs mt-4">
+          Image should be a JPG or PNG format*
+        </p>
+      </section>
+      <div>{thumbs}</div>
+    </>
   );
 };
 

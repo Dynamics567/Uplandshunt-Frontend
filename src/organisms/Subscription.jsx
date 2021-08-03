@@ -30,7 +30,7 @@ const Subscription = () => {
             note3="It is a long established"
             bgImage={bronzeBg}
           />
-          <SubCard
+          {/* <SubCard
             category="Silver"
             icon={silver}
             amount="$10.00"
@@ -40,8 +40,8 @@ const Subscription = () => {
             note3="It is a long established"
             bgImage={bronzeBg}
             className="-mt-10"
-          />
-          <SubCard
+          /> */}
+          {/* <SubCard
             category="Gold"
             icon={bronze}
             amount="$10.00"
@@ -50,7 +50,7 @@ const Subscription = () => {
             note2="It is a long established"
             note3="It is a long established"
             bgImage={goldBg}
-          />
+          /> */}
         </div>
       </div>
     </SectionWrapper>
