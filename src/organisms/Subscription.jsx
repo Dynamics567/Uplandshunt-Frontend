@@ -24,33 +24,8 @@ const Subscription = () => {
             category="Bronze"
             icon={bronze}
             amount="$10.00"
-            note="It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem"
-            note1="It is a long established"
-            note2="It is a long established"
-            note3="It is a long established"
             bgImage={bronzeBg}
           />
-          {/* <SubCard
-            category="Silver"
-            icon={silver}
-            amount="$10.00"
-            note="It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem"
-            note1="It is a long established"
-            note2="It is a long established"
-            note3="It is a long established"
-            bgImage={bronzeBg}
-            className="-mt-10"
-          /> */}
-          {/* <SubCard
-            category="Gold"
-            icon={bronze}
-            amount="$10.00"
-            note="It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem"
-            note1="It is a long established"
-            note2="It is a long established"
-            note3="It is a long established"
-            bgImage={goldBg}
-          /> */}
         </div>
       </div>
     </SectionWrapper>

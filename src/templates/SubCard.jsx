@@ -2,14 +2,12 @@ import { useState, useEffect } from "react";
 import dot from "../assets/dot.svg";
 import { axiosInstance } from "../Auth/Axios";
 
-const SubCard = ({ icon, bgImage, className }) => {
-  const [loading, setLoading] = useState(false);
+const SubCard = ({ icon, bgImage, className, buttonText }) => {
   const [subscription, setSubscription] = useState([]);
 
   const getSubscription = () => {
     axiosInstance.get("property/subscription/all").then((response) => {
       const results = response.data.data;
-      console.log(results);
       setSubscription(results);
     });
   };
@@ -56,6 +54,11 @@ const SubCard = ({ icon, bgImage, className }) => {
             <p className="text-center py-4 bg-whiteAsh text-white font-bold text-base mt-auto w-full">
               Get Started Today
             </p>
+            <div className=" bg-white">
+              <button className="py-4 px-8 w-full mt-6 font-bold text-base text-white rounded-md bg-primary">
+                {buttonText}
+              </button>
+            </div>
           </section>
         );
       })}
