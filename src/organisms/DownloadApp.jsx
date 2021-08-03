@@ -27,7 +27,12 @@ const DownloadApp = () => {
       </div>
       <SectionWrapper>
         <div className="">
-          <img src={mockup} alt="mockup" style={{ marginTop: "-42rem" }} />
+          <img
+            src={mockup}
+            alt="mockup"
+            className="w-1/2"
+            style={{ marginTop: "-37rem" }}
+          />
         </div>
       </SectionWrapper>
     </>
