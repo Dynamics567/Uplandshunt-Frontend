@@ -19,6 +19,7 @@ const Subscription = () => {
             amount="$10.00"
             bgImage={bronzeBg}
             buttonText="Upgrade"
+            showButton={true}
           />
         </div>
       </div>

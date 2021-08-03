@@ -1,8 +1,10 @@
 import React, { useCallback, useEffect, useState, useMemo } from "react";
 import { useDropzone } from "react-dropzone";
+import axios from "axios";
 
 import cloud from "../assets/cloud.png";
 import bin from "../assets/bin.png";
+import { axiosWithAuth } from "../Auth/Axios";
 
 const baseStyle = {
   display: "flex",
@@ -30,6 +32,7 @@ const rejectStyle = {
 const DragAndDrop = (props) => {
   const [files, setFiles] = useState([]);
 
+  // To preview file
   const onDrop = useCallback((acceptedFiles) => {
     setFiles(
       acceptedFiles.map((file) =>
@@ -41,7 +44,7 @@ const DragAndDrop = (props) => {
   }, []);
 
   const maxSize = 2097152;
-  console.log(files);
+  // console.log(files);
 
   const {
     getRootProps,
@@ -55,10 +58,8 @@ const DragAndDrop = (props) => {
     accept: "image/jpeg, image/png",
     minSize: "0",
     maxSize: { maxSize },
+    multiple,
   });
-
-  // const isFileTooLarge =
-  //   rejectedFiles.length > 0 && rejectedFiles[0].size > maxSize;
 
   const style = useMemo(
     () => ({
@@ -89,6 +90,17 @@ const DragAndDrop = (props) => {
     setFiles(newFiles); // update the state
   };
 
+  // var formData = new FormData();
+  // formData.append("myimages", files);
+
+  const handleDrop = () => {
+    console.log(files);
+    axiosWithAuth()
+      .post("property/images", files)
+      .then((response) => {
+        console.log(response);
+      });
+  };
   return (
     <>
       <section className="mr-4 rounded-sm bg-white">
@@ -115,8 +127,11 @@ const DragAndDrop = (props) => {
         <p className="text-ashfont-semibold text-xs mt-4">
           Image should be a JPG or PNG format*
         </p>
+        <div>{thumbs}</div>
+        <button onClick={handleDrop} className="bg-primary">
+          upload
+        </button>
       </section>
-      <div>{thumbs}</div>
     </>
   );
 };
