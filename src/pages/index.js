@@ -38,6 +38,7 @@ export * from "./PaymentHistory";
 export * from "./AllSavedProperties";
 export * from "./ActivateAccount";
 export * from "./EditIndividualProfile";
+export * from "./EditBusinessProfile";
 export * from "./SearchResult";
 export * from "./TopProperties";
 export * from "./BoostedProperties";

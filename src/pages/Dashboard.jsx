@@ -21,6 +21,7 @@ import {
   PropertyRented,
   AllSavedProperties,
   EditIndividualProfile,
+  EditBusinessProfile,
   ImageUpload,
 } from "../pages";
 
@@ -123,6 +124,11 @@ const Dashboard = () => {
               path="/dashboard/editindividualprofile"
               exact
               component={EditIndividualProfile}
+            />
+            <Route
+              path="/dashboard/editbusinessprofile"
+              exact
+              component={EditBusinessProfile}
             />
             <Route
               path="/dashboard/subscription"
