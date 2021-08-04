@@ -62,7 +62,7 @@ const IndividualProfile = () => {
         <div className="">
           <div className="flex mb-20">
             <div className="flex-none mr-6 ml-10 mt-6">
-              <img src={avatar} alt="profileAvatar" />
+              <img src={avatar} alt="profileAvatar" className="rounded-full" />
               <p className="font-bold text-2xl mb-4"></p>
               <p className="font-semibold text-base"></p>
             </div>
@@ -71,7 +71,10 @@ const IndividualProfile = () => {
               <div className="border rounded-md mt-6 ml-10 w-3/4">
                 <div className="bg-primary flex justify-between p-4 text-white">
                   <p className="font-bold text-base">Personal Information</p>
-                  <Link to="/dashboard/editprofile" className="cursor-pointer">
+                  <Link
+                    to="/dashboard/editindividualprofile"
+                    className="cursor-pointer"
+                  >
                     <img src={edit} alt="edit" />
                   </Link>
                 </div>

@@ -37,7 +37,7 @@ export * from "./PropertyRented";
 export * from "./PaymentHistory";
 export * from "./AllSavedProperties";
 export * from "./ActivateAccount";
-export * from "./EditProfile";
+export * from "./EditIndividualProfile";
 export * from "./SearchResult";
 export * from "./TopProperties";
 export * from "./BoostedProperties";
