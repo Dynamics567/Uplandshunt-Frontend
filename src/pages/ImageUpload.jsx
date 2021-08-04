@@ -34,7 +34,7 @@
 // export { ImageUpload };
 
 import React from "react";
-import DragAndDrop from "../templates/DragAndDrop";
+import SimpleDropZone from "../templates/SimpleDropZone";
 
 const ImageUpload = () => {
   return (
@@ -45,9 +45,9 @@ const ImageUpload = () => {
       </div>
       <p className="font-bold text-base my-2">Images Of Properties</p>
       <div className="flex justify-between">
-        <DragAndDrop />
-        <DragAndDrop />
-        <DragAndDrop />
+        <SimpleDropZone />
+        {/* <Dropzone />
+        <Dropzone /> */}
       </div>
     </div>
   );

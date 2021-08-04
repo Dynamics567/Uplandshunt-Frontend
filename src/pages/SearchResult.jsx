@@ -22,7 +22,7 @@ const SearchResult = () => {
         // handle success
         const category = response.data;
         const entries = Object.entries(category.data);
-        // console.log(entries);
+        console.log(entries);
         setFilterBy(entries);
         setLoading(false);
       })

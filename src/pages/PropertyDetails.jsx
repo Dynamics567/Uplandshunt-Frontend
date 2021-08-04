@@ -4,13 +4,12 @@ import { useParams } from "react-router";
 import { HeaderTwo } from "../molecules";
 import prop3 from "../assets/prop3.png";
 import smallProp from "../assets/smallProp.png";
-// import interest from "../assets/interest.png";
+import interest from "../assets/interest.png";
 // import bid from "../assets/bid.png";
 import love from "../assets/love.png";
 import bidIcon from "../assets/bidIcon.png";
 import location from "../assets/location.svg";
 import listed from "../assets/listed.png";
-import searchBy from "../assets/searchBy.png";
 import detailsBedroom from "../assets/detailsBed.png";
 import detailsBathroom from "../assets/detailsBathroom.png";
 import detailsKitchen from "../assets/detailsKitchen.png";
@@ -30,6 +29,7 @@ const PropertyDetails = () => {
       .then(function (response) {
         // handle success
         const details = response.data.data;
+        console.log(details);
         setPropertyDetails(details);
         setLoading(false);
       })
@@ -55,9 +55,15 @@ const PropertyDetails = () => {
     price,
     city,
     country,
+    description,
     area,
     postal_code,
     status,
+    user: { first_name },
+    user: { last_name },
+    user: {
+      avatar: { url },
+    },
     geo_location: {
       geometry: {
         location: { lat, lng },
@@ -75,7 +81,7 @@ const PropertyDetails = () => {
       {loading ? (
         <DashboardLoader />
       ) : (
-        <>
+        <div className="flex flex-col w-full justify-between">
           <HeaderTwo />
           <div className="m-auto mt-10 w-11/12 flex justify-between">
             <div className="mr-10" style={{ flex: "1" }}>
@@ -142,42 +148,31 @@ const PropertyDetails = () => {
                   frameborder="0"
                   style={{ width: "100%", objectFit: "cover" }}
                 ></iframe>
-                <div className="flex w-full mt-4">
+                <div className="flex items-center w-full mt-4">
+                  <div className="border border-ashThree rounded-md mr-4 ">
+                    <p className="p-2 font-semibold text-lg border-b border-ashThree mb-2">
+                      Property Listed By:
+                    </p>
+                    <div className="flex items-center p-2">
+                      <img src={url} alt="url" className="w-1/2" />
+                      <p className="font-bold text-2xl">
+                        {first_name + " " + last_name}
+                      </p>
+                    </div>
+                  </div>
                   <img src={listed} alt="listed" className="w-1/2" />
-                  <img src={searchBy} alt="searchBy" className="w-1/2" />
+                  {/* <img src={searchBy} alt="searchBy" className="w-1/2" /> */}
                 </div>
               </div>
             </div>
             {/* voluptas nesciunt inventore obcaecati deleniti molestiae magni. */}
           </div>
-          <section className="m-auto mt-16 w-11/12 border border-lightAsh">
+          <section className="m-auto mt-24 w-11/12 border border-lightAsh">
             <p className="border-b border-ashThree font-bold text-lg p-4">
               Details
             </p>
             <p className="p-4 font-bold text-lg">Property Description</p>
-            <p className="p-4 font-normal text-base">
-              Sed ut perspiciatis, unde omnis iste natus error sit voluptatem
-              accusantium doloremque laudantium, totam rem aperiam eaque ipsa,
-              quae ab illo inventore veritatis et quasi architecto beatae vitae
-              dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas
-              sit, aspernatur aut odit aut fugit, sed quia consequuntur magni
-              dolores eos, qui ratione voluptatem sequi nesciunt, neque porro
-              quisquam est, qui dolorem ipsum, quia dolor sit amet consectetur
-              adipisci[ng]velit, sed quia non numquam [do] eius modi tempora
-              inci[di]dunt, ut labore et dolore magnam aliquam quaerat
-              voluptatem. Ut enim ad minima veniam, quis nostrum[d]
-              exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid
-              ex ea commodi consequatur? Quis autem vel eum iure reprehenderit,
-              qui in ea voluptate velit esse, quam nihil molestiae consequatur,
-              vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?
-              [33] At vero eos et accusamus et iusto odio dignissimos ducimus,
-              qui blanditiis praesentium voluptatum deleniti atque corrupti,
-              quos dolores et quas molestias excepturi sint, obcaecati
-              cupiditate non provident, similique sunt in culpa, qui officia
-              deserunt mollitia animi, id est laborum et dolorum fuga. Et harum
-              quidem rerum facilis est et expedita distinctio. Nam libero
-              tempore
-            </p>
+            <p className="p-4 font-normal text-base">{description}</p>
             <p className="px-4 py-2 font-bold text-lg">Property Details</p>
             <div className="grid grid-cols-4 gap-4 p-4 text-base font-semibold">
               <div className="">
@@ -213,12 +208,12 @@ const PropertyDetails = () => {
               </div>
             </div>
           </section>
-        </>
+        </div>
       )}
-      {/* <div className="p-4 flex w-full">
+      <div className="flex m-auto mt-10 w-11/12">
         <img src={interest} alt="interest" className="w-1/2" />
-        <img src={bid} alt="bid" className="w-1/2" />
-      </div> */}
+        {/* <img src={bid} alt="bid" className="w-1/2" /> */}
+      </div>
       <Footer />
     </div>
   );

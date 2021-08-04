@@ -31,7 +31,6 @@ import {
   ImageUpload,
   PropertyDetails,
 } from "./pages";
-import DragAndDrop from "./templates/DragAndDrop";
 
 function App() {
   return (
