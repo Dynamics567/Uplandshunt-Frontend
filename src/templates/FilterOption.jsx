@@ -10,7 +10,12 @@ const FilterOption = ({ item, setQueryParameter, queryParameter }) => {
   // console.log(item);
   return (
     <>
-      <div className="flex items-center mb-6" onClick={toggle}>
+      <div
+        className="flex items-center mb-6"
+        onClick={toggle}
+        onBlur={() => setFilterOption(false)}
+        tabIndex="0"
+      >
         <p className="font-semibold text-base" style={{ flex: "1" }}>
           {item[0].charAt(0).toUpperCase() + item[0].slice(1)}
         </p>

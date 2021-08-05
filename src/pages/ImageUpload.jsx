@@ -33,8 +33,11 @@ const ImageUpload = () => {
     const fileNames = files.map((file) => file.file);
     console.log(fileNames);
     setImages(fileNames);
+
+    const formdata = new FormData();
+    formdata.append("file", images);
     axiosWithAuth()
-      .post("property/1/images", images)
+      .post("property/1/images", formdata)
       .then((response) => {
         console.log(response);
       });
