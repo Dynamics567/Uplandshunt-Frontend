@@ -45,11 +45,11 @@ const Dashboard = () => {
               component={EditNewListing}
             />
             <Route
-              path="/dashboard/listings/imageUpload"
+              path="/dashboard/listings/imageUpload/:id"
               component={ImageUpload}
             />
             <Route
-              path="/dashboard/listings/documentUpload"
+              path="/dashboard/listings/documentUpload/:id"
               component={DocumentUpload}
             />
             <Route

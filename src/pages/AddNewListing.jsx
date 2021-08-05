@@ -42,6 +42,7 @@ const EditNewListing = () => {
     kitchen: Yup.string().required("Number of Kitchen is required"),
     bathroom: Yup.string().required("Number of Bathroom is required"),
     bedroom: Yup.string().required("Number of Bedrooms is required"),
+    description: Yup.string().required("Property description is required"),
     furnish_type: Yup.number().required("Furnishing Type is required"),
     deposit_structure: Yup.number().required("Deposit Structure is required"),
   });
@@ -61,10 +62,13 @@ const EditNewListing = () => {
       .post("property", propertyData)
       .then(function (response) {
         if (response) {
+          console.log(response);
           setLoading(false);
         }
         toast.success(response.data.message);
-        location.push("/dashboard/listings/imageUpload");
+        location.push(
+          `/dashboard/listings/imageUpload/${response.data.data.id}`
+        );
       })
       .catch(function (error) {
         if (error.response) {
@@ -194,6 +198,20 @@ const EditNewListing = () => {
           {...register("bedroom")}
           error={errors.bedroom?.message}
         />
+        <div>
+          <label className="text-lg font-semibold text-left">
+            Property Description
+          </label>
+          <textarea
+            className="w-full border border-gray-400 focus:outline-none px-2 rounded-md py-1 mt-1"
+            rows="4"
+            cols="5"
+            placeholder="Write a short property description"
+            name="description"
+            {...register("description")}
+            error={errors.description?.message}
+          ></textarea>
+        </div>
         <Select
           values={furnishingType}
           selectedValue="Not furnished"

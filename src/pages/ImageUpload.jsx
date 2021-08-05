@@ -1,11 +1,12 @@
-import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { axiosWithAuth } from "../Auth/Axios";
 import SimpleDropZone from "../templates/SimpleDropZone";
+import { toast } from "react-toastify";
+import { useParams } from "react-router";
 
 const ImageUpload = () => {
   const location = useHistory();
-  const [images, setImages] = useState([]);
+  let { id } = useParams();
 
   const handleChangeStatus = ({ meta }, status) => {
     // console.log(status, meta);
@@ -29,19 +30,18 @@ const ImageUpload = () => {
   //   // location.push("/dashboard/listings/documentUpload");
   // };
 
-  const handleSubmit = (files, allFiles) => {
+  const handleSubmit = (files) => {
     const fileNames = files.map((file) => file.file);
-    console.log(fileNames);
-    setImages(fileNames);
 
     const formdata = new FormData();
-    formdata.append("file", images);
+    formdata.append("file", fileNames);
     axiosWithAuth()
-      .post("property/1/images", formdata)
+      .post(`property/${id}/images`, formdata)
       .then((response) => {
-        console.log(response);
+        const successMessage = response.data.data;
+        toast.success(successMessage);
+        location.push(`/dashboard/listings/documentUpload/${id}`);
       });
-    // allFiles.forEach((f) => f.remove());
   };
 
   return (
@@ -51,17 +51,23 @@ const ImageUpload = () => {
         <div className="bg-primary w-16 h-2 ml-3"></div>
       </div>
       <p className="font-bold text-base my-2">Images Of Properties</p>
-      <div className=" justify-between">
+      <div className="m-auto w-6/12">
         <SimpleDropZone
           maximumFiles="7"
-          minimumFiles="1"
-          inputContent="Drag and drop here or browse images"
+          minimumFiles="3"
+          fileType="image/*"
           handleSubmit={handleSubmit}
           handleChangeStatus={handleChangeStatus}
+          buttonText="Continue"
         />
-        {/* <button onClick={handleSubmit} className="bg-primary p-4 text-white">
-          continue
-        </button> */}
+        <div className="mt-4">
+          <p className="text-xs font-semibold text-ashThree">
+            Image should be a JPG or PNG format upload size is 2MB*
+          </p>
+          <p className="text-xs font-semibold text-ashThree">
+            Maximum of 7 and minimum of 5 images**
+          </p>
+        </div>
       </div>
     </div>
   );
