@@ -21,6 +21,7 @@ const EditBusinessProfile = () => {
     state: Yup.string().required("State is required"),
     city: Yup.string().required("City is required"),
     company_phone: Yup.number().required("Company Phone is required"),
+    contact_number: Yup.number().required("Contact Number is required"),
     email: Yup.string().required("Email is required").email("Email is invalid"),
     website: Yup.string().required("Website URL is required"),
     logo: Yup.string().required("Company logo is required"),
@@ -37,7 +38,7 @@ const EditBusinessProfile = () => {
     axiosWithAuth()
       .post("account/update-profile", data)
       .then(function (response) {
-        console.log(response);
+        console.log(data, response);
         if (response) {
           setLoading(false);
         }
@@ -45,10 +46,11 @@ const EditBusinessProfile = () => {
         location.push("/dashboard/profile");
       })
       .catch(function (error) {
-        if (error.response) {
+        if (error) {
           setError(error);
           setLoading(false);
-          toast.error(error);
+          console.log(error);
+          toast.error(data.errors);
         }
         // handle error
         // setError(error.status);
@@ -111,6 +113,13 @@ const EditBusinessProfile = () => {
             name="company_phone"
             {...register("company_phone")}
             error={errors.company_phone?.message}
+          />
+          <Input
+            type="text"
+            label="Contact Number"
+            name="contact_number"
+            {...register("contact_number")}
+            error={errors.contact_number?.message}
           />
           <Input
             type="text"

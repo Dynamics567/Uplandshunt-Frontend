@@ -136,46 +136,35 @@
 // };
 
 // export default DragAndDrop;
-
 import Dropzone from "react-dropzone-uploader";
 import "react-dropzone-uploader/dist/styles.css";
 
-const SimpleDropZone = () => {
-  // Payload data and url to upload files
-  const getUploadParams = ({ meta }) => {
-    return { url: "https://httpbin.org/post" };
-  };
-
-  // Return the current status of files being uploaded
-  const handleChangeStatus = ({ meta, file }, status) => {
-    // console.log(file);
-    // console.log(status, meta, file);
-  };
-
-  // Return array of uploaded files after submit button is clicked
-  const handleSubmit = (files, allFiles) => {
-    console.log(files.map((f) => f.meta));
-    allFiles.forEach((f) => f.remove());
-  };
-
+const SimpleDropZone = ({
+  maximumFiles,
+  minimumFiles,
+  inputContent,
+  handleSubmit,
+  handleChangeStatus,
+}) => {
   return (
     <Dropzone
-      getUploadParams={getUploadParams}
       onChangeStatus={handleChangeStatus}
       onSubmit={handleSubmit}
       accept="image/*"
       inputContent={(files, extra) =>
-        extra.reject ? "Only imagesfiles allowed!" : "Select and Drop Files"
+        extra.reject ? "Only images files allowed!" : "Select and Drop Files"
       }
       styles={{
         dropzoneReject: { borderColor: "#F19373", backgroundColor: "#F1BDAB" },
         inputLabel: (files, extra) =>
           extra.reject ? { color: "#A02800" } : {},
       }}
-      maxFiles={3}
-      inputContent="Drop 3 Files"
-      inputWithFilesContent={(files) => `${3 - files.length} more`}
-      submitButtonDisabled={(files) => files.length < 3}
+      maxFiles={maximumFiles}
+      inputContent={inputContent}
+      inputWithFilesContent={(files) => `${maximumFiles - files.length} more`}
+      submitButtonDisabled={(files) => files.length < minimumFiles}
+      handleSubmit={handleSubmit}
+      maxSizeBytes={2097152}
     />
   );
 };

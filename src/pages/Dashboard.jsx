@@ -23,6 +23,7 @@ import {
   EditIndividualProfile,
   EditBusinessProfile,
   ImageUpload,
+  DocumentUpload,
 } from "../pages";
 
 const Dashboard = () => {
@@ -47,7 +48,10 @@ const Dashboard = () => {
               path="/dashboard/listings/imageUpload"
               component={ImageUpload}
             />
-
+            <Route
+              path="/dashboard/listings/documentUpload"
+              component={DocumentUpload}
+            />
             <Route
               path="/dashboard/listings/manageDetails"
               exact

@@ -2,7 +2,7 @@ import { useState } from "react";
 import dropdown from "../assets/dropdown.svg";
 import Option from "./Option";
 
-const FilterOption = ({ item }) => {
+const FilterOption = ({ item, setQueryParameter, queryParameter }) => {
   const [filterOption, setFilterOption] = useState(false);
   const toggle = () => {
     setFilterOption(!filterOption);
@@ -22,7 +22,14 @@ const FilterOption = ({ item }) => {
           style={{ marginLeft: "10.2rem" }}
         >
           {item.map((options) => {
-            return <Option options={options} />;
+            return (
+              <Option
+                options={options}
+                onClick={(name) =>
+                  setQueryParameter({ ...queryParameter, [item[0]]: name })
+                }
+              />
+            );
           })}
         </div>
       )}
