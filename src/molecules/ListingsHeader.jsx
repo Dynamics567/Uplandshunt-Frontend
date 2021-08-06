@@ -16,7 +16,7 @@ const ListingsHeader = () => {
           </NavLink>
         );
       })}
-      <button className="bg-metal p-4 font-semibold text-sm rounded-sm text-white">
+      <button className="bg-metal p-4 font-semibold text-sm rounded-md text-white">
         Boost Property
       </button>
     </div>

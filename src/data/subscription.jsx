@@ -19,8 +19,8 @@ export const plans = [
 export const listingHeader = [
   {
     id: "1",
-    item: "Manage Details",
-    url: "/dashboard/listings/manageDetails",
+    item: "Edit Details",
+    url: "/dashboard/listings/editDetails",
   },
   {
     id: "2",

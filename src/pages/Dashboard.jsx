@@ -10,7 +10,7 @@ import {
   MyPurchase,
   Documents,
   UserView,
-  ManageDetails,
+  EditDetails,
   InterestRecieved,
   BidsPlaced,
   InterestSent,
@@ -53,9 +53,9 @@ const Dashboard = () => {
               component={DocumentUpload}
             />
             <Route
-              path="/dashboard/listings/manageDetails"
+              path="/dashboard/listings/editDetails/:id"
               exact
-              component={ManageDetails}
+              component={EditDetails}
             />
             <Route
               path="/dashboard/listings/userview"

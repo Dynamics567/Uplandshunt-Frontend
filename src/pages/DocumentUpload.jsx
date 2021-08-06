@@ -1,6 +1,7 @@
 import React from "react";
 import SimpleDropZone from "../templates/SimpleDropZone";
 import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 
 import { Button } from "../atoms";
 import { axiosWithAuth } from "../Auth/Axios";
@@ -58,9 +59,12 @@ const DocumentUpload = () => {
           imageTitle="Rent agreement"
         />
       </div>
-      <div className="flex justify-center w-1/6">
+      <Link
+        to={`/dashboard/listings/editDetails${id}`}
+        className="flex justify-center w-1/6"
+      >
         <Button buttonText="Save" />
-      </div>
+      </Link>
     </div>
   );
 };
