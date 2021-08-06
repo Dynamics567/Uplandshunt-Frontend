@@ -18,7 +18,7 @@ import { axiosInstance } from "../Auth/Axios";
 import DashboardLoader from "../templates/DashboardLoader";
 import { Footer } from "../organisms";
 
-const PropertyDetails = () => {
+const PropertyDetails = ({ showFooter = true, showHeader = true }) => {
   let { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [propertyDetails, setPropertyDetails] = useState([]);
@@ -82,7 +82,7 @@ const PropertyDetails = () => {
         <DashboardLoader />
       ) : (
         <div className="flex flex-col w-full justify-between">
-          <HeaderTwo />
+          {showHeader && <HeaderTwo />}
           <div className="m-auto mt-10 w-11/12 flex justify-between">
             <div className="mr-10" style={{ flex: "1" }}>
               <p className="font-bold text-base">{name}</p>
@@ -214,7 +214,7 @@ const PropertyDetails = () => {
         <img src={interest} alt="interest" className="w-1/2" />
         {/* <img src={bid} alt="bid" className="w-1/2" /> */}
       </div>
-      <Footer />
+      {showFooter && <Footer />}
     </div>
   );
 };

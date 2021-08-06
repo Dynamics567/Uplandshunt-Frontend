@@ -1,18 +1,17 @@
 import { useState, useEffect } from "react";
 import { ListingsLayout } from "../Layout";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useParams } from "react-router";
-import MultiSelect from "react-multi-select-component";
 
 import prop1 from "../assets/prop1.png";
 import EditPropertyForm from "../templates/EditPropertyForm";
 import { axiosInstance } from "../Auth/Axios";
 import DashboardLoader from "../templates/DashboardLoader";
-
-// property/${id}
+import { Button } from "../atoms";
 
 const EditDetails = () => {
   const { id } = useParams();
+  const location = useHistory();
   const [data, setData] = useState(null);
   const [loading, setloading] = useState(true);
 
@@ -33,6 +32,10 @@ const EditDetails = () => {
       .then(function () {
         // always executed
       });
+  };
+
+  const editProperty = () => {
+    location.push(`/dashboard/listings/userview/${id}`);
   };
 
   useEffect(() => {
@@ -61,11 +64,9 @@ const EditDetails = () => {
               </div>
 
               <div className="flex w-full justify-center items-center text-center mb-10">
-                <Link to="/dashboard/listings/manageDetails" className="w-full">
-                  <button className="rounded-md p-4 text-white bg-primary font-semibold w-1/2">
-                    Save
-                  </button>
-                </Link>
+                <div className="w-1/2" onClick={editProperty}>
+                  <Button loading={loading} buttonText="Save" />
+                </div>
               </div>
             </div>
           </ListingsLayout>

@@ -58,7 +58,7 @@ const Dashboard = () => {
               component={EditDetails}
             />
             <Route
-              path="/dashboard/listings/userview"
+              path="/dashboard/listings/userview/:id"
               exact
               component={UserView}
             />

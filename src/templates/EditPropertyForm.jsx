@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 
 import { Input, Select } from "../atoms";
+import MultiSelect from "react-multi-select-component";
 import {
   availability,
   listType,
