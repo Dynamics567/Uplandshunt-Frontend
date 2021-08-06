@@ -10,9 +10,11 @@ const SimpleDropZone = ({
   handleChangeStatus,
   fileType,
   buttonText,
+  imageTitle,
 }) => {
   return (
     <div className="mt-10">
+      <p className="font-bold text-base mb-2">{imageTitle}</p>
       <Dropzone
         onChangeStatus={handleChangeStatus}
         onSubmit={handleSubmit}
@@ -28,6 +30,8 @@ const SimpleDropZone = ({
           dropzone: {
             border: "2px solid white",
             boxShadow: "0px 0px 4px 0px #00000040",
+            overflowX: "hidden",
+            overflowY: "hidden",
           },
           inputLabel: {
             color: "#c4c4c4",
@@ -43,7 +47,10 @@ const SimpleDropZone = ({
         inputContent={
           <div className="flex flex-col justify center items-center">
             <img src={cloud} alt="cloud" className="w-8" />
-            <p>Drag and drop here or browse files</p>
+            <p className="text-center">
+              Drag and drop here or{" "}
+              <span className="#B3404A">browse files</span>
+            </p>
           </div>
         }
         inputWithFilesContent={(files) => `${maximumFiles - files.length} more`}

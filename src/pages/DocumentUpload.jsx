@@ -40,11 +40,23 @@ const DocumentUpload = () => {
           handleSubmit={handleSubmit}
           fileType="application/pdf"
           buttonText="Submit"
+          imageTitle="Certificate Of  Occupancy "
         />
-        <SimpleDropZone maximumFiles="1" minimumFiles="1" />
-        <SimpleDropZone maximumFiles="1" minimumFiles="1" />
-        <SimpleDropZone maximumFiles="1" minimumFiles="1" />
-        <SimpleDropZone maximumFiles="1" minimumFiles="1" />
+        <SimpleDropZone
+          maximumFiles="1"
+          minimumFiles="1"
+          imageTitle="Governor’s Consent"
+        />
+        <SimpleDropZone
+          maximumFiles="1"
+          minimumFiles="1"
+          imageTitle="Government Gazette"
+        />
+        <SimpleDropZone
+          maximumFiles="1"
+          minimumFiles="1"
+          imageTitle="Rent agreement"
+        />
       </div>
       <div className="flex justify-center w-1/6">
         <Button buttonText="Save" />
