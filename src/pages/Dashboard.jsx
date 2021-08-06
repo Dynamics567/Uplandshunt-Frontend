@@ -11,7 +11,7 @@ import {
   Documents,
   UserView,
   EditDetails,
-  InterestRecieved,
+  BidsRecieved,
   BidsPlaced,
   InterestSent,
   EditNewListing,
@@ -68,9 +68,9 @@ const Dashboard = () => {
               component={Documents}
             />
             <Route
-              path="/dashboard/listings/interest"
+              path="/dashboard/listings/bidsReceived/:id"
               exact
-              component={InterestRecieved}
+              component={BidsRecieved}
             />
             <Route
               path="/dashboard/listings"

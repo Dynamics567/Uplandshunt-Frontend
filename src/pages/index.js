@@ -28,7 +28,7 @@ export * from "./AddNewListing";
 export * from "./UserView";
 export * from "./Documents";
 export * from "./EditDetails";
-export * from "./InterestRecieved";
+export * from "./BidsRecieved";
 export * from "./BidsPlaced";
 export * from "./InterestSent";
 export * from "./PropertyRequestDocument";

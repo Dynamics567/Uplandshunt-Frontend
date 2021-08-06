@@ -34,8 +34,13 @@ export const listingHeader = [
   },
   {
     id: "4",
-    item: "Interest Recieved",
-    url: "/dashboard/listings/interest",
+    item: "Bids Recieved",
+    url: "/dashboard/listings/bidsReceived",
+  },
+  {
+    id: "5",
+    item: "Bids Sent",
+    url: "/dashboard/listings/bidsSent",
   },
 ];
 

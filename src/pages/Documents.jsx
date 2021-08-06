@@ -41,13 +41,13 @@ const Documents = () => {
         <DashboardLoader />
       ) : (
         <ListingsLayout>
-          <div className="mt-4 border border-b-0 border-ashThree rounded-md">
+          <div className="mt-8 border border-b-0 border-ashThree rounded-md">
             <div className="mt-2 p-4 flex justify-between w-full mb-4 font-bold text-base border-b border-ashThree">
               <p>Document Name</p>
               <p>View Document</p>
               <p>Status</p>
             </div>
-            {data.map(({ id, name, status }) => {
+            {data.map(({ id, name, image_url, status }) => {
               return (
                 <div
                   key={id}
@@ -57,7 +57,11 @@ const Documents = () => {
                     <img src={file} alt="file" className="w-4 mr-2" />
                     <p>{name}</p>
                   </div>
-                  <img src={eye} alt="" className="w-4" />
+                  <div className="cursor-pointer">
+                    <a href={image_url} target="_blank" className="">
+                      <img src={eye} alt="" className="w-4" />
+                    </a>
+                  </div>
                   <p
                     className="uppercase text-white rounded-3xl px-2 py-1 text-xs"
                     style={{
