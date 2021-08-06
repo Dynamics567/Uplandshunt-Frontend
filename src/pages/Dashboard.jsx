@@ -63,7 +63,7 @@ const Dashboard = () => {
               component={UserView}
             />
             <Route
-              path="/dashboard/listings/documents"
+              path="/dashboard/listings/documents/:id"
               exact
               component={Documents}
             />

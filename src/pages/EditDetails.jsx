@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { ListingsLayout } from "../Layout";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useParams } from "react-router";
 
 import prop1 from "../assets/prop1.png";

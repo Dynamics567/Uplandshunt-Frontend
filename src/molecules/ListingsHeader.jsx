@@ -4,7 +4,7 @@ import { listingHeader } from "../data/subscription";
 
 const ListingsHeader = () => {
   const { id } = useParams();
-  console.log(id);
+
   return (
     <div className="flex items-center justify-between">
       {listingHeader.map(({ item, url }) => {
