@@ -31,6 +31,7 @@ import {
   ImageUpload,
   PropertyDetails,
   PaymentPage,
+  PaymentSuccessful,
 } from "./pages";
 
 function App() {
@@ -79,6 +80,7 @@ function App() {
               <Route path="/legal/newsview" exact component={SingleNews} />
               <Route path="/legal/blogview" component={SingleBlog} />
               <Route path="/paymentPage" component={PaymentPage} />
+              <Route path="/paymentSuccess" component={PaymentSuccessful} />
               <Route
                 path="/searchresults/:value?/:category?"
                 component={SearchResult}

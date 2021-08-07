@@ -1,6 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 import { Button, Input } from "../atoms";
 import { HeaderTwo } from "../molecules";
+import { Footer } from "../organisms";
 
 const PaymentPage = () => {
   return (
@@ -32,11 +35,12 @@ const PaymentPage = () => {
           </label>
         </div>
         <div className="flex w-full justify-center items-center text-center mb-10">
-          <div className="w-1/2">
+          <Link to="/paymentSuccess" className="w-1/2">
             <Button buttonText="Submit" />
-          </div>
+          </Link>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

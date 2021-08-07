@@ -47,3 +47,4 @@ export * from "./ImageUpload";
 export * from "./DocumentUpload";
 export * from "./PropertyDetails";
 export * from "./PaymentPage";
+export * from "./PaymentSuccessful";
