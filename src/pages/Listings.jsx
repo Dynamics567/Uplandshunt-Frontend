@@ -8,7 +8,6 @@ import { DashboardSectionTitle } from "../atoms";
 import PropertyCard from "../templates/PropertyCard";
 
 const Listings = () => {
-  const [userListings, setUserListings] = useState("");
   const [loading, setLoading] = useState(true);
   const [response, setResponse] = useState([]);
   const [error, setError] = useState("");

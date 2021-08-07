@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from "../atoms";
 import { HeaderTwo } from "../molecules";
 import payment from "../assets/payment.png";
+import { Footer } from "../organisms";
 
 const PaymentSuccessful = () => {
   return (
@@ -23,6 +24,7 @@ const PaymentSuccessful = () => {
           <Button buttonText="Back To Home" />
         </Link>
       </div>
+      <Footer />
     </div>
   );
 };
