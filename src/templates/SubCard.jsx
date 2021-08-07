@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import dot from "../assets/dot.svg";
 import { axiosInstance } from "../Auth/Axios";
 
@@ -7,6 +8,7 @@ const SubCard = ({
   bgImage,
   className,
   buttonText,
+  buttonUrl,
   showButton = false,
 }) => {
   const [subscription, setSubscription] = useState([]);
@@ -61,11 +63,11 @@ const SubCard = ({
               Get Started Today
             </p>
             {showButton && (
-              <div className=" bg-white">
+              <Link to={buttonUrl} className=" bg-white">
                 <button className="py-4 px-8 w-full mt-6 font-bold text-base text-white rounded-md bg-primary">
                   {buttonText}
                 </button>
-              </div>
+              </Link>
             )}
           </section>
         );

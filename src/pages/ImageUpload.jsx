@@ -55,7 +55,7 @@ const ImageUpload = () => {
         <SimpleDropZone
           maximumFiles="7"
           minimumFiles="3"
-          fileType="image/*"
+          fileType="image/*,png/*,svg/*,jpeg/*,jpg/*"
           handleSubmit={handleSubmit}
           handleChangeStatus={handleChangeStatus}
           buttonText="Continue"

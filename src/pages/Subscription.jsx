@@ -20,6 +20,7 @@ const Subscription = () => {
             bgImage={bronzeBg}
             buttonText="Upgrade"
             showButton={true}
+            // buttonUrl={window.location.replace("/payment")}
           />
         </div>
       </div>

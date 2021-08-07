@@ -350,3 +350,7 @@ Drag and drop styles */
   text-align: left;
   font-weight: bold;
 }
+
+.outline {
+  outline: 1px solid #b3404a;
+}

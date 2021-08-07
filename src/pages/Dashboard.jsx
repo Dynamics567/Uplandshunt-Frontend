@@ -24,6 +24,7 @@ import {
   EditBusinessProfile,
   ImageUpload,
   DocumentUpload,
+  // BidsSent,
 } from "../pages";
 
 const Dashboard = () => {
@@ -72,6 +73,11 @@ const Dashboard = () => {
               exact
               component={BidsRecieved}
             />
+            {/* <Route
+              path="/dashboard/listings/bidsSent/:id"
+              exact
+              component={BidsSent}
+            /> */}
             <Route
               path="/dashboard/listings"
               exact

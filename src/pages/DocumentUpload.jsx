@@ -1,30 +1,44 @@
-import React from "react";
+import { useState } from "react";
 import SimpleDropZone from "../templates/SimpleDropZone";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import { Button } from "../atoms";
 import { axiosWithAuth } from "../Auth/Axios";
 
-const DocumentUpload = () => {
+const DocumentUpload = (imageTitle) => {
   let { id } = useParams();
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (files, allFiles) => {
+  const handleSubmit = (files) => {
     const fileNames = files.map((file) => file.file);
 
-    console.log(fileNames);
+    // console.log(fileNames);
     const formdata = new FormData();
-    formdata.append("file", fileNames);
-    formdata.append("document_name", "Government certificate");
-    console.log(formdata);
+    formdata.append("file", fileNames[0]);
+    formdata.append("document_name", imageTitle);
+    // console.log(formdata);
     // console.log(formdata);
     axiosWithAuth()
       .post(`property/${id}/documents`, formdata)
       .then((response) => {
-        const successMessage = response;
+        const successMessage = response.data.data;
         console.log(successMessage);
-        // toast.success(successMessage);
-        // location.push("/dashboard/listings/documentUpload");
+        toast.success(successMessage);
+      });
+  };
+
+  const saveDocuments = () => {
+    setLoading(true);
+    axiosWithAuth()
+      .post(`property/${id}/save`)
+      .then((response) => {
+        console.log(response);
+        setLoading(false);
+        const successMessage = response.data.message;
+        console.log(successMessage);
+        toast.success(successMessage);
       });
   };
   return (
@@ -39,32 +53,44 @@ const DocumentUpload = () => {
           maximumFiles="1"
           minimumFiles="1"
           handleSubmit={handleSubmit}
-          fileType="application/pdf"
+          fileType="image/*,.pdf,.doc,.docx"
           buttonText="Submit"
-          imageTitle="Certificate Of  Occupancy "
+          imageTitle="Certificate Of Occupancy"
         />
+        {/* accept="image/*,.pdf,.doc,.docx" */}
+
         <SimpleDropZone
           maximumFiles="1"
           minimumFiles="1"
+          handleSubmit={handleSubmit}
+          fileType="image/*,.pdf,.doc,.docx"
+          buttonText="Submit"
           imageTitle="Governor’s Consent"
         />
         <SimpleDropZone
           maximumFiles="1"
           minimumFiles="1"
+          handleSubmit={handleSubmit}
+          fileType="image/*,.pdf,.doc,.docx"
+          buttonText="Submit"
           imageTitle="Government Gazette"
         />
         <SimpleDropZone
           maximumFiles="1"
           minimumFiles="1"
+          handleSubmit={handleSubmit}
+          fileType="image/*,.pdf,.doc,.docx"
+          buttonText="Submit"
           imageTitle="Rent agreement"
         />
       </div>
-      <Link
-        to={`/dashboard/listings/editDetails${id}`}
+      <div
+        onClick={saveDocuments}
+        // to={`/dashboard/listings/editDetails/${id}`}
         className="flex justify-center w-1/6"
       >
-        <Button buttonText="Save" />
-      </Link>
+        <Button buttonText="Save" loading={loading} />
+      </div>
     </div>
   );
 };
