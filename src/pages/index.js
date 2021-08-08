@@ -48,3 +48,4 @@ export * from "./DocumentUpload";
 export * from "./PropertyDetails";
 export * from "./PaymentPage";
 export * from "./PaymentSuccessful";
+export * from "./Modal";

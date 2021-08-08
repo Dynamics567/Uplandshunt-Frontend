@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 
 import { HeaderTwo } from "../molecules";
 import prop3 from "../assets/prop3.png";
@@ -17,11 +18,14 @@ import detailsParking from "../assets/detailsParking.png";
 import { axiosInstance } from "../Auth/Axios";
 import DashboardLoader from "../templates/DashboardLoader";
 import { Footer } from "../organisms";
+import Modal from "./Modal";
+// import { LoginModal } from "./LoginModal";
 
 const PropertyDetails = ({ showFooter = true, showHeader = true }) => {
   let { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [propertyDetails, setPropertyDetails] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
   const getPropertyDetails = () => {
     axiosInstance
@@ -45,6 +49,8 @@ const PropertyDetails = ({ showFooter = true, showHeader = true }) => {
   useEffect(() => {
     getPropertyDetails();
   }, []);
+
+  const modal = useRef(null);
 
   if (loading) {
     return <DashboardLoader />;
@@ -83,6 +89,39 @@ const PropertyDetails = ({ showFooter = true, showHeader = true }) => {
       ) : (
         <div className="flex flex-col w-full justify-between">
           {showHeader && <HeaderTwo />}
+
+          <div className="m-auto w-6/12">
+            <Modal ref={modal}>
+              <div className="text-center">
+                <p className="font-bold text-lg my-4">
+                  Login or Register to place and save bid
+                </p>
+                <p className="font-normal text-sm text-ash">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Aenean tortor nisi, mattis quis purus at, mattis mattis
+                  ligula. Quisque vel ex convallis, eleifend erat imperdiet,
+                  lacinia dui. Mauris elementum efficitur nisl.Lorem ipsum dolor
+                  sit amet, consectetur adipiscing elit. Aenean tortor nisi,
+                  mattis quis purus at, mattis mattis ligula. Quisque vel ex
+                  convallis, eleifend erat imperdiet, lacinia dui. Mauris
+                  elementum efficitur nisl.
+                </p>
+                <div className="flex items-center justify-center my-4">
+                  <Link to="/register">
+                    <button className="font-bold text-base text-primary py-2 px-8 border border-primary rounded-md mr-6">
+                      Register
+                    </button>
+                  </Link>
+                  <Link to="/login">
+                    <button className="font-bold text-base text-white bg-primary py-2 px-8 rounded-md">
+                      Login
+                    </button>
+                  </Link>
+                </div>
+              </div>
+            </Modal>
+          </div>
+
           <div className="m-auto mt-10 w-11/12 flex justify-between">
             <div className="mr-10" style={{ flex: "1" }}>
               <p className="font-bold text-base">{name}</p>
@@ -213,6 +252,9 @@ const PropertyDetails = ({ showFooter = true, showHeader = true }) => {
       <div className="flex m-auto mt-10 w-11/12">
         <img src={interest} alt="interest" className="w-1/2" />
         {/* <img src={bid} alt="bid" className="w-1/2" /> */}
+        <button className="bg-primary" onClick={() => modal.current.open()}>
+          Show Modal
+        </button>
       </div>
       {showFooter && <Footer />}
     </div>
