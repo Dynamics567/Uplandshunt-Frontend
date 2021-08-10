@@ -6,6 +6,7 @@ import { axiosWithAuth } from "../Auth/Axios";
 import LoadSpinner from "../templates/LoadSpinner";
 import { DashboardSectionTitle } from "../atoms";
 import PropertyCard from "../templates/PropertyCard";
+import DashboardLoader from "../templates/DashboardLoader";
 
 const SavedProperty = () => {
   const [loading, setLoading] = useState(true);
@@ -15,10 +16,10 @@ const SavedProperty = () => {
   const getUserSavedProperties = () => {
     setLoading(false);
     axiosWithAuth()
-      .get("property/user/listing")
+      .get("property/save/all")
       .then(function (response) {
         const properties = response.data.data;
-        // console.log(properties);
+        setResponse(properties);
         setLoading(false);
       })
       .catch(function (error) {
@@ -35,6 +36,7 @@ const SavedProperty = () => {
     getUserSavedProperties();
   }, []);
 
+  // console.log(response);
   return (
     <>
       <DashboardSectionTitle text="My Saved Properties" showButton={false} />
@@ -47,9 +49,22 @@ const SavedProperty = () => {
           buttonText="Add New Listings"
         />
       ) : (
-        <div className="ml-4">
-          <p className="text-xl font-bold">Properties To Sell</p>
-          <div className="grid grid-cols-4 gap-2 mt-6"></div>
+        <div className="m-auto w-11/12 grid grid-cols-3 gap-6">
+          {response.map((property) => {
+            {
+              console.log(property.property);
+            }
+            return property.property.images.map((image) => {
+              return (
+                <PropertyCard
+                  location={property.property.city}
+                  price={property.property.price}
+                  place={property.property.name}
+                  photo={image.image_url}
+                />
+              );
+            });
+          })}
         </div>
       )}
     </>

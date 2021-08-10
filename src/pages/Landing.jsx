@@ -20,7 +20,7 @@ const Landing = () => {
         <SectionWrapper>
           <div className="mt-14">
             <PropertySlider title="Top Property" category="top" />
-            <PropertySlider title="Boosted Property" category="boosted" />
+            {/* <PropertySlider title="Boosted Property" category="boosted/all" /> */}
             <Explore title="Explore Nigeria" />
           </div>
         </SectionWrapper>

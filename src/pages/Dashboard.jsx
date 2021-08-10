@@ -24,6 +24,7 @@ import {
   EditBusinessProfile,
   ImageUpload,
   DocumentUpload,
+  RequestProperty,
   // BidsSent,
 } from "../pages";
 
@@ -97,6 +98,11 @@ const Dashboard = () => {
               path="/dashboard/request"
               exact
               component={PropertyRequest}
+            />
+            <Route
+              path="/dashboard/request/requestProperty"
+              exact
+              component={RequestProperty}
             />
             <Route
               path="/dashboard/request/bidsPlaced"

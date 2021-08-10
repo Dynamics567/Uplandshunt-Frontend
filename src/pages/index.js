@@ -49,3 +49,4 @@ export * from "./PropertyDetails";
 export * from "./PaymentPage";
 export * from "./PaymentSuccessful";
 export * from "./Modal";
+export * from "./RequestProperty";
