@@ -3,7 +3,6 @@ import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 
 import { HeaderTwo } from "../molecules";
-import prop3 from "../assets/prop3.png";
 import smallProp from "../assets/smallProp.png";
 import interest from "../assets/interest.png";
 import love from "../assets/love.png";
@@ -19,6 +18,7 @@ import DashboardLoader from "../templates/DashboardLoader";
 import { Footer } from "../organisms";
 import Modal from "./Modal";
 import { Input } from "../atoms";
+import { property } from "../data/Properties";
 // import { LoginModal } from "./LoginModal";
 
 const PropertyDetails = ({ showFooter = true, showHeader = true }) => {
@@ -33,6 +33,7 @@ const PropertyDetails = ({ showFooter = true, showHeader = true }) => {
       .then(function (response) {
         // handle success
         const details = response.data.data;
+        console.log(details);
         setPropertyDetails(details);
         setLoading(false);
       })
@@ -141,7 +142,7 @@ const PropertyDetails = ({ showFooter = true, showHeader = true }) => {
               </div>
               <div className="">
                 <img
-                  src={prop3}
+                  src={propertyDetails.images[0].image_url}
                   alt="propertyPicture"
                   className="object-cover w-full"
                 />
@@ -175,7 +176,10 @@ const PropertyDetails = ({ showFooter = true, showHeader = true }) => {
                 />
               </div>
               <div className="flex mt-2">
-                <div className="flex px-16 py-2 items-center justify-center rounded-md border border-primary mr-8">
+                <div
+                  onClick={() => modal.current.open()}
+                  className="flex px-16 py-2 items-center justify-center rounded-md border border-primary mr-8"
+                >
                   <img src={love} alt="love" className="w-4 mr-4" />
                   <p className="text-primary text-base font-bold">Save</p>
                 </div>
@@ -256,7 +260,7 @@ const PropertyDetails = ({ showFooter = true, showHeader = true }) => {
           </section>
         </div>
       )}
-      <div className="grid-rows-3 grid grid-cols-2 gap-6 m-auto mt-10 w-11/12">
+      <div className="grid grid-cols-2 gap-6 m-auto mt-10 w-11/12">
         <img src={interest} alt="interest" className="" />
         <div className="">
           <div className="p-4 flex justify-between bg-primary font-bold text-lg text-white rounded-tr-md rounded-tl-md">
