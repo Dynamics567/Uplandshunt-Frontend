@@ -6,7 +6,6 @@ import { HeaderTwo } from "../molecules";
 import prop3 from "../assets/prop3.png";
 import smallProp from "../assets/smallProp.png";
 import interest from "../assets/interest.png";
-// import bid from "../assets/bid.png";
 import love from "../assets/love.png";
 import bidIcon from "../assets/bidIcon.png";
 import location from "../assets/location.svg";
@@ -15,7 +14,7 @@ import detailsBedroom from "../assets/detailsBed.png";
 import detailsBathroom from "../assets/detailsBathroom.png";
 import detailsKitchen from "../assets/detailsKitchen.png";
 import detailsParking from "../assets/detailsParking.png";
-import { axiosInstance } from "../Auth/Axios";
+import { axiosInstance, axiosWithAuth } from "../Auth/Axios";
 import DashboardLoader from "../templates/DashboardLoader";
 import { Footer } from "../organisms";
 import Modal from "./Modal";
@@ -25,7 +24,7 @@ const PropertyDetails = ({ showFooter = true, showHeader = true }) => {
   let { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [propertyDetails, setPropertyDetails] = useState([]);
-  const [showModal, setShowModal] = useState(false);
+  const [bidsReceived, setBidsReceived] = useState([]);
 
   const getPropertyDetails = () => {
     axiosInstance
@@ -33,7 +32,6 @@ const PropertyDetails = ({ showFooter = true, showHeader = true }) => {
       .then(function (response) {
         // handle success
         const details = response.data.data;
-        console.log(details);
         setPropertyDetails(details);
         setLoading(false);
       })
@@ -46,8 +44,16 @@ const PropertyDetails = ({ showFooter = true, showHeader = true }) => {
       });
   };
 
+  const getBidsReceived = () => {
+    axiosInstance.get(`bid/${id}/bids`).then((response) => {
+      const results = response.data.data[0].bids;
+      console.log(results);
+    });
+  };
+
   useEffect(() => {
     getPropertyDetails();
+    getBidsReceived();
   }, []);
 
   const modal = useRef(null);
@@ -249,12 +255,26 @@ const PropertyDetails = ({ showFooter = true, showHeader = true }) => {
           </section>
         </div>
       )}
-      <div className="flex m-auto mt-10 w-11/12">
-        <img src={interest} alt="interest" className="w-1/2" />
-        {/* <img src={bid} alt="bid" className="w-1/2" /> */}
-        <button className="bg-primary" onClick={() => modal.current.open()}>
-          Show Modal
-        </button>
+      <div className="grid-rows-3 grid grid-cols-2 gap-6 m-auto mt-10 w-11/12">
+        <img src={interest} alt="interest" className="" />
+        <div className="rounded-md">
+          <div className="flex justify-between bg-primary font-bold text-lg text-white">
+            <p>Bids Received</p>
+            <div className="">
+              <p className="rounded-full text-primary bg-white p-2 ">
+                {bidsReceived.length}
+              </p>
+            </div>
+          </div>
+          <div className="flex justify-center items-center w-full">
+            <button
+              className="bg-primary text-white text-center text-base font-bold"
+              onClick={() => modal.current.open()}
+            >
+              Submit your bid
+            </button>
+          </div>
+        </div>
       </div>
       {showFooter && <Footer />}
     </div>

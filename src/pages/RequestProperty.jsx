@@ -5,6 +5,7 @@ import * as Yup from "yup";
 
 import { Input, Select, DashboardSectionTitle, Button } from "../atoms";
 import { listType, propertyType } from "../data/SelectOptions";
+import { axiosInstance } from "../Auth/Axios";
 
 const RequestProperty = () => {
   const [loading, setLoading] = useState(false);
@@ -18,6 +19,16 @@ const RequestProperty = () => {
   const formOptions = { resolver: yupResolver(validationSchema) };
   const { register, handleSubmit, formState } = useForm(formOptions);
   const { errors } = formState;
+
+  const getPropertiesAvailable = () => {
+    console.log("works");
+    // axiosInstance
+    //   .get(`property?type=${listTypeResult}&category=${propertyTypeResult}`)
+    //   .then((response) => {
+    //     console.log(response);
+    //   });
+  };
+
   return (
     <div className="m-auto w-11/12">
       <DashboardSectionTitle text="Request a Property" showButton={false} />
@@ -39,8 +50,14 @@ const RequestProperty = () => {
             selectedValue="New Development"
             onValueChange={(val) => console.log(val)}
           />
-          <div className="w-1/6 flex items-center">
-            <Button buttonText="Search Property" loading={loading} />
+          <div
+            className="w-1/6 flex items-center"
+            onClick={getPropertiesAvailable}
+          >
+            <Button
+              buttonText="Search Property"
+              // loading={loading}
+            />
           </div>
         </form>
         {showMessageBox ? (
