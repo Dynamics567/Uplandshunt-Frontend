@@ -1,21 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
+import { toast } from "react-toastify";
 
 import { Select, DashboardSectionTitle, Button } from "../atoms";
 import { listType, propertyType } from "../data/SelectOptions";
-import { axiosInstance } from "../Auth/Axios";
+import { axiosInstance, axiosWithAuth } from "../Auth/Axios";
 import PropertyCard from "../templates/PropertyCard";
-import DashboardLoader from "../templates/DashboardLoader";
 
 const RequestProperty = () => {
+  const messageRef = useRef(null);
+
   const [loading, setLoading] = useState(false);
-  const [showMessageBox] = useState(false);
+  const [showMessageBox, setShowMessageBox] = useState(false);
   const [listTypeResult, setListTypeResult] = useState("");
   const [propertyTypeResult, setPropertyTypeResult] = useState("");
   const [results, setResults] = useState([]);
   const [initialState, setInitialState] = useState(true);
+  const [propertyId, setPropertyId] = useState("");
 
   const validationSchema = Yup.object().shape({
     message: Yup.string().required("Message is required"),
@@ -30,31 +33,33 @@ const RequestProperty = () => {
       .get(`property?type=${listTypeResult}&category=${propertyTypeResult}`)
       .then((response) => {
         const searchResults = response.data.data;
-        console.log(searchResults);
+        // console.log(searchResults);
         setResults(searchResults);
         setInitialState(false);
         setLoading(false);
       });
   };
 
-  // let resultsToDisplay;
+  const getPropertyId = (id) => {
+    setPropertyId(id);
+    setShowMessageBox(true);
+    if (messageRef.current) {
+      messageRef.current.scrollIntoView();
+    }
+  };
 
-  // if (results.length === 0) {
-  //   <p>No properties match your search</p>;
-  // } else {
-  //   <div className="grid grid-cols-4 gap-2 mt-6">
-  //     {results.map((property) => {
-  //       return (
-  //         <PropertyCard
-  //           location={property.city}
-  //           price={property.price}
-  //           place={property.name}
-  //           photo={property.images[0].image_url}
-  //         />
-  //       );
-  //     })}
-  //   </div>;
-  // }
+  const submitPropertyRequest = (data) => {
+    let id = { property_id: propertyId };
+    const userData = { ...id, ...data };
+    console.log(userData);
+    axiosWithAuth()
+      .post("request", userData)
+      .then((response) => {
+        if (response) {
+          toast.success(response.data.message);
+        }
+      });
+  };
 
   return (
     <div className="m-auto w-11/12">
@@ -91,14 +96,15 @@ const RequestProperty = () => {
             <p>No properties match your search</p>
           ) : (
             <div className="ml-4">
-              <div className="grid grid-cols-4 gap-2 mt-6">
-                {results.map((property) => {
+              <div className="grid grid-cols-4 gap-2 mt-6 cursor-pointer">
+                {results.map(({ city, id, name, images, price }) => {
                   return (
                     <PropertyCard
-                      location={property.city}
-                      price={property.price}
-                      place={property.name}
-                      photo={property.images[0].image_url}
+                      location={city}
+                      price={price}
+                      place={name}
+                      photo={images[0].image_url}
+                      getPropertyId={() => getPropertyId(id)}
                     />
                   );
                 })}
@@ -109,7 +115,7 @@ const RequestProperty = () => {
         <div className=""></div>
       </>
       {showMessageBox ? (
-        <form>
+        <form ref={messageRef} onSubmit={handleSubmit(submitPropertyRequest)}>
           <textarea
             name=""
             cols="20"
@@ -117,6 +123,8 @@ const RequestProperty = () => {
             placeholder="Message"
             className="w-full font-normal text-base border border-gray-400 focus:outline-none px-2 rounded-md py-1 mt-1"
             style={{ backgroundColor: "#EFF0F6" }}
+            {...register("message")}
+            error={errors.message?.message}
           ></textarea>
 
           <div className="flex w-full justify-center items-center text-center mb-10">

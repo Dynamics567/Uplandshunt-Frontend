@@ -1,8 +1,11 @@
 import locationIcon from "../assets/location.svg";
 
-const PropertyCard = ({ photo, location, price, place }) => {
+const PropertyCard = ({ photo, location, price, place, getPropertyId }) => {
   return (
-    <div className="mr-8 mb-8 border border-white shadow-md rounded-md">
+    <div
+      className="mr-8 mb-8 border border-white shadow-md rounded-md"
+      onClick={getPropertyId}
+    >
       <section className="w-full h-auto object-cover">
         <img
           src={photo}
