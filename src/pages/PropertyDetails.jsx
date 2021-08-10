@@ -18,6 +18,7 @@ import { axiosInstance, axiosWithAuth } from "../Auth/Axios";
 import DashboardLoader from "../templates/DashboardLoader";
 import { Footer } from "../organisms";
 import Modal from "./Modal";
+import { Input } from "../atoms";
 // import { LoginModal } from "./LoginModal";
 
 const PropertyDetails = ({ showFooter = true, showHeader = true }) => {
@@ -47,7 +48,7 @@ const PropertyDetails = ({ showFooter = true, showHeader = true }) => {
   const getBidsReceived = () => {
     axiosInstance.get(`bid/${id}/bids`).then((response) => {
       const results = response.data.data[0].bids;
-      console.log(results);
+      setBidsReceived(results);
     });
   };
 
@@ -190,7 +191,7 @@ const PropertyDetails = ({ showFooter = true, showHeader = true }) => {
                   src={`https://maps.google.com/maps?q=${lat}, ${lng}&z=15&output=embed`}
                   width="100%"
                   height="70%"
-                  frameborder="0"
+                  frameBorder="0"
                   style={{ width: "100%", objectFit: "cover" }}
                 ></iframe>
                 <div className="flex items-center w-full mt-4">
@@ -257,22 +258,40 @@ const PropertyDetails = ({ showFooter = true, showHeader = true }) => {
       )}
       <div className="grid-rows-3 grid grid-cols-2 gap-6 m-auto mt-10 w-11/12">
         <img src={interest} alt="interest" className="" />
-        <div className="rounded-md">
-          <div className="flex justify-between bg-primary font-bold text-lg text-white">
+        <div className="">
+          <div className="p-4 flex justify-between bg-primary font-bold text-lg text-white rounded-tr-md rounded-tl-md">
             <p>Bids Received</p>
-            <div className="">
-              <p className="rounded-full text-primary bg-white p-2 ">
-                {bidsReceived.length}
-              </p>
-            </div>
+            <p className="rounded-full h-8 w-8 flex items-center justify-center text-primary bg-white">
+              {bidsReceived.length}
+            </p>
           </div>
-          <div className="flex justify-center items-center w-full">
-            <button
-              className="bg-primary text-white text-center text-base font-bold"
-              onClick={() => modal.current.open()}
-            >
-              Submit your bid
-            </button>
+          <div className="border border-b-name border-lightAsh">
+            {bidsReceived.map(({ id, price, updatedAt }) => {
+              return (
+                <div
+                  className="w-full flex justify-between border-b border-lightAsh"
+                  key={id}
+                >
+                  <p className="font-bold text-lg p-4">₦{price}</p>
+                  <p className="font-normal text-sm p-4">
+                    {new Date(updatedAt).toLocaleDateString()}
+                  </p>
+                </div>
+              );
+            })}
+            <p className="font-bold text-lg my-4 p-4">Place your bid</p>
+            <p className="font-bold text-base px-4 mb-4">Price</p>
+            <section className="m-auto w-11/12">
+              <Input />
+            </section>
+            <div className="bg-primary p-4 flex justify-center items-center m-auto w-11/12 rounded-md mb-4">
+              <button
+                className=" text-white text-center text-base font-bold"
+                onClick={() => modal.current.open()}
+              >
+                Submit your bid
+              </button>
+            </div>
           </div>
         </div>
       </div>

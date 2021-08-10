@@ -5,7 +5,6 @@ import EmptyState from "../templates/EmptyState";
 import { axiosWithAuth } from "../Auth/Axios";
 import LoadSpinner from "../templates/LoadSpinner";
 import { DashboardSectionTitle } from "../atoms";
-import PropertyCard from "../templates/PropertyCard";
 
 const PropertyRequest = () => {
   const [loading, setLoading] = useState(true);
@@ -18,7 +17,7 @@ const PropertyRequest = () => {
       .get("request")
       .then(function (response) {
         const properties = response.data.data;
-        console.log(properties);
+        // console.log(properties);
         setResponse(properties);
         setLoading(false);
       })
@@ -39,7 +38,7 @@ const PropertyRequest = () => {
   return (
     <>
       <DashboardSectionTitle
-        text="My Property Request"
+        text="My Property Requests"
         buttonText="Request a Property"
         buttonUrl="/dashboard/request/requestProperty"
       />
@@ -59,8 +58,8 @@ const PropertyRequest = () => {
           >
             <p>Property Name</p>
             <p>Message</p>
-            <p>Price</p>
             <p>Date</p>
+            <p>Price</p>
             <p>Status</p>
           </div>
           {response.map((request) => {
