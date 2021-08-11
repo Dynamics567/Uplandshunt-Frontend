@@ -1,6 +1,6 @@
 import eye from "../assets/userDashboard/eye.png";
 import file from "../assets/userDashboard/file.png";
-// { id, name, image_url, status }
+
 const Document = ({ document }) => {
   return (
     <div

@@ -1,18 +1,22 @@
 import { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 
+import { Modal } from "../organisms";
 import { axiosWithAuth } from "../Auth/Axios";
 import { ListingsLayout } from "../Layout";
 import { Document } from "../organisms";
 import DashboardLoader from "../templates/DashboardLoader";
-import { Modal } from "./Modal";
 
 const BidsRecieved = () => {
   const { id } = useParams();
-  const modal = useRef(null);
+  const [showModal, setShowModal] = useState(false);
 
   const [data, setData] = useState([]);
   const [loading, setloading] = useState(true);
+
+  const handleClose = () => {
+    setShowModal(false);
+  };
 
   const getBidsReceived = () => {
     axiosWithAuth()
@@ -29,10 +33,9 @@ const BidsRecieved = () => {
     getBidsReceived();
   }, []);
 
-  // const showDocument = () => {
-  //   // modal.current.open();
-  //   console.log("works");
-  // };
+  const showDocument = () => {
+    setShowModal(true);
+  };
 
   return (
     <>
@@ -41,9 +44,8 @@ const BidsRecieved = () => {
       ) : (
         <div>
           <ListingsLayout>
-            <Modal ref={modal}>
-              {/* <Document /> */}
-              <p>test</p>
+            <Modal showModal={showModal} handleClose={handleClose}>
+              <Document />
             </Modal>
             <div className="mt-8 border border-b-0 border-ashThree rounded-md">
               <div
@@ -78,11 +80,11 @@ const BidsRecieved = () => {
                     </div>
                     <p>{new Date(bid.updatedAt).toLocaleDateString()}</p>
                     <p className="font-semibold text-base">₦{bid.price}</p>
-                    <div
-                      className="flex items-center justify-start"
-                      // onClick={() => modal.current.open()}
-                    >
-                      <button className="uppercase text-green text-xs font-bold border border-green p-2 rounded-2xl">
+                    <div className="flex items-center justify-start">
+                      <button
+                        className="uppercase text-green text-xs font-bold border border-green p-2 rounded-2xl"
+                        onClick={showDocument}
+                      >
                         Accept Trade
                       </button>
                     </div>

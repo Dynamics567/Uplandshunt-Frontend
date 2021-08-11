@@ -8,3 +8,5 @@ export * from "./Footer";
 export * from "./LegalHeader";
 export * from "./Toast";
 export * from "./Document";
+export * from "./Modal";
+export * from "./Boost";
