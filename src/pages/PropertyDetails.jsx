@@ -20,7 +20,11 @@ import Modal from "./Modal";
 // import { property } from "../data/Properties";
 import Bids from "../templates/Bids";
 
-const PropertyDetails = ({ showFooter = true, showHeader = true }) => {
+const PropertyDetails = ({
+  showFooter = true,
+  showHeader = true,
+  showBids = true,
+}) => {
   let { id } = useParams();
 
   const [loading, setLoading] = useState(true);
@@ -268,7 +272,7 @@ const PropertyDetails = ({ showFooter = true, showHeader = true }) => {
           </section>
         </div>
       )}
-      <Bids />
+      {showBids && <Bids />}
       {showFooter && <Footer />}
     </div>
   );

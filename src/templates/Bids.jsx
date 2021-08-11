@@ -95,7 +95,7 @@ const Bids = () => {
           </div>
         </div>
       </Modal>
-      <img src={interest} alt="interest" className="" />
+      <img src={interest} alt="interest" />
       <div className="">
         <div className="p-4 flex justify-between bg-primary font-bold text-lg text-white rounded-tr-md rounded-tl-md">
           <p>Bids Received</p>
