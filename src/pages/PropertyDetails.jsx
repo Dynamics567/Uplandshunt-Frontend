@@ -1,14 +1,10 @@
 import { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as Yup from "yup";
 
 import { HeaderTwo } from "../molecules";
 import smallProp from "../assets/smallProp.png";
-import interest from "../assets/interest.png";
 import love from "../assets/love.png";
 import bidIcon from "../assets/bidIcon.png";
 import location from "../assets/location.svg";
@@ -21,25 +17,15 @@ import { axiosInstance, axiosWithAuth } from "../Auth/Axios";
 import DashboardLoader from "../templates/DashboardLoader";
 import { Footer } from "../organisms";
 import Modal from "./Modal";
-import { Input } from "../atoms";
-import { property } from "../data/Properties";
-// import { LoginModal } from "./LoginModal";
+// import { property } from "../data/Properties";
+import Bids from "../templates/Bids";
 
 const PropertyDetails = ({ showFooter = true, showHeader = true }) => {
   let { id } = useParams();
-  const path = useLocation();
 
   const [loading, setLoading] = useState(true);
   const [propertyDetails, setPropertyDetails] = useState([]);
-  const [bidsReceived, setBidsReceived] = useState([]);
-  const [error, setError] = useState("");
-
-  const validationSchema = Yup.object().shape({
-    amount: Yup.string().required("Price is required"),
-  });
-  const formOptions = { resolver: yupResolver(validationSchema) };
-  const { register, handleSubmit, formState } = useForm(formOptions);
-  const { errors } = formState;
+  // const [error, setError] = useState("");
 
   const getPropertyDetails = () => {
     axiosInstance
@@ -59,16 +45,8 @@ const PropertyDetails = ({ showFooter = true, showHeader = true }) => {
       });
   };
 
-  const getBidsReceived = () => {
-    axiosInstance.get(`bid/${id}/bids`).then((response) => {
-      const results = response.data.data[0].bids;
-      setBidsReceived(results);
-    });
-  };
-
   useEffect(() => {
     getPropertyDetails();
-    getBidsReceived();
   }, []);
 
   const modal = useRef(null);
@@ -118,28 +96,6 @@ const PropertyDetails = ({ showFooter = true, showHeader = true }) => {
         const errorMessage = error.response.data.data;
         toast.error(errorMessage);
       });
-  };
-
-  const placeBid = (data) => {
-    if (getUserAuthStatus) {
-      let propertyId = { property_id: id };
-      const userData = { ...propertyId, ...data };
-      // console.log(userData);
-      axiosWithAuth()
-        .post(`bid`, userData)
-        .then((response) => {
-          // const successMessage = response.data.data;
-          // console.log(successMessage);
-          // toast.success(successMessage);
-          console.log(response);
-        })
-        .catch((error) => {
-          // const errorMessage = error.response.data.data;
-          // toast.error(errorMessage);
-        });
-    } else {
-      modal.current.open();
-    }
   };
 
   return (
@@ -312,47 +268,7 @@ const PropertyDetails = ({ showFooter = true, showHeader = true }) => {
           </section>
         </div>
       )}
-      <div className="grid grid-cols-2 gap-6 m-auto mt-10 w-11/12">
-        <img src={interest} alt="interest" className="" />
-        <div className="">
-          <div className="p-4 flex justify-between bg-primary font-bold text-lg text-white rounded-tr-md rounded-tl-md">
-            <p>Bids Received</p>
-            <p className="rounded-full h-8 w-8 flex items-center justify-center text-primary bg-white">
-              {bidsReceived.length}
-            </p>
-          </div>
-          <div className="border border-b-name border-lightAsh">
-            {bidsReceived.map(({ id, price, updatedAt }) => {
-              return (
-                <div
-                  className="w-full flex justify-between border-b border-lightAsh"
-                  key={id}
-                >
-                  <p className="font-bold text-lg p-4">₦{price}</p>
-                  <p className="font-normal text-sm p-4">
-                    {new Date(updatedAt).toLocaleDateString()}
-                  </p>
-                </div>
-              );
-            })}
-            <p className="font-bold text-lg my-4 p-4">Place your bid</p>
-            <p className="font-bold text-base px-4 mb-4">Price</p>
-            <form onSubmit={handleSubmit(placeBid)}>
-              <section className="m-auto w-11/12">
-                <Input {...register("amount")} error={errors.amount?.message} />
-              </section>
-              <div className="bg-primary p-4 flex justify-center items-center m-auto w-11/12 rounded-md mb-4">
-                <button
-                  className=" text-white text-center text-base font-bold"
-                  onClick={placeBid}
-                >
-                  Submit your bid
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
+      <Bids />
       {showFooter && <Footer />}
     </div>
   );

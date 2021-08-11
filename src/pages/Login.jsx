@@ -31,6 +31,7 @@ const Login = () => {
 
   const dispatch = useAuthDispatch();
   const { loading, errorMessage } = useAuthState();
+  const userPath = sessionStorage.getItem("propertyPath");
 
   const handleLogin = async (data) => {
     let email = data.email;
@@ -39,7 +40,7 @@ const Login = () => {
       let response = await loginUser(dispatch, { email, password });
       if (!response.data.user) return;
       toast.success(response.message);
-      window.location.replace("/dashboard");
+      window.location.replace(userPath || "/dashboard");
     } catch (error) {
       toast.error(errorMessage && errorMessage);
       console.log(error);
