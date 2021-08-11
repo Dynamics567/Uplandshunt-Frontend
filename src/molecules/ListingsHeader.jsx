@@ -1,10 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useParams } from "react-router";
 import { NavLink } from "react-router-dom";
 
 import { Boost, Modal } from "../organisms";
 import { listingHeader } from "../data/subscription";
-import { axiosWithAuth } from "../Auth/Axios";
 
 const ListingsHeader = () => {
   const { id } = useParams();
@@ -18,22 +17,14 @@ const ListingsHeader = () => {
   const handleClose = () => {
     setShow(false);
   };
-
-  const getBoostingPlans = () => {
-    axiosWithAuth()
-      .get("boost/plans")
-      .then((response) => {
-        console.log(response);
-      });
-  };
-
-  useEffect(() => {
-    getBoostingPlans();
-  }, []);
   return (
     <div className="flex items-center justify-between">
-      <Modal showModal={show} handleClose={handleClose}>
-        <Boost />
+      <Modal
+        showModal={show}
+        handleClose={handleClose}
+        modalTitle="Boost My Property"
+      >
+        <Boost id={id} />
       </Modal>
       {listingHeader.map(({ item, url }) => {
         return (
