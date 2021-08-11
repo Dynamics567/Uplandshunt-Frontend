@@ -1,18 +1,25 @@
-import { useAuthDispatch, useAuthState, logout } from "../Context";
+import { useAuthState } from "../Context";
 
 import listingDetails from "../assets/userDashboard/listingDetails.svg";
 import transactionHistory from "../assets/userDashboard/transactionHistory.svg";
-import priceHistory from "../assets/userDashboard/priceHistory.svg";
 import savedProperties from "../assets/userDashboard/savedProperties.svg";
+import { axiosWithAuth } from "../Auth/Axios";
+import { useEffect } from "react";
 
 const Notification = (props) => {
-  const dispatch = useAuthDispatch();
   const userDetails = useAuthState();
 
-  const handleLogout = () => {
-    logout(dispatch);
-    window.location.replace("/login");
+  const getGraphDetails = () => {
+    axiosWithAuth()
+      .get("graph")
+      .then((response) => {
+        console.log(response);
+      });
   };
+
+  useEffect(() => {
+    getGraphDetails();
+  }, []);
   return (
     <div className="m-auto w-11/12">
       <p className="font-bold text-base my-4 ">
@@ -25,13 +32,8 @@ const Notification = (props) => {
           alt="transactionHistory"
           className="mr-10"
         />
-        <img src={priceHistory} alt="priceHistory" />
         <img src={savedProperties} alt="savedProperties" />
       </div>
-
-      <button onClick={handleLogout} className="bg-red-500 p-4 rounded-md">
-        logout
-      </button>
     </div>
   );
 };

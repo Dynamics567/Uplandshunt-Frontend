@@ -5,6 +5,10 @@ import { listingHeader } from "../data/subscription";
 const ListingsHeader = () => {
   const { id } = useParams();
 
+  const boostProperty = () => {
+    console.log("works");
+  };
+
   return (
     <div className="flex items-center justify-between">
       {listingHeader.map(({ item, url }) => {
@@ -19,7 +23,10 @@ const ListingsHeader = () => {
           </NavLink>
         );
       })}
-      <button className="bg-metal p-4 font-semibold text-sm rounded-md text-white">
+      <button
+        className="bg-metal p-4 font-semibold text-sm rounded-md text-white"
+        onClick={boostProperty}
+      >
         Boost Property
       </button>
     </div>
