@@ -51,7 +51,6 @@ const RequestProperty = () => {
   const submitPropertyRequest = (data) => {
     let id = { property_id: propertyId };
     const userData = { ...id, ...data };
-    console.log(userData);
     axiosWithAuth()
       .post("request", userData)
       .then((response) => {

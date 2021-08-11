@@ -1,6 +1,10 @@
 import { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as Yup from "yup";
 
 import { HeaderTwo } from "../molecules";
 import smallProp from "../assets/smallProp.png";
@@ -23,9 +27,19 @@ import { property } from "../data/Properties";
 
 const PropertyDetails = ({ showFooter = true, showHeader = true }) => {
   let { id } = useParams();
+  const path = useLocation();
+
   const [loading, setLoading] = useState(true);
   const [propertyDetails, setPropertyDetails] = useState([]);
   const [bidsReceived, setBidsReceived] = useState([]);
+  const [error, setError] = useState("");
+
+  const validationSchema = Yup.object().shape({
+    amount: Yup.string().required("Price is required"),
+  });
+  const formOptions = { resolver: yupResolver(validationSchema) };
+  const { register, handleSubmit, formState } = useForm(formOptions);
+  const { errors } = formState;
 
   const getPropertyDetails = () => {
     axiosInstance
@@ -33,7 +47,6 @@ const PropertyDetails = ({ showFooter = true, showHeader = true }) => {
       .then(function (response) {
         // handle success
         const details = response.data.data;
-        console.log(details);
         setPropertyDetails(details);
         setLoading(false);
       })
@@ -89,6 +102,45 @@ const PropertyDetails = ({ showFooter = true, showHeader = true }) => {
     bed: { bedroom },
     // bed: { bedroom },
   } = propertyDetails;
+
+  const getUserDetails = JSON.parse(localStorage.getItem("auth"));
+  const getUserAuthStatus = getUserDetails.isAuthenticated;
+
+  const saveProperty = () => {
+    axiosWithAuth()
+      .post(`property/save/${id}`)
+      .then((response) => {
+        const successMessage = response.data.data;
+        console.log(successMessage);
+        toast.success(successMessage);
+      })
+      .catch((error) => {
+        const errorMessage = error.response.data.data;
+        toast.error(errorMessage);
+      });
+  };
+
+  const placeBid = (data) => {
+    if (getUserAuthStatus) {
+      let propertyId = { property_id: id };
+      const userData = { ...propertyId, ...data };
+      // console.log(userData);
+      axiosWithAuth()
+        .post(`bid`, userData)
+        .then((response) => {
+          // const successMessage = response.data.data;
+          // console.log(successMessage);
+          // toast.success(successMessage);
+          console.log(response);
+        })
+        .catch((error) => {
+          // const errorMessage = error.response.data.data;
+          // toast.error(errorMessage);
+        });
+    } else {
+      modal.current.open();
+    }
+  };
 
   return (
     <div>
@@ -177,8 +229,8 @@ const PropertyDetails = ({ showFooter = true, showHeader = true }) => {
               </div>
               <div className="flex mt-2">
                 <div
-                  onClick={() => modal.current.open()}
-                  className="flex px-16 py-2 items-center justify-center rounded-md border border-primary mr-8"
+                  onClick={saveProperty}
+                  className="flex px-16 py-2 items-center justify-center rounded-md border border-primary mr-8 cursor-pointer"
                 >
                   <img src={love} alt="love" className="w-4 mr-4" />
                   <p className="text-primary text-base font-bold">Save</p>
@@ -285,17 +337,19 @@ const PropertyDetails = ({ showFooter = true, showHeader = true }) => {
             })}
             <p className="font-bold text-lg my-4 p-4">Place your bid</p>
             <p className="font-bold text-base px-4 mb-4">Price</p>
-            <section className="m-auto w-11/12">
-              <Input />
-            </section>
-            <div className="bg-primary p-4 flex justify-center items-center m-auto w-11/12 rounded-md mb-4">
-              <button
-                className=" text-white text-center text-base font-bold"
-                onClick={() => modal.current.open()}
-              >
-                Submit your bid
-              </button>
-            </div>
+            <form onSubmit={handleSubmit(placeBid)}>
+              <section className="m-auto w-11/12">
+                <Input {...register("amount")} error={errors.amount?.message} />
+              </section>
+              <div className="bg-primary p-4 flex justify-center items-center m-auto w-11/12 rounded-md mb-4">
+                <button
+                  className=" text-white text-center text-base font-bold"
+                  onClick={placeBid}
+                >
+                  Submit your bid
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
