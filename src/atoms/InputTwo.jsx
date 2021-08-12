@@ -1,4 +1,4 @@
-const Input = ({
+const InputTwo = ({
   placeholder,
   className,
   type,
@@ -18,7 +18,7 @@ const Input = ({
         type={type}
         name={name}
         id={id}
-        ref={register}
+        {...register}
         placeholder={placeholder}
         {...inputProps}
         className="w-full border border-gray-400 focus:outline-none px-2 rounded-md py-1 mt-1"
@@ -30,4 +30,4 @@ const Input = ({
   );
 };
 
-export { Input };
+export { InputTwo };

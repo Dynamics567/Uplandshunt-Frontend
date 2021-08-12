@@ -29,22 +29,22 @@ const EditNewListing = () => {
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Property Name is required"),
-    // type: Yup.number().required("Property Type is required"),
-    // category: Yup.number().required("Category is required"),
-    // city: Yup.string().required("City is required"),
-    // price: Yup.string().required("Price is required"),
-    // area: Yup.number().required("Area of the Property is required"),
-    // postal_code: Yup.string().required("Postal code is required"),
-    // address_line_one: Yup.string().required("Address Lane 1 is required"),
-    // address_line_two: Yup.string().required("Address Lane 2 is required"),
-    // country: Yup.string().required("Country is required"),
-    // availability: Yup.number().required("Availability is required"),
-    // kitchen: Yup.string().required("Number of Kitchen is required"),
-    // bathroom: Yup.string().required("Number of Bathroom is required"),
-    // bedroom: Yup.string().required("Number of Bedrooms is required"),
-    // description: Yup.string().required("Property description is required"),
-    // furnish_type: Yup.number().required("Furnishing Type is required"),
-    // deposit_structure: Yup.number().required("Deposit Structure is required"),
+    type: Yup.number().required("Property Type is required"),
+    category: Yup.number().required("Category is required"),
+    city: Yup.string().required("City is required"),
+    price: Yup.string().required("Price is required"),
+    area: Yup.number().required("Area of the Property is required"),
+    postal_code: Yup.string().required("Postal code is required"),
+    address_line_one: Yup.string().required("Address Lane 1 is required"),
+    address_line_two: Yup.string().required("Address Lane 2 is required"),
+    country: Yup.string().required("Country is required"),
+    availability: Yup.number().required("Availability is required"),
+    kitchen: Yup.string().required("Number of Kitchen is required"),
+    bathroom: Yup.string().required("Number of Bathroom is required"),
+    bedroom: Yup.string().required("Number of Bedrooms is required"),
+    description: Yup.string().required("Property description is required"),
+    furnish_type: Yup.number().required("Furnishing Type is required"),
+    deposit_structure: Yup.number().required("Deposit Structure is required"),
   });
   const formOptions = { resolver: yupResolver(validationSchema) };
 
@@ -52,7 +52,6 @@ const EditNewListing = () => {
   const { register, handleSubmit, formState, reset } = useForm(formOptions);
   const { errors } = formState;
 
-  console.log();
   const addNewListing = (data) => {
     let amenities = { amenity: [selected[1].value] || [] };
     const propertyData = { ...amenities, ...data };
@@ -89,10 +88,10 @@ const EditNewListing = () => {
           type="text"
           label="Property Name"
           name="name"
-          register={register("name")}
+          {...register("name")}
           error={errors.name?.message}
         />
-        {/* <Select
+        <Select
           values={propertyType}
           selectedValue="Sell"
           labelName="Property Type"
@@ -227,7 +226,7 @@ const EditNewListing = () => {
           name="deposit_structure"
           {...register("deposit_structure")}
           error={errors.deposit_structure?.message}
-        /> */}
+        />
       </section>
 
       {/* <div className="mb-12 mt-10">
