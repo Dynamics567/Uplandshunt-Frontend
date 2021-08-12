@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 
+import placeholder from "../assets/placeholder.png";
 import building from "../assets/userDashboard/building.svg";
 import EmptyState from "../templates/EmptyState";
 import { axiosWithAuth } from "../Auth/Axios";
@@ -63,32 +64,30 @@ const Listings = () => {
         <div className="ml-4">
           <p className="text-xl font-bold">Properties To Sell</p>
           <div className="grid grid-cols-4 gap-2 mt-6">
-            {propertiesToSell.map((property) => {
-              return property.images.map((image) => {
-                return (
-                  <PropertyCard
-                    location={property.city}
-                    price={property.price}
-                    place={property.name}
-                    photo={image.image_url}
-                  />
-                );
-              });
+            {propertiesToSell.map(({ id, city, price, name, images }) => {
+              return (
+                <PropertyCard
+                  location={city}
+                  price={price}
+                  place={name}
+                  photo={placeholder || images[0].image_url}
+                  id={id}
+                />
+              );
             })}
           </div>
-          <p className="text-xl font-bold">Properties To Sell</p>
+          <p className="text-xl font-bold">Properties To Rent</p>
           <div className="grid grid-cols-4 gap-2 mt-6">
-            {propertiesToRent.map((property) => {
-              return property.images.map((image) => {
-                return (
-                  <PropertyCard
-                    location={property.city}
-                    price={property.price}
-                    place={property.name}
-                    photo={image.image_url}
-                  />
-                );
-              });
+            {propertiesToRent.map(({ id, city, price, name, images }) => {
+              return (
+                <PropertyCard
+                  location={city}
+                  price={price}
+                  place={name}
+                  photo={placeholder || images[0].image_url}
+                  id={id}
+                />
+              );
             })}
           </div>
         </div>

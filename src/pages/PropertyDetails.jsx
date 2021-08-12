@@ -16,7 +16,6 @@ import detailsParking from "../assets/detailsParking.png";
 import { axiosInstance, axiosWithAuth } from "../Auth/Axios";
 import DashboardLoader from "../templates/DashboardLoader";
 import { Footer } from "../organisms";
-import Modal from "./Modal";
 // import { property } from "../data/Properties";
 import Bids from "../templates/Bids";
 
@@ -111,7 +110,7 @@ const PropertyDetails = ({
           {showHeader && <HeaderTwo />}
 
           <div className="m-auto w-6/12">
-            <Modal ref={modal}>
+            {/* <Modal ref={modal}>
               <div className="text-center">
                 <p className="font-bold text-lg my-4">
                   Login or Register to place and save bid
@@ -139,7 +138,7 @@ const PropertyDetails = ({
                   </Link>
                 </div>
               </div>
-            </Modal>
+            </Modal> */}
           </div>
 
           <div className="m-auto mt-10 w-11/12 flex justify-between">

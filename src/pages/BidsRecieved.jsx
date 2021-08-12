@@ -6,11 +6,11 @@ import { axiosWithAuth } from "../Auth/Axios";
 import { ListingsLayout } from "../Layout";
 import { Document } from "../organisms";
 import DashboardLoader from "../templates/DashboardLoader";
+import { Documents } from "./Documents";
 
 const BidsRecieved = () => {
   const { id } = useParams();
   const [showModal, setShowModal] = useState(false);
-
   const [data, setData] = useState([]);
   const [loading, setloading] = useState(true);
 
@@ -23,7 +23,6 @@ const BidsRecieved = () => {
       .get(`bid/${id}/bids`)
       .then((response) => {
         const results = response.data.data[0].bids;
-        console.log(results);
         setData(results);
         setloading(false);
       });
@@ -45,7 +44,7 @@ const BidsRecieved = () => {
         <div>
           <ListingsLayout>
             <Modal showModal={showModal} handleClose={handleClose}>
-              <Document />
+              <Documents showHeader={false} />
             </Modal>
             <div className="mt-8 border border-b-0 border-ashThree rounded-md">
               <div

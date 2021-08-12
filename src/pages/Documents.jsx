@@ -6,7 +6,7 @@ import DashboardLoader from "../templates/DashboardLoader";
 import { axiosInstance } from "../Auth/Axios";
 import { ListingsLayout } from "../Layout";
 
-const Documents = () => {
+const Documents = ({ showHeader = true }) => {
   const { id } = useParams();
 
   const [data, setData] = useState([]);
@@ -39,9 +39,10 @@ const Documents = () => {
       {loading ? (
         <DashboardLoader />
       ) : (
-        <ListingsLayout>
-          <div className="mt-8 border border-b-0 border-ashThree rounded-md">
-            <div className="mt-2 p-4 grid grid-cols-3 gap-60 w-full mb-4 font-bold text-base border-b border-ashThree">
+        <>
+          {showHeader && <ListingsLayout />}
+          <div className="mt-8  m-auto w-11/12 border border-b-0 border-ashThree rounded-md">
+            <div className="mt-2 p-4 grid grid-cols-3 gap-36 w-full mb-4 font-bold text-base border-b border-ashThree">
               <p>Document Name</p>
               <p>View Document</p>
               <p>Status</p>
@@ -50,7 +51,7 @@ const Documents = () => {
               return <Document document={document} />;
             })}
           </div>
-        </ListingsLayout>
+        </>
       )}
     </>
   );

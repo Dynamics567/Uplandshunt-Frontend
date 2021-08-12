@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { useParams } from "react-router";
 
-import Modal from "../pages/Modal";
+import { Modal } from "../organisms";
 import interest from "../assets/interest.png";
 import { axiosInstance, axiosWithAuth } from "../Auth/Axios";
 import { Input } from "../atoms";
@@ -14,12 +14,12 @@ import { Input } from "../atoms";
 const Bids = () => {
   let { id } = useParams();
   const path = useLocation();
-  const modal = useRef(null);
 
   const getUserDetails = JSON.parse(localStorage.getItem("auth"));
   const getUserAuthStatus = getUserDetails.isAuthenticated;
 
   const [bidsReceived, setBidsReceived] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
   const validationSchema = Yup.object().shape({
     amount: Yup.string().required("Price is required"),
@@ -33,6 +33,10 @@ const Bids = () => {
       const results = response.data.data[0].bids;
       setBidsReceived(results);
     });
+  };
+
+  const handleClose = () => {
+    setShowModal(false);
   };
 
   const placeBid = (data) => {
@@ -57,7 +61,8 @@ const Bids = () => {
       const currentPath = path.pathname;
       //Save data to sessionStorage
       sessionStorage.setItem("propertyPath", currentPath);
-      modal.current.open();
+      window.scrollTo(0, 0);
+      setShowModal(true);
     }
   };
 
@@ -67,7 +72,7 @@ const Bids = () => {
 
   return (
     <div className="grid grid-cols-2 gap-6 m-auto mt-10 w-11/12">
-      <Modal ref={modal}>
+      <Modal showModal={showModal} handleClose={handleClose} showButton={false}>
         <div className="text-center">
           <p className="font-bold text-lg my-4">
             Login or Register to place and save bid

@@ -5,7 +5,7 @@ const Document = ({ document }) => {
   return (
     <div
       key={document.id}
-      className="p-4 grid grid-cols-3 gap-28 mb-4 font-normal text-base border-b border-ashThree"
+      className="p-4 grid grid-cols-3 gap-6 mb-4 font-normal text-base border-b border-ashThree"
     >
       <div className="flex">
         <img src={file} alt="file" className="w-4 mr-2" />

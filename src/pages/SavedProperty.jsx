@@ -6,6 +6,7 @@ import { axiosWithAuth } from "../Auth/Axios";
 import LoadSpinner from "../templates/LoadSpinner";
 import { DashboardSectionTitle } from "../atoms";
 import PropertyCard from "../templates/PropertyCard";
+import placeholder from "../assets/placeholder.png";
 import DashboardLoader from "../templates/DashboardLoader";
 
 const SavedProperty = () => {
@@ -51,19 +52,14 @@ const SavedProperty = () => {
       ) : (
         <div className="m-auto w-11/12 grid grid-cols-3 gap-6">
           {response.map((property) => {
-            {
-              console.log(property.property);
-            }
-            return property.property.images.map((image) => {
-              return (
-                <PropertyCard
-                  location={property.property.city}
-                  price={property.property.price}
-                  place={property.property.name}
-                  photo={image.image_url}
-                />
-              );
-            });
+            return (
+              <PropertyCard
+                location={property.property.city}
+                price={property.property.price}
+                place={property.property.name}
+                photo={placeholder || property.property.images[0].image_url}
+              />
+            );
           })}
         </div>
       )}
