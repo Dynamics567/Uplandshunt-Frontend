@@ -1,6 +1,7 @@
 import { useState } from "react";
 import SimpleDropZone from "../templates/SimpleDropZone";
 import { useParams } from "react-router";
+import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -9,6 +10,7 @@ import { axiosWithAuth } from "../Auth/Axios";
 
 const DocumentUpload = (imageTitle) => {
   let { id } = useParams();
+  const location = useHistory();
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = (files) => {
@@ -26,6 +28,7 @@ const DocumentUpload = (imageTitle) => {
         const successMessage = response.data.data;
         console.log(successMessage);
         toast.success(successMessage);
+        location.push(`/dashboard/listings/editDetails/${id}`);
       });
   };
 
