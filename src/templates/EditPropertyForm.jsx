@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 import { Input, Select } from "../atoms";
@@ -12,13 +13,26 @@ import {
 } from "../data/SelectOptions";
 
 const EditPropertyForm = ({ preloadedValues }) => {
-  const { register, handleSubmit } = useForm({
-    defaultValues: preloadedValues,
+  const { register, handleSubmit, reset, getValues } = useForm({
+    defaultValues: {
+      name: preloadedValues?.name,
+    },
   });
-  console.log(preloadedValues);
+  // console.log(preloadedValues);
   const onSubmit = (data) => {
     alert(JSON.stringify(data));
   };
+
+  useEffect(() => {
+    const defaultValues = {
+      name: preloadedValues?.name,
+    };
+    console.log(getValues("name"));
+    reset(defaultValues);
+    console.log(getValues("name"));
+  }, [preloadedValues, reset]);
+
+  // propertyDetails?.propertyCategory?.name
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <section className="grid grid-cols-3 gap-4">
@@ -26,7 +40,7 @@ const EditPropertyForm = ({ preloadedValues }) => {
           type="text"
           label="Property Name"
           name="name"
-          {...register("name")}
+          register={register("name")}
         />
         {/* <Select
               // values={propertyType}
@@ -34,26 +48,26 @@ const EditPropertyForm = ({ preloadedValues }) => {
               labelName="Property Type"
               name="type"
             /> */}
-        <Input
+        {/* <Input
           type="text"
           label="City"
           name="city"
           {...register("city")}
           // placeholder="city"
-        />
-        <input
+        /> */}
+        {/* <input
           className="border border-primary"
           name="city"
           {...register("city")}
-        />
-        <Input type="text" label="Price" name="price" {...register("name")} />
+        /> */}
+        {/* <Input type="text" label="Price" name="price" {...register("name")} />
         <Input
           type="text"
           label="Area of the Property"
           name="area"
           {...register("area")}
-        />
-        <Input
+        /> */}
+        {/* <Input
           type="text"
           label="Postal Code"
           name="postal_code"
@@ -70,7 +84,7 @@ const EditPropertyForm = ({ preloadedValues }) => {
           label="Address Lane 2"
           name="address_line_two"
           {...register("address_line_two")}
-        />
+        /> */}
         {/* <MultiSelect
               // options={multiSelectOptions}
               // value={selected}
@@ -78,7 +92,7 @@ const EditPropertyForm = ({ preloadedValues }) => {
               labelledBy="Amenities"
               className="mt-7"
             /> */}
-        <Input
+        {/* <Input
           type="text"
           label="Country"
           name="country"
@@ -89,14 +103,14 @@ const EditPropertyForm = ({ preloadedValues }) => {
           selectedValue="Sell"
           labelName="Listing Type"
           name="category"
-        />
+        /> */}
         {/* <Select
               // values={availability}
               selectedValue="Residence"
               labelName="Availability"
               name="availability"
             /> */}
-        <Input
+        {/* <Input
           type="text"
           label="Kitchen"
           name="kitchen"
@@ -107,9 +121,9 @@ const EditPropertyForm = ({ preloadedValues }) => {
           label="Bathroom"
           name="bathroom"
           {...register("bathroom")}
-        />
-        <Input type="text" label="Bedroom" name="bedroom" />
-        <div>
+        /> */}
+        {/* <Input type="text" label="Bedroom" name="bedroom" /> */}
+        {/* <div>
           <label className="text-lg font-semibold text-left">
             Property Description
           </label>
@@ -121,7 +135,7 @@ const EditPropertyForm = ({ preloadedValues }) => {
             name="description"
             {...register("description")}
           ></textarea>
-        </div>
+        </div> */}
         {/* <Select
               // values={furnishingType}
               selectedValue="Not furnished"
