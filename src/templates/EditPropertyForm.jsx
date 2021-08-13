@@ -262,7 +262,7 @@ const EditPropertyForm = ({ preloadedValues }) => {
       </section>
 
       <div className="flex w-full justify-center items-center text-center mb-10">
-        <div className="w-1/2" onClick={editDetails}>
+        <div className="w-1/2">
           <Button loading={loading} buttonText="Save" />
         </div>
       </div>
