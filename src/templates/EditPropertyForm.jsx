@@ -53,8 +53,8 @@ const EditPropertyForm = ({ preloadedValues }) => {
       country: preloadedValues?.country,
       kitchens: preloadedValues?.kitchens.kitchen.charAt(0),
       description: preloadedValues?.description,
-      property_category: preloadedValues?.property_category.id,
-      property_type: preloadedValues?.property_type.id,
+      // property_category: preloadedValues?.property_category.id,
+      // property_type: preloadedValues?.property_type.id,
       bed: preloadedValues?.bed.bedroom,
       bath: preloadedValues?.bath.bathroom,
     },
@@ -69,20 +69,31 @@ const EditPropertyForm = ({ preloadedValues }) => {
       kitchen: propertyData.kitchens,
       bedroom: propertyData.bed,
       bathroom: propertyData.bath,
-      category: propertyData.property_category,
+      // category: propertyData.property_category,
       type: propertyData.property_type,
       ...propertyData,
     };
-    console.log(payload);
+    // console.log(payload);
     setLoading(true);
     axiosWithAuth()
       .put(`property/${id}`, payload)
       .then((response) => {
+        // console.log(response);
         if (response) {
           console.log(response);
           setLoading(false);
         }
         toast.success(response.data.message);
+      })
+      .catch(function (error) {
+        if (error.response) {
+          const errorMessage = error.response.data.data;
+          // setError();
+          toast.error(errorMessage);
+          setLoading(false);
+        }
+        // handle error
+        // setError(error.status);
       });
     // console.log("work");
   };
@@ -98,8 +109,8 @@ const EditPropertyForm = ({ preloadedValues }) => {
       address_line_two: preloadedValues?.address_line_two,
       country: preloadedValues?.country,
       kitchens: preloadedValues?.kitchens.kitchen.charAt(0),
-      property_type: preloadedValues?.property_type.id,
-      property_category: preloadedValues?.property_category.id,
+      // property_type: preloadedValues?.property_type.id,
+      // property_category: preloadedValues?.property_category.id,
       description: preloadedValues?.description,
       bed: preloadedValues?.bed.bedroom.charAt(0),
       bath: preloadedValues?.bath.bathroom.charAt(0),
@@ -185,9 +196,9 @@ const EditPropertyForm = ({ preloadedValues }) => {
           values={listType}
           selectedValue="Rent"
           labelName="Listing Type"
-          name="property_category"
-          {...register("property_category")}
-          error={errors.property_category?.message}
+          name="category"
+          {...register("category")}
+          error={errors.category?.message}
         />
         <Select
           values={availability}

@@ -44,12 +44,18 @@ export const filterCategory = [
 
 export const category = [["Category", "Category"]];
 
-export const deposit = [
-  ["1", "10%"],
-  ["2", "15%"],
-  ["3", "20%"],
-  ["4", "25%"],
-];
+// export const deposit = [
+//   ["1", "10%"],
+//   ["2", "20%"],
+//   ["3", "30%"],
+//   ["4", "40%"],
+//   ["5", "50%"],
+//   ["6", "60%"],
+//   ["7", "70%"],
+//   ["8", "80%"],
+//   ["9", "90%"],
+//   ["10", "100%"],
+// ];
 
 export const date = [
   ["Just listed", "Just listed"],
@@ -143,9 +149,15 @@ export const amenities = [
 
 export const depositStructure = [
   ["1", "10%"],
-  ["2", "15%"],
-  ["3", "20%"],
-  ["4", "25%"],
+  ["2", "20%"],
+  ["3", "30%"],
+  ["4", "40%"],
+  ["5", "50%"],
+  ["6", "60%"],
+  ["7", "70%"],
+  ["8", "80%"],
+  ["9", "90%"],
+  ["10", "100%"],
 ];
 
 export const multiSelectOptions = [
