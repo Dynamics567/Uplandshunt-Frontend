@@ -16,7 +16,8 @@ import detailsParking from "../assets/detailsParking.png";
 import { axiosInstance, axiosWithAuth } from "../Auth/Axios";
 import DashboardLoader from "../templates/DashboardLoader";
 import { Footer } from "../organisms";
-// import { property } from "../data/Properties";
+import { Modal } from "../organisms";
+import { Documents } from "./Documents";
 import Bids from "../templates/Bids";
 
 const PropertyDetails = ({
@@ -28,6 +29,7 @@ const PropertyDetails = ({
   let { id } = useParams();
 
   const [loading, setLoading] = useState(true);
+  const [showModal, setShowModal] = useState(false);
   const [propertyDetails, setPropertyDetails] = useState([]);
   // const [error, setError] = useState("");
 
@@ -52,8 +54,6 @@ const PropertyDetails = ({
   useEffect(() => {
     getPropertyDetails();
   }, []);
-
-  const modal = useRef(null);
 
   if (loading) {
     return <DashboardLoader />;
@@ -102,6 +102,14 @@ const PropertyDetails = ({
       });
   };
 
+  const showDocument = () => {
+    setShowModal(true);
+  };
+
+  const handleClose = () => {
+    setShowModal(false);
+  };
+
   return (
     <div>
       {loading ? (
@@ -111,6 +119,17 @@ const PropertyDetails = ({
           {showHeader && <HeaderTwo />}
 
           <div className="m-auto w-6/12">
+            <Modal showModal={showModal}>
+              <Documents showHeader={false} />
+              <div className="flex justify-between">
+                <button
+                  handleClose={handleClose}
+                  className="font-bold text-base text-white"
+                >
+                  Close
+                </button>
+              </div>
+            </Modal>
             {/* <Modal ref={modal}>
               <div className="text-center">
                 <p className="font-bold text-lg my-4">
@@ -147,7 +166,10 @@ const PropertyDetails = ({
               <div className="w-full flex justify-between">
                 <p className="font-bold text-base">{name}</p>
                 {showDocuments && (
-                  <p className="text-primary font-bold text-lg">
+                  <p
+                    className="text-primary font-bold text-lg cursor-pointer"
+                    onClick={showDocument}
+                  >
                     View Documents
                   </p>
                 )}

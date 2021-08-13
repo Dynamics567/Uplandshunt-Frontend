@@ -29,7 +29,7 @@ const PropertyCardTwo = ({
         <div className="flex justify-between">
           <p className="font-bold text-base py-2">{name}</p>
           {showDocument && (
-            <p className="font-bold text-base">View Documents</p>
+            <p className="font-bold text-base">Documents Recieved</p>
           )}
         </div>
         <div className="flex items-center justify-between">

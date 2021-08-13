@@ -34,24 +34,25 @@ const BidsPlaced = () => {
         <PropertyRequestLayout>
           <div className="mt-10 m-auto w-11/12">
             {properties.map(({ price, property }) => {
-              console.log(property.address_line_one);
               return (
-                <PropertyCardTwo
-                  id={property.id}
-                  price={price}
-                  name={property.name}
-                  image_url={placeholder || property.imges[0].image_url}
-                  city={property.address_line_one}
-                  showBidsHistory={true}
-                  showDocument={true}
-                  amenities={property.amenities.map(({ id, name }) => {
-                    return (
-                      <div key={id} className="flex">
-                        <p>{name}</p>
-                      </div>
-                    );
-                  })}
-                />
+                <div key={property.ic}>
+                  <PropertyCardTwo
+                    id={property.id}
+                    price={price}
+                    name={property.name}
+                    image_url={placeholder || property.imges[0].image_url}
+                    city={property.address_line_one}
+                    showBidsHistory={true}
+                    showDocument={true}
+                    // amenities={property.amenities.map(({ id, name }) => {
+                    //   return (
+                    //     <div key={id} className="flex">
+                    //       <p>{name}</p>
+                    //     </div>
+                    //   );
+                    // })}
+                  />
+                </div>
               );
             })}
           </div>
