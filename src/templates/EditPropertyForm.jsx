@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useParams } from "react-router";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
+import { toast } from "react-toastify";
 
 import { Button } from "../atoms";
 import { InputTwo, Select } from "../atoms";
@@ -21,7 +22,7 @@ const EditPropertyForm = ({ preloadedValues }) => {
   const { id } = useParams();
 
   const [selected, setSelected] = useState([]);
-  const [loading, setloading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const validationSchema = Yup.object().shape({
     type: Yup.number().required("Property Type is required"),
@@ -51,9 +52,9 @@ const EditPropertyForm = ({ preloadedValues }) => {
       address_line_two: preloadedValues?.address_line_two,
       country: preloadedValues?.country,
       kitchens: preloadedValues?.kitchens.kitchen.charAt(0),
-      property_type: preloadedValues?.property_type.name,
       description: preloadedValues?.description,
-      property_category: preloadedValues?.property_category.name,
+      property_category: preloadedValues?.property_category.id,
+      property_type: preloadedValues?.property_type.id,
       bed: preloadedValues?.bed.bedroom,
       bath: preloadedValues?.bath.bathroom,
     },
@@ -62,15 +63,27 @@ const EditPropertyForm = ({ preloadedValues }) => {
 
   // console.log(preloadedValues);
   const editDetails = (data) => {
-    // let amenities = { amenity: [selected[1].value] || [] };
-    // const propertyData = { ...amenities, ...data };
-    // console.log(propertyData);
-    // setloading(true);
-    // axiosWithAuth()
-    //   .put(`property/${id}`, propertyData)
-    //   .then((response) => {
-    //     console.log(response);
-    //   });
+    let amenities = { amenity: [selected[1].value] || [] };
+    const propertyData = { ...amenities, ...data };
+    const payload = {
+      kitchen: propertyData.kitchens,
+      bedroom: propertyData.bed,
+      bathroom: propertyData.bath,
+      category: propertyData.property_category,
+      type: propertyData.property_type,
+      ...propertyData,
+    };
+    console.log(payload);
+    setLoading(true);
+    axiosWithAuth()
+      .put(`property/${id}`, payload)
+      .then((response) => {
+        if (response) {
+          console.log(response);
+          setLoading(false);
+        }
+        toast.success(response.data.message);
+      });
     // console.log("work");
   };
 
@@ -85,8 +98,8 @@ const EditPropertyForm = ({ preloadedValues }) => {
       address_line_two: preloadedValues?.address_line_two,
       country: preloadedValues?.country,
       kitchens: preloadedValues?.kitchens.kitchen.charAt(0),
-      property_type: preloadedValues?.property_type.name,
-      property_category: preloadedValues?.property_category.name,
+      property_type: preloadedValues?.property_type.id,
+      property_category: preloadedValues?.property_category.id,
       description: preloadedValues?.description,
       bed: preloadedValues?.bed.bedroom.charAt(0),
       bath: preloadedValues?.bath.bathroom.charAt(0),
@@ -106,9 +119,9 @@ const EditPropertyForm = ({ preloadedValues }) => {
         />
         <Select
           values={propertyType}
-          selectedValue="Sell"
+          selectedValue="Under construction"
           labelName="Property Type"
-          name="type"
+          name="property_type"
           {...register("property_type")}
           error={errors.type?.message}
         />
@@ -154,13 +167,13 @@ const EditPropertyForm = ({ preloadedValues }) => {
           register={register("address_line_two")}
           readOnly
         />
-        {/* <MultiSelect
+        <MultiSelect
           options={multiSelectOptions}
           value={selected}
           onChange={setSelected}
           labelledBy="Amenities"
           className="mt-7"
-        /> */}
+        />
         <InputTwo
           type="text"
           label="Country"
@@ -170,17 +183,18 @@ const EditPropertyForm = ({ preloadedValues }) => {
         />
         <Select
           values={listType}
-          selectedValue="Sell"
+          selectedValue="Rent"
           labelName="Listing Type"
-          name="category"
+          name="property_category"
           {...register("property_category")}
-          error={errors.category?.message}
+          error={errors.property_category?.message}
         />
         <Select
           values={availability}
-          selectedValue="Residence"
+          selectedValue="Available"
           labelName="Availability"
           name="availability"
+          {...register("availability")}
           error={errors.availability?.message}
         />
         <InputTwo

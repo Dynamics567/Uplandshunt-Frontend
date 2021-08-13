@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 
+import dropdown from "../assets/dropdown.svg";
 import { HeaderTwo } from "../molecules";
 import FilterOption from "../templates/FilterOption";
 import { TopProperties } from "./TopProperties";
@@ -113,36 +114,58 @@ const SearchResult = () => {
       ) : (
         <>
           <HeaderTwo />
-          <div className="m-auto mt-6 w-11/12 grid grid-cols-6 gap-6">
-            <div class="col-start-1 col-end-2">
-              <div className="border border-lightAsh p-2">
-                <p className="font-bold text-lg border-b border-lightAsh mb-4">
-                  Filter by:
-                </p>
-                {filterBy.map((item) => {
-                  return (
-                    <FilterOption
-                      setQueryParameter={setQueryParameter}
-                      queryParameter={queryParameter}
-                      item={item}
-                    />
-                  );
-                })}
-                <button
-                  onClick={searchParameters}
-                  className="bg-primary text-white p-4"
-                >
-                  search
+          <div className="m-auto mt-6 w-11/12">
+            <div className="mb-8 w-full flex items-center justify-between">
+              <div className="flex items-center">
+                <section className="border-white rounded-md p-2 shadow-md mr-6">
+                  <p className="font-bold text-base">
+                    Result: <span className="font-normal">1- 9 of 500</span>
+                  </p>
+                </section>
+                <button className="font-bold text-base text-white bg-primary p-2">
+                  Reset Filter
                 </button>
               </div>
+
+              <div className="flex items-center border-white rounded-md py-2 px-6 shadow-md cursor-pointer">
+                <p className="font-bold text-base">
+                  Sort by:{" "}
+                  <span className="font-normal">Price high to low</span>
+                </p>
+                <img src={dropdown} alt="dropdown" className="ml-2" />
+              </div>
             </div>
-            <div class="col-start-2 col-end-6">
-              {searchResults.map((searches) => {
-                return <SingleSearchResult searches={searches} />;
-              })}
-            </div>
-            <div class="col-start-6 col-end-7">
-              <TopProperties />
+            <div className="grid grid-cols-6 gap-6">
+              <div class="col-start-1 col-end-2">
+                <div className="border border-lightAsh p-2">
+                  <p className="font-bold text-lg border-b border-lightAsh mb-4">
+                    Filter by:
+                  </p>
+                  {filterBy.map((item) => {
+                    return (
+                      <FilterOption
+                        setQueryParameter={setQueryParameter}
+                        queryParameter={queryParameter}
+                        item={item}
+                      />
+                    );
+                  })}
+                  <button
+                    onClick={searchParameters}
+                    className="bg-primary text-white p-4"
+                  >
+                    search
+                  </button>
+                </div>
+              </div>
+              <div class="col-start-2 col-end-6">
+                {searchResults.map((searches) => {
+                  return <SingleSearchResult searches={searches} />;
+                })}
+              </div>
+              <div class="col-start-6 col-end-7">
+                <TopProperties />
+              </div>
             </div>
           </div>
         </>

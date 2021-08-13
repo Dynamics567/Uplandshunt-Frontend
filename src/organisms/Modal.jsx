@@ -1,4 +1,4 @@
-import React from "react";
+import closeButton from "../assets/userDashboard/closeButton.png";
 
 const Modal = ({
   showModal = false,
@@ -16,12 +16,13 @@ const Modal = ({
               <p className="font-bold text-2xl text-center">{modalTitle}</p>
               {showButton && (
                 <div className="justify-self-end">
-                  <p
+                  {/* <p
                     className="bg-black rounded-full p-2 text-white h-8 w-8 flex items-center justify-center cursor-pointer"
                     onClick={handleClose}
                   >
                     X
-                  </p>
+                  </p> */}
+                  <img src="" alt="" />
                 </div>
               )}
             </div>

@@ -7,16 +7,16 @@ const Option = ({ options, onClick }) => {
   //   console.log(id);
   // };
   return (
-    <div className="">
+    <div className="cursor-pointer">
       <div
         // onClick={() => {
         //   getName(id);
         // }}
         onClick={() => onClick("")}
       >
-        <p className="cursor-pointer font-normal text-base bg-white shadow-md pb-2">
+        {/* <p className="cursor-pointer font-normal text-base bg-white shadow-md pb-2">
           All
-        </p>
+        </p> */}
       </div>
       {optionEntries.map(
         ({ name, bathroom, id, bedroom, kitchen, city, country }) => {
@@ -32,7 +32,7 @@ const Option = ({ options, onClick }) => {
                 )
               }
             >
-              <p className="font-normal text-base bg-white shadow-md pb-2">
+              <p className="px-6 font-normal text-base hover:bg-ashThree bg-white shadow-md">
                 {name || bathroom || bedroom || kitchen || city || country}
               </p>
             </div>

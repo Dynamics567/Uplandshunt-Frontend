@@ -28,7 +28,6 @@ const DocumentUpload = (imageTitle) => {
         const successMessage = response.data.data;
         console.log(successMessage);
         toast.success(successMessage);
-        location.push(`/dashboard/listings/editDetails/${id}`);
       });
   };
 
@@ -42,6 +41,7 @@ const DocumentUpload = (imageTitle) => {
         const successMessage = response.data.message;
         console.log(successMessage);
         toast.success(successMessage);
+        location.push(`/dashboard/listings/editDetails/${id}`);
       });
   };
   return (

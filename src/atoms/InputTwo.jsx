@@ -6,6 +6,7 @@ const InputTwo = ({
   id,
   error,
   label,
+  readOnly,
   register,
   ...inputProps
 }) => {
@@ -22,6 +23,11 @@ const InputTwo = ({
         placeholder={placeholder}
         {...inputProps}
         className="w-full border border-gray-400 focus:outline-none px-2 rounded-md py-1 mt-1"
+        style={
+          readOnly
+            ? { backgroundColor: "#b5b5b5" }
+            : { backgroundColor: "#ffffff" }
+        }
       />
       <span>
         <p className="text-red-500 text-sm"> {error}</p>

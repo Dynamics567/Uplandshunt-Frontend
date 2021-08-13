@@ -11,7 +11,7 @@ const FilterOption = ({ item, setQueryParameter, queryParameter }) => {
   return (
     <>
       <div
-        className="flex items-center mb-6"
+        className="flex items-center mb-6 cursor-pointer"
         onClick={toggle}
         onBlur={() => setFilterOption(false)}
         tabIndex="0"

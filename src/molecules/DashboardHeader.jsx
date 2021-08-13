@@ -7,10 +7,10 @@ const DashboardHeader = () => {
   const userDetails = useAuthState();
   return (
     <div
-      className="flex justify-between p-4"
+      className="flex justify-end p-4"
       style={{ boxShadow: "0px 0px 4px 0px #eea7a740" }}
     >
-      <div className="flex w-full">
+      {/* <div className="flex w-full">
         <input
           type="text"
           placeholder="Lagos"
@@ -18,7 +18,7 @@ const DashboardHeader = () => {
           style={{ width: "50%" }}
         />
         <img src={search} alt="search" />
-      </div>
+      </div> */}
       <div className="flex items-center">
         <img src={active} alt="active" className="mr-4" />
         <p className="font-bold text-base mr-4">
