@@ -25,6 +25,7 @@ import {
   ImageUpload,
   DocumentUpload,
   RequestProperty,
+  ViewBidsPropertyRequest,
   // BidsSent,
 } from "../pages";
 
@@ -108,6 +109,11 @@ const Dashboard = () => {
               path="/dashboard/request/bidsPlaced"
               exact
               component={BidsPlaced}
+            />
+            <Route
+              path="/dashboard/request/bidsPlaced/viewbids/:id"
+              exact
+              component={ViewBidsPropertyRequest}
             />
             <Route
               path="/dashboard/request/interestSent"

@@ -23,6 +23,7 @@ const PropertyDetails = ({
   showFooter = true,
   showHeader = true,
   showBids = true,
+  showDocuments = false,
 }) => {
   let { id } = useParams();
 
@@ -143,7 +144,14 @@ const PropertyDetails = ({
 
           <div className="m-auto mt-10 w-11/12 flex justify-between">
             <div className="mr-10" style={{ flex: "1" }}>
-              <p className="font-bold text-base">{name}</p>
+              <div className="w-full flex justify-between">
+                <p className="font-bold text-base">{name}</p>
+                {showDocuments && (
+                  <p className="text-primary font-bold text-lg">
+                    View Documents
+                  </p>
+                )}
+              </div>
               <div className="w-full flex justify-between my-2">
                 <section className="flex items-center">
                   <img src={location} alt="location" className="mr-2" />
