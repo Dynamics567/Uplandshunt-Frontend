@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+import placeholder from "../assets/placeholder.png";
 import { axiosWithAuth, axiosInstance } from "../Auth/Axios";
 import thunder from "../assets/userDashboard/thunder.png";
 import DashboardLoader from "../templates/DashboardLoader";
@@ -27,7 +28,7 @@ const Boost = ({ id }) => {
       .then(function (response) {
         // handle success
         const details = response.data.data;
-        console.log(details);
+        // console.log(details);
         setLoading(false);
         setPropertyDetails(details);
       })
@@ -45,24 +46,31 @@ const Boost = ({ id }) => {
     getPropertyDetails();
   }, []);
 
+  const boostProperty = (planId) => {
+    const boostObject = {
+      property_id: id,
+      boost_plan_id: planId,
+    };
+    console.log(boostObject);
+    axiosWithAuth()
+      .post("boost", boostObject)
+      .then((response) => {
+        console.log(response);
+      });
+  };
+
   //   if (loading) {
   //     return <DashboardLoader />;
   //   }
 
   const { name, price, city, images } = propertyDetails;
-  console.log(images);
+
   return (
     <div className="">
-      <p className="font-normal text-base text-center">
+      <p className="font-normal text-sm text-center">
         Lorem Ipsum is simply dummy text of the printing and typesetting
         industry. Lorem Ipsum has been the industry's standard dummy text ever
-        since the 1500s, when an unknown printer took a galley of type and
-        scrambled it to make a type specimen book. It has survived not only five
-        centuries, but also the leap into electronic typesetting, remaining
-        essentially unchanged. It was popularised in the 1960s with the release
-        of Letraset sheets containing Lorem Ipsum passages, and more recently
-        with desktop publishing software like Aldus PageMaker including versions
-        of Lorem Ipsum.
+        since the 1500s, when an unknown printer took a galley of type
       </p>
       <>
         {loading ? (
@@ -74,29 +82,30 @@ const Boost = ({ id }) => {
                 price={price}
                 city={city}
                 name={name}
-                // image_url={images[0].image_url}
+                image_url={placeholder || images[0].image_url}
               />
             </div>
-            <p className="text-base font-normal py-4">
+            <p className="text-base font-normal py-2">
               Select any plan from the list below:
             </p>
             <div className="cursor-pointer w-full flex rounded-md">
-              {data.map(({ category, id, price, time }) => {
+              {data.map((plan) => {
                 return (
                   <div
-                    className="shadow-lg rounded-lg bg-white px-8 py-4 mr-16 hover:border-blue-500"
-                    key={id}
+                    className="shadow-lg rounded-lg bg-white p-4 my-4 mr-16 hover:border-blue-500"
+                    key={plan.id}
+                    onClick={() => boostProperty(plan.id)}
                   >
                     <p className="text-center font-bold text-lg py-2">
-                      {category}
+                      {plan.category}
                     </p>
                     <div className="w-full flex justify-between items-center">
                       <img src={thunder} alt="boost" className="w-4 mr-4" />
-                      <p className="font-normal text-base">
-                        Boost for {time} hrs
+                      <p className="font-normal text-sm">
+                        Boost for {plan.time} hrs
                       </p>
                     </div>
-                    <p className="text-center text-lg font-bold py-4">
+                    <p className="text-center text-base font-bold py-4">
                       ₦{price}
                     </p>
                   </div>

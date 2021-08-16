@@ -7,7 +7,7 @@ import { plans } from "../data/subscription";
 import { axiosWithAuth } from "../Auth/Axios";
 
 const Subscription = ({ id }) => {
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(1);
   const [getMonthId, setGetMonthId] = useState("");
   const [getPlanId, setGetPlanId] = useState("");
 
@@ -29,7 +29,7 @@ const Subscription = ({ id }) => {
     if (getMonthId && getPlanId) {
       upgradeSub();
     }
-  }, [getMonthId, getPlanId]);
+  }, [getMonthId, getPlanId, active]);
   return (
     <>
       <div className="m-auto w-11/12">
@@ -49,6 +49,8 @@ const Subscription = ({ id }) => {
                 key={monthId}
                 onClick={() => {
                   setGetMonthId(() => duration);
+                  setActive(() => monthId);
+                  console.log(active);
                   setGetPlanId("");
                 }}
                 // className={

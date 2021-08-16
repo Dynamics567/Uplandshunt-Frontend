@@ -23,6 +23,7 @@ const ListingsHeader = () => {
         showModal={show}
         handleClose={handleClose}
         modalTitle="Boost My Property"
+        showButton={true}
       >
         <Boost id={id} />
       </Modal>
