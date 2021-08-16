@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import dot from "../assets/dot.svg";
 import { axiosInstance } from "../Auth/Axios";
 
@@ -8,7 +7,7 @@ const SubCard = ({
   bgImage,
   className,
   buttonText,
-  buttonUrl,
+  getPlanId,
   showButton = false,
 }) => {
   const [subscription, setSubscription] = useState([]);
@@ -16,6 +15,7 @@ const SubCard = ({
   const getSubscription = () => {
     axiosInstance.get("property/subscription/all").then((response) => {
       const results = response.data.data;
+      console.log(results);
       setSubscription(results);
     });
   };
@@ -30,6 +30,7 @@ const SubCard = ({
         return (
           <section
             key={sub.id}
+            id={sub.id}
             className={`flex flex-col mr-8 ${className}`}
             style={{ backgroundImage: `url(${bgImage})` }}
             // style={{ backgroundImage: `url(${sub.image})` }}
@@ -63,11 +64,11 @@ const SubCard = ({
               Get Started Today
             </p>
             {showButton && (
-              <Link to={buttonUrl} className=" bg-white">
+              <div onClick={() => getPlanId(sub.id)} className="bg-white">
                 <button className="py-4 px-8 w-full mt-6 font-bold text-base text-white rounded-md bg-primary">
                   {buttonText}
                 </button>
-              </Link>
+              </div>
             )}
           </section>
         );

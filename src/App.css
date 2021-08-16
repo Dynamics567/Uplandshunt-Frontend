@@ -105,6 +105,14 @@ h2:after {
   border-bottom: 7px solid #b3404a;
 }
 
+.sub-active {
+  background-color: #b3404a;
+}
+
+.sub-active p {
+  color: white;
+}
+
 /* LoadSpinner */
 .lds-ring {
   width: 30px;

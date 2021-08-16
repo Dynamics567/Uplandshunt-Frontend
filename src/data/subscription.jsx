@@ -1,18 +1,27 @@
 export const plans = [
   {
-    id: "1",
-    plan: "Plan 1",
-    access: "Upgrading to this plan will help you post 5 properties",
+    monthId: "1",
+    plan: "Bill Yearly",
+    duration: "12",
+    // url: "/dashboard/subscription",
   },
   {
-    id: "2",
-    plan: "Plan 2",
-    access: "Upgrading to this plan will help you post 10 properties",
+    monthId: "2",
+    plan: "Bill / 3 months",
+    duration: "3",
+    // url: "/dashboard/subscription",
   },
   {
-    id: "3",
-    plan: "Plan 3",
-    access: "Upgrading to this plan will help you post 15 properties",
+    monthId: "3",
+    plan: "Bill / 6 months",
+    duration: "6",
+    // url: "/dashboard/subscription",
+  },
+  {
+    monthId: "4",
+    plan: "Bill / 9 months",
+    duration: "9",
+    // url: "/dashboard/subscription",
   },
 ];
 
