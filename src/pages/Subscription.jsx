@@ -7,7 +7,7 @@ import { plans } from "../data/subscription";
 import { axiosWithAuth } from "../Auth/Axios";
 
 const Subscription = ({ id }) => {
-  const [active, setActive] = useState(1);
+  const [active, setActive] = useState(plans[0].index);
   const [getMonthId, setGetMonthId] = useState("");
   const [getPlanId, setGetPlanId] = useState("");
 

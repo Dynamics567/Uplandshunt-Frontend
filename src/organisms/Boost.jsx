@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 import placeholder from "../assets/placeholder.png";
 import { axiosWithAuth, axiosInstance } from "../Auth/Axios";
@@ -7,9 +8,12 @@ import DashboardLoader from "../templates/DashboardLoader";
 import { PropertyCardTwo } from "./PropertyCardTwo";
 
 const Boost = ({ id }) => {
+  const location = useLocation();
+
   const [data, setData] = useState([]);
   const [propertyDetails, setPropertyDetails] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [authUrl, setAuthUrl] = useState("");
 
   const getBoostingPlans = () => {
     setLoading(true);
@@ -47,15 +51,21 @@ const Boost = ({ id }) => {
   }, []);
 
   const boostProperty = (planId) => {
+    setLoading(true);
     const boostObject = {
       property_id: id,
       boost_plan_id: planId,
     };
-    console.log(boostObject);
     axiosWithAuth()
       .post("boost", boostObject)
       .then((response) => {
-        console.log(response);
+        const successMessage = response.data.data;
+        setAuthUrl(successMessage.authorization_url);
+        // console.log(successMessage);
+        setLoading(false);
+        // console.log(typeof authUrl);
+        // window.location.replace(authUrl);
+        window.open(authUrl, "_blank");
       });
   };
 

@@ -1,40 +1,59 @@
-import { useAuthState } from "../Context";
+import { useEffect, useState } from "react";
 
-import listingDetails from "../assets/userDashboard/listingDetails.svg";
-import transactionHistory from "../assets/userDashboard/transactionHistory.svg";
-import savedProperties from "../assets/userDashboard/savedProperties.svg";
+import DashboardLoader from "../templates/DashboardLoader";
+import { useAuthState } from "../Context";
 import { axiosWithAuth } from "../Auth/Axios";
-import { useEffect } from "react";
+import PieChart from "../templates/PieChart";
+import DoughnutChart from "../templates/DoughnutChart";
+import LineChart from "../templates/LineChart";
+import { transaction } from "../test";
 
 const Notification = (props) => {
   const userDetails = useAuthState();
+  const [graphData, setGraphData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const getGraphDetails = () => {
+    setLoading(true);
     axiosWithAuth()
       .get("graph")
       .then((response) => {
-        console.log(response);
+        const results = response.data.data;
+        console.log(results);
+        setGraphData(results);
+        setLoading(false);
       });
   };
 
   useEffect(() => {
     getGraphDetails();
   }, []);
+
+  if (loading) {
+    return <DashboardLoader />;
+  }
+
+  const listings = graphData.listing_details;
+  const transactions = graphData.transaction_history;
+  const savedProperty = graphData.saved_properties;
+
   return (
-    <div className="m-auto w-11/12">
-      <p className="font-bold text-base my-4 ">
-        Welcome {userDetails.user?.first_name}
-      </p>
-      <div className="grid grid-cols-2 gap-2">
-        <img src={listingDetails} alt="listingDetails" />
-        <img
-          src={transactionHistory}
-          alt="transactionHistory"
-          className="mr-10"
-        />
-        <img src={savedProperties} alt="savedProperties" />
-      </div>
-    </div>
+    <>
+      {loading ? (
+        <DashboardLoader />
+      ) : (
+        <div className="m-auto w-11/12">
+          <p className="font-bold text-base my-4 ">
+            Welcome {userDetails.user?.first_name}
+          </p>
+          <div className="grid grid-cols-2 gap-2">
+            <PieChart listings={listings} />
+            <DoughnutChart transactions={transactions} />
+            {/* <LineChart savedProperty={savedProperty} /> */}
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
