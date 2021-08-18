@@ -9,6 +9,8 @@ const PieChart = ({ listings }) => {
     listValues.push(value.count);
   }
 
+  delete listings.total_listed;
+
   const data = {
     labels: listkeys,
     datasets: [
@@ -38,57 +40,26 @@ const PieChart = ({ listings }) => {
     },
   };
 
-  // const options = {
-  //   cutoutPercentage: 55,
-  //   elements: {
-  //     center: {
-  //       // text: `${numeral(total).format(
-  //       //   "0,0"
-  //       // )} ${innerTopText} ${innerMiddleText} ${innerBottomText}`,
-  //       fontColor: "#666666",
-  //       fontFamily: "Allianz-Neo",
-  //       fontStyle: "bold",
-  //       minFontSize: 15,
-  //       maxFontSize: 20,
-  //     },
-  //   },
-  //   plugins: {
-  //     outlabels: {
-  //       backgroundColor: "white", // Background color of Label
-  //       borderColor: "none", // Border color of Label
-  //       borderRadius: 0, // Border radius of Label
-  //       borderWidth: 0, // Thickness of border
-  //       color: "black", // Font color
-  //       display: false,
-  //       lineWidth: 1, // Thickness of line between chart arc and Label
-  //       padding: 0,
-  //       lineColor: "black",
-  //       textAlign: "center",
-  //       stretch: 45,
-  //     },
-  //     labels: false,
-  //   },
-  //   legend: {
-  //     display: true,
-  //     position: "right",
-  //     align: "center",
-  //     fontFamily: "Allianz-Neo",
-  //     textDirection: "ltr",
-  //     labels: {
-  //       usePointStyle: true,
-  //       fontColor: "#006192",
-  //     },
-  //   },
-  // };
+  const options = {
+    plugins: {
+      // title: {
+      //   display: true,
+      //   text: "Listings details",
+      //   align: "right",
+      // },
+      legend: {
+        position: "right",
+      },
+      font: {
+        size: 20,
+      },
+    },
+  };
 
   return (
     <>
-      {/* <div className="header">
-        <h1 className="title">Doughnut Chart</h1>
-        <div className="links"></div>
-      </div> */}
       <div style={styles.pieContainer}>
-        <Pie data={data} />
+        <Pie data={data} options={options} />
       </div>
     </>
   );

@@ -19,7 +19,6 @@ const Notification = (props) => {
       .get("graph")
       .then((response) => {
         const results = response.data.data;
-        console.log(results);
         setGraphData(results);
         setLoading(false);
       });

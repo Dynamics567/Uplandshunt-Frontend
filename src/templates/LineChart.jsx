@@ -1,8 +1,21 @@
-import React from "react";
 import { Line } from "react-chartjs-2";
+import { save } from "../test";
+
+const savedPropertyKeys = [];
+const savedPropertyValues = [];
+for (const [key, value] of Object.entries(save[0])) {
+  savedPropertyKeys.push(key);
+  savedPropertyValues.push(
+    value.map((value) => {
+      return value;
+    })
+  );
+}
+
+console.log(savedPropertyValues, savedPropertyKeys);
 
 const data = {
-  labels: ["1", "2", "3", "4", "5", "6"],
+  labels: savedPropertyKeys,
   datasets: [
     {
       label: "# of Votes",
@@ -26,21 +39,17 @@ const options = {
   },
 };
 
+const styles = {
+  lineContainer: {
+    width: "100%",
+    height: "100%",
+  },
+};
+
 const LineChart = () => (
-  <>
-    <div className="header">
-      <h1 className="title">Line Chart</h1>
-      <div className="links">
-        <a
-          className="btn btn-gh"
-          href="https://github.com/reactchartjs/react-chartjs-2/blob/master/example/src/charts/Line.js"
-        >
-          Github Source
-        </a>
-      </div>
-    </div>
+  <div style={styles.lineContainer}>
     <Line data={data} options={options} />
-  </>
+  </div>
 );
 
 export default LineChart;

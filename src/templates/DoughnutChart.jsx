@@ -11,7 +11,7 @@ const DoughnutChart = ({ transactions }) => {
     transactionValues.push(value.total_amount);
   }
 
-  // console.log(transactionkeys, transactionValues);
+  delete transactions.total;
 
   const data = {
     labels: transactionkeys,
@@ -41,20 +41,29 @@ const DoughnutChart = ({ transactions }) => {
   };
 
   const styles = {
-    pieContainer: {
+    doughnutContainer: {
       width: "80%",
       height: "80%",
     },
   };
 
+  const options = {
+    plugins: {
+      // title: {
+      //   display: true,
+      //   text: "Transaction history",
+      // },
+      legend: {
+        // display: false,
+        position: "right",
+      },
+    },
+  };
+
   return (
     <>
-      <div className="header">
-        <h1 className="title">Doughnut Chart</h1>
-        <div className="links"></div>
-      </div>
-      <div style={styles.pieContainer}>
-        <Doughnut data={data} />
+      <div style={styles.doughnutContainer}>
+        <Doughnut data={data} options={options} />
       </div>
     </>
   );
