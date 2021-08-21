@@ -7,12 +7,11 @@ import LoadSpinner from "../templates/LoadSpinner";
 import { DashboardSectionTitle } from "../atoms";
 import PropertyCard from "../templates/PropertyCard";
 import placeholder from "../assets/placeholder.png";
-import DashboardLoader from "../templates/DashboardLoader";
 
 const SavedProperty = () => {
   const [loading, setLoading] = useState(true);
   const [response, setResponse] = useState([]);
-  const [error, setError] = useState("");
+  const [setError] = useState("");
 
   const getUserSavedProperties = () => {
     setLoading(false);

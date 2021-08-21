@@ -1,6 +1,5 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import { HeaderTwo } from "../molecules";
@@ -63,7 +62,7 @@ const PropertyDetails = ({
     name,
     price,
     city,
-    country,
+    // country,
     description,
     area,
     postal_code,
@@ -73,11 +72,11 @@ const PropertyDetails = ({
     user: {
       avatar: { url },
     },
-    geo_location: {
-      geometry: {
-        location: { lat, lng },
-      },
-    },
+    // geo_location: {
+    //   geometry: {
+    //     location: { lat, lng },
+    //   },
+    // },
     // availability_status: { available: name },
     kitchens: { kitchen },
     bath: { bathroom },
@@ -85,8 +84,8 @@ const PropertyDetails = ({
     // bed: { bedroom },
   } = propertyDetails;
 
-  const getUserDetails = JSON.parse(localStorage.getItem("auth"));
-  const getUserAuthStatus = getUserDetails.isAuthenticated;
+  // const getUserDetails = JSON.parse(localStorage.getItem("auth"));
+  // const getUserAuthStatus = getUserDetails.isAuthenticated;
 
   const saveProperty = () => {
     axiosWithAuth()
@@ -233,7 +232,8 @@ const PropertyDetails = ({
             <div className="" style={{ flex: "1" }}>
               <div className="w-full h-full mt-16">
                 <iframe
-                  src={`https://maps.google.com/maps?q=${lat}, ${lng}&z=15&output=embed`}
+                  title="Property Location"
+                  src={`https://maps.google.com/maps?q=, &z=15&output=embed`}
                   width="100%"
                   height="70%"
                   frameBorder="0"

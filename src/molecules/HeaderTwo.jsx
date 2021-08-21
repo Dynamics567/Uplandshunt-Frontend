@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom";
 
-import search from "../assets/search.svg";
-
 const HeaderTwo = () => {
   return (
     <div

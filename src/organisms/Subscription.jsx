@@ -3,13 +3,8 @@ import { SectionTitle } from "../atoms";
 import { SectionWrapper } from "../Layout/SectionWrapper";
 import SubCard from "../templates/SubCard";
 import bronze from "../assets/bronze.svg";
-import silver from "../assets/silver.svg";
 import plan from "../assets/plan.svg";
-// import gold from "../assets/silver.svg";
 import bronzeBg from "../assets/bronzeBg.svg";
-// import card10 from "../assets/card10.png";
-// import silverBg from "../assets/silverBg.svg";
-import goldBg from "../assets/goldBg.svg";
 
 const Subscription = () => {
   return (

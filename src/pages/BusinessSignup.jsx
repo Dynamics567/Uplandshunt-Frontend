@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
@@ -11,8 +10,6 @@ import eyeOpened from "../assets/eyeOpen.svg";
 import { RegisterLayout } from "../Layout";
 
 const BusinessSignup = () => {
-  const location = useHistory();
-
   const [passwordShown, setPasswordShown] = useState(false);
   const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
 

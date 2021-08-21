@@ -9,7 +9,7 @@ import { DashboardSectionTitle } from "../atoms";
 const PropertyRequest = () => {
   const [loading, setLoading] = useState(true);
   const [response, setResponse] = useState([]);
-  const [error, setError] = useState("");
+  const [setError] = useState("");
 
   const getUserSavedProperties = () => {
     setLoading(false);

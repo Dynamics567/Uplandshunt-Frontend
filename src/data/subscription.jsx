@@ -114,3 +114,14 @@ export const filter = [
     url: "/searchresults/boostedproperties",
   },
 ];
+
+export const sortByPrice = [
+  {
+    id: "ASC",
+    item: "low to high",
+  },
+  {
+    id: "DESC",
+    item: "high to low",
+  },
+];

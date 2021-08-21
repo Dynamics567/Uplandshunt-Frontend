@@ -68,8 +68,8 @@ const Explore = ({ title }) => {
       <Slider ref={sliderRef} {...settings}>
         {city.map(({ name, photo, location, id }) => {
           return (
-            <Link key={id}>
-              <div className="mr-8 mb-8 border border-white shadow-xl rounded-md">
+            <Link to={`/searchresults/${location}`} key={id}>
+              <div className="mr-8 mb-8 border border-white shadow-xl rounded-md cursor-pointer">
                 <section className="relative w-full h-auto object-cover">
                   <img
                     src={photo}

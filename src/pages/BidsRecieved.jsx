@@ -1,10 +1,9 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import { Modal } from "../organisms";
 import { axiosWithAuth } from "../Auth/Axios";
 import { ListingsLayout } from "../Layout";
-import { Document } from "../organisms";
 import DashboardLoader from "../templates/DashboardLoader";
 import { Documents } from "./Documents";
 

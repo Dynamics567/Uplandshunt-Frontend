@@ -6,8 +6,8 @@ import edit from "../assets/userDashboard/edit.svg";
 
 const BusinessProfile = () => {
   const [response, setResponse] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [setLoading] = useState(false);
+  const [setError] = useState("");
 
   const getUserProfile = () => {
     setLoading(true);

@@ -11,7 +11,7 @@ const Subscription = ({ id }) => {
   const [active, setActive] = useState(plans[0].index);
   const [getMonthId, setGetMonthId] = useState("");
   const [getPlanId, setGetPlanId] = useState("");
-  const [currentPlan, setCurrentPlan] = useState([]);
+  const [setCurrentPlan] = useState([]);
   const [loading, setLoading] = useState(false);
   const [authUrl, setAuthUrl] = useState("");
 

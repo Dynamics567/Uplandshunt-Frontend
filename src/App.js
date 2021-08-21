@@ -28,7 +28,7 @@ import {
   BusinessSignup,
   ActivateAccount,
   SearchResult,
-  ImageUpload,
+  // ImageUpload,
   PropertyDetails,
   PaymentPage,
   PaymentSuccessful,

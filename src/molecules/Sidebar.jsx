@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import { userDashboard } from "../data/FooterItems";
-import { useAuthDispatch, useAuthState, logout } from "../Context";
+import { useAuthDispatch, logout } from "../Context";
 
 const Sidebar = () => {
   const scrollToTop = () => {
@@ -9,7 +9,6 @@ const Sidebar = () => {
   };
 
   const dispatch = useAuthDispatch();
-  const userDetails = useAuthState();
 
   const handleLogout = () => {
     logout(dispatch);

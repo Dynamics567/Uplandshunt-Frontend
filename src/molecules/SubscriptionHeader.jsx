@@ -2,7 +2,7 @@ import { useState } from "react";
 import { plans } from "../data/subscription";
 
 const SubscriptionHeader = () => {
-  const [active, setActive] = useState(0);
+  const [active] = useState(0);
 
   return (
     <div className="w-3/4 flex items-center shadow-md rounded-md  border border-lightAsh">

@@ -5,10 +5,13 @@ import smallBuild from "../assets/userDashboard/smallBuild.png";
 const PieChart = ({ listings }) => {
   let listkeys = [];
   const listValues = [];
+
   for (const [key, value] of Object.entries(listings)) {
     listkeys.push(key);
     listValues.push(value.count);
   }
+
+  // const newListKeys = listkeys.replace(/_/g, " ");
 
   delete listings.total_listed;
 

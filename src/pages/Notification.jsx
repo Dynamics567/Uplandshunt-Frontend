@@ -5,8 +5,7 @@ import { useAuthState } from "../Context";
 import { axiosWithAuth } from "../Auth/Axios";
 import PieChart from "../templates/PieChart";
 import DoughnutChart from "../templates/DoughnutChart";
-import LineChart from "../templates/LineChart";
-import { transaction } from "../test";
+// import LineChart from "../templates/LineChart";
 
 const Notification = (props) => {
   const userDetails = useAuthState();
@@ -34,7 +33,7 @@ const Notification = (props) => {
 
   const listings = graphData.listing_details;
   const transactions = graphData.transaction_history;
-  const savedProperty = graphData.saved_properties;
+  // const savedProperty = graphData.saved_properties;
 
   return (
     <>

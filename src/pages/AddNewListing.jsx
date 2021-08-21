@@ -25,7 +25,7 @@ const EditNewListing = () => {
   const location = useHistory();
   const [selected, setSelected] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setErrors] = useState("");
+  const [setErrors] = useState("");
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Property Name is required"),

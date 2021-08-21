@@ -5,15 +5,19 @@ import dropdown from "../assets/dropdown.svg";
 import { HeaderTwo } from "../molecules";
 import FilterOption from "../templates/FilterOption";
 import { TopProperties } from "./TopProperties";
-import { axiosInstance } from "../Auth/Axios";
+import { axiosInstance, axiosWithAuth } from "../Auth/Axios";
 import DashboardLoader from "../templates/DashboardLoader";
 import { SingleSearchResult } from "../templates/SingleSearchResult";
+import { sortByPrice } from "../data/subscription";
 
 const SearchResult = () => {
   let { value, category } = useParams();
   const [filterBy, setFilterBy] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchResults, setSearchResults] = useState([]);
+  const [initialState, setInitialState] = useState(true);
+  const [togglePrice, setTogglePrice] = useState(false);
+
   const [queryParameter, setQueryParameter] = useState({
     category: "",
     availability: "",
@@ -38,7 +42,6 @@ const SearchResult = () => {
         // handle success
         const category = response.data;
         const entries = Object.entries(category.data);
-        console.log(entries);
         setFilterBy(entries);
         setLoading(false);
       })
@@ -59,6 +62,7 @@ const SearchResult = () => {
         // handle success
         const results = response.data.data;
         setSearchResults(results);
+        setInitialState(false);
         setLoading(false);
         // console.log(response.data.data);
       })
@@ -71,7 +75,6 @@ const SearchResult = () => {
       });
   };
 
-  // test();
   useEffect(() => {
     getFilters();
     getSearchedProperty();
@@ -107,6 +110,28 @@ const SearchResult = () => {
       });
   };
 
+  const togglePriceDropDown = () => {
+    setTogglePrice(!togglePrice);
+  };
+
+  const sortPropertiesByPrice = (id) => {
+    setLoading(true);
+    axiosWithAuth()
+      .get(`property?sort=${id}`)
+      .then((response) => {
+        const results = response.data.data;
+        setSearchResults(results);
+        setLoading(false);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+      .then(function () {
+        // always executed
+      });
+  };
+
   return (
     <div>
       {loading ? (
@@ -119,7 +144,10 @@ const SearchResult = () => {
               <div className="flex items-center">
                 <section className="border-white rounded-md p-2 shadow-md mr-6">
                   <p className="font-bold text-base">
-                    Result: <span className="font-normal">1- 9 of 500</span>
+                    Result:{" "}
+                    <span className="font-normal">
+                      1- 9 of {searchResults.length}
+                    </span>
                   </p>
                 </section>
                 <button className="font-bold text-base text-white bg-primary p-2">
@@ -127,12 +155,35 @@ const SearchResult = () => {
                 </button>
               </div>
 
-              <div className="flex items-center border-white rounded-md py-2 px-6 shadow-md cursor-pointer">
-                <p className="font-bold text-base">
-                  Sort by:{" "}
-                  <span className="font-normal">Price high to low</span>
-                </p>
-                <img src={dropdown} alt="dropdown" className="ml-2" />
+              <div className="flex flex-col cursor-pointer">
+                <div
+                  className="flex items-center  py-2 px-6 shadow-md rounded-md"
+                  onClick={togglePriceDropDown}
+                >
+                  <p className="font-bold text-base">
+                    Sort by: <span className="font-normal">Price</span>
+                  </p>
+                  <img src={dropdown} alt="dropdown" className="ml-2" />
+                </div>
+                <section className="mt-2 bg-white shadow-md border-lightAsh">
+                  {togglePrice && (
+                    <div className="">
+                      {sortByPrice.map(({ item, id }) => {
+                        return (
+                          <div
+                            className=""
+                            key={id}
+                            onClick={() => sortPropertiesByPrice(id)}
+                          >
+                            <p className="hover:bg-ashThree py-2 px-6">
+                              {item}
+                            </p>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+                </section>
               </div>
             </div>
             <div className="grid grid-cols-6 gap-6">
@@ -159,9 +210,20 @@ const SearchResult = () => {
                 </div>
               </div>
               <div class="col-start-2 col-end-6">
-                {searchResults.map((searches) => {
-                  return <SingleSearchResult searches={searches} />;
-                })}
+                {/* {initialState ? ( "" ) : searchResults.length === 0 ? (
+                  <p>no props</p>
+                ) : } */}
+                {initialState ? (
+                  ""
+                ) : searchResults.length === 0 ? (
+                  <p>No properties match your search</p>
+                ) : (
+                  <div>
+                    {searchResults.map((searches) => {
+                      return <SingleSearchResult searches={searches} />;
+                    })}
+                  </div>
+                )}
               </div>
               <div class="col-start-6 col-end-7">
                 <TopProperties />

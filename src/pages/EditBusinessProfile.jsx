@@ -11,7 +11,7 @@ import { axiosWithAuth } from "../Auth/Axios";
 const EditBusinessProfile = () => {
   const location = useHistory();
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [setError] = useState("");
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Property Name is required"),
@@ -138,7 +138,6 @@ const EditBusinessProfile = () => {
           <Input
             accept="image/png, image/gif, image/jpeg"
             type="file"
-            name="logo"
             name="logo"
             label="Company Logo"
             {...register("logo")}

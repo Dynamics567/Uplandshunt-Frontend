@@ -6,13 +6,12 @@ import { useAuthState } from "../Context";
 import DashboardLoader from "../templates/DashboardLoader";
 import notify from "../assets/userDashboard/Notify.png";
 import avatar from "../assets/userDashboard/avatar.svg";
-import { axiosWithAuth } from "../Auth/Axios";
 
 const DashboardHeader = () => {
   const userDetails = useAuthState();
 
-  const [loading, setLoading] = useState(false);
-  const [notifications, setNotifications] = useState("0");
+  const [loading] = useState(false);
+  const [notifications] = useState("0");
   const [showNotifications, setShowNotifications] = useState(false);
 
   // const getNotifications = () => {

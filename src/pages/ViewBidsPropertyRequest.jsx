@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useParams } from "react-router";
 
 import { axiosInstance } from "../Auth/Axios";
@@ -11,12 +11,12 @@ const ViewBidsPropertyRequest = () => {
 
   const [bidsReceived, setBidsReceived] = useState([]);
 
-  const getBidsReceived = () => {
-    axiosInstance.get(`bid/${id}/bids`).then((response) => {
-      const results = response.data.data[0].bids;
-      setBidsReceived(results);
-    });
-  };
+  // const getBidsReceived = () => {
+  //   axiosInstance.get(`bid/${id}/bids`).then((response) => {
+  //     const results = response.data.data[0].bids;
+  //     setBidsReceived(results);
+  //   });
+  // };
 
   return (
     <div>

@@ -1,4 +1,3 @@
-import topProperty from "../assets/topProperty.png";
 import { FilterHeader } from "../molecules";
 
 const BoostedProperties = () => {

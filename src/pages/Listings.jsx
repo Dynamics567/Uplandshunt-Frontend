@@ -11,7 +11,7 @@ import PropertyCard from "../templates/PropertyCard";
 const Listings = () => {
   const [loading, setLoading] = useState(true);
   const [response, setResponse] = useState([]);
-  const [error, setError] = useState("");
+  const [setError] = useState("");
 
   const getUserListings = () => {
     setLoading(false);

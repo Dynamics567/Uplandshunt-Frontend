@@ -16,8 +16,8 @@ const ActivateAccount = () => {
   const location = useHistory();
 
   const [loading, setLoading] = useState(false);
-  const [response, setResponse] = useState("");
-  const [error, setError] = useState("");
+  const [setResponse] = useState("");
+  const [setError] = useState("");
 
   const validationSchema = Yup.object().shape({
     email: Yup.string().required("Email is required").email("Email is invalid"),

@@ -105,6 +105,11 @@ const EditPropertyForm = ({ preloadedValues, images }) => {
       .delete(`property/${id}/images/${imageId}`)
       .then((response) => {
         console.log(response);
+      })
+      .catch((error) => {
+        // const errorMessage = error.response.data.data;
+        // toast.error(errorMessage);
+        console.log(error);
       });
   };
 
