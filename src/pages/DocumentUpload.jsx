@@ -2,7 +2,6 @@ import { useState } from "react";
 import SimpleDropZone from "../templates/SimpleDropZone";
 import { useParams } from "react-router";
 import { useHistory } from "react-router-dom";
-import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import { Button } from "../atoms";

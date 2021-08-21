@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
+import { useHistory } from "react-router-dom";
 
 import { Select, DashboardSectionTitle, Button } from "../atoms";
 import { listType, propertyType } from "../data/SelectOptions";
@@ -11,6 +12,7 @@ import PropertyCard from "../templates/PropertyCard";
 
 const RequestProperty = () => {
   const messageRef = useRef(null);
+  const location = useHistory();
 
   const [loading, setLoading] = useState(false);
   const [showMessageBox, setShowMessageBox] = useState(false);
@@ -51,12 +53,15 @@ const RequestProperty = () => {
   const submitPropertyRequest = (data) => {
     let id = { property_id: propertyId };
     const userData = { ...id, ...data };
+    setLoading(true);
     axiosWithAuth()
       .post("request", userData)
       .then((response) => {
         if (response) {
           toast.success(response.data.message);
         }
+        setLoading(false);
+        location.push(`/dashboard/request/bidsPlaced`);
       });
   };
 

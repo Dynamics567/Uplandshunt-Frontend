@@ -18,7 +18,7 @@ import {
 } from "../data/SelectOptions";
 import { axiosWithAuth } from "../Auth/Axios";
 
-const EditPropertyForm = ({ preloadedValues }) => {
+const EditPropertyForm = ({ preloadedValues, images }) => {
   const { id } = useParams();
 
   const [selected, setSelected] = useState([]);
@@ -57,6 +57,7 @@ const EditPropertyForm = ({ preloadedValues }) => {
       // property_type: preloadedValues?.property_type.id,
       bed: preloadedValues?.bed.bedroom,
       bath: preloadedValues?.bath.bathroom,
+      images: preloadedValues?.images,
     },
   });
   const { errors } = formState;
@@ -98,6 +99,15 @@ const EditPropertyForm = ({ preloadedValues }) => {
     // console.log("work");
   };
 
+  const deletePropertyImage = (imageId) => {
+    console.log(id, imageId);
+    axiosWithAuth()
+      .delete(`property/${id}/images/${imageId}`)
+      .then((response) => {
+        console.log(response);
+      });
+  };
+
   useEffect(() => {
     const defaultValues = {
       name: preloadedValues?.name,
@@ -119,154 +129,171 @@ const EditPropertyForm = ({ preloadedValues }) => {
   }, [preloadedValues, reset]);
 
   return (
-    <form onSubmit={handleSubmit(editDetails)}>
-      <section className="grid grid-cols-3 gap-4">
-        <InputTwo
-          type="text"
-          label="Property Name"
-          name="name"
-          register={register("name")}
-          readOnly
-        />
-        <Select
-          values={propertyType}
-          selectedValue="Under construction"
-          labelName="Property Type"
-          name="property_type"
-          {...register("property_type")}
-          error={errors.type?.message}
-        />
-        <InputTwo
-          type="text"
-          label="City"
-          name="city"
-          register={register("city")}
-          readOnly
-        />
-        <InputTwo
-          type="text"
-          label="Price"
-          name="price"
-          register={register("price")}
-          error={errors.price?.message}
-        />
-        <InputTwo
-          type="text"
-          label="Area of the Property"
-          name="area"
-          register={register("area")}
-          error={errors.area?.message}
-        />
-        <InputTwo
-          type="text"
-          label="Postal Code"
-          name="postal_code"
-          register={register("postal_code")}
-          readOnly
-        />
-        <InputTwo
-          type="text"
-          label="Address Lane 1"
-          name="address_line_one"
-          register={register("address_line_one")}
-          readOnly
-        />
-        <InputTwo
-          type="text"
-          label="Address Lane 2"
-          name="address_line_two"
-          register={register("address_line_two")}
-          readOnly
-        />
-        <MultiSelect
-          options={multiSelectOptions}
-          value={selected}
-          onChange={setSelected}
-          labelledBy="Amenities"
-          className="mt-7"
-        />
-        <InputTwo
-          type="text"
-          label="Country"
-          name="country"
-          register={register("country")}
-          readOnly
-        />
-        <Select
-          values={listType}
-          selectedValue="Rent"
-          labelName="Listing Type"
-          name="category"
-          {...register("category")}
-          error={errors.category?.message}
-        />
-        <Select
-          values={availability}
-          selectedValue="Available"
-          labelName="Availability"
-          name="availability"
-          {...register("availability")}
-          error={errors.availability?.message}
-        />
-        <InputTwo
-          type="text"
-          label="Kitchen"
-          name="kitchen"
-          register={register("kitchens")}
-          error={errors.kitchen?.message}
-        />
-        <InputTwo
-          type="text"
-          label="Bathroom"
-          name="bathroom"
-          register={register("bath")}
-          error={errors.bathroom?.message}
-        />
-        <InputTwo
-          type="text"
-          label="Bedroom"
-          name="bedroom"
-          register={register("bed")}
-          error={errors.bedroom?.message}
-        />
-        <div>
-          <label className="text-lg font-semibold text-left">
-            Property Description
-          </label>
-          <textarea
-            className="w-full border border-gray-400 focus:outline-none px-2 rounded-md py-1 mt-1"
-            rows="4"
-            cols="5"
+    <>
+      <form onSubmit={handleSubmit(editDetails)}>
+        <section className="grid grid-cols-3 gap-4">
+          <InputTwo
+            type="text"
+            label="Property Name"
+            name="name"
+            register={register("name")}
             readOnly
-            placeholder="Write a short property description"
-            name="description"
-            {...register("description")}
-          ></textarea>
-        </div>
-        <Select
-          values={furnishingType}
-          selectedValue="Not furnished"
-          labelName="Furnishing Type"
-          name="furnish_type"
-          {...register("furnish_type")}
-          error={errors.furnish_type?.message}
-        />
-        <Select
-          values={depositStructure}
-          selectedValue="10%"
-          labelName="Deposit Structure"
-          name="deposit_structure"
-          {...register("deposit_structure")}
-          error={errors.deposit_structure?.message}
-        />
-      </section>
+          />
+          <Select
+            values={propertyType}
+            selectedValue="Under construction"
+            labelName="Property Type"
+            name="property_type"
+            {...register("property_type")}
+            error={errors.type?.message}
+          />
+          <InputTwo
+            type="text"
+            label="City"
+            name="city"
+            register={register("city")}
+            readOnly
+          />
+          <InputTwo
+            type="text"
+            label="Price"
+            name="price"
+            register={register("price")}
+            error={errors.price?.message}
+          />
+          <InputTwo
+            type="text"
+            label="Area of the Property"
+            name="area"
+            register={register("area")}
+            error={errors.area?.message}
+          />
+          <InputTwo
+            type="text"
+            label="Postal Code"
+            name="postal_code"
+            register={register("postal_code")}
+            readOnly
+          />
+          <InputTwo
+            type="text"
+            label="Address Lane 1"
+            name="address_line_one"
+            register={register("address_line_one")}
+            readOnly
+          />
+          <InputTwo
+            type="text"
+            label="Address Lane 2"
+            name="address_line_two"
+            register={register("address_line_two")}
+            readOnly
+          />
+          <MultiSelect
+            options={multiSelectOptions}
+            value={selected}
+            onChange={setSelected}
+            labelledBy="Amenities"
+            className="mt-7"
+          />
+          <InputTwo
+            type="text"
+            label="Country"
+            name="country"
+            register={register("country")}
+            readOnly
+          />
+          <Select
+            values={listType}
+            selectedValue="Rent"
+            labelName="Listing Type"
+            name="category"
+            {...register("category")}
+            error={errors.category?.message}
+          />
+          <Select
+            values={availability}
+            selectedValue="Available"
+            labelName="Availability"
+            name="availability"
+            {...register("availability")}
+            error={errors.availability?.message}
+          />
+          <InputTwo
+            type="text"
+            label="Kitchen"
+            name="kitchen"
+            register={register("kitchens")}
+            error={errors.kitchen?.message}
+          />
+          <InputTwo
+            type="text"
+            label="Bathroom"
+            name="bathroom"
+            register={register("bath")}
+            error={errors.bathroom?.message}
+          />
+          <InputTwo
+            type="text"
+            label="Bedroom"
+            name="bedroom"
+            register={register("bed")}
+            error={errors.bedroom?.message}
+          />
+          <div>
+            <label className="text-lg font-semibold text-left">
+              Property Description
+            </label>
+            <textarea
+              className="w-full border border-gray-400 focus:outline-none px-2 rounded-md py-1 mt-1"
+              rows="4"
+              cols="5"
+              readOnly
+              placeholder="Write a short property description"
+              name="description"
+              {...register("description")}
+            ></textarea>
+          </div>
+          <Select
+            values={furnishingType}
+            selectedValue="Not furnished"
+            labelName="Furnishing Type"
+            name="furnish_type"
+            {...register("furnish_type")}
+            error={errors.furnish_type?.message}
+          />
+          <Select
+            values={depositStructure}
+            selectedValue="10%"
+            labelName="Deposit Structure"
+            name="deposit_structure"
+            {...register("deposit_structure")}
+            error={errors.deposit_structure?.message}
+          />
+        </section>
 
-      <div className="flex w-full justify-center items-center text-center mb-10">
-        <div className="w-1/2">
-          <Button loading={loading} buttonText="Save" />
+        <div className="flex w-full justify-center items-center text-center mb-10">
+          <div className="w-1/2">
+            <Button loading={loading} buttonText="Save" />
+          </div>
         </div>
+      </form>
+      <div className="flex  w-full my-8 justify-between">
+        {images.map((image) => {
+          return (
+            <div key={image.id}>
+              <img src={image.image_url} alt="propertyImage" />
+              <button
+                className="bg-primary text-white"
+                onClick={() => deletePropertyImage(image.id)}
+              >
+                Delete
+              </button>
+            </div>
+          );
+        })}
       </div>
-    </form>
+    </>
   );
 };
 

@@ -1,17 +1,15 @@
 import { useState, useEffect } from "react";
 import { ListingsLayout } from "../Layout";
-import { useHistory } from "react-router-dom";
 import { useParams } from "react-router";
 
-import prop1 from "../assets/prop1.png";
 import EditPropertyForm from "../templates/EditPropertyForm";
 import { axiosInstance } from "../Auth/Axios";
 import DashboardLoader from "../templates/DashboardLoader";
 
 const EditDetails = () => {
   const { id } = useParams();
-  const location = useHistory();
   const [data, setData] = useState(null);
+  const [images, setImages] = useState([]);
   const [loading, setloading] = useState(true);
 
   const getPropertyData = () => {
@@ -20,9 +18,10 @@ const EditDetails = () => {
       .then(function (response) {
         // handle success
         const details = response.data.data;
+        const propertyImages = details.images;
         setloading(false);
         setData(details);
-        // console.log(details);
+        setImages(propertyImages);
       })
       .catch(function (error) {
         // handle error
@@ -47,17 +46,7 @@ const EditDetails = () => {
       ) : (
         <div className="m-auto w-11/12">
           <ListingsLayout>
-            <EditPropertyForm preloadedValues={data} />
-            <div className="mt-8">
-              {/* <div className="mb-12 mt-10">
-                <p className="font-bold text-base mb-4">Images Of Properties</p>
-                <div className="flex">
-                  <img src={prop1} alt="prop1" className="mr-4 w-1/2" />
-                  <img src={prop1} alt="prop1" className="mr-4 w-1/2" />
-                  <img src={prop1} alt="prop1" className=" w-1/2" />
-                </div>
-              </div> */}
-            </div>
+            <EditPropertyForm preloadedValues={data} images={images} />
           </ListingsLayout>
         </div>
       )}

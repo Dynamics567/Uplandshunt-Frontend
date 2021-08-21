@@ -8,6 +8,7 @@ import { Footer } from "../organisms";
 const PaymentSuccessful = () => {
   return (
     <div>
+      {console.log(window.location.origin)}
       <HeaderTwo />
       <section className="m-auto w-8/12 mt-16 border border-lightAsh rounded-md p-6 flex flex-col justify-between items-center">
         <img src={payment} alt="payment" className="w-8 my-4" />

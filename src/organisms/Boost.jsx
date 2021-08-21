@@ -50,11 +50,14 @@ const Boost = ({ id }) => {
     getPropertyDetails();
   }, []);
 
+  const callBack = window.location.origin;
+
   const boostProperty = (planId) => {
     setLoading(true);
     const boostObject = {
       property_id: id,
       boost_plan_id: planId,
+      call_back_url: `${callBack}/paymentSuccess`,
     };
     axiosWithAuth()
       .post("boost", boostObject)
@@ -69,9 +72,9 @@ const Boost = ({ id }) => {
       });
   };
 
-  //   if (loading) {
-  //     return <DashboardLoader />;
-  //   }
+  // if (loading) {
+  //   return <DashboardLoader />;
+  // }
 
   const { name, price, city, images } = propertyDetails;
 

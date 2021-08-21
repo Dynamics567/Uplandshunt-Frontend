@@ -1,5 +1,6 @@
-import React from "react";
 import { Doughnut } from "react-chartjs-2";
+
+import transact from "../assets/userDashboard/transact.png";
 
 const DoughnutChart = ({ transactions }) => {
   // transactions.shift();
@@ -63,6 +64,10 @@ const DoughnutChart = ({ transactions }) => {
   return (
     <>
       <div style={styles.doughnutContainer}>
+        <div className="flex">
+          <img src={transact} alt="transact" className="w-6" />
+          <p className="font-bold text-lg">Transaction history</p>
+        </div>
         <Doughnut data={data} options={options} />
       </div>
     </>

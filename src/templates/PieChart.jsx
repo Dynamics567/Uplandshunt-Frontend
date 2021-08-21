@@ -1,5 +1,6 @@
-import React from "react";
 import { Pie } from "react-chartjs-2";
+
+import smallBuild from "../assets/userDashboard/smallBuild.png";
 
 const PieChart = ({ listings }) => {
   let listkeys = [];
@@ -42,11 +43,6 @@ const PieChart = ({ listings }) => {
 
   const options = {
     plugins: {
-      // title: {
-      //   display: true,
-      //   text: "Listings details",
-      //   align: "right",
-      // },
       legend: {
         position: "right",
       },
@@ -57,11 +53,15 @@ const PieChart = ({ listings }) => {
   };
 
   return (
-    <>
+    <div className="">
       <div style={styles.pieContainer}>
+        <div className="flex">
+          <img src={smallBuild} alt="smallBuild" className="w-6" />
+          <p className="font-bold text-lg">Listings details</p>
+        </div>
         <Pie data={data} options={options} />
       </div>
-    </>
+    </div>
   );
 };
 

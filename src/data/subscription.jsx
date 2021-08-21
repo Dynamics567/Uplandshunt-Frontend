@@ -46,11 +46,11 @@ export const listingHeader = [
     item: "Bids Recieved",
     url: "/dashboard/listings/bidsReceived",
   },
-  // {
-  //   id: "5",
-  //   item: "Bids Sent",
-  //   url: "/dashboard/listings/bidsSent",
-  // },
+  {
+    id: "5",
+    item: "Bids Sent",
+    url: "/dashboard/listings/bidsSent",
+  },
 ];
 
 export const propertyRequest = [

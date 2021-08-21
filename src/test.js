@@ -58,3 +58,28 @@ export const listing = {
     percentage: 0,
   },
 };
+
+// {
+//   "status": true,
+//   "code": 200,
+//   "message": "success",
+//   "data": {
+//       "duration_in_month": "4",
+//       "start_month": "2021-08-19T00:40:52.565Z",
+//       "end_month": "2021-12-19T00:40:52.565Z",
+//       "id": 2,
+//       "plan": {
+//           "id": 1,
+//           "name": "Gold",
+//           "amount_per_month": "100",
+//           "number_of_property": 400,
+//           "description": "Plan description goes here",
+//           "attributes": [
+//               "first attribute goes here",
+//               "second attribute goes here",
+//               "third attribute goes here"
+//           ],
+//           "image": "https://via.placeholder.com/150"
+//       }
+//   }
+// }
