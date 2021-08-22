@@ -4,20 +4,19 @@ import { useParams } from "react-router";
 import { useHistory } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
+import { toast } from "react-toastify";
 
 import { axiosInstance } from "../Auth/Axios";
-import { Input } from "../atoms";
+import { Button, Input } from "../atoms";
 import { AuthLayout } from "../Layout";
 import Intro from "../templates/Intro";
-import LoadSpinner from "../templates/LoadSpinner";
 
 const ActivateAccount = () => {
   let { token } = useParams();
   const location = useHistory();
 
   const [loading, setLoading] = useState(false);
-  const [setResponse] = useState("");
-  const [setError] = useState("");
+  const [error, setError] = useState("");
 
   const validationSchema = Yup.object().shape({
     email: Yup.string().required("Email is required").email("Email is invalid"),
@@ -29,14 +28,14 @@ const ActivateAccount = () => {
   const activateAccount = (data) => {
     let userToken = { token: token };
     const userData = { ...userToken, ...data };
-    console.log(userData);
     setLoading(true);
     axiosInstance
       .post("auth/activate", userData)
       .then(function (response) {
-        console.log(response);
-        setResponse(response.data.data);
+        const results = response.data.data;
+        console.log(results);
         setLoading(false);
+        toast.success(results);
         location.push("/login");
       })
       .catch(function (error) {
@@ -67,13 +66,7 @@ before you can log in"
           error={errors.email?.message}
           //   disabled={loading}
         />
-
-        <div className="bg-primary rounded-md p-4 my-8 flex w-full justify-between items-center text-center">
-          <div className="">{loading && <LoadSpinner />}</div>
-          <button className="text-white bg-primary font-semibold w-full focus:outline-none">
-            Activate Account
-          </button>
-        </div>
+        <Button loading={loading} buttonText="Activate Account" />
       </form>
     </AuthLayout>
   );

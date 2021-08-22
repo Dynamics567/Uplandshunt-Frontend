@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 
 import placeholder from "../assets/placeholder.png";
 import building from "../assets/userDashboard/building.svg";
@@ -11,7 +12,7 @@ import PropertyCard from "../templates/PropertyCard";
 const Listings = () => {
   const [loading, setLoading] = useState(true);
   const [response, setResponse] = useState([]);
-  const [setError] = useState("");
+  const [error, setError] = useState("");
 
   const getUserListings = () => {
     setLoading(false);
@@ -33,8 +34,24 @@ const Listings = () => {
       });
   };
 
+  const getUserSub = () => {
+    setLoading(true);
+    axiosWithAuth()
+      .get("/subscription/active")
+      .then((response) => {
+        const results = response.data.data;
+        console.log(results);
+      })
+      .catch((error) => {
+        const errorMessage = error.response.data.data;
+        toast.error(errorMessage);
+        setError(error);
+      });
+  };
+
   useEffect(() => {
     getUserListings();
+    getUserSub();
   }, []);
 
   const propertiesToSell = response.filter(
@@ -51,6 +68,7 @@ const Listings = () => {
         text="Listings"
         buttonText="Add New Listings"
         buttonUrl="/dashboard/listings/edit"
+        error={error}
       />
       {loading ? (
         <LoadSpinner />

@@ -19,6 +19,7 @@ const Boost = ({ id }) => {
       .get("boost/plans")
       .then((response) => {
         const results = response.data.data;
+        console.log(results);
         setData(results);
         setLoading(false);
       });

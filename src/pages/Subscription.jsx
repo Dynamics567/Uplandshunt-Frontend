@@ -8,12 +8,13 @@ import { axiosWithAuth } from "../Auth/Axios";
 import DashboardLoader from "../templates/DashboardLoader";
 
 const Subscription = ({ id }) => {
-  const [active, setActive] = useState(plans[0].index);
+  const [active, setActive] = useState(1);
   const [getMonthId, setGetMonthId] = useState("");
   const [getPlanId, setGetPlanId] = useState("");
-  const [setCurrentPlan] = useState([]);
+  const [currentPlan, setCurrentPlan] = useState([]);
   const [loading, setLoading] = useState(false);
   const [authUrl, setAuthUrl] = useState("");
+  const [error, setError] = useState("");
 
   const callBack = window.location.origin;
 
@@ -35,24 +36,27 @@ const Subscription = ({ id }) => {
       });
   };
 
-  const getUserSub = () => {
-    setLoading(true);
-    axiosWithAuth()
-      .get("/subscription/active")
-      .then((response) => {
-        const results = response.data.data;
-        setCurrentPlan(results);
-        setLoading(false);
-        console.log(results);
-      });
-  };
+  // const getUserSub = () => {
+  //   setLoading(true);
+  //   axiosWithAuth()
+  //     .get("/subscription/active")
+  //     .then((response) => {
+  //       const results = response.data.data;
+  //       setCurrentPlan(results);
+  //       setLoading(false);
+  //       console.log(results);
+  //     });
+  // };
 
   useEffect(() => {
-    getUserSub();
     if (getMonthId && getPlanId) {
       upgradeSub();
     }
   }, [getMonthId, getPlanId, active]);
+
+  // useEffect(() => {
+  //   getUserSub();
+  // }, []);
 
   if (loading) {
     return <DashboardLoader />;
@@ -75,21 +79,23 @@ const Subscription = ({ id }) => {
               return (
                 <div
                   className="cursor-pointer"
-                  style={
-                    ({ backgroundColor: active ? "sub-active" : "" },
-                    { color: active ? "sub-active" : "" })
-                  }
                   key={monthId}
                   onClick={() => {
                     setGetMonthId(() => duration);
                     setActive(() => monthId);
+                    // console.log(active);
                     setGetPlanId("");
                   }}
-                  // className={
-                  //   active === id ? "tab-title tab-title--active" : "tab-title"
-                  // }
                 >
-                  <p className="font-semibold text-base p-4 text-ash mr-8">
+                  <p
+                    className="font-semibold text-base p-4 text-ash mr-8"
+                    style={
+                      active
+                        ? { backgroundColor: "#B3404A" }
+                        : { backgroundColor: "#ffffff" }
+                    }
+                  >
+                    {console.log(active)}
                     {plan}
                   </p>
                 </div>

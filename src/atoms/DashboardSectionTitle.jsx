@@ -1,13 +1,25 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useLocation } from "react-router";
 
 const DashboardSectionTitle = ({
   text,
   buttonUrl,
   buttonText,
   showButton = true,
+  error,
 }) => {
-  const scrollToTop = () => {
+  const location = useHistory();
+
+  const addNewListing = () => {
     window.scrollTo(0, 0);
+    if (error) {
+      location.push(`/dashboard/subscription`);
+      toast.error("You must have an active subscription to add listings");
+    } else {
+      location.push(buttonUrl);
+    }
   };
   return (
     <div className="flex justify-between items-center w-full m-4">
@@ -16,17 +28,14 @@ const DashboardSectionTitle = ({
         <div className="bg-primary w-16 h-2 ml-3"></div>
       </div>
       {showButton && (
-        <Link
-          to={buttonUrl}
-          className="w-full flex items-center justify-center"
-        >
+        <div to={buttonUrl} className="w-full flex items-center justify-center">
           <button
             className="rounded-md p-4 text-white bg-primary font-semibold "
-            onClick={scrollToTop}
+            onClick={addNewListing}
           >
             {buttonText}
           </button>
-        </Link>
+        </div>
       )}
     </div>
   );

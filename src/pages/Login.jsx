@@ -83,6 +83,7 @@ const Login = () => {
             {...register("password")}
             error={errors.password?.message}
             disabled={loading}
+            autocomplete="on"
           />
         </div>
         <Link to="/forgotpassword">
