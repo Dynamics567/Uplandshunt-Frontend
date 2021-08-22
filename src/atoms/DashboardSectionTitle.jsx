@@ -9,18 +9,30 @@ const DashboardSectionTitle = ({
   buttonText,
   showButton = true,
   error,
+  numberOfProperty,
+  response,
 }) => {
   const location = useHistory();
 
   const addNewListing = () => {
     window.scrollTo(0, 0);
+    // if (error) {
+    //   location.push(`/dashboard/subscription`);
+    //   toast.error("You must have an active subscription to add listings");
+    // } else {
+    //   location.push(buttonUrl);
+    // }
     if (error) {
       location.push(`/dashboard/subscription`);
       toast.error("You must have an active subscription to add listings");
+    } else if (response.length > numberOfProperty) {
+      location.push(`/dashboard/subscription`);
+      toast.error("You have exceeded the number of properties");
     } else {
       location.push(buttonUrl);
     }
   };
+
   return (
     <div className="flex justify-between items-center w-full m-4">
       <div className="w-full">

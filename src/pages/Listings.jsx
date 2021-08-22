@@ -13,6 +13,7 @@ const Listings = () => {
   const [loading, setLoading] = useState(true);
   const [response, setResponse] = useState([]);
   const [error, setError] = useState("");
+  const [numberOfProperty, setNumberOfProperty] = useState("");
 
   const getUserListings = () => {
     setLoading(false);
@@ -40,6 +41,7 @@ const Listings = () => {
       .get("/subscription/active")
       .then((response) => {
         const results = response.data.data;
+        setNumberOfProperty(results.plan.number_of_property);
         console.log(results);
       })
       .catch((error) => {
@@ -69,6 +71,8 @@ const Listings = () => {
         buttonText="Add New Listings"
         buttonUrl="/dashboard/listings/edit"
         error={error}
+        numberOfProperty={numberOfProperty}
+        response={response}
       />
       {loading ? (
         <LoadSpinner />
