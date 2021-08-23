@@ -41,6 +41,7 @@ const PropertyRequest = () => {
         text="My Property Requests"
         buttonText="Request a Property"
         buttonUrl="/dashboard/request/requestProperty"
+        response="0"
       />
       {loading ? (
         <LoadSpinner />

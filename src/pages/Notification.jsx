@@ -34,7 +34,9 @@ const Notification = (props) => {
   const listings = graphData.listing_details;
   const transactions = graphData.transaction_history;
   // const savedProperty = graphData.saved_properties;
-
+  {
+    console.log(Object.keys(listings).count);
+  }
   return (
     <>
       {loading ? (

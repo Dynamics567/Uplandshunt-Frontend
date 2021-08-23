@@ -11,12 +11,26 @@ const DoughnutChart = ({ transactions }) => {
     transactionkeys.push(key);
     transactionValues.push(value.total_amount);
   }
-
+  {
+    console.log(transactions.length);
+  }
   delete transactions.total;
 
   const data = {
     labels: transactionkeys,
     datasets: [
+      {
+        label: "",
+        fillColor: "rgba(220,220,220,0.0)",
+        strokeColor: "rgba(220,220,220,0)",
+        pointColor: "rgba(220,220,220,0)",
+        pointStrokeColor: "#fff",
+        pointHighlightFill: "#fff",
+        pointHighlightStroke: "rgba(220,220,220,1)",
+        // change this data values according to the vertical scale
+        // you are looking for
+        data: [65, 59, 80, 81, 56, 55, 40],
+      },
       {
         label: "# of Votes",
         data: transactionValues,
@@ -28,14 +42,6 @@ const DoughnutChart = ({ transactions }) => {
           "#a53b44",
           "#b63a44",
         ],
-        //   borderColor: [
-        //     "rgba(255, 99, 132, 1)",
-        //     "rgba(54, 162, 235, 1)",
-        //     "rgba(255, 206, 86, 1)",
-        //     "rgba(75, 192, 192, 1)",
-        //     "rgba(153, 102, 255, 1)",
-        //     "rgba(255, 159, 64, 1)",
-        //   ],
         borderWidth: 1,
       },
     ],

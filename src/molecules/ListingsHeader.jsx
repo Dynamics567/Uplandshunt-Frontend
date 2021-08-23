@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { NavLink } from "react-router-dom";
 
+import Timer from "../templates/Timer";
 import { boostedProperties } from "../test";
 import { Boost, Modal } from "../organisms";
 import { listingHeader } from "../data/subscription";
@@ -11,10 +12,7 @@ const ListingsHeader = () => {
   const { id } = useParams();
   const [show, setShow] = useState(false);
   const [toggleShowBoosted, setToggleShowBoosted] = useState(false);
-
-  let getBoostedPropertyId = [];
-  let getStartTime = [];
-  let getEndTime = [];
+  const [getPropertyId, setGetPropertyId] = useState({});
 
   const boostProperty = () => {
     setShow(true);
@@ -34,26 +32,24 @@ const ListingsHeader = () => {
       });
   };
 
-  {
-    boostedProperties.map((property) => {
-      return getBoostedPropertyId.push(property.property.id);
-    });
-  }
-
-  const propertyId = getBoostedPropertyId.includes(Number(id));
-
-  console.log(getBoostedPropertyId);
   useEffect(() => {
     getUserBoostedProperties();
   }, []);
 
   useEffect(() => {
-    if (propertyId) {
+    if (id) {
       return setToggleShowBoosted(true);
     }
-  }, [propertyId]);
+  }, [id]);
 
-  // console.log(boostedProperties);
+  useEffect(() => {
+    const data = boostedProperties.find((el) => el.property.id === +id);
+    setGetPropertyId(data);
+  }, [id]);
+
+  const startTime = getPropertyId.start_at;
+  const endTime = getPropertyId.end_at;
+
   return (
     <div className="flex items-center justify-between">
       <Modal
@@ -77,7 +73,13 @@ const ListingsHeader = () => {
         );
       })}
       {toggleShowBoosted ? (
-        <p>test</p>
+        <Timer
+          startTime={startTime}
+          endTime={endTime}
+          boostProperty={boostProperty}
+          show={show}
+          setShow={setShow}
+        />
       ) : (
         <button
           className="bg-metal p-4 font-semibold text-sm rounded-md text-white"

@@ -19,6 +19,18 @@ const PieChart = ({ listings }) => {
     labels: listkeys,
     datasets: [
       {
+        label: "",
+        fillColor: "rgba(220,220,220,0.0)",
+        strokeColor: "rgba(220,220,220,0)",
+        pointColor: "rgba(220,220,220,0)",
+        pointStrokeColor: "#fff",
+        pointHighlightFill: "#fff",
+        pointHighlightStroke: "rgba(220,220,220,1)",
+        // change this data values according to the vertical scale
+        // you are looking for
+        data: [65, 59, 80, 81, 56, 55, 40],
+      },
+      {
         label: "Listings details",
         data: listValues,
         backgroundColor: [
