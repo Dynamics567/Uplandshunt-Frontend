@@ -13,7 +13,7 @@ const Timer = ({ startTime, endTime, boostProperty, show, setShow }) => {
   date = new Date(startTime);
   date2 = new Date(endTime);
 
-  console.log(diff_hours(date, date2));
+  let countDownTime = diff_hours(date, date2);
 
   const renderer = ({ hours, minutes, seconds, completed }) => {
     if (completed) {
@@ -37,7 +37,10 @@ const Timer = ({ startTime, endTime, boostProperty, show, setShow }) => {
   };
   return (
     <div>
-      <Countdown date={Date.now() + 5} renderer={renderer} />
+      <Countdown
+        date={Date.now() + countDownTime * 3600000}
+        renderer={renderer}
+      />
     </div>
   );
 };
