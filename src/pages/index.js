@@ -50,3 +50,4 @@ export * from "./PaymentPage";
 export * from "./PaymentSuccessful";
 export * from "./RequestProperty";
 export * from "./ViewBidsPropertyRequest";
+export * from "./PageNotFound";

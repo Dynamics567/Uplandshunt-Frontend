@@ -1001,3 +1001,21 @@ export const propertySold = [
     ],
   },
 ];
+
+export const allBlogs = [
+  {
+    id: 1,
+    title: "New Bloc info",
+    author: "1",
+    image: "http://via.placeholder.com/150",
+    content:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    updatedAt: "2021-08-21T00:24:14.726Z",
+    user: {
+      email: "admin@uplandhunt.com",
+      first_name: "martins",
+      last_name: "jeremy",
+      phone: "9098989898",
+    },
+  },
+];

@@ -32,6 +32,7 @@ import {
   PropertyDetails,
   PaymentPage,
   PaymentSuccessful,
+  PageNotFound,
 } from "./pages";
 
 function App() {
@@ -78,7 +79,7 @@ function App() {
               <Route path="/legal/regulations" component={Regulations} />
               <Route path="/legal/blog" exact component={Blog} />
               <Route path="/legal/newsview" exact component={SingleNews} />
-              <Route path="/legal/blogview" component={SingleBlog} />
+              <Route path="/legal/blogview/:id" component={SingleBlog} />
               <Route path="/paymentPage" component={PaymentPage} />
               <Route path="/paymentSuccess" component={PaymentSuccessful} />
               <Route
@@ -91,6 +92,7 @@ function App() {
                 component={SingleRegulation}
               />
             </div>
+            <Route component={PageNotFound} />
           </Switch>
           <ToastContainer autoClose={5000} />
         </Router>
