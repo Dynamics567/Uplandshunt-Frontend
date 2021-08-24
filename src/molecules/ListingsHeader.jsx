@@ -14,6 +14,9 @@ const ListingsHeader = () => {
   const [toggleShowBoosted, setToggleShowBoosted] = useState(false);
   const [getPropertyId, setGetPropertyId] = useState({});
 
+  let startTime;
+  let endTime;
+
   const boostProperty = () => {
     setShow(true);
     console.log("works");
@@ -47,8 +50,13 @@ const ListingsHeader = () => {
     setGetPropertyId(data);
   }, [id]);
 
-  const startTime = getPropertyId.start_at;
-  const endTime = getPropertyId.end_at;
+  if (getPropertyId) {
+    startTime = getPropertyId.start_at;
+    endTime = getPropertyId.end_at;
+  }
+  // if (id) {
+
+  // }
 
   return (
     <div className="flex items-center justify-between">
@@ -86,6 +94,7 @@ const ListingsHeader = () => {
           onClick={boostProperty}
         >
           Boost Property
+          {console.log(toggleShowBoosted)}
         </button>
       )}
     </div>

@@ -4,14 +4,14 @@ import placeholder from "../assets/placeholder.png";
 import { PurchaseLayout } from "../Layout";
 import DashboardLoader from "../templates/DashboardLoader";
 import { axiosWithAuth } from "../Auth/Axios";
-import { propertyPurchased } from "../test";
+import { propertySold } from "../test";
 import { PropertyCardThree } from "../organisms";
 
-const PropertyPurchased = () => {
+const PropertySold = () => {
   const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState([]);
 
-  const getPropertyPurchased = () => {
+  const getPropertySold = () => {
     axiosWithAuth()
       .get("/transaction/property?tag=bought")
       .then((response) => {
@@ -20,7 +20,7 @@ const PropertyPurchased = () => {
   };
 
   useEffect(() => {
-    getPropertyPurchased();
+    getPropertySold();
   }, []);
 
   return (
@@ -28,11 +28,11 @@ const PropertyPurchased = () => {
       <>
         {loading ? (
           <DashboardLoader />
-        ) : propertyPurchased.length === 0 ? (
-          <p>No property purhased</p>
+        ) : propertySold.length === 0 ? (
+          <p>No property sold</p>
         ) : (
           <div className="ml-4">
-            {propertyPurchased.map(
+            {propertySold.map(
               ({ id, price, name, property, address_line_one }) => {
                 return (
                   <PropertyCardThree
@@ -61,4 +61,4 @@ const PropertyPurchased = () => {
   );
 };
 
-export { PropertyPurchased };
+export { PropertySold };

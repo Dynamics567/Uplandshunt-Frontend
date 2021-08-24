@@ -108,6 +108,6 @@ export const userDashboard = [
     id: "7",
     navItem: "My Purchase",
     image: purchase,
-    link: "/dashboard/purchase",
+    link: "/dashboard/purchase/propertyPurchased",
   },
 ];

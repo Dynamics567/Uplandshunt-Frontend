@@ -36,17 +36,17 @@ const Subscription = ({ id }) => {
       });
   };
 
-  // const getUserSub = () => {
-  //   setLoading(true);
-  //   axiosWithAuth()
-  //     .get("/subscription/active")
-  //     .then((response) => {
-  //       const results = response.data.data;
-  //       setCurrentPlan(results);
-  //       setLoading(false);
-  //       console.log(results);
-  //     });
-  // };
+  const getUserSub = () => {
+    setLoading(true);
+    axiosWithAuth()
+      .get("/subscription/active")
+      .then((response) => {
+        const results = response.data.data;
+        setCurrentPlan(results);
+        setLoading(false);
+        console.log(results);
+      });
+  };
 
   useEffect(() => {
     if (getMonthId && getPlanId) {
@@ -54,9 +54,9 @@ const Subscription = ({ id }) => {
     }
   }, [getMonthId, getPlanId, active]);
 
-  // useEffect(() => {
-  //   getUserSub();
-  // }, []);
+  useEffect(() => {
+    getUserSub();
+  }, []);
 
   if (loading) {
     return <DashboardLoader />;

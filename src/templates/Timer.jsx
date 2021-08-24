@@ -15,6 +15,8 @@ const Timer = ({ startTime, endTime, boostProperty, show, setShow }) => {
 
   let countDownTime = diff_hours(date, date2);
 
+  window.localStorage.setItem("countDownTime", countDownTime);
+
   const renderer = ({ hours, minutes, seconds, completed }) => {
     if (completed) {
       // Render a completed state
@@ -36,7 +38,7 @@ const Timer = ({ startTime, endTime, boostProperty, show, setShow }) => {
     }
   };
   return (
-    <div>
+    <div className="bg-white p-4 rounded-md shadow-md">
       <Countdown
         date={Date.now() + countDownTime * 3600000}
         renderer={renderer}

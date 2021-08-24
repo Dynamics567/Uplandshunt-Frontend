@@ -18,7 +18,7 @@ import {
   PropertyRequestDocument,
   PaymentHistory,
   PropertyPurchased,
-  PropertyRented,
+  PropertySold,
   AllSavedProperties,
   EditIndividualProfile,
   EditBusinessProfile,
@@ -132,9 +132,9 @@ const Dashboard = () => {
               component={PropertyPurchased}
             />
             <Route
-              path="/dashboard/purchase/propertyRented"
+              path="/dashboard/purchase/propertySold"
               exact
-              component={PropertyRented}
+              component={PropertySold}
             />
             <Route
               path="/dashboard/purchase/paymentHistory"

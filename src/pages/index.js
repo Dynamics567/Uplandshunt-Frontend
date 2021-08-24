@@ -34,7 +34,7 @@ export * from "./BidsPlaced";
 export * from "./InterestSent";
 export * from "./PropertyRequestDocument";
 export * from "./PropertyPurchased";
-export * from "./PropertyRented";
+export * from "./PropertySold";
 export * from "./PaymentHistory";
 export * from "./AllSavedProperties";
 export * from "./ActivateAccount";

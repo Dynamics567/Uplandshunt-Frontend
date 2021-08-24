@@ -40,7 +40,7 @@ const BidsPlaced = () => {
                     id={property.id}
                     price={price}
                     name={property.name}
-                    image_url={placeholder || property.imges[0].image_url}
+                    image_url={placeholder || property.images[0].image_url}
                     city={property.address_line_one}
                     showBidsHistory={true}
                     showDocument={true}

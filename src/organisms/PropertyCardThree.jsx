@@ -1,15 +1,16 @@
 import { useHistory } from "react-router-dom";
 
 import locationIcon from "../assets/location.svg";
+import payIcon from "../assets/userDashboard/payIcon.png";
 
-const PropertyCardTwo = ({
+const PropertyCardThree = ({
   id,
   price,
   name,
   image_url,
   city,
   amenities,
-  showBidsHistory = false,
+  showPaymentHistory = false,
   showDocument = false,
 }) => {
   const location = useHistory();
@@ -37,13 +38,16 @@ const PropertyCardTwo = ({
             <img src={locationIcon} alt="location" className="mr-2" />
             <p className="font-semibold text-sm">{city}</p>
           </div>
-          {showBidsHistory && (
-            <p
-              className="font-semibold text-base text-primary cursor-pointer"
-              onClick={() => viewBidsHistory(id)}
-            >
-              View bids History
-            </p>
+          {showPaymentHistory && (
+            <div className="">
+              <img src={payIcon} alt="payIcon" className="w-32" />
+              <p
+                className="font-semibold text-xs text-primary cursor-pointer mt-2"
+                onClick={() => viewBidsHistory(id)}
+              >
+                View Payment History
+              </p>
+            </div>
           )}
         </div>
         <p className="font-bold text-base py-2">₦{price}</p>
@@ -56,4 +60,4 @@ const PropertyCardTwo = ({
   );
 };
 
-export { PropertyCardTwo };
+export { PropertyCardThree };

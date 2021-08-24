@@ -79,14 +79,14 @@ export const purchase = [
   },
   {
     id: "2",
-    item: "Property Rented",
-    url: "/dashboard/purchase/propertyRented",
+    item: "Property Sold",
+    url: "/dashboard/purchase/propertySold",
   },
-  {
-    id: "3",
-    item: "Payment History",
-    url: "/dashboard/purchase/paymentHistory",
-  },
+  // {
+  //   id: "3",
+  //   item: "Payment History",
+  //   url: "/dashboard/purchase/paymentHistory",
+  // },
 ];
 
 export const register = [
