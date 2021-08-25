@@ -2,9 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 
 import { axiosInstance } from "../Auth/Axios";
-import blogOne from "../assets/blogTwo.svg";
 import { SingleLegalLayout } from "../Layout";
-import SingleLegalCard from "../templates/SingleLegalCard";
 import DashboardLoader from "../templates/DashboardLoader";
 
 const SingleBlog = () => {
@@ -14,9 +12,11 @@ const SingleBlog = () => {
   const [blog, setBlog] = useState({});
 
   const getSingleBlog = () => {
+    setLoading(true);
     axiosInstance.get(`/blogs/${id}`).then((response) => {
       const results = response.data.data;
       setBlog(results);
+      setLoading(false);
     });
   };
 

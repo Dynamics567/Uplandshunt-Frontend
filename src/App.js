@@ -78,7 +78,7 @@ function App() {
               <ProtectedRoute path="/dashboard" component={Dashboard} />
               <Route path="/legal/regulations" component={Regulations} />
               <Route path="/legal/blog" exact component={Blog} />
-              <Route path="/legal/newsview" exact component={SingleNews} />
+              <Route path="/legal/newsview/:id" exact component={SingleNews} />
               <Route path="/legal/blogview/:id" component={SingleBlog} />
               <Route path="/paymentPage" component={PaymentPage} />
               <Route path="/paymentSuccess" component={PaymentSuccessful} />
@@ -87,7 +87,7 @@ function App() {
                 component={SearchResult}
               />
               <Route
-                path="/legal/regulationview"
+                path="/legal/regulationview/:id"
                 exact
                 component={SingleRegulation}
               />

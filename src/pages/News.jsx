@@ -1,28 +1,26 @@
 import { useState, useEffect } from "react";
 
 import { LegalLayout } from "../Layout/LegalLayout";
-import prop2 from "../assets/prop4.svg";
-import BlogCard from "../templates/BlogCard";
+import NewsCard from "../templates/NewsCard";
 import { axiosInstance } from "../Auth/Axios";
-import { allBlogs } from "../test";
 import DashboardLoader from "../templates/DashboardLoader";
 
 const News = () => {
   const [loading, setLoading] = useState(false);
-  const [blogs, setBlogs] = useState(allBlogs);
+  const [news, setNews] = useState([]);
 
-  const getAllBlogs = () => {
+  const getAllNews = () => {
     setLoading(true);
-    axiosInstance.get("/blogs").then((response) => {
-      // const results = response.data.data;
-      // console.log(results);
-      // setBlogs(results);
+    axiosInstance.get("/news").then((response) => {
+      const results = response.data.data;
+      console.log(results);
+      setNews(results);
       setLoading(false);
     });
   };
 
   useEffect(() => {
-    getAllBlogs();
+    getAllNews();
   }, []);
 
   return (
@@ -31,8 +29,8 @@ const News = () => {
         <DashboardLoader />
       ) : (
         <LegalLayout text="News about the buildings">
-          {blogs.map((blogs) => {
-            return <BlogCard blogs={blogs} />;
+          {news.map((news) => {
+            return <NewsCard news={news} />;
           })}
         </LegalLayout>
       )}
