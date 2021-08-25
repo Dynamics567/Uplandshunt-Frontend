@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+
+import { Button } from "../atoms";
 import dot from "../assets/dot.svg";
 import { axiosInstance } from "../Auth/Axios";
 
@@ -8,6 +10,7 @@ const SubCard = ({
   className,
   buttonText,
   getPlanId,
+  loading,
   showButton = false,
 }) => {
   const [subscription, setSubscription] = useState([]);
@@ -15,7 +18,6 @@ const SubCard = ({
   const getSubscription = () => {
     axiosInstance.get("property/subscription/all").then((response) => {
       const results = response.data.data;
-      console.log(results);
       setSubscription(results);
     });
   };
@@ -65,9 +67,10 @@ const SubCard = ({
             </p>
             {showButton && (
               <div onClick={() => getPlanId(sub.id)} className="bg-white">
-                <button className="py-4 px-8 w-full mt-6 font-bold text-base text-white rounded-md bg-primary">
+                {/* <button className="py-4 px-8 w-full mt-6 font-bold text-base text-white rounded-md bg-primary">
                   {buttonText}
-                </button>
+                </button> */}
+                <Button loading={loading} buttonText="Upgrade" />
               </div>
             )}
           </section>

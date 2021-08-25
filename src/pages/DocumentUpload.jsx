@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import { Button } from "../atoms";
-import { axiosWithAuth } from "../Auth/Axios";
+import { axiosWithAuth, axiosInstance } from "../Auth/Axios";
 
 const DocumentUpload = (imageTitle) => {
   let { id } = useParams();
@@ -18,30 +18,39 @@ const DocumentUpload = (imageTitle) => {
     // console.log(fileNames);
     const formdata = new FormData();
     formdata.append("file", fileNames[0]);
-    formdata.append("document_name", imageTitle);
+    formdata.append("document_name", "test");
+    console.log(formdata);
     // console.log(formdata);
-    // console.log(formdata);
-    axiosWithAuth()
-      .post(`property/${id}/documents`, formdata)
-      .then((response) => {
-        const successMessage = response.data.data;
-        console.log(successMessage);
-        toast.success(successMessage);
-      });
+    // axiosWithAuth()
+    //   .post(`property/${id}/documents`, formdata)
+    //   .then((response) => {
+    //     const successMessage = response.data.data;
+    //     console.log(successMessage);
+    //     toast.success(successMessage);
+    //   });
+  };
+
+  const getPropertyDetails = () => {
+    // setLoading(true);
+    axiosInstance.get(`property/${id}`).then((response) => {
+      return response;
+    });
   };
 
   const saveDocuments = () => {
-    setLoading(true);
-    axiosWithAuth()
-      .post(`property/${id}/save`)
-      .then((response) => {
-        console.log(response);
-        setLoading(false);
-        const successMessage = response.data.message;
-        console.log(successMessage);
-        toast.success(successMessage);
-        location.push(`/dashboard/listings/editDetails/${id}`);
-      });
+    const ifDocuments = getPropertyDetails();
+    console.log(ifDocuments);
+    // setLoading(true);
+    // axiosWithAuth()
+    //   .post(`property/${id}/save`)
+    //   .then((response) => {
+    //     console.log(response);
+    //     setLoading(false);
+    //     const successMessage = response.data.message;
+    //     console.log(successMessage);
+    //     toast.success(successMessage);
+    //     location.push(`/dashboard/listings/editDetails/${id}`);
+    //   });
   };
   return (
     <div className="m-auto w-11/12 mt-6">

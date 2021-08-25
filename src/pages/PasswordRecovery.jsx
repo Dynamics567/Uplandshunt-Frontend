@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
+import { toast } from "react-toastify";
 // import { useHistory } from "react-router-dom";
 
 import { AuthLayout } from "../Layout";
@@ -34,13 +35,17 @@ const PasswordRecovery = () => {
       .post("auth/forgot-password", data)
       .then(function (response) {
         console.log(response);
-        setResponse(response.data.data);
+        const successMessage = response.data.data;
+        setResponse(successMessage);
+        toast.success(successMessage);
         setLoading(false);
         // location.push("/resetpassword");
       })
       .catch(function (error) {
         if (error.response) {
-          setError(error.response.data.data);
+          const errorMessage = error.response.data.data;
+          setError(errorMessage);
+          toast.error(errorMessage);
           setLoading(false);
         }
         // handle error
@@ -49,7 +54,6 @@ const PasswordRecovery = () => {
   };
   return (
     <div className="h-full">
-      {/* <Toast toastList={testList} position="top-left" /> */}
       <AuthLayout>
         <Intro
           title="Password Recovery"
@@ -59,7 +63,6 @@ const PasswordRecovery = () => {
           className="mt-12 m-auto w-8/12"
           onSubmit={handleSubmit(submitEmail)}
         >
-          {error && <p className="text-sm text-red-400">{error}</p>}
           {response && <p className="text-sm text-green-400">{response}</p>}
           <Input
             type="email"

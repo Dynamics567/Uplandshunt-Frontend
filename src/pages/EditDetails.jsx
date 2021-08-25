@@ -31,6 +31,7 @@ const EditDetails = () => {
         // always executed
       });
   };
+  console.log(images);
 
   useEffect(() => {
     // const fetchData = async () => {

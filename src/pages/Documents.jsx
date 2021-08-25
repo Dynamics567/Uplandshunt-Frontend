@@ -18,6 +18,7 @@ const Documents = ({ showHeader = true }) => {
       .then(function (response) {
         // handle success
         const details = response.data.data.documents;
+        console.log(details);
         setloading(false);
         setData(details);
       })

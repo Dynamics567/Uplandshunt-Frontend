@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 
 import bronzeBg from "../assets/bronzeBg.svg";
 import SubCard from "../templates/SubCard";
@@ -19,7 +20,7 @@ const Subscription = ({ id }) => {
   const callBack = window.location.origin;
 
   const upgradeSub = () => {
-    // console.log(getMonthId, getPlanId);
+    console.log(getMonthId, getPlanId);
     const subObject = {
       subscription_id: getPlanId,
       duration: getMonthId,
@@ -27,12 +28,22 @@ const Subscription = ({ id }) => {
     };
     setLoading(true);
     axiosWithAuth()
-      .post("/subscription/upgrade", subObject)
+      .put("/subscription/upgrade", subObject)
       .then((response) => {
         const successMessage = response.data.data;
         setAuthUrl(successMessage.authorization_url);
         setLoading(false);
         window.open(authUrl, "_blank");
+      })
+      .catch(function (error) {
+        if (error.response) {
+          setLoading(false);
+          const errorMessage = error.response.data.data;
+          setError(errorMessage);
+          toast.error(errorMessage);
+        }
+        // handle error
+        setError(error.status);
       });
   };
 
@@ -45,6 +56,16 @@ const Subscription = ({ id }) => {
         setCurrentPlan(results);
         setLoading(false);
         console.log(results);
+      })
+      .catch(function (error) {
+        if (error.response) {
+          setLoading(false);
+          const errorMessage = error.response.data.data;
+          setError(errorMessage);
+          toast.error(errorMessage);
+        }
+        // handle error
+        setError(error.status);
       });
   };
 
@@ -91,11 +112,10 @@ const Subscription = ({ id }) => {
                     className="font-semibold text-base p-4 text-ash mr-8"
                     style={
                       active
-                        ? { backgroundColor: "#B3404A" }
-                        : { backgroundColor: "#ffffff" }
+                        ? { backgroundColor: "#B3404A", color: "#ffffff" }
+                        : { backgroundColor: "#ffffff", color: "#1c1c1c" }
                     }
                   >
-                    {console.log(active)}
                     {plan}
                   </p>
                 </div>
@@ -104,7 +124,7 @@ const Subscription = ({ id }) => {
           </div>
           <div
             className="w-full flex justify-between mb-10"
-            // onClick={() => upgradeSub(id)}
+            onClick={() => upgradeSub(id)}
           >
             <SubCard
               icon={bronze}
@@ -113,6 +133,7 @@ const Subscription = ({ id }) => {
               buttonText="Upgrade"
               showButton={true}
               getPlanId={(getPlanId) => setGetPlanId(getPlanId)}
+              loading={loading}
               // id=
               // buttonUrl={window.location.replace("/payment")}
             />

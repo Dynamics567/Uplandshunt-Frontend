@@ -13,7 +13,6 @@ const MiniPropertyCard = ({ id }) => {
     // setLoading(true);
     axiosInstance.get(`property/${id}`).then((response) => {
       const details = response.data.data;
-      console.log(details);
       setPropertyDetails(details);
       setLoading(false);
     });

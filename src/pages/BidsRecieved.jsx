@@ -1,17 +1,20 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import { MiniPropertyCard, Modal } from "../organisms";
 import { axiosWithAuth } from "../Auth/Axios";
 import { ListingsLayout } from "../Layout";
 import DashboardLoader from "../templates/DashboardLoader";
 import { Documents } from "./Documents";
+import LoadSpinner from "../templates/LoadSpinner";
 
 const BidsRecieved = () => {
   const { id } = useParams();
   const [showModal, setShowModal] = useState(false);
   const [data, setData] = useState([]);
-  const [loading, setloading] = useState(true);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   const handleClose = () => {
     setShowModal(false);
@@ -23,7 +26,30 @@ const BidsRecieved = () => {
       .then((response) => {
         const results = response.data.data[0].bids;
         setData(results);
-        setloading(false);
+        setLoading(false);
+      });
+  };
+
+  const acceptBid = (bidId) => {
+    console.log(bidId);
+    // setLoading(true);
+    axiosWithAuth()
+      .post(`bid/${bidId}/approve`)
+      .then((response) => {
+        const result = response.data;
+        console.log(result);
+        toast.success(result);
+      })
+      .catch(function (error) {
+        if (error.response) {
+          setLoading(false);
+          const errorMessage = error.response.data.data;
+          setError(errorMessage);
+          console.log(errorMessage);
+          toast.error(errorMessage);
+        }
+        // handle error
+        setError(error.status);
       });
   };
 
@@ -42,19 +68,6 @@ const BidsRecieved = () => {
       ) : (
         <div>
           <ListingsLayout>
-            <Modal
-              showModal={showModal}
-              handleClose={handleClose}
-              transferDocument={true}
-            >
-              <MiniPropertyCard id={id} />
-              <Documents showHeader={false} />
-              <div className="m-auto w-11/12 flex justify-end">
-                <button className="bg-primary text-white text-base font-bold px-6 py-2 my-2 rounded-md shadow-sm">
-                  Share
-                </button>
-              </div>
-            </Modal>
             <div className="mt-8 border border-b-0 border-ashThree rounded-md">
               <div
                 className="mt-2 p-4 grid grid-cols-4 gap-20 mb-4 font-bold text-base border-b border-ashThree"
@@ -96,6 +109,22 @@ const BidsRecieved = () => {
                         Accept Trade
                       </button>
                     </div>
+                    <Modal
+                      showModal={showModal}
+                      handleClose={handleClose}
+                      transferDocument={true}
+                    >
+                      <MiniPropertyCard id={id} />
+                      <Documents showHeader={false} />
+                      <div
+                        className="m-auto w-11/12 flex justify-end"
+                        onClick={() => acceptBid(bid.id)}
+                      >
+                        <button className="bg-primary text-white text-base font-bold px-6 py-2 my-2 rounded-md shadow-sm focus:outline-none">
+                          {loading ? <LoadSpinner /> : "Share"}
+                        </button>
+                      </div>
+                    </Modal>
                   </div>
                 );
               })}

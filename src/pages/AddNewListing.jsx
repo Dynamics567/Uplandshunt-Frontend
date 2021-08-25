@@ -18,7 +18,7 @@ import {
   propertyType,
 } from "../data/SelectOptions";
 
-const EditNewListing = () => {
+const AddNewListing = () => {
   // const getManageDetailsPage = () => {
   //   window.scrollTo(0, 0);
   // };
@@ -60,6 +60,7 @@ const EditNewListing = () => {
     axiosWithAuth()
       .post("property", propertyData)
       .then(function (response) {
+        console.log(response);
         if (response) {
           console.log(response);
           setLoading(false);
@@ -250,4 +251,4 @@ const EditNewListing = () => {
   );
 };
 
-export { EditNewListing };
+export { AddNewListing };

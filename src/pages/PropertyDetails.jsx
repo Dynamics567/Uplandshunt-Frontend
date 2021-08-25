@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { toast } from "react-toastify";
 
+import placeholder from "../assets/placeholder.png";
 import { HeaderTwo } from "../molecules";
 import smallProp from "../assets/smallProp.png";
 import love from "../assets/love.png";
@@ -182,7 +183,7 @@ const PropertyDetails = ({
               </div>
               <div className="">
                 <img
-                  src={propertyDetails.images[0].image_url}
+                  src={placeholder || propertyDetails.images[0].image_url}
                   alt="propertyPicture"
                   className="object-cover w-full"
                 />

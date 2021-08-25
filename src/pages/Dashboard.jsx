@@ -14,7 +14,7 @@ import {
   BidsRecieved,
   BidsPlaced,
   InterestSent,
-  EditNewListing,
+  AddNewListing,
   PropertyRequestDocument,
   PaymentHistory,
   PropertyPurchased,
@@ -43,9 +43,9 @@ const Dashboard = () => {
             <Route path="/dashboard" exact component={Notification} />
             <Route path="/dashboard/listings" exact component={Listings} />
             <Route
-              path="/dashboard/listings/edit"
+              path="/dashboard/listings/add"
               exact
-              component={EditNewListing}
+              component={AddNewListing}
             />
             <Route
               path="/dashboard/listings/imageUpload/:id"
@@ -80,11 +80,11 @@ const Dashboard = () => {
               exact
               component={BidsSent}
             />
-            <Route
+            {/* <Route
               path="/dashboard/listings"
               exact
               component={EditNewListing}
-            />
+            /> */}
             <Route
               path="/dashboard/savedProperty"
               exact

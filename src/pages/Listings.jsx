@@ -42,7 +42,6 @@ const Listings = () => {
       .then((response) => {
         const results = response.data.data;
         setNumberOfProperty(results.plan.number_of_property);
-        console.log(results);
       })
       .catch((error) => {
         const errorMessage = error.response.data.data;
@@ -69,7 +68,7 @@ const Listings = () => {
       <DashboardSectionTitle
         text="Listings"
         buttonText="Add New Listings"
-        buttonUrl="/dashboard/listings/edit"
+        buttonUrl="/dashboard/listings/add"
         error={error}
         numberOfProperty={numberOfProperty}
         response={response}
