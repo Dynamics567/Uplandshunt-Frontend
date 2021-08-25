@@ -12,3 +12,4 @@ export * from "./Modal";
 export * from "./Boost";
 export * from "./PropertyCardTwo";
 export * from "./PropertyCardThree";
+export * from "./MiniPropertyCard";

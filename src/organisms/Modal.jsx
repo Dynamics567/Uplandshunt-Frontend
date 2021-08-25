@@ -6,6 +6,7 @@ const Modal = ({
   handleClose,
   modalTitle,
   showButton = true,
+  transferDocument = false,
 }) => {
   return (
     <>
@@ -15,13 +16,20 @@ const Modal = ({
             <div className="mb-4 flex justify-center items-center">
               <p className="font-bold text-2xl text-center">{modalTitle}</p>
               {showButton && (
-                <div className="justify-self-end">
-                  <img
-                    src={closeButton}
-                    alt="closeButton"
-                    className="w-8"
-                    onClick={handleClose}
-                  />
+                <div className="flex justify-self-end">
+                  {transferDocument && (
+                    <p className="text-center text-2xl font-bold">
+                      Transfer Document
+                    </p>
+                  )}
+                  <div className="justify-end">
+                    <img
+                      src={closeButton}
+                      alt="closeButton"
+                      className="w-8 cursor-pointer"
+                      onClick={handleClose}
+                    />
+                  </div>
                 </div>
               )}
             </div>
