@@ -60,7 +60,7 @@ const BusinessSignup = () => {
       toast.success(registerSuccess && registerSuccess);
       // location.push("/login");
     } catch (error) {
-      document.getElementById("rest-form").reset();
+      document.getElementById("business-form").reset();
       toast.error(errorMessage && errorMessage);
       console.log(error);
     }
