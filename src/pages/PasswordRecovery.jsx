@@ -19,8 +19,6 @@ const PasswordRecovery = () => {
   const [response, setResponse] = useState("");
   const [error, setError] = useState("");
 
-  // const { addToast } = useToasts();
-
   const validationSchema = Yup.object().shape({
     email: Yup.string().required("Email is required").email("Email is invalid"),
   });
@@ -49,8 +47,6 @@ const PasswordRecovery = () => {
           toast.error(errorMessage);
           setLoading(false);
         }
-        // handle error
-        // setError(error.status);
       });
   };
 

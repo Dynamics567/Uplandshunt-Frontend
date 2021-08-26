@@ -60,6 +60,7 @@ const BusinessSignup = () => {
       toast.success(registerSuccess && registerSuccess);
       // location.push("/login");
     } catch (error) {
+      document.getElementById("rest-form").reset();
       toast.error(errorMessage && errorMessage);
       console.log(error);
     }
@@ -72,7 +73,11 @@ const BusinessSignup = () => {
 
   return (
     <RegisterLayout>
-      <form className="mt-12 m-auto w-8/12" onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className="mt-12 m-auto w-8/12"
+        id="business-form"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <Input
           type="text"
           placeholder="example@example.com"
