@@ -16,6 +16,7 @@ import {
   depositStructure,
   multiSelectOptions,
   propertyType,
+  amenities,
 } from "../data/SelectOptions";
 
 const AddNewListing = () => {
@@ -32,16 +33,26 @@ const AddNewListing = () => {
     type: Yup.number().required("Property Type is required"),
     category: Yup.number().required("Category is required"),
     city: Yup.string().required("City is required"),
-    price: Yup.string().required("Price is required"),
-    area: Yup.number().required("Area of the Property is required"),
-    postal_code: Yup.string().required("Postal code is required"),
+    price: Yup.number()
+      .typeError("Price must be a number")
+      .required("Price is required"),
+    area: Yup.number()
+      .typeError("Area of property must be a number")
+      .required("Area of the Property is required"),
+    postal_code: Yup.number()
+      .typeError("Postal code must be a number")
+      .required("Postal code is required"),
     address_line_one: Yup.string().required("Address Lane 1 is required"),
     address_line_two: Yup.string().required("Address Lane 2 is required"),
     country: Yup.string().required("Country is required"),
     availability: Yup.number().required("Availability is required"),
-    kitchen: Yup.string().required("Number of Kitchen is required"),
+    kitchen: Yup.number()
+      .typeError("Number of Kitchen must be a number")
+      .required("Number of Kitchen is required"),
     bathroom: Yup.string().required("Number of Bathroom is required"),
-    bedroom: Yup.string().required("Number of Bedrooms is required"),
+    bedroom: Yup.number()
+      .typeError("Number of Bedrooms must be a number")
+      .required("Number of Bedrooms is required"),
     description: Yup.string().required("Property description is required"),
     furnish_type: Yup.number().required("Furnishing Type is required"),
     deposit_structure: Yup.number().required("Deposit Structure is required"),
@@ -146,12 +157,17 @@ const AddNewListing = () => {
           error={errors.address_line_two?.message}
         />
 
+        {/* <label
+          htmlFor={amenities}
+          className="text-lg font-semibold text-left"
+        ></label> */}
         <MultiSelect
           options={multiSelectOptions}
           value={selected}
           onChange={setSelected}
           labelledBy="Amenities"
           className="mt-7"
+          labelledBy="test"
         />
 
         <Input
