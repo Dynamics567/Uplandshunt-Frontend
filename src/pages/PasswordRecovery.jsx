@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 
 import { AuthLayout } from "../Layout";
 import Intro from "../templates/Intro";
-import { Input } from "../atoms";
+import { InputTwo } from "../atoms";
 import LoadSpinner from "../templates/LoadSpinner";
 import { axiosInstance } from "../Auth/Axios";
 // import { Toast } from "../organisms";
@@ -31,34 +31,29 @@ const PasswordRecovery = () => {
 
   const submitEmail = (data) => {
     setLoading(true);
-    console.log("cleared");
-    reset();
-    // axiosInstance
-    //   .post("auth/forgot-password", data)
-    //   .then(function (response) {
-    //     console.log(response);
-    //     const successMessage = response.data.data;
-    //     setResponse(successMessage);
-    //     toast.success(successMessage);
-    //     setLoading(false);
-    //     // location.push("/resetpassword");
-    //   })
-    //   .catch(function (error) {
-    //     if (error.response) {
-    //       reset();
-    //       const errorMessage = error.response.data.data;
-    //       setError(errorMessage);
-    //       toast.error(errorMessage);
-    //       setLoading(false);
-    //     }
-    //     // handle error
-    //     // setError(error.status);
-    //   });
+    axiosInstance
+      .post("auth/forgot-password", data)
+      .then(function (response) {
+        console.log(response);
+        const successMessage = response.data.data;
+        setResponse(successMessage);
+        toast.success(successMessage);
+        setLoading(false);
+        // location.push("/resetpassword");
+      })
+      .catch(function (error) {
+        if (error.response) {
+          reset();
+          const errorMessage = error.response.data.data;
+          setError(errorMessage);
+          toast.error(errorMessage);
+          setLoading(false);
+        }
+        // handle error
+        // setError(error.status);
+      });
   };
 
-  const resetForm = () => {
-    reset();
-  };
   return (
     <div className="h-full">
       <AuthLayout>
@@ -70,12 +65,12 @@ const PasswordRecovery = () => {
           className="mt-12 m-auto w-8/12"
           onSubmit={handleSubmit(submitEmail)}
         >
-          {/* {response && <p className="text-sm text-green-400">{response}</p>}
-          <Input
+          {response && <p className="text-sm text-green-400">{response}</p>}
+          <InputTwo
             type="email"
             placeholder="example@example.com"
             label="Email Address"
-            {...register("email")}
+            register={register("email")}
             error={errors.email?.message}
           />
           <div className="bg-primary rounded-md p-4 my-8 flex w-full justify-between items-center text-center">
@@ -83,11 +78,7 @@ const PasswordRecovery = () => {
             <button className=" text-white bg-primary font-semibold w-full focus:outline-none">
               Send Link To Email
             </button>
-          </div> */}
-          <input type="text" className="border border-lightAsh p-4" />
-          <button onClick={submitEmail} className="bg-primary text-white">
-            reset
-          </button>
+          </div>
         </form>
       </AuthLayout>
     </div>
