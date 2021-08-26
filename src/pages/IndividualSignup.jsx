@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
-import { registerUser, useAuthState, useAuthDispatch } from "../Context";
+import { axiosInstance } from "../Auth/Axios";
 import { Input, Button } from "../atoms";
 import eyeClosed from "../assets/eyeClosed.svg";
 import eyeOpened from "../assets/eyeOpen.svg";
@@ -14,6 +14,9 @@ import { RegisterLayout } from "../Layout";
 const IndividualSignup = () => {
   const [passwordShown, setPasswordShown] = useState(false);
   const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
+  const [error, setError] = useState("");
+  const [response, setResponse] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const togglePasswordVisibility = () => {
     setPasswordShown(passwordShown ? false : true);
@@ -44,21 +47,25 @@ const IndividualSignup = () => {
   const { register, handleSubmit, formState } = useForm(formOptions);
   const { errors } = formState;
 
-  const dispatch = useAuthDispatch();
-  const { loading, errorMessage, registerSuccess } = useAuthState();
-
   const onSubmit = async (data) => {
     let accountType = { account_type: "Individual" };
     const userData = { ...accountType, ...data };
-    try {
-      let response = await registerUser(dispatch, userData);
-      if (!response.status === 201) return;
-      toast.success(registerSuccess && registerSuccess);
-    } catch (error) {
-      toast.error(errorMessage && errorMessage);
-      console.log(error);
-    }
-    // reset();
+
+    setLoading(true);
+    axiosInstance
+      .post(`auth/register`, userData)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch(function (error) {
+        if (error.response) {
+          document.getElementById("individual-form").reset();
+          const errorMessage = error.response.data.data;
+          setError(errorMessage);
+          toast.error(errorMessage);
+          setLoading(false);
+        }
+      });
   };
 
   const scrollTo = () => {
@@ -67,7 +74,11 @@ const IndividualSignup = () => {
 
   return (
     <RegisterLayout>
-      <form className="mt-12 m-auto w-8/12" onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className="mt-12 m-auto w-8/12"
+        id="individual-form"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <Input
           type="text"
           placeholder="example@example.com"

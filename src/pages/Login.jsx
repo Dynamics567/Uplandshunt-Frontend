@@ -22,7 +22,7 @@ const Login = () => {
   const validationSchema = Yup.object().shape({
     email: Yup.string().required("Email is required").email("Email is invalid"),
     password: Yup.string()
-      .min(6, "Password must be at least 6 characters")
+      .min(7, "Password must be at least 7 characters")
       .required("Password is required"),
   });
   const formOptions = { resolver: yupResolver(validationSchema) };
@@ -38,12 +38,18 @@ const Login = () => {
     let password = data.password;
     try {
       let response = await loginUser(dispatch, { email, password });
-      if (!response.data.user) return;
-      toast.success(response.message);
-      window.location.replace(userPath || "/dashboard");
+      console.log(response);
+      if (response.status === false) {
+        console.log("works");
+        const errorMessage = response.data.errors.error[0];
+        toast.error(errorMessage);
+      } else {
+        toast.success(response.message);
+        window.location.replace(userPath || "/dashboard");
+      }
     } catch (error) {
-      toast.error(errorMessage && errorMessage);
-      console.log(error);
+      // toast.error(errorMessage && errorMessage);
+      // console.log(error);
     }
   };
   return (

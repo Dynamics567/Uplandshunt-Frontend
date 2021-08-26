@@ -4,16 +4,19 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
 
-import { registerUser, useAuthState, useAuthDispatch } from "../Context";
 import { Input, Button } from "../atoms";
 import eyeClosed from "../assets/eyeClosed.svg";
 import eyeOpened from "../assets/eyeOpen.svg";
 import { RegisterLayout } from "../Layout";
 import { Link } from "react-router-dom";
+import { axiosInstance } from "../Auth/Axios";
 
 const BusinessSignup = () => {
   const [passwordShown, setPasswordShown] = useState(false);
   const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
+  const [error, setError] = useState("");
+  const [response, setResponse] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const togglePasswordVisibility = () => {
     setPasswordShown(passwordShown ? false : true);
@@ -22,9 +25,6 @@ const BusinessSignup = () => {
   const toggleConfirmPasswordVisibility = () => {
     setConfirmPasswordShown(confirmPasswordShown ? false : true);
   };
-
-  const dispatch = useAuthDispatch();
-  const { loading, errorMessage, registerSuccess } = useAuthState();
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Account Name is required"),
@@ -52,25 +52,27 @@ const BusinessSignup = () => {
   const onSubmit = async (data) => {
     let accountType = { account_type: "Business" };
     const userData = { ...accountType, ...data };
-    console.log(userData);
-    try {
-      let response = await registerUser(dispatch, userData);
-      console.log(response);
-      if (!response.status === 201) return;
-      toast.success(registerSuccess && registerSuccess);
-      // location.push("/login");
-    } catch (error) {
-      document.getElementById("business-form").reset();
-      toast.error(errorMessage && errorMessage);
-      console.log(error);
-    }
-    reset({});
+
+    setLoading(true);
+    axiosInstance
+      .post(`auth/register`, userData)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch(function (error) {
+        if (error.response) {
+          document.getElementById("business-form").reset();
+          const errorMessage = error.response.data.data;
+          setError(errorMessage);
+          toast.error(errorMessage);
+          setLoading(false);
+        }
+      });
   };
 
   const scrollTo = () => {
     window.scrollTo(0, 0);
   };
-
   return (
     <RegisterLayout>
       <form

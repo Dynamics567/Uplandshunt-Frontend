@@ -1,5 +1,7 @@
 // import React, { useReducer } from "react";
 
+import { useAuthState } from "./Context";
+
 let user = localStorage.getItem("currentUser")
   ? JSON.parse(localStorage.getItem("currentUser")).user
   : "";
@@ -24,6 +26,7 @@ export const AuthReducer = (initialState, action) => {
       return {
         ...initialState,
         loading: true,
+        // errorMessage: "",
       };
     case "LOGIN_SUCCESS":
       return {
@@ -50,6 +53,7 @@ export const AuthReducer = (initialState, action) => {
       return {
         ...initialState,
         loading: true,
+        // errorMessage: "",
       };
     case "REGISTER_SUCCESS":
       return {
@@ -59,6 +63,7 @@ export const AuthReducer = (initialState, action) => {
         registerSuccess: action.payload.data,
       };
     case "REGISTER_ERROR":
+      console.log(action.error);
       return {
         ...initialState,
         loading: false,
