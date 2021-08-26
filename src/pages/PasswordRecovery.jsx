@@ -32,7 +32,7 @@ const PasswordRecovery = () => {
     axiosInstance
       .post("auth/forgot-password", data)
       .then(function (response) {
-        console.log(response);
+        reset();
         const successMessage = response.data.data;
         setResponse(successMessage);
         toast.success(successMessage);
@@ -61,7 +61,6 @@ const PasswordRecovery = () => {
           className="mt-12 m-auto w-8/12"
           onSubmit={handleSubmit(submitEmail)}
         >
-          {response && <p className="text-sm text-green-400">{response}</p>}
           <InputTwo
             type="email"
             placeholder="example@example.com"
