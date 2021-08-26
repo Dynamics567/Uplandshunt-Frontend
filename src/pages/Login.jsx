@@ -6,7 +6,7 @@ import * as Yup from "yup";
 import { toast } from "react-toastify";
 
 import { loginUser, useAuthState, useAuthDispatch } from "../Context";
-import { Button, Input } from "../atoms";
+import { Button, InputTwo } from "../atoms";
 import Intro from "../templates/Intro";
 import eyeClosed from "../assets/eyeClosed.svg";
 import eyeOpened from "../assets/eyeOpen.svg";
@@ -26,7 +26,7 @@ const Login = () => {
       .required("Password is required"),
   });
   const formOptions = { resolver: yupResolver(validationSchema) };
-  const { register, handleSubmit, formState } = useForm(formOptions);
+  const { register, handleSubmit, formState, reset } = useForm(formOptions);
   const { errors } = formState;
 
   const dispatch = useAuthDispatch();
@@ -40,17 +40,14 @@ const Login = () => {
       let response = await loginUser(dispatch, { email, password });
       console.log(response);
       if (response.status === false) {
-        console.log("works");
+        reset();
         const errorMessage = response.data.errors.error[0];
         toast.error(errorMessage);
       } else {
         toast.success(response.message);
         window.location.replace(userPath || "/dashboard");
       }
-    } catch (error) {
-      // toast.error(errorMessage && errorMessage);
-      // console.log(error);
-    }
+    } catch (error) {}
   };
   return (
     <AuthLayout>
@@ -62,15 +59,11 @@ const Login = () => {
         className="mt-12 m-auto w-8/12"
         onSubmit={handleSubmit(handleLogin)}
       >
-        {/* {errorMessage ? (
-          <p className="text-sm text-red-400">{errorMessage}</p>
-        ) : null} */}
-        {/* {errorMessage && <p className="text-sm text-red-400">{errorMessage}</p>} */}
-        <Input
+        <InputTwo
           type="email"
           placeholder="example@example.com"
           label="Email"
-          {...register("email")}
+          register={register("email")}
           error={errors.email?.message}
           disabled={loading}
         />
@@ -82,11 +75,11 @@ const Login = () => {
               className="w-6 absolute visibility mt-8 ml-96"
             />
           </i>
-          <Input
+          <InputTwo
             placeholder="xxxxxxx"
             type={passwordShown ? "text" : "password"}
             label="Password"
-            {...register("password")}
+            register={register("password")}
             error={errors.password?.message}
             disabled={loading}
             autocomplete="on"

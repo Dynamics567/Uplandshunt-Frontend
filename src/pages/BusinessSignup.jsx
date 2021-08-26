@@ -57,7 +57,10 @@ const BusinessSignup = () => {
     axiosInstance
       .post(`auth/register`, userData)
       .then((response) => {
-        console.log(response);
+        const successMessage = response.data.data;
+        toast.success(successMessage);
+        setLoading(false);
+        document.getElementById("business-form").reset();
       })
       .catch(function (error) {
         if (error.response) {

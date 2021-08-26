@@ -7,7 +7,7 @@ import * as Yup from "yup";
 import { toast } from "react-toastify";
 
 import { axiosInstance } from "../Auth/Axios";
-import { Button, Input } from "../atoms";
+import { Button, InputTwo } from "../atoms";
 import { AuthLayout } from "../Layout";
 import Intro from "../templates/Intro";
 
@@ -39,8 +39,11 @@ const ActivateAccount = () => {
       })
       .catch(function (error) {
         if (error.response) {
-          setError(error.response.data.data);
+          reset();
+          const errorMessage = error.response.data.data;
+          setError(errorMessage);
           setLoading(false);
+          toast.error(errorMessage);
         }
         // handle error
         setError(error.status);
@@ -57,11 +60,11 @@ before you can log in"
         className="mt-12 m-auto w-8/12"
         onSubmit={handleSubmit(activateAccount)}
       >
-        <Input
+        <InputTwo
           type="email"
           placeholder="example@example.com"
           label="Email"
-          {...register("email")}
+          register={register("email")}
           error={errors.email?.message}
         />
         <Button loading={loading} buttonText="Activate Account" />
