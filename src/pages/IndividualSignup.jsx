@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 import { registerUser, useAuthState, useAuthDispatch } from "../Context";
 import { Input, Button } from "../atoms";
@@ -59,6 +60,11 @@ const IndividualSignup = () => {
     }
     // reset();
   };
+
+  const scrollTo = () => {
+    window.scrollTo(0, 0);
+  };
+
   return (
     <RegisterLayout>
       <form className="mt-12 m-auto w-8/12" onSubmit={handleSubmit(onSubmit)}>
@@ -129,9 +135,11 @@ const IndividualSignup = () => {
           name="acceptTerms"
           {...register("acceptTerms")}
         />
-        <label htmlFor="Terms" className="text-sm font-normal">
-          I agree to the Terms of Service and Privacy Policy
-        </label>
+        <Link to="/terms" onClick={scrollTo}>
+          <label htmlFor="Terms" className="text-sm font-normal cursor-pointer">
+            I agree to the Terms of Service and Privacy Policy
+          </label>
+        </Link>
         <span>
           <p className="text-red-500 text-sm">{errors.acceptTerms?.message}</p>
         </span>

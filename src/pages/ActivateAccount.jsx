@@ -22,7 +22,7 @@ const ActivateAccount = () => {
     email: Yup.string().required("Email is required").email("Email is invalid"),
   });
   const formOptions = { resolver: yupResolver(validationSchema) };
-  const { register, handleSubmit, formState } = useForm(formOptions);
+  const { register, handleSubmit, formState, reset } = useForm(formOptions);
   const { errors } = formState;
 
   const activateAccount = (data) => {
@@ -33,7 +33,6 @@ const ActivateAccount = () => {
       .post("auth/activate", userData)
       .then(function (response) {
         const results = response.data.data;
-        console.log(results);
         setLoading(false);
         toast.success(results);
         location.push("/login");
@@ -64,7 +63,6 @@ before you can log in"
           label="Email"
           {...register("email")}
           error={errors.email?.message}
-          //   disabled={loading}
         />
         <Button loading={loading} buttonText="Activate Account" />
       </form>

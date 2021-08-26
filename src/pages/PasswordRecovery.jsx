@@ -26,31 +26,38 @@ const PasswordRecovery = () => {
   });
 
   const formOptions = { resolver: yupResolver(validationSchema) };
-  const { register, handleSubmit, formState } = useForm(formOptions);
+  const { register, handleSubmit, formState, reset } = useForm(formOptions);
   const { errors } = formState;
 
   const submitEmail = (data) => {
     setLoading(true);
-    axiosInstance
-      .post("auth/forgot-password", data)
-      .then(function (response) {
-        console.log(response);
-        const successMessage = response.data.data;
-        setResponse(successMessage);
-        toast.success(successMessage);
-        setLoading(false);
-        // location.push("/resetpassword");
-      })
-      .catch(function (error) {
-        if (error.response) {
-          const errorMessage = error.response.data.data;
-          setError(errorMessage);
-          toast.error(errorMessage);
-          setLoading(false);
-        }
-        // handle error
-        // setError(error.status);
-      });
+    console.log("cleared");
+    reset();
+    // axiosInstance
+    //   .post("auth/forgot-password", data)
+    //   .then(function (response) {
+    //     console.log(response);
+    //     const successMessage = response.data.data;
+    //     setResponse(successMessage);
+    //     toast.success(successMessage);
+    //     setLoading(false);
+    //     // location.push("/resetpassword");
+    //   })
+    //   .catch(function (error) {
+    //     if (error.response) {
+    //       reset();
+    //       const errorMessage = error.response.data.data;
+    //       setError(errorMessage);
+    //       toast.error(errorMessage);
+    //       setLoading(false);
+    //     }
+    //     // handle error
+    //     // setError(error.status);
+    //   });
+  };
+
+  const resetForm = () => {
+    reset();
   };
   return (
     <div className="h-full">
@@ -63,7 +70,7 @@ const PasswordRecovery = () => {
           className="mt-12 m-auto w-8/12"
           onSubmit={handleSubmit(submitEmail)}
         >
-          {response && <p className="text-sm text-green-400">{response}</p>}
+          {/* {response && <p className="text-sm text-green-400">{response}</p>}
           <Input
             type="email"
             placeholder="example@example.com"
@@ -76,7 +83,11 @@ const PasswordRecovery = () => {
             <button className=" text-white bg-primary font-semibold w-full focus:outline-none">
               Send Link To Email
             </button>
-          </div>
+          </div> */}
+          <input type="text" className="border border-lightAsh p-4" />
+          <button onClick={submitEmail} className="bg-primary text-white">
+            reset
+          </button>
         </form>
       </AuthLayout>
     </div>

@@ -2,12 +2,14 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
+import { toast } from "react-toastify";
 
 import { registerUser, useAuthState, useAuthDispatch } from "../Context";
 import { Input, Button } from "../atoms";
 import eyeClosed from "../assets/eyeClosed.svg";
 import eyeOpened from "../assets/eyeOpen.svg";
 import { RegisterLayout } from "../Layout";
+import { Link } from "react-router-dom";
 
 const BusinessSignup = () => {
   const [passwordShown, setPasswordShown] = useState(false);
@@ -55,24 +57,22 @@ const BusinessSignup = () => {
       let response = await registerUser(dispatch, userData);
       console.log(response);
       if (!response.status === 201) return;
+      toast.success(registerSuccess && registerSuccess);
       // location.push("/login");
     } catch (error) {
+      toast.error(errorMessage && errorMessage);
       console.log(error);
     }
     reset({});
   };
+
+  const scrollTo = () => {
+    window.scrollTo(0, 0);
+  };
+
   return (
     <RegisterLayout>
       <form className="mt-12 m-auto w-8/12" onSubmit={handleSubmit(onSubmit)}>
-        {/* {formState.isSubmitted && (
-          <div className="success">Form submitted successfully</div>
-        )} */}
-        {errorMessage ? (
-          <p className="text-sm text-red-400">{errorMessage}</p>
-        ) : null}
-        {registerSuccess ? (
-          <p className="text-sm text-green-400">{registerSuccess}</p>
-        ) : null}
         <Input
           type="text"
           placeholder="example@example.com"
@@ -157,19 +157,15 @@ const BusinessSignup = () => {
           name="acceptTerms"
           {...register("acceptTerms")}
         />
-        <label htmlFor="Terms" className="text-sm font-normal">
-          I agree to the Terms of Service and Privacy Policy
-        </label>
+        <Link to="/terms" onClick={scrollTo}>
+          <label htmlFor="Terms" className="text-sm font-normal cursor-pointer">
+            I agree to the Terms of Service and Privacy Policy
+          </label>
+        </Link>
         <span>
           <p className="text-red-500 text-sm">{errors.acceptTerms?.message}</p>
         </span>
-        {/* <div className="bg-primary rounded-md p-4 my-8 flex w-full justify-between items-center">
-          <div className="">{loading && <LoadSpinner />}</div>
-          <button className="w-full text-white font-semibold focus:outline-none">
-            Register as a Business
-          </button>
-        </div> */}
-        <Button loading={loading} buttonText="Register as an Business" />
+        <Button loading={loading} buttonText="Register as a Business" />
       </form>
     </RegisterLayout>
   );
