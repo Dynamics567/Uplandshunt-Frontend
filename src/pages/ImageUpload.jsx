@@ -12,24 +12,6 @@ const ImageUpload = () => {
     // console.log(status, meta);
   };
 
-  // Return array of uploaded files after submit button is clicked
-  // const handleSubmit = (files, allFiles) => {
-  //   const fileNames = files.map((file) => file.file);
-  //   // console.log(fileNames);
-  //   setImages(fileNames);
-  //   console.log(fileNames);
-  //   axiosWithAuth()
-  //     .post("property/32/images", fileNames)
-  //     .then((response) => {
-  //       console.log(response);
-  //     });
-  //   // console.log(files.map((f) => setImages(f.meta.name)));
-  //   // setImages(files.map((f) => f.meta));
-  //   // console.log(images);
-  //   allFiles.forEach((f) => f.remove());
-  //   // location.push("/dashboard/listings/documentUpload");
-  // };
-
   const handleSubmit = (files) => {
     const fileNames = files.map((file) => file.file);
 
@@ -54,7 +36,7 @@ const ImageUpload = () => {
       <div className="m-auto w-6/12">
         <SimpleDropZone
           maximumFiles="7"
-          minimumFiles="3"
+          minimumFiles="5"
           fileType="image/*,png/*,svg/*,jpeg/*,jpg/*"
           handleSubmit={handleSubmit}
           handleChangeStatus={handleChangeStatus}

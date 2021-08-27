@@ -14,14 +14,18 @@ const EditBusinessProfile = () => {
   const [setError] = useState("");
 
   const validationSchema = Yup.object().shape({
-    name: Yup.string().required("Property Name is required"),
+    name: Yup.string().required("Full Name Name is required"),
     company_name: Yup.string().required("Company Name is required"),
     address: Yup.string().required("Address is required"),
     country: Yup.string().required("Country is required"),
     state: Yup.string().required("State is required"),
     city: Yup.string().required("City is required"),
-    company_phone: Yup.number().required("Company Phone is required"),
-    contact_number: Yup.number().required("Contact Number is required"),
+    company_phone: Yup.number()
+      .typeError("Company Phone must be a number")
+      .required("Company Phone is required"),
+    contact_number: Yup.number()
+      .typeError("Company Number must be a number")
+      .required("Contact Number is required"),
     email: Yup.string().required("Email is required").email("Email is invalid"),
     website: Yup.string().required("Website URL is required"),
     logo: Yup.string().required("Company logo is required"),

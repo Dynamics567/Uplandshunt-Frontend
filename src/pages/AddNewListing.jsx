@@ -20,9 +20,6 @@ import {
 } from "../data/SelectOptions";
 
 const AddNewListing = () => {
-  // const getManageDetailsPage = () => {
-  //   window.scrollTo(0, 0);
-  // };
   const location = useHistory();
   const [selected, setSelected] = useState([]);
   const [loading, setLoading] = useState(false);

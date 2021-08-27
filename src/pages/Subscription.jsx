@@ -20,30 +20,32 @@ const Subscription = ({ id }) => {
   const callBack = window.location.origin;
 
   const upgradeSub = () => {
-    console.log(getMonthId, getPlanId);
     const subObject = {
       subscription_id: getPlanId,
       duration: getMonthId,
       call_back_url: `${callBack}/paymentSuccess`,
     };
-    setLoading(true);
+    console.log(subObject);
+    // setLoading(true);
     axiosWithAuth()
       .put("/subscription/upgrade", subObject)
       .then((response) => {
         const successMessage = response.data.data;
         setAuthUrl(successMessage.authorization_url);
-        setLoading(false);
-        window.open(authUrl, "_blank");
+        console.log(successMessage);
+        // setLoading(false);
+        // window.open(authUrl, "_blank");
       })
       .catch(function (error) {
         if (error.response) {
           setLoading(false);
-          const errorMessage = error.response.data.data;
+          const errorMessage =
+            error.response.data.data.errors.duration[0] ||
+            error.response.data.data.errors.duration[1];
+          console.log(errorMessage);
           setError(errorMessage);
           toast.error(errorMessage);
         }
-        // handle error
-        setError(error.status);
       });
   };
 
@@ -55,7 +57,6 @@ const Subscription = ({ id }) => {
         const results = response.data.data;
         setCurrentPlan(results);
         setLoading(false);
-        console.log(results);
       })
       .catch(function (error) {
         if (error.response) {
@@ -83,7 +84,6 @@ const Subscription = ({ id }) => {
     return <DashboardLoader />;
   }
 
-  // const planName = currentPlan.plan.name;
   return (
     <>
       {loading ? (
@@ -101,17 +101,16 @@ const Subscription = ({ id }) => {
                 <div
                   className="cursor-pointer"
                   key={monthId}
-                  onClick={() => {
+                  onClick={(e) => {
                     setGetMonthId(() => duration);
                     setActive(() => monthId);
-                    // console.log(active);
                     setGetPlanId("");
                   }}
                 >
                   <p
                     className="font-semibold text-base p-4 text-ash mr-8"
                     style={
-                      active
+                      +active === +monthId
                         ? { backgroundColor: "#B3404A", color: "#ffffff" }
                         : { backgroundColor: "#ffffff", color: "#1c1c1c" }
                     }

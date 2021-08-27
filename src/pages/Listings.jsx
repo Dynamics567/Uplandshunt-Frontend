@@ -8,6 +8,7 @@ import { axiosWithAuth } from "../Auth/Axios";
 import LoadSpinner from "../templates/LoadSpinner";
 import { DashboardSectionTitle } from "../atoms";
 import PropertyCard from "../templates/PropertyCard";
+import { Link } from "react-router-dom";
 
 const Listings = () => {
   const [loading, setLoading] = useState(true);
@@ -87,13 +88,15 @@ const Listings = () => {
           <div className="grid grid-cols-4 gap-2 mt-6">
             {propertiesToSell.map(({ id, city, price, name, images }) => {
               return (
-                <PropertyCard
-                  location={city}
-                  price={price}
-                  place={name}
-                  photo={placeholder || images[0].image_url}
-                  id={id}
-                />
+                <Link to={`/dashboard/listings/userview/${id}`}>
+                  <PropertyCard
+                    location={city}
+                    price={price}
+                    place={name}
+                    photo={placeholder || images[0].image_url}
+                    id={id}
+                  />
+                </Link>
               );
             })}
           </div>
