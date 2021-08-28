@@ -40,23 +40,37 @@ const ListingsHeader = () => {
   }, []);
 
   useEffect(() => {
-    if (id) {
-      return setToggleShowBoosted(true);
+    const isBoosted = boostedProperties.map((prop) => {
+      return prop.property.id;
+    });
+    if (isBoosted.includes(+id)) {
+      setToggleShowBoosted(true);
+    } else {
+      setToggleShowBoosted(false);
     }
-  }, [id]);
+  }, []);
 
   useEffect(() => {
     const data = boostedProperties.find((el) => el.property.id === +id);
     setGetPropertyId(data);
   }, [id]);
 
+  // useEffect(() => {
+  //   const data = boostedProperties.find((el) => {
+  //     boostedProp.push(el.property.id);
+  //     if (el.property.id === +id) {
+  //       setToggleShowBoosted(true);
+  //     } else {
+  //       setToggleShowBoosted(false);
+  //     }
+  //   });
+  //   setGetPropertyId(data);
+  // }, [boostedProp]);
+
   if (getPropertyId) {
     startTime = getPropertyId.start_at;
     endTime = getPropertyId.end_at;
   }
-  // if (id) {
-
-  // }
 
   return (
     <div className="flex items-center justify-between">
@@ -94,7 +108,6 @@ const ListingsHeader = () => {
           onClick={boostProperty}
         >
           Boost Property
-          {console.log(toggleShowBoosted)}
         </button>
       )}
     </div>

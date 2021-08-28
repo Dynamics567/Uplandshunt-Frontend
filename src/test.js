@@ -1,7 +1,7 @@
 export const boostedProperties = [
   {
     start_at: "2021-08-08T09:27:31.586Z",
-    end_at: "2021-08-08T14:27:31.586Z",
+    end_at: "2021-08-28T12:27:31.586Z",
     status: "ACTIVE",
     boost_plan: {
       category: "Plan B",
@@ -120,8 +120,8 @@ export const boostedProperties = [
     },
   },
   {
-    start_at: "2021-08-08T09:27:31.586Z",
-    end_at: "2021-08-08T14:27:31.586Z",
+    start_at: "2021-08-28T09:27:31.586Z",
+    end_at: "2021-08-28T15:27:31.586Z",
     status: "ACTIVE",
     boost_plan: {
       category: "Plan B",

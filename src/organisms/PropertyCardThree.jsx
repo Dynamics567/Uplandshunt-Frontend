@@ -43,7 +43,7 @@ const PropertyCardThree = ({
               <img src={payIcon} alt="payIcon" className="w-32" />
               <p
                 className="font-semibold text-xs text-primary cursor-pointer mt-2"
-                onClick={() => viewBidsHistory(id)}
+                // onClick={() => viewBidsHistory(id)}
               >
                 View Payment History
               </p>

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { toast } from "react-toastify";
 
+import LoadSpinnerTwo from "../templates/LoadSpinnerTwo";
 import placeholder from "../assets/placeholder.png";
 import { HeaderTwo } from "../molecules";
 import smallProp from "../assets/smallProp.png";
@@ -29,6 +30,7 @@ const PropertyDetails = ({
   let { id } = useParams();
 
   const [loading, setLoading] = useState(true);
+  const [spinnerLoading, setSpinnerLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [propertyDetails, setPropertyDetails] = useState([]);
   // const [error, setError] = useState("");
@@ -89,16 +91,18 @@ const PropertyDetails = ({
   // const getUserAuthStatus = getUserDetails.isAuthenticated;
 
   const saveProperty = () => {
+    setSpinnerLoading(true);
     axiosWithAuth()
       .post(`property/save/${id}`)
       .then((response) => {
         const successMessage = response.data.data;
-        console.log(successMessage);
         toast.success(successMessage);
+        setSpinnerLoading(false);
       })
       .catch((error) => {
         const errorMessage = error.response.data.data;
         toast.error(errorMessage);
+        setSpinnerLoading(false);
       });
   };
 
@@ -119,7 +123,7 @@ const PropertyDetails = ({
           {showHeader && <HeaderTwo />}
 
           <div className="m-auto w-6/12">
-            <Modal showModal={showModal}>
+            <Modal showModal={showModal} handleClose={handleClose}>
               <Documents showHeader={false} />
               <div className="flex justify-between">
                 <button
@@ -130,35 +134,6 @@ const PropertyDetails = ({
                 </button>
               </div>
             </Modal>
-            {/* <Modal ref={modal}>
-              <div className="text-center">
-                <p className="font-bold text-lg my-4">
-                  Login or Register to place and save bid
-                </p>
-                <p className="font-normal text-sm text-ash">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Aenean tortor nisi, mattis quis purus at, mattis mattis
-                  ligula. Quisque vel ex convallis, eleifend erat imperdiet,
-                  lacinia dui. Mauris elementum efficitur nisl.Lorem ipsum dolor
-                  sit amet, consectetur adipiscing elit. Aenean tortor nisi,
-                  mattis quis purus at, mattis mattis ligula. Quisque vel ex
-                  convallis, eleifend erat imperdiet, lacinia dui. Mauris
-                  elementum efficitur nisl.
-                </p>
-                <div className="flex items-center justify-center my-4">
-                  <Link to="/register">
-                    <button className="font-bold text-base text-primary py-2 px-8 border border-primary rounded-md mr-6">
-                      Register
-                    </button>
-                  </Link>
-                  <Link to="/login">
-                    <button className="font-bold text-base text-white bg-primary py-2 px-8 rounded-md">
-                      Login
-                    </button>
-                  </Link>
-                </div>
-              </div>
-            </Modal> */}
           </div>
 
           <div className="m-auto mt-10 w-11/12 flex justify-between">
@@ -222,7 +197,9 @@ const PropertyDetails = ({
                   className="flex px-16 py-2 items-center justify-center rounded-md border border-primary mr-8 cursor-pointer"
                 >
                   <img src={love} alt="love" className="w-4 mr-4" />
-                  <p className="text-primary text-base font-bold">Save</p>
+                  <p className="text-primary text-base font-bold">
+                    {spinnerLoading ? <LoadSpinnerTwo /> : "Save"}
+                  </p>
                 </div>
                 <div className="bg-primary flex px-16 py-2 items-center justify-center rounded-md border border-primary">
                   <img src={bidIcon} alt="bidIcon" className="w-4 mr-4" />

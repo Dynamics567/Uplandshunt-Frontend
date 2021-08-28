@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
@@ -35,7 +35,7 @@ const RequestProperty = () => {
       .get(`property?type=${listTypeResult}&category=${propertyTypeResult}`)
       .then((response) => {
         const searchResults = response.data.data;
-        // console.log(searchResults);
+        console.log(searchResults);
         setResults(searchResults);
         setInitialState(false);
         setLoading(false);
@@ -65,39 +65,41 @@ const RequestProperty = () => {
       });
   };
 
+  useEffect(() => {
+    setInitialState(true);
+  }, [listTypeResult, propertyTypeResult]);
+
   return (
     <div className="m-auto w-11/12">
       <DashboardSectionTitle text="Request a Property" showButton={false} />
       <>
-        <div
-          className="w-full justify-between flex items-center"
-          style={{ flex: "1" }}
-        >
-          <Select
-            labelName="Listing Type"
-            values={propertyType}
-            selectedValue="Under Construction"
-            name="property type"
-            onValueChange={(val) => setListTypeResult(val)}
-          />
-          <Select
-            labelName="Property Type"
-            values={listType}
-            selectedValue="New Development"
-            onValueChange={(val) => setPropertyTypeResult(val)}
-          />
-          <div
-            className="w-1/6 flex items-center"
-            onClick={getPropertiesAvailable}
-          >
-            <Button buttonText="Search Property" loading={loading} />
+        <div className="flex items-center">
+          <div className="w-full grid grid-cols-3 gap-6">
+            <Select
+              labelName="Listing Type"
+              values={propertyType}
+              selectedValue="Under Construction"
+              name="property type"
+              onValueChange={(val) => setListTypeResult(val)}
+            />
+            <Select
+              labelName="Property Type"
+              values={listType}
+              selectedValue="New Development"
+              onValueChange={(val) => setPropertyTypeResult(val)}
+            />
+            <div className="" onClick={getPropertiesAvailable}>
+              <Button buttonText="Search Property" loading={loading} />
+            </div>
           </div>
         </div>
         <div className="">
           {initialState ? (
             ""
           ) : results.length === 0 ? (
-            <p>No properties match your search</p>
+            <p className="text-center font-bold text-3xl py-6">
+              No properties match your search
+            </p>
           ) : (
             <div className="ml-4">
               <div className="grid grid-cols-4 gap-2 mt-6 cursor-pointer">

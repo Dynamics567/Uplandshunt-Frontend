@@ -1,19 +1,17 @@
 import Countdown from "react-countdown";
 
-const Timer = ({ startTime, endTime, boostProperty, show, setShow }) => {
-  let date = new Date(endTime);
-  let date2 = new Date(startTime);
-
+const Timer = ({ endTime, boostProperty }) => {
+  const currentTime = new Date();
   function diff_hours(date, date2) {
-    var diff = (date2.getTime() - date.getTime()) / 1000;
+    var diff = (date2.getTime() - new Date().getTime()) / 1000;
     diff /= 60 * 60;
-    return Math.abs(Math.round(diff));
+    // return Math.abs(Math.round(diff));
+    return diff;
   }
 
-  date = new Date(startTime);
-  date2 = new Date(endTime);
+  let date2 = new Date(endTime);
 
-  let countDownTime = diff_hours(date, date2);
+  let countDownTime = diff_hours(currentTime, date2);
 
   window.localStorage.setItem("countDownTime", countDownTime);
 

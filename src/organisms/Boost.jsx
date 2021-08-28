@@ -11,7 +11,6 @@ const Boost = ({ id }) => {
   const [data, setData] = useState([]);
   const [propertyDetails, setPropertyDetails] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [authUrl, setAuthUrl] = useState("");
 
   const getBoostingPlans = () => {
     setLoading(true);
@@ -19,7 +18,6 @@ const Boost = ({ id }) => {
       .get("boost/plans")
       .then((response) => {
         const results = response.data.data;
-        console.log(results);
         setData(results);
         setLoading(false);
       });
@@ -52,22 +50,21 @@ const Boost = ({ id }) => {
   const callBack = window.location.origin;
 
   const boostProperty = (planId) => {
-    setLoading(true);
+    // setLoading(true);
     const boostObject = {
       property_id: id,
       boost_plan_id: planId,
       call_back_url: `${callBack}/paymentSuccess`,
     };
+    console.log(boostObject);
     axiosWithAuth()
       .post("boost", boostObject)
       .then((response) => {
         const successMessage = response.data;
-        setAuthUrl(successMessage.data.authorization_url);
-        console.log(successMessage);
+        const authUrl = successMessage.data.authorization_url;
         setLoading(false);
-        // console.log(typeof authUrl);
-        // window.location.replace(authUrl);
         window.open(authUrl, "_blank");
+        // window.location.replace(authUrl);
       })
       .catch((error) => {
         const errorMessage = error.response.data.data;

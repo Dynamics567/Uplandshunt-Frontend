@@ -7,11 +7,13 @@ import bronze from "../assets/bronze.svg";
 import { plans } from "../data/subscription";
 import { axiosWithAuth } from "../Auth/Axios";
 import DashboardLoader from "../templates/DashboardLoader";
+import { Button } from "../atoms";
 
 const Subscription = ({ id }) => {
   const [active, setActive] = useState(1);
   const [getMonthId, setGetMonthId] = useState("");
   const [getPlanId, setGetPlanId] = useState("");
+  const [spinnerLoading, setSpinnerLoading] = useState(false);
   const [currentPlan, setCurrentPlan] = useState([]);
   const [loading, setLoading] = useState(false);
   const [authUrl, setAuthUrl] = useState("");
@@ -25,26 +27,25 @@ const Subscription = ({ id }) => {
       duration: getMonthId,
       call_back_url: `${callBack}/paymentSuccess`,
     };
-    console.log(subObject);
-    // setLoading(true);
+    setSpinnerLoading(true);
     axiosWithAuth()
       .put("/subscription/upgrade", subObject)
       .then((response) => {
-        const successMessage = response.data.data;
-        setAuthUrl(successMessage.authorization_url);
-        console.log(successMessage);
-        // setLoading(false);
-        // window.open(authUrl, "_blank");
+        const successMessage = response.data;
+        const authUrl = successMessage.data.authorization_url;
+        setSpinnerLoading(false);
+        window.open(authUrl, "_blank");
       })
       .catch(function (error) {
         if (error.response) {
-          setLoading(false);
-          const errorMessage =
-            error.response.data.data.errors.duration[0] ||
-            error.response.data.data.errors.duration[1];
-          console.log(errorMessage);
+          setSpinnerLoading(false);
+          const errorMessage = error.response.data.data;
+          Object.values(errorMessage.errors)
+            .flat()
+            .map((err) => {
+              toast.error(err);
+            });
           setError(errorMessage);
-          toast.error(errorMessage);
         }
       });
   };
@@ -72,9 +73,9 @@ const Subscription = ({ id }) => {
 
   useEffect(() => {
     if (getMonthId && getPlanId) {
-      upgradeSub();
+      // upgradeSub();
     }
-  }, [getMonthId, getPlanId, active]);
+  }, [getMonthId, getPlanId]);
 
   useEffect(() => {
     getUserSub();
@@ -121,10 +122,7 @@ const Subscription = ({ id }) => {
               );
             })}
           </div>
-          <div
-            className="w-full flex justify-between mb-10"
-            onClick={() => upgradeSub(id)}
-          >
+          <div className="w-full flex justify-between mb-10">
             <SubCard
               icon={bronze}
               amount="$10.00"
@@ -136,6 +134,14 @@ const Subscription = ({ id }) => {
               // id=
               // buttonUrl={window.location.replace("/payment")}
             />
+          </div>
+          <div
+            className="flex w-full justify-center items-center text-center mb-10"
+            onClick={upgradeSub}
+          >
+            <div className="w-2/6">
+              <Button loading={spinnerLoading} buttonText="Upgrade" />
+            </div>
           </div>
         </div>
       )}
