@@ -19,12 +19,12 @@ const Header = () => {
               <li className="mr-6">Contact Us</li>
             </Link>
             <Link to="/register">
-              <button className="border border-primary rounded-md py-2 px-4 mr-6">
+              <button className="border border-primary rounded-md py-2 px-4 mr-6 focus:outline-none">
                 Register
               </button>
             </Link>
             <Link to="/login">
-              <button className="text-white bg-primary rounded-md py-2 px-4 mr-6">
+              <button className="text-white bg-primary rounded-md py-2 px-4 mr-6 focus:outline-none">
                 Login
               </button>
             </Link>

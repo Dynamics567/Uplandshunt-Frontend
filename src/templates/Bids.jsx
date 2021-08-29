@@ -9,7 +9,7 @@ import { useParams } from "react-router";
 import { Modal } from "../organisms";
 import interest from "../assets/interest.png";
 import { axiosInstance, axiosWithAuth } from "../Auth/Axios";
-import { Input } from "../atoms";
+import { Button, InputTwo } from "../atoms";
 
 const Bids = () => {
   let { id } = useParams();
@@ -20,12 +20,13 @@ const Bids = () => {
 
   const [bidsReceived, setBidsReceived] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const validationSchema = Yup.object().shape({
     amount: Yup.string().required("Price is required"),
   });
   const formOptions = { resolver: yupResolver(validationSchema) };
-  const { register, handleSubmit, formState } = useForm(formOptions);
+  const { register, handleSubmit, formState, reset } = useForm(formOptions);
   const { errors } = formState;
 
   const getBidsReceived = () => {
@@ -43,20 +44,32 @@ const Bids = () => {
     if (getUserAuthStatus) {
       let propertyId = { property_id: id };
       const userData = { ...propertyId, ...data };
-      // console.log(userData);
-      return axiosWithAuth()
-        .post(`bid`, userData)
-        .then((response) => {
-          const successMessage = response.data.data;
-          // console.log(successMessage);
-          toast.success(successMessage);
-          console.log(response);
-        })
-        .catch((error) => {
-          // const errorMessage = error.response.data.data;
-          // console.log(errorMessage);
-          // toast.error(errorMessage);
-        });
+      setLoading(true);
+      return (
+        axiosWithAuth()
+          .post(`bid`, userData)
+          .then((response) => {
+            const successMessage = response.data.data;
+            toast.success(successMessage);
+            setLoading(false);
+          })
+          // .catch((error) => {
+          //   setLoading(false);
+          //   //const errorMessage = error.response.data.data;
+          //   const errorMessage = error.response.data.data;
+          //   console.log(errorMessage);
+          //   reset();
+          //   // toast.error(errorMessage);
+          // });
+          .catch(function (error) {
+            if (error.response) {
+              setLoading(false);
+              const errorMessage = error.response.data.data;
+              reset();
+              toast.error(errorMessage);
+            }
+          })
+      );
     } else {
       const currentPath = path.pathname;
       //Save data to sessionStorage
@@ -126,15 +139,22 @@ const Bids = () => {
           <p className="font-bold text-base px-4 mb-4">Price</p>
           <form onSubmit={handleSubmit(placeBid)}>
             <section className="m-auto w-11/12">
-              <Input {...register("amount")} error={errors.amount?.message} />
+              <InputTwo
+                register={register("amount")}
+                error={errors.amount?.message}
+              />
             </section>
-            <div className="bg-primary p-4 flex justify-center items-center m-auto w-11/12 rounded-md mb-4">
-              <button
+            <div
+              className="bg-primary m-auto w-11/12 rounded-md mb-4"
+              onClick={placeBid}
+            >
+              {/* <button
                 className=" text-white text-center text-base font-bold"
                 onClick={placeBid}
               >
                 Submit your bid
-              </button>
+              </button> */}
+              <Button loading={loading} buttonText="Submit your bid" />
             </div>
           </form>
         </div>

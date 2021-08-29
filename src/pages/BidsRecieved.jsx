@@ -14,6 +14,7 @@ const BidsRecieved = () => {
   const [showModal, setShowModal] = useState(false);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [spinnerLoading, setSpinnerLoading] = useState(false);
   const [error, setError] = useState("");
 
   const handleClose = () => {
@@ -32,7 +33,7 @@ const BidsRecieved = () => {
 
   const acceptBid = (bidId) => {
     console.log(bidId);
-    // setLoading(true);
+    setSpinnerLoading(true);
     axiosWithAuth()
       .post(`bid/${bidId}/approve`)
       .then((response) => {
@@ -42,7 +43,7 @@ const BidsRecieved = () => {
       })
       .catch(function (error) {
         if (error.response) {
-          setLoading(false);
+          setSpinnerLoading(false);
           const errorMessage = error.response.data.data;
           setError(errorMessage);
           console.log(errorMessage);
@@ -121,7 +122,7 @@ const BidsRecieved = () => {
                         onClick={() => acceptBid(bid.id)}
                       >
                         <button className="bg-primary text-white text-base font-bold px-6 py-2 my-2 rounded-md shadow-sm focus:outline-none">
-                          {loading ? <LoadSpinner /> : "Share"}
+                          {spinnerLoading ? <LoadSpinner /> : "Share"}
                         </button>
                       </div>
                     </Modal>
