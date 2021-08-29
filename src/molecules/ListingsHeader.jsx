@@ -31,7 +31,7 @@ const ListingsHeader = () => {
       .get("boost")
       .then((response) => {
         const results = response.data.data;
-        // console.log(results);
+        console.log(results);
       });
   };
 

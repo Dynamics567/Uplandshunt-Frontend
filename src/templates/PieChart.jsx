@@ -10,29 +10,23 @@ const PieChart = ({ listings }) => {
     listkeys.push(key);
     listValues.push(value.count);
   }
-
-  // const newListKeys = listkeys.replace(/_/g, " ");
+  console.log(listings);
+  const removeUndeScoreFromKeys = listkeys.map((key) => {
+    return key.replace(/[_]/g, " ");
+  });
 
   delete listings.total_listed;
 
+  const isEmpty = Object.entries(listings).length === 0;
+
+  const dataToDisplay = isEmpty ? [0, 0, 0, 0, 0, 0, 0] : listValues;
+
   const data = {
-    labels: listkeys,
+    labels: removeUndeScoreFromKeys,
     datasets: [
       {
-        label: "",
-        fillColor: "rgba(220,220,220,0.0)",
-        strokeColor: "rgba(220,220,220,0)",
-        pointColor: "rgba(220,220,220,0)",
-        pointStrokeColor: "#fff",
-        pointHighlightFill: "#fff",
-        pointHighlightStroke: "rgba(220,220,220,1)",
-        // change this data values according to the vertical scale
-        // you are looking for
-        data: [65, 59, 80, 81, 56, 55, 40],
-      },
-      {
         label: "Listings details",
-        data: listValues,
+        data: [0, 0, 0, 0, 0, 0, 0],
         backgroundColor: [
           "#B3404A",
           "#CE787F",
@@ -81,3 +75,61 @@ const PieChart = ({ listings }) => {
 };
 
 export default PieChart;
+
+// let ctx = document.getElementById("chartContainer").getContext("2d");
+
+// let data = [
+//   [0, 0, 0],
+//   [1, 2, 3],
+// ];
+// let labels = ["A", "B", "C"];
+// let bgColors = ["yellow", "orange", "aquamarine"];
+
+// let options = {
+//   borderWidth: 1,
+//   borderColor: "black",
+//   legend: {
+//     labels: {
+//       // Prevent items with undefined labels from appearing in the legend
+//       filter: (item) => item.text !== undefined,
+//     },
+//   },
+//   tooltips: {
+//     // Prevent items with undefined labels from showing tooltips
+//     filter: (item, chart) => chart.labels[item.index] !== undefined,
+//   },
+// };
+
+// let chartConfig = {
+//   type: "pie",
+//   data: {
+//     labels: labels,
+//     datasets: [
+//       {
+//         data: data[0],
+//         backgroundColor: bgColors,
+//         label: "data",
+//         borderColor: "black",
+//         borderWidth: 2,
+//       },
+//       {
+//         data: data[1],
+//         backgroundColor: bgColors,
+//         label: "data",
+//         borderColor: "black",
+//         borderWidth: 2,
+//       },
+//     ],
+//   },
+//   options: options,
+// };
+
+// // Check if data is all 0s; if it is, add dummy data to end with empty label
+// chartConfig.data.datasets.forEach((dataset) => {
+//   if (dataset.data.every((el) => el === 0)) {
+//     dataset.backgroundColor.push("rgba(255,255,255,0)");
+//     dataset.data.push(1);
+//   }
+// });
+
+// let pieChart = new Chart(ctx, chartConfig);

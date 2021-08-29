@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import search from "../assets/search.svg";
-import support from "../assets/support.svg";
+import contact from "../assets/contact.png";
 import dropdown from "../assets/dropdown.svg";
 import { axiosInstance } from "../Auth/Axios";
 import DashboardLoader from "../templates/DashboardLoader";
@@ -84,13 +84,22 @@ const Hero = () => {
                   />
                 </Link>
               </section>
-              <div className="hero-support fixed right-8 bottom-8 top-0 inset-x-0 z-50 h-16">
+              <Link
+                to="/contactus"
+                className="hero-support fixed right-8 bottom-8 top-0 inset-x-0 z-50 h-16"
+              >
                 <img
-                  src={support}
-                  alt="support"
-                  className="w-36 hero-support"
+                  src={contact}
+                  alt="contact"
+                  className="w-12 hero-support"
                 />
-              </div>
+                <p
+                  className="font-semibold text-base ml-96 mt-2"
+                  style={{ color: "#0AFF22" }}
+                >
+                  Contact Support
+                </p>
+              </Link>
             </div>
           </div>
           {showDropDown && (

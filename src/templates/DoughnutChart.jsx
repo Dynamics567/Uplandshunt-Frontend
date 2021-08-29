@@ -11,29 +11,19 @@ const DoughnutChart = ({ transactions }) => {
     transactionkeys.push(key);
     transactionValues.push(value.total_amount);
   }
-  {
-    console.log(transactions.length);
-  }
-  delete transactions.total;
 
+  delete transactions.total;
+  console.log(transactions);
+
+  const isEmpty = Object.entries(transactions).length === 0;
+
+  const dataToDisplay = isEmpty ? [0, 0, 0, 0, 0, 0, 0] : transactionValues;
   const data = {
     labels: transactionkeys,
     datasets: [
       {
-        label: "",
-        fillColor: "rgba(220,220,220,0.0)",
-        strokeColor: "rgba(220,220,220,0)",
-        pointColor: "rgba(220,220,220,0)",
-        pointStrokeColor: "#fff",
-        pointHighlightFill: "#fff",
-        pointHighlightStroke: "rgba(220,220,220,1)",
-        // change this data values according to the vertical scale
-        // you are looking for
-        data: [65, 59, 80, 81, 56, 55, 40],
-      },
-      {
-        label: "# of Votes",
-        data: transactionValues,
+        label: "Transactions",
+        data: dataToDisplay,
         backgroundColor: [
           "#B3404A",
           "#CE787F",
@@ -81,3 +71,28 @@ const DoughnutChart = ({ transactions }) => {
 };
 
 export default DoughnutChart;
+
+// {
+//   label: "",
+//   fillColor: "rgba(220,220,220,0.0)",
+//   strokeColor: "rgba(220,220,220,0)",
+//   pointColor: "rgba(220,220,220,0)",
+//   pointStrokeColor: "#fff",
+//   pointHighlightFill: "#fff",
+//   pointHighlightStroke: "rgba(220,220,220,1)",
+//   // change this data values according to the vertical scale
+//   // you are looking for
+//   data: [65, 59, 80, 81, 56, 55, 40],
+// },
+
+// {
+//   "total": {
+//       "total_amount": "300"
+//   },
+//   "property": {
+//       "total_amount": null
+//   },
+//   "boosting": {
+//       "total_amount": null
+//   }
+// }

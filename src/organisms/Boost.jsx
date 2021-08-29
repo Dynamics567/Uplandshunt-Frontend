@@ -106,7 +106,7 @@ const Boost = ({ id }) => {
               {data.map((plan) => {
                 return (
                   <div
-                    className="shadow-lg rounded-lg bg-white p-4 my-4 mr-16 hover:border-blue-500"
+                    className="shadow-lg rounded-lg bg-white p-4 my-4 mr-16 hover:bg-ashThree"
                     key={plan.id}
                     onClick={() => boostProperty(plan.id)}
                   >

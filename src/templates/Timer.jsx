@@ -5,7 +5,6 @@ const Timer = ({ endTime, boostProperty }) => {
   function diff_hours(date, date2) {
     var diff = (date2.getTime() - new Date().getTime()) / 1000;
     diff /= 60 * 60;
-    // return Math.abs(Math.round(diff));
     return diff;
   }
 
@@ -36,7 +35,7 @@ const Timer = ({ endTime, boostProperty }) => {
     }
   };
   return (
-    <div className="bg-white p-4 rounded-md shadow-md">
+    <div className="bg-white p-4 rounded-md shadow-md text-primary">
       <Countdown
         date={Date.now() + countDownTime * 3600000}
         renderer={renderer}

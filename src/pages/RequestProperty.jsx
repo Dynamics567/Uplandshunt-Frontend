@@ -67,7 +67,7 @@ const RequestProperty = () => {
 
   useEffect(() => {
     setInitialState(true);
-  }, [listTypeResult, propertyTypeResult]);
+  }, []);
 
   return (
     <div className="m-auto w-11/12">

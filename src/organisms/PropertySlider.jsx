@@ -99,7 +99,7 @@ const PropertySlider = ({ title, category }) => {
                   <div className="mr-8 mb-8 border border-white shadow-xl rounded-md">
                     <section className="w-full h-auto object-cover">
                       <img
-                        src={prop2}
+                        src={property.images[0].image_url}
                         alt="location"
                         className="object-cover w-full h-full"
                       />
