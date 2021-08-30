@@ -45,31 +45,22 @@ const Bids = () => {
       let propertyId = { property_id: id };
       const userData = { ...propertyId, ...data };
       setLoading(true);
-      return (
-        axiosWithAuth()
-          .post(`bid`, userData)
-          .then((response) => {
-            const successMessage = response.data.data;
-            toast.success(successMessage);
+      return axiosWithAuth()
+        .post(`bid`, userData)
+        .then((response) => {
+          const successMessage = response.data.data;
+          toast.success(successMessage);
+          setLoading(false);
+        })
+        .catch(function (error) {
+          if (error.response) {
             setLoading(false);
-          })
-          // .catch((error) => {
-          //   setLoading(false);
-          //   //const errorMessage = error.response.data.data;
-          //   const errorMessage = error.response.data.data;
-          //   console.log(errorMessage);
-          //   reset();
-          //   // toast.error(errorMessage);
-          // });
-          .catch(function (error) {
-            if (error.response) {
-              setLoading(false);
-              const errorMessage = error.response.data.data;
-              reset();
-              toast.error(errorMessage);
-            }
-          })
-      );
+            const errorMessage = error.response.data.data;
+            console.log(error.response.data);
+            reset();
+            toast.error(errorMessage);
+          }
+        });
     } else {
       const currentPath = path.pathname;
       //Save data to sessionStorage

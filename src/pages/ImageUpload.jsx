@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { axiosWithAuth } from "../Auth/Axios";
 import SimpleDropZone from "../templates/SimpleDropZone";
@@ -12,17 +13,22 @@ const ImageUpload = () => {
     // console.log(status, meta);
   };
 
+  const [loading, setLoading] = useState(false);
+
   const handleSubmit = (files) => {
     const fileNames = files.map((file) => file.file);
 
     const formdata = new FormData();
     formdata.append("file", fileNames);
+    console.log(formdata);
+    setLoading(true);
     axiosWithAuth()
       .post(`property/${id}/images`, formdata)
       .then((response) => {
         const successMessage = response.data.data;
         toast.success(successMessage);
-        location.push(`/dashboard/listings/documentUpload/${id}`);
+        setLoading(false);
+        // location.push(`/dashboard/listings/documentUpload/${id}`);
       });
   };
 
@@ -41,6 +47,7 @@ const ImageUpload = () => {
           handleSubmit={handleSubmit}
           handleChangeStatus={handleChangeStatus}
           buttonText="Continue"
+          loading={loading}
         />
         <div className="mt-4">
           <p className="text-xs font-semibold text-ashThree">

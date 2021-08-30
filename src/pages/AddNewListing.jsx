@@ -23,7 +23,7 @@ const AddNewListing = () => {
   const location = useHistory();
   const [selected, setSelected] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [setErrors] = useState("");
+  const [error, setError] = useState("");
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Property Name is required"),
@@ -63,16 +63,16 @@ const AddNewListing = () => {
   const addNewListing = (data) => {
     let amenities = { amenity: [selected[1].value] || [] };
     const propertyData = { ...amenities, ...data };
-    // console.log(propertyData);
-    setLoading(true);
+    console.log(propertyData);
+    //setLoading(true);
     axiosWithAuth()
       .post("property", propertyData)
       .then(function (response) {
         console.log(response);
-        if (response) {
-          console.log(response);
-          setLoading(false);
-        }
+        // if (response) {
+        //   console.log(response);
+        //   setLoading(false);
+        // }
         toast.success(response.data.message);
         location.push(
           `/dashboard/listings/imageUpload/${response.data.data.id}`
@@ -80,11 +80,9 @@ const AddNewListing = () => {
       })
       .catch(function (error) {
         if (error.response) {
-          setErrors(errors);
-          toast.error(errors);
+          setError(errors);
+          toast.error(error);
         }
-        // handle error
-        // setError(error.status);
       });
   };
   return (

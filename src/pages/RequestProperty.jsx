@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
 
 import { Select, DashboardSectionTitle, Button } from "../atoms";
-import { listType, propertyType } from "../data/SelectOptions";
+import { listType, propertyTypeTwo } from "../data/SelectOptions";
 import { axiosInstance, axiosWithAuth } from "../Auth/Axios";
 import PropertyCard from "../templates/PropertyCard";
 
@@ -30,16 +30,18 @@ const RequestProperty = () => {
   const { errors } = formState;
 
   const getPropertiesAvailable = () => {
-    setLoading(true);
-    axiosInstance
-      .get(`property?type=${listTypeResult}&category=${propertyTypeResult}`)
-      .then((response) => {
-        const searchResults = response.data.data;
-        console.log(searchResults);
-        setResults(searchResults);
-        setInitialState(false);
-        setLoading(false);
-      });
+    const test = `property?type=${listTypeResult}&category=${propertyTypeResult}`;
+    console.log(test);
+    // setLoading(true);
+    // axiosInstance
+    //   .get(`property?type=${listTypeResult}&category=${propertyTypeResult}`)
+    //   .then((response) => {
+    //     const searchResults = response.data.data;
+    //     console.log(searchResults);
+    //     setResults(searchResults);
+    //     setInitialState(false);
+    //     setLoading(false);
+    //   });
   };
 
   const getPropertyId = (id) => {
@@ -67,7 +69,7 @@ const RequestProperty = () => {
 
   useEffect(() => {
     setInitialState(true);
-  }, []);
+  }, [listTypeResult, propertyTypeResult]);
 
   return (
     <div className="m-auto w-11/12">
@@ -77,7 +79,7 @@ const RequestProperty = () => {
           <div className="w-full grid grid-cols-3 gap-6">
             <Select
               labelName="Listing Type"
-              values={propertyType}
+              values={propertyTypeTwo}
               selectedValue="Under Construction"
               name="property type"
               onValueChange={(val) => setListTypeResult(val)}

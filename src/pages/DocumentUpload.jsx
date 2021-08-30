@@ -20,14 +20,16 @@ const DocumentUpload = (imageTitle) => {
     formdata.append("file", fileNames[0]);
     formdata.append("document_name", "test");
     console.log(formdata);
-    // console.log(formdata);
-    // axiosWithAuth()
-    //   .post(`property/${id}/documents`, formdata)
-    //   .then((response) => {
-    //     const successMessage = response.data.data;
-    //     console.log(successMessage);
-    //     toast.success(successMessage);
-    //   });
+    console.log(formdata);
+    setLoading(true);
+    axiosWithAuth()
+      .post(`property/${id}/documents`, formdata)
+      .then((response) => {
+        const successMessage = response.data.data;
+        console.log(successMessage);
+        toast.success(successMessage);
+        setLoading(false);
+      });
   };
 
   const getPropertyDetails = () => {
@@ -40,17 +42,17 @@ const DocumentUpload = (imageTitle) => {
   const saveDocuments = () => {
     const ifDocuments = getPropertyDetails();
     console.log(ifDocuments);
-    // setLoading(true);
-    // axiosWithAuth()
-    //   .post(`property/${id}/save`)
-    //   .then((response) => {
-    //     console.log(response);
-    //     setLoading(false);
-    //     const successMessage = response.data.message;
-    //     console.log(successMessage);
-    //     toast.success(successMessage);
-    //     location.push(`/dashboard/listings/editDetails/${id}`);
-    //   });
+    setLoading(true);
+    axiosWithAuth()
+      .post(`property/${id}/save`)
+      .then((response) => {
+        console.log(response);
+        setLoading(false);
+        const successMessage = response.data.message;
+        console.log(successMessage);
+        toast.success(successMessage);
+        location.push(`/dashboard/listings/editDetails/${id}`);
+      });
   };
   return (
     <div className="m-auto w-11/12 mt-6">
@@ -67,6 +69,7 @@ const DocumentUpload = (imageTitle) => {
           fileType="image/*,.pdf,.doc,.docx"
           buttonText="Submit"
           imageTitle="Certificate Of Occupancy"
+          loading={loading}
         />
         {/* accept="image/*,.pdf,.doc,.docx" */}
 
@@ -77,6 +80,7 @@ const DocumentUpload = (imageTitle) => {
           fileType="image/*,.pdf,.doc,.docx"
           buttonText="Submit"
           imageTitle="Governor’s Consent"
+          loading={loading}
         />
         <SimpleDropZone
           maximumFiles="1"
@@ -85,6 +89,7 @@ const DocumentUpload = (imageTitle) => {
           fileType="image/*,.pdf,.doc,.docx"
           buttonText="Submit"
           imageTitle="Government Gazette"
+          loading={loading}
         />
         <SimpleDropZone
           maximumFiles="1"
@@ -93,6 +98,7 @@ const DocumentUpload = (imageTitle) => {
           fileType="image/*,.pdf,.doc,.docx"
           buttonText="Submit"
           imageTitle="Rent agreement"
+          loading={loading}
         />
       </div>
       <div

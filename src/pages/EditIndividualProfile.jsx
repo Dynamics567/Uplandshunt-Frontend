@@ -11,7 +11,8 @@ import { axiosWithAuth } from "../Auth/Axios";
 const EditIndividualProfile = () => {
   const location = useHistory();
   const [loading, setLoading] = useState(false);
-  const [setError] = useState("");
+  const [error, setError] = useState("");
+  const [profileUpdate, setProfileUpdate] = useState([]);
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Full Name is required"),
@@ -38,6 +39,8 @@ const EditIndividualProfile = () => {
       .then(function (response) {
         console.log(response);
         if (response) {
+          const message = response.data.data;
+          setProfileUpdate(message);
           setLoading(false);
         }
         toast.success(response.data.message);

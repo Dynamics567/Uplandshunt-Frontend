@@ -2,6 +2,7 @@ import Dropzone from "react-dropzone-uploader";
 import "react-dropzone-uploader/dist/styles.css";
 
 import cloud from "../assets/cloud.png";
+import LoadSpinner from "./LoadSpinner";
 
 const SimpleDropZone = ({
   maximumFiles,
@@ -11,6 +12,7 @@ const SimpleDropZone = ({
   fileType,
   buttonText,
   imageTitle,
+  loading,
 }) => {
   return (
     <div className="mt-10">
@@ -18,7 +20,7 @@ const SimpleDropZone = ({
       <Dropzone
         onChangeStatus={handleChangeStatus}
         onSubmit={handleSubmit}
-        submitButtonContent={buttonText}
+        submitButtonContent={loading ? <LoadSpinner /> : buttonText}
         accept={fileType}
         inputContent={(files, extra) =>
           files.reject ? "Only images files allowed!" : "Select and Drop Files"

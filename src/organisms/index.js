@@ -13,3 +13,4 @@ export * from "./Boost";
 export * from "./PropertyCardTwo";
 export * from "./PropertyCardThree";
 export * from "./MiniPropertyCard";
+export * from "./DeleteAccount";

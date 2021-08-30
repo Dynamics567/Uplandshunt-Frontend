@@ -177,3 +177,18 @@ export const multiSelectOptions = [
   { label: "Lifts", value: "14" },
   { label: "Parking", value: "15" },
 ];
+
+export const propertyTypeTwo = [
+  ["", "Type of Property"],
+  ["1", "Under construction"],
+  ["2", "Occupancy stage"],
+  ["3", "Flat"],
+  ["4", "Detached"],
+  ["5", "Semi Detached"],
+  ["6", "Town house"],
+  ["7", "Bungalow"],
+  ["8", "Residential"],
+  ["9", "Student accomodation"],
+  ["10", "Office space"],
+  ["11", "Condo Apartment"],
+];
