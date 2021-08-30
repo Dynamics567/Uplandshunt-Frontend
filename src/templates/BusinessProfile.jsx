@@ -5,6 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
 
+import { DeleteAccount, Modal } from "../organisms";
 import { InputTwo, Button } from "../atoms";
 import { axiosWithAuth } from "../Auth/Axios";
 import edit from "../assets/userDashboard/edit.svg";
@@ -14,6 +15,7 @@ const BusinessProfile = () => {
   const [loading, setLoading] = useState(false);
   const [spinnerLoading, setSpinnerLoading] = useState(false);
   const [error, setError] = useState("");
+  const [showModal, setShowModal] = useState(false);
 
   const validationSchema = Yup.object().shape({
     old_password: Yup.string()
@@ -74,6 +76,14 @@ const BusinessProfile = () => {
       });
   };
 
+  const showDeleteAccount = () => {
+    setShowModal(true);
+  };
+
+  const handleClose = () => {
+    setShowModal(false);
+  };
+
   useEffect(() => {
     getUserProfile();
   }, []);
@@ -108,8 +118,22 @@ const BusinessProfile = () => {
       <div className="flex mb-20">
         <div className="flex-none mr-6 ml-10 mt-6">
           <img src={avatar} alt="profileAvatar" className="rounded-full" />
-          <p className="font-bold text-2xl mb-4"></p>
-          <p className="font-semibold text-base"></p>
+          <p className="font-bold text-center text-2xl mb-4">{first_name}</p>
+          <div
+            onClick={showDeleteAccount}
+            className="px-16 py-2 rounded-md border border-primary mr-8 cursor-pointer"
+          >
+            <p className="text-primary text-base font-bold">
+              Delete My Account
+            </p>
+          </div>
+          <Modal
+            modalTitle="Delete My Account"
+            showModal={showModal}
+            handleClose={handleClose}
+          >
+            <DeleteAccount />
+          </Modal>
         </div>
 
         <div className="flex-grow w-full">

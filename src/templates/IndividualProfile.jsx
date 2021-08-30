@@ -6,8 +6,6 @@ import * as Yup from "yup";
 import { toast } from "react-toastify";
 
 import { DeleteAccount, Modal } from "../organisms";
-import LoadSpinnerTwo from "../templates/LoadSpinnerTwo";
-import LoadSpinner from "../templates/LoadSpinner";
 import edit from "../assets/userDashboard/edit.svg";
 import { InputTwo, Button } from "../atoms";
 import { axiosWithAuth } from "../Auth/Axios";
@@ -135,19 +133,15 @@ const IndividualProfile = () => {
                 className="px-16 py-2 rounded-md border border-primary mr-8 cursor-pointer"
               >
                 <p className="text-primary text-base font-bold">
-                  {spinnerLoading ? <LoadSpinnerTwo /> : "Delete My Account"}
+                  Delete My Account
                 </p>
               </div>
-              <Modal showModal={showModal} handleClose={handleClose}>
+              <Modal
+                modalTitle="Delete My Account"
+                showModal={showModal}
+                handleClose={handleClose}
+              >
                 <DeleteAccount />
-                <div
-                  className="m-auto w-11/12 flex justify-end"
-                  // onClick={() => acceptBid(bid.id)}
-                >
-                  <button className="bg-primary text-white text-base font-bold px-6 py-2 my-2 rounded-md shadow-sm focus:outline-none">
-                    {spinnerLoading ? <LoadSpinner /> : "Share"}
-                  </button>
-                </div>
               </Modal>
             </div>
 
