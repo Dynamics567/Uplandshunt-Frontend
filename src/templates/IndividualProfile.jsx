@@ -10,6 +10,7 @@ import edit from "../assets/userDashboard/edit.svg";
 import { InputTwo, Button } from "../atoms";
 import { axiosWithAuth } from "../Auth/Axios";
 import DashboardLoader from "./DashboardLoader";
+import { UploadProfilePicture } from "../organisms/UploadProfilePicture";
 
 const IndividualProfile = () => {
   const [response, setResponse] = useState([]);
@@ -93,20 +94,20 @@ const IndividualProfile = () => {
     email,
     first_name,
     phone,
-    avatar,
     last_name,
+    avatar,
     address,
     country,
     state,
     city,
   } = response;
-
+  console.log(avatar);
   const userObject = [
     ["Name", `${first_name} ${last_name}`],
-    ["Address", address],
-    ["Country", country],
-    ["State", state],
-    ["City", city],
+    // ["Address", address],
+    // ["Country", country],
+    // ["State", state],
+    // ["City", city],
     ["Contact Number", phone],
     ["Email Address", email],
   ];
@@ -118,13 +119,7 @@ const IndividualProfile = () => {
         <div className="">
           <div className="flex mb-20">
             <div className="flex-none mr-6 ml-10 mt-6">
-              <div className="text-center">
-                <img
-                  src={avatar}
-                  alt="profileAvatar"
-                  className="rounded-full"
-                />
-              </div>
+              <UploadProfilePicture avatar={avatar} />
               <p className="font-bold text-center text-2xl mb-4">
                 {first_name}
               </p>

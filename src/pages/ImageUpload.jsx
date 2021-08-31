@@ -28,7 +28,7 @@ const ImageUpload = () => {
         const successMessage = response.data.data;
         toast.success(successMessage);
         setLoading(false);
-        // location.push(`/dashboard/listings/documentUpload/${id}`);
+        location.push(`/dashboard/listings/documentUpload/${id}`);
       });
   };
 

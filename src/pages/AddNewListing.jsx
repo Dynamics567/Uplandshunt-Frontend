@@ -36,9 +36,7 @@ const AddNewListing = () => {
     area: Yup.number()
       .typeError("Area of property must be a number")
       .required("Area of the Property is required"),
-    postal_code: Yup.number()
-      .typeError("Postal code must be a number")
-      .required("Postal code is required"),
+    postal_code: Yup.string().required("Postal Code is required"),
     address_line_one: Yup.string().required("Address Lane 1 is required"),
     address_line_two: Yup.string().required("Address Lane 2 is required"),
     country: Yup.string().required("Country is required"),
@@ -64,15 +62,15 @@ const AddNewListing = () => {
     let amenities = { amenity: [selected[1].value] || [] };
     const propertyData = { ...amenities, ...data };
     console.log(propertyData);
-    //setLoading(true);
+    setLoading(true);
     axiosWithAuth()
       .post("property", propertyData)
       .then(function (response) {
         console.log(response);
-        // if (response) {
-        //   console.log(response);
-        //   setLoading(false);
-        // }
+        if (response) {
+          console.log(response);
+          setLoading(false);
+        }
         toast.success(response.data.message);
         location.push(
           `/dashboard/listings/imageUpload/${response.data.data.id}`
@@ -80,8 +78,14 @@ const AddNewListing = () => {
       })
       .catch(function (error) {
         if (error.response) {
-          setError(errors);
-          toast.error(error);
+          setLoading(false);
+          const errorMessage = error.response.data.data;
+          Object.values(errorMessage.errors)
+            .flat()
+            .map((err) => {
+              toast.error(err);
+            });
+          setError(errorMessage);
         }
       });
   };
@@ -250,10 +254,7 @@ const AddNewListing = () => {
         </div>
       </div> */}
 
-      <div
-        className="flex w-full justify-center items-center text-center mb-10"
-        // onClick={getManageDetailsPage}
-      >
+      <div className="flex w-full justify-center items-center text-center mb-10">
         <div className="w-1/2">
           <Button loading={loading} buttonText="Continue" />
         </div>

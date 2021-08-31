@@ -17,10 +17,10 @@ const EditIndividualProfile = () => {
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Full Name is required"),
     email: Yup.string().required("Email is required").email("Email is invalid"),
-    address: Yup.string().required("Address is required"),
-    country: Yup.string().required("Country is required"),
-    state: Yup.string().required("State is required"),
-    city: Yup.string().required("City is required"),
+    // address: Yup.string().required("Address is required"),
+    // country: Yup.string().required("Country is required"),
+    // state: Yup.string().required("State is required"),
+    // city: Yup.string().required("City is required"),
     contact_number: Yup.number()
       .typeError("Contact Number must be a number")
       .required("Contact Number is required"),
@@ -37,14 +37,13 @@ const EditIndividualProfile = () => {
     axiosWithAuth()
       .post("account/update-profile", data)
       .then(function (response) {
-        console.log(response);
         if (response) {
           const message = response.data.data;
           setProfileUpdate(message);
           setLoading(false);
         }
         toast.success(response.data.message);
-        location.push("/dashboard/profile");
+        // location.push("/dashboard/profile");
       })
       .catch(function (error) {
         if (error.response) {
@@ -77,7 +76,7 @@ const EditIndividualProfile = () => {
             error={errors.email?.message}
           />
 
-          <Input
+          {/* <Input
             type="text"
             label="Address"
             name="address"
@@ -106,7 +105,7 @@ const EditIndividualProfile = () => {
             name="city"
             {...register("city")}
             error={errors.city?.message}
-          />
+          /> */}
           <Input
             type="text"
             label="Contact Number"
