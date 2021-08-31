@@ -52,3 +52,4 @@ export * from "./RequestProperty";
 export * from "./ViewBidsPropertyRequest";
 export * from "./PageNotFound";
 export * from "./UserSubscription";
+export * from "./AllProperties";

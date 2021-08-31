@@ -28,6 +28,7 @@ import {
   ViewBidsPropertyRequest,
   BidsSent,
   UserSubscription,
+  AllProperties,
 } from "../pages";
 
 const Dashboard = () => {
@@ -90,6 +91,11 @@ const Dashboard = () => {
               path="/dashboard/savedProperty"
               exact
               component={SavedProperty}
+            />
+            <Route
+              path="/dashboard/savedProperty/allProperties"
+              exact
+              component={AllProperties}
             />
             <Route
               path="/dashboard/savedProperty/allSavedProperties"

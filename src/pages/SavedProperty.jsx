@@ -39,7 +39,11 @@ const SavedProperty = () => {
   // console.log(response);
   return (
     <>
-      <DashboardSectionTitle text="My Saved Properties" showButton={false} />
+      <DashboardSectionTitle
+        text="My Saved Properties"
+        buttonText="Save New Properties"
+        buttonUrl="/dashboard/savedProperty/allProperties"
+      />
       {loading ? (
         <LoadSpinner />
       ) : response.length === 0 ? (
@@ -56,7 +60,7 @@ const SavedProperty = () => {
                 location={property.property.city}
                 price={property.property.price}
                 place={property.property.name}
-                photo={placeholder || property.property.images[0].image_url}
+                photo={property.property.images[0].image_url}
               />
             );
           })}

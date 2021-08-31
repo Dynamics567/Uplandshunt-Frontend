@@ -1,6 +1,18 @@
 import locationIcon from "../assets/location.svg";
+import love from "../assets/userDashboard/love.png";
+import LoadSpinnerTwo from "./LoadSpinnerTwo";
 
-const PropertyCard = ({ id, photo, location, price, place, getPropertyId }) => {
+const PropertyCard = ({
+  id,
+  photo,
+  location,
+  price,
+  place,
+  getPropertyId,
+  showSaveIcon = false,
+  saveProperty,
+  loading,
+}) => {
   return (
     <div
       className="mr-8 mb-8 border border-white shadow-md rounded-md"
@@ -20,7 +32,18 @@ const PropertyCard = ({ id, photo, location, price, place, getPropertyId }) => {
           <img src={locationIcon} alt="location" className="mr-2" />
           <p className="font-bold text-sm text-ash my-1">{location}</p>
         </div>
-        <p className="font-bold text-base">{price}</p>
+        <div className="w-full flex items-center justify-between">
+          <p className="font-bold text-base">{price}</p>
+          {showSaveIcon && (
+            <div className="cursor-pointer w-8" onClick={saveProperty}>
+              {loading ? (
+                <LoadSpinnerTwo />
+              ) : (
+                <img src={love} alt="love" className="w-8" />
+              )}
+            </div>
+          )}
+        </div>
       </section>
     </div>
   );
