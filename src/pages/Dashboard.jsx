@@ -27,6 +27,7 @@ import {
   RequestProperty,
   ViewBidsPropertyRequest,
   BidsSent,
+  UserSubscription,
 } from "../pages";
 
 const Dashboard = () => {
@@ -154,6 +155,11 @@ const Dashboard = () => {
             />
             <Route
               path="/dashboard/subscription"
+              exact
+              component={UserSubscription}
+            />
+            <Route
+              path="/dashboard/subscription/upgradeSub"
               exact
               component={Subscription}
             />

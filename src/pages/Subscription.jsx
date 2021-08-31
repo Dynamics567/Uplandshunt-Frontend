@@ -50,40 +50,11 @@ const Subscription = ({ id }) => {
       });
   };
 
-  const getUserSub = () => {
-    setLoading(true);
-    axiosWithAuth()
-      .get("/subscription/active")
-      .then((response) => {
-        const results = response.data.data;
-        setCurrentPlan(results);
-        setLoading(false);
-      })
-      .catch(function (error) {
-        if (error.response) {
-          setLoading(false);
-          const errorMessage = error.response.data.data;
-          setError(errorMessage);
-          toast.error(errorMessage);
-        }
-        // handle error
-        setError(error.status);
-      });
-  };
-
   useEffect(() => {
     if (getMonthId && getPlanId) {
       // upgradeSub();
     }
   }, [getMonthId, getPlanId]);
-
-  useEffect(() => {
-    getUserSub();
-  }, []);
-
-  if (loading) {
-    return <DashboardLoader />;
-  }
 
   return (
     <>
@@ -94,7 +65,6 @@ const Subscription = ({ id }) => {
           <div className="w-full my-4">
             <p className="text-2xl font-bold">Subscriptions</p>
             <div className="bg-primary w-16 h-2 ml-3"></div>
-            <p className="text-lg my-4 font-bold">Current Subscription Plan:</p>
           </div>
           <div className="my-6 w-3/4 flex items-center shadow-md rounded-md  border border-lightAsh">
             {plans.map(({ monthId, plan, duration }) => {
@@ -127,7 +97,7 @@ const Subscription = ({ id }) => {
               icon={bronze}
               amount="$10.00"
               bgImage={bronzeBg}
-              buttonText="Upgrade"
+              buttonText="Select"
               showButton={true}
               getPlanId={(getPlanId) => setGetPlanId(getPlanId)}
               loading={loading}

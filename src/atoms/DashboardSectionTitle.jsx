@@ -23,10 +23,10 @@ const DashboardSectionTitle = ({
     //   location.push(buttonUrl);
     // }
     if (error) {
-      location.push(`/dashboard/subscription`);
+      location.push(`/dashboard/subscription/upgradeSub`);
       toast.error("You must have an active subscription to add listings");
-    } else if (response.length > numberOfProperty) {
-      location.push(`/dashboard/subscription`);
+    } else if (response?.length > numberOfProperty) {
+      location.push(`/dashboard/subscription/upgradeSub`);
       toast.error("You have exceeded the number of properties");
     } else {
       location.push(buttonUrl);

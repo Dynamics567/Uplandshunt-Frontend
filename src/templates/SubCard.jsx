@@ -67,10 +67,10 @@ const SubCard = ({
             </p>
             {showButton && (
               <div onClick={() => getPlanId(sub.id)} className="bg-white">
-                {/* <button className="py-4 px-8 w-full mt-6 font-bold text-base text-white rounded-md bg-primary">
+                <button className="py-4 px-8 w-full mt-6 font-bold text-base text-primary rounded-md bg-white border border-primary ">
                   {buttonText}
-                </button> */}
-                <Button loading={loading} buttonText="Select" />
+                </button>
+                {/* <Button loading={loading} buttonText="Select" /> */}
               </div>
             )}
           </section>
