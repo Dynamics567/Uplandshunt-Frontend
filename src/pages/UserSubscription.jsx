@@ -23,8 +23,9 @@ const UserSubscription = () => {
     axiosWithAuth()
       .get("/subscription/active")
       .then((response) => {
-        const results = response.data.data;
+        const results = response.data.data.plan;
         setCurrentPlan(results);
+        console.log(results);
         setLoading(false);
       })
       .catch(function (error) {
@@ -103,7 +104,7 @@ const UserSubscription = () => {
                   Number of Properties: {currentPlan.number_of_property}
                 </p>
                 <ul className="m-auto w-full">
-                  {currentPlan.attributes.map((attr) => {
+                  {currentPlan.attributes?.map((attr) => {
                     return (
                       <div className="flex items-center mb-4">
                         <img src={dot} alt="dot" className="mr-6" />
