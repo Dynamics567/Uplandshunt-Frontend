@@ -50,6 +50,7 @@ const Bids = () => {
         .then((response) => {
           const successMessage = response.data.data;
           toast.success(successMessage);
+          reset();
           setLoading(false);
         })
         .catch(function (error) {

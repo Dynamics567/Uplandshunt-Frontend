@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 
+import logoTwo from "../assets/logoTwo.svg";
+
 const HeaderTwo = () => {
   return (
     <div
@@ -7,7 +9,7 @@ const HeaderTwo = () => {
       style={{ boxShadow: "0px 0px 4px 0px #eea7a740" }}
     >
       <Link to="/" className="" style={{ width: "40%" }}>
-        Sample Logo
+        <img src={logoTwo} alt="logo" />
       </Link>
 
       {/* <div className="flex w-full">

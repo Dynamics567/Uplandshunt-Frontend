@@ -1,5 +1,7 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
+
+import logo from "../assets/userDashboard/logo.svg";
 import { userDashboard } from "../data/FooterItems";
 import { useAuthDispatch, logout } from "../Context";
 
@@ -16,12 +18,12 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="w-64 bg-primary fixed top-0 left-0 right-0 bottom-0 pt-5 text-white z-10 pl-10">
+    <div className="w-64 bg-primary overflow-y-auto sidebar overflow-x-hidden fixed top-0 left-0 right-0 bottom-0 pt-5 text-white z-10 pl-10">
       <Link
         to="/dashboard"
         className="cursor-pointer font-normal text-base text-center"
       >
-        Sample Logo
+        <img src={logo} alt="logo" />
       </Link>
       <div className="mt-6 space-y-10 h-4/5 ">
         {userDashboard.map(({ id, image, navItem, link }) => {

@@ -29,6 +29,8 @@ import {
   BidsSent,
   UserSubscription,
   AllProperties,
+  Transactions,
+  UpdateDocument,
 } from "../pages";
 
 const Dashboard = () => {
@@ -56,6 +58,10 @@ const Dashboard = () => {
             <Route
               path="/dashboard/listings/documentUpload/:id"
               component={DocumentUpload}
+            />
+            <Route
+              path="/dashboard/listings/documentUpdate/:id"
+              component={UpdateDocument}
             />
             <Route
               path="/dashboard/listings/editDetails/:id"
@@ -103,7 +109,7 @@ const Dashboard = () => {
               component={AllSavedProperties}
             />
             <Route
-              path="/dashboard/request"
+              path="/dashboard/request/propertyRequest"
               exact
               component={PropertyRequest}
             />
@@ -168,6 +174,11 @@ const Dashboard = () => {
               path="/dashboard/subscription/upgradeSub"
               exact
               component={Subscription}
+            />
+            <Route
+              path="/dashboard/transactions"
+              exact
+              component={Transactions}
             />
           </Switch>
         </div>

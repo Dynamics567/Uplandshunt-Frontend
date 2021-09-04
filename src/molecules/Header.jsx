@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 
+import logoTwo from "../assets/logoTwo.svg";
 import { SectionWrapper } from "../Layout";
 
 const Header = () => {
   return (
     <SectionWrapper>
       <header className="flex justify-between items-center mb-4">
-        <p>Sample Logo</p>
+        <img src={logoTwo} alt="logo" />
         <nav>
           <ul className="flex justify-between items-center list-none text-primary font-semibold text-lg">
             <Link to="/legal/news">

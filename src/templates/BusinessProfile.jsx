@@ -5,6 +5,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
 
+import DashboardLoader from "./DashboardLoader";
+import { UploadProfilePicture } from "../organisms/UploadProfilePicture";
 import { DeleteAccount, Modal } from "../organisms";
 import { InputTwo, Button } from "../atoms";
 import { axiosWithAuth } from "../Auth/Axios";
@@ -88,23 +90,22 @@ const BusinessProfile = () => {
     getUserProfile();
   }, []);
 
+  if (loading) {
+    return <DashboardLoader />;
+  }
+
   const {
     email,
     first_name,
     phone,
     avatar,
     last_name,
-    address,
-    country,
-    state,
-    website,
-    company_name,
-    city,
+    business: { name, address, country, state, city, website },
   } = response;
 
   const userObject = [
     ["Name", `${first_name} ${last_name}`],
-    ["Company Name", company_name],
+    ["Company Name", name],
     ["Address", address],
     ["Country", country],
     ["State", state],
@@ -117,7 +118,7 @@ const BusinessProfile = () => {
     <div className="">
       <div className="flex mb-20">
         <div className="flex-none mr-6 ml-10 mt-6">
-          <img src={avatar} alt="profileAvatar" className="rounded-full" />
+          <UploadProfilePicture avatar={avatar} />
           <p className="font-bold text-center text-2xl mb-4">{first_name}</p>
           <div
             onClick={showDeleteAccount}

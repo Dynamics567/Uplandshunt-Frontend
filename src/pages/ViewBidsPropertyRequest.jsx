@@ -4,6 +4,7 @@ import { useParams } from "react-router";
 import { axiosInstance } from "../Auth/Axios";
 import { PropertyDetails } from "./PropertyDetails";
 import interest from "../assets/interest.png";
+import { BidsHistory } from "./BidsHistory";
 
 const ViewBidsPropertyRequest = () => {
   let { id } = useParams();
@@ -26,14 +27,11 @@ const ViewBidsPropertyRequest = () => {
         showBids={false}
         showDocuments={true}
       />
-      <section className="grid grid-cols-2 gap-6 mt-10 m-auto w-11/12">
+      <section className="grid my-16 grid-cols-2 gap-6 mt-10 m-auto w-11/12">
         <img src={interest} alt="interest" />
 
         <div className="">
-          <div className="p-4 flex justify-between bg-primary font-bold text-lg text-white rounded-tr-md rounded-tl-md">
-            <p>Bids History</p>
-            <p className="font-bold text-lg text-ashThree">Bids History</p>
-          </div>
+          <BidsHistory id={id} />
           <div className="border border-b-name border-lightAsh">
             {bidsReceived.map(({ id, price, updatedAt }) => {
               return (

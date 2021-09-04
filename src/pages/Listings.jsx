@@ -15,6 +15,7 @@ const Listings = () => {
   const [response, setResponse] = useState([]);
   const [error, setError] = useState("");
   const [numberOfProperty, setNumberOfProperty] = useState("");
+  const [spinnerLoading, setSpinnerLoading] = useState(false);
 
   const getUserListings = () => {
     setLoading(false);
@@ -48,6 +49,22 @@ const Listings = () => {
         const errorMessage = error.response.data.data;
         toast.error(errorMessage);
         setError(error);
+      });
+  };
+
+  const deleteProperty = (id) => {
+    setSpinnerLoading(true);
+    axiosWithAuth()
+      .delete(`property${id}`)
+      .then((response) => {
+        const successMessage = response.data.data;
+        toast.success(successMessage);
+        setSpinnerLoading(false);
+      })
+      .catch((error) => {
+        const errorMessage = error.response.data.data;
+        toast.error(errorMessage);
+        setSpinnerLoading(false);
       });
   };
 
@@ -95,6 +112,8 @@ const Listings = () => {
                     place={name}
                     photo={placeholder || images[0].image_url}
                     id={id}
+                    showDeleteIcon={true}
+                    deleteProperty={() => deleteProperty(id)}
                   />
                 </Link>
               );
@@ -104,13 +123,17 @@ const Listings = () => {
           <div className="grid grid-cols-4 gap-2 mt-6">
             {propertiesToRent.map(({ id, city, price, name, images }) => {
               return (
-                <PropertyCard
-                  location={city}
-                  price={price}
-                  place={name}
-                  photo={placeholder || images[0].image_url}
-                  id={id}
-                />
+                <Link to={`/dashboard/listings/userview/${id}`}>
+                  <PropertyCard
+                    location={city}
+                    price={price}
+                    place={name}
+                    photo={placeholder || images[0].image_url}
+                    id={id}
+                    showDeleteIcon={true}
+                    deleteProperty={() => deleteProperty(id)}
+                  />
+                </Link>
               );
             })}
           </div>

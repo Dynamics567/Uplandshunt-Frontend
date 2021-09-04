@@ -53,3 +53,7 @@ export * from "./ViewBidsPropertyRequest";
 export * from "./PageNotFound";
 export * from "./UserSubscription";
 export * from "./AllProperties";
+export * from "./Transactions";
+export * from "./BidsHistory";
+export * from "./SingleBidHistory";
+export * from "./UpdateDocument";

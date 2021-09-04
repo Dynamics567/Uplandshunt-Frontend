@@ -32,16 +32,16 @@ const RequestProperty = () => {
   const getPropertiesAvailable = () => {
     const test = `property?type=${listTypeResult}&category=${propertyTypeResult}`;
     console.log(test);
-    // setLoading(true);
-    // axiosInstance
-    //   .get(`property?type=${listTypeResult}&category=${propertyTypeResult}`)
-    //   .then((response) => {
-    //     const searchResults = response.data.data;
-    //     console.log(searchResults);
-    //     setResults(searchResults);
-    //     setInitialState(false);
-    //     setLoading(false);
-    //   });
+    setLoading(true);
+    axiosInstance
+      .get(`property?type=${listTypeResult}&category=${propertyTypeResult}`)
+      .then((response) => {
+        const searchResults = response.data.data;
+        console.log(searchResults);
+        setResults(searchResults);
+        setInitialState(false);
+        setLoading(false);
+      });
   };
 
   const getPropertyId = (id) => {

@@ -1,6 +1,7 @@
 import locationIcon from "../assets/location.svg";
 import love from "../assets/userDashboard/love.png";
 import LoadSpinnerTwo from "./LoadSpinnerTwo";
+import bin from "../assets/bin.png";
 
 const PropertyCard = ({
   id,
@@ -10,7 +11,9 @@ const PropertyCard = ({
   place,
   getPropertyId,
   showSaveIcon = false,
+  showDeleteIcon,
   saveProperty,
+  deleteProperty,
   loading,
 }) => {
   return (
@@ -40,6 +43,15 @@ const PropertyCard = ({
                 <LoadSpinnerTwo />
               ) : (
                 <img src={love} alt="love" className="w-8" />
+              )}
+            </div>
+          )}
+          {showDeleteIcon && (
+            <div className="cursor-pointer w-8" onClick={deleteProperty}>
+              {loading ? (
+                <LoadSpinnerTwo />
+              ) : (
+                <img src={bin} alt="love" className="w-4" />
               )}
             </div>
           )}

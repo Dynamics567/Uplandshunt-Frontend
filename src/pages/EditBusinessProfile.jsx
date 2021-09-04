@@ -28,7 +28,6 @@ const EditBusinessProfile = () => {
       .required("Contact Number is required"),
     email: Yup.string().required("Email is required").email("Email is invalid"),
     website: Yup.string().required("Website URL is required"),
-    logo: Yup.string().required("Company logo is required"),
   });
 
   const formOptions = { resolver: yupResolver(validationSchema) };
@@ -138,14 +137,6 @@ const EditBusinessProfile = () => {
             name="website"
             {...register("website")}
             error={errors.website?.message}
-          />
-          <Input
-            accept="image/png, image/gif, image/jpeg"
-            type="file"
-            name="logo"
-            label="Company Logo"
-            {...register("logo")}
-            error={errors.logo?.message}
           />
         </section>
         <div className="w-1/4 flex justify-center">

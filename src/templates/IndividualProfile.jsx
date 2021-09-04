@@ -90,24 +90,10 @@ const IndividualProfile = () => {
     getUserProfile();
   }, []);
 
-  const {
-    email,
-    first_name,
-    phone,
-    last_name,
-    avatar,
-    address,
-    country,
-    state,
-    city,
-  } = response;
-  console.log(avatar);
+  const { email, first_name, phone, last_name, avatar } = response;
+
   const userObject = [
     ["Name", `${first_name} ${last_name}`],
-    // ["Address", address],
-    // ["Country", country],
-    // ["State", state],
-    // ["City", city],
     ["Contact Number", phone],
     ["Email Address", email],
   ];

@@ -1,3 +1,6 @@
+import { ViewBidsPropertyRequest } from "../pages";
+import BusinessProfile from "../templates/BusinessProfile";
+
 export const plans = [
   {
     monthId: "1",
@@ -46,29 +49,34 @@ export const listingHeader = [
     item: "Bids Recieved",
     url: "/dashboard/listings/bidsReceived",
   },
-  {
-    id: "5",
-    item: "Bids Sent",
-    url: "/dashboard/listings/bidsSent",
-  },
+  // {
+  //   id: "5",
+  //   item: "Bids Sent",
+  //   url: "/dashboard/listings/bidsSent",
+  // },
 ];
 
 export const propertyRequest = [
   {
     id: "1",
-    item: "Bids Placed",
-    url: "/dashboard/request/bidsPlaced",
+    item: "Property Request",
+    url: "/dashboard/request/propertyRequest",
   },
   {
     id: "2",
-    item: "Interest Sent",
-    url: "/dashboard/request/interestSent",
+    item: "Bids Placed",
+    url: "/dashboard/request/bidsPlaced",
   },
-  {
-    id: "3",
-    item: "Documents",
-    url: "/dashboard/request/documents",
-  },
+  // {
+  //   id: "2",
+  //   item: "Interest Sent",
+  //   url: "/dashboard/request/interestSent",
+  // },
+  // {
+  //   id: "3",
+  //   item: "Documents",
+  //   url: "/dashboard/request/documents",
+  // },
 ];
 
 export const purchase = [
@@ -123,5 +131,20 @@ export const sortByPrice = [
   {
     id: "DESC",
     item: "high to low",
+  },
+];
+
+export const bidsHistory = [
+  {
+    id: "1",
+    label: "tab1",
+    item: "Bids History",
+    content: "Bids History",
+  },
+  {
+    id: "2",
+    label: "tab2",
+    item: "My Bids",
+    content: "My Bids",
   },
 ];

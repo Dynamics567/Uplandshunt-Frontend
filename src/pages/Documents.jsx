@@ -43,13 +43,14 @@ const Documents = ({ showHeader = true }) => {
         <>
           {showHeader && <ListingsLayout />}
           <div className="mt-8  m-auto w-11/12 border border-b-0 border-ashThree rounded-md">
-            <div className="mt-2 p-4 grid grid-cols-3 gap-36 w-full mb-4 font-bold text-base border-b border-ashThree">
+            <div className="mt-2 p-4 grid grid-cols-4 gap-24 w-full mb-4 font-bold text-base border-b border-ashThree">
               <p>Document Name</p>
               <p>View Document</p>
               <p>Status</p>
+              <p>Action</p>
             </div>
             {data.map((document) => {
-              return <Document document={document} />;
+              return <Document document={document} id={id} />;
             })}
           </div>
         </>

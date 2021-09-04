@@ -8,6 +8,7 @@ import profile from "../assets/userDashboard/profile.svg";
 import savedProperty from "../assets/userDashboard/savedProperty.svg";
 import purchase from "../assets/userDashboard/purchase.svg";
 import request from "../assets/userDashboard/request.svg";
+import transaction from "../assets/userDashboard/transaction.svg";
 
 export const getInTouch = [
   {
@@ -102,12 +103,18 @@ export const userDashboard = [
     id: "6",
     navItem: "Property Request",
     image: request,
-    link: "/dashboard/request",
+    link: "/dashboard/request/propertyRequest",
   },
   {
     id: "7",
     navItem: "My Purchase",
     image: purchase,
     link: "/dashboard/purchase/propertyPurchased",
+  },
+  {
+    id: "7",
+    navItem: "Transactions",
+    image: transaction,
+    link: "/dashboard/transactions",
   },
 ];

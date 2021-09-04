@@ -37,9 +37,10 @@ const BidsRecieved = () => {
     axiosWithAuth()
       .post(`bid/${bidId}/approve`)
       .then((response) => {
-        const result = response.data;
+        const result = response.data.data;
         console.log(result);
         toast.success(result);
+        setSpinnerLoading(false);
       })
       .catch(function (error) {
         if (error.response) {

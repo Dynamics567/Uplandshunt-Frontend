@@ -38,7 +38,6 @@ const AllProperties = () => {
   };
 
   const saveProperty = (id) => {
-    console.log(id);
     setSpinnerLoading(true);
     axiosWithAuth()
       .post(`property/save/${id}`)

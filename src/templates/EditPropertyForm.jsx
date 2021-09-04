@@ -5,6 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
 
+import bin from "../assets/bin.png";
 import { Button } from "../atoms";
 import { InputTwo, Select } from "../atoms";
 import MultiSelect from "react-multi-select-component";
@@ -286,14 +287,23 @@ const EditPropertyForm = ({ preloadedValues, images }) => {
       <div className="flex  w-full my-8 justify-between">
         {images.map((image) => {
           return (
-            <div key={image.id}>
-              <img src={image.image_url} alt="propertyImage" />
-              <button
-                className="bg-primary text-white"
-                onClick={() => deletePropertyImage(image.id)}
-              >
-                Delete
-              </button>
+            <div className="rounded-md" key={image.id}>
+              <img
+                src={image.image_url}
+                alt="propertyImage"
+                className="w-1/2"
+              />
+              <div className="w-1/2 flex justify-between items-center">
+                <button className="bg-primary text-white py-2 px-4 rounded-2xl my-2 text-sm font-normal focus:outline-none">
+                  Update
+                </button>
+                <div
+                  className="w-4"
+                  onClick={() => deletePropertyImage(image.id)}
+                >
+                  <img src={bin} alt="bin" className="w-4" />
+                </div>
+              </div>
             </div>
           );
         })}
